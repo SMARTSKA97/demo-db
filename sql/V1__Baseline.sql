@@ -1,10 +1,38 @@
+--
+-- PostgreSQL database dump
+--
+
+
+-- Dumped from database version 17.7
+-- Dumped by pg_dump version 18.0
+
+-- Started on 2025-12-30 17:51:57
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+SET check_function_bodies = false;
+
+--
+-- TOC entry 6 (class 2615 OID 921583)
+-- Name: bantan; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
 CREATE SCHEMA bantan;
 
 
 ALTER SCHEMA bantan OWNER TO postgres;
 
 --
--- TOC entry 7 (class 2615 OID 920174)
+-- TOC entry 7 (class 2615 OID 921584)
 -- Name: billing; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
@@ -14,7 +42,7 @@ CREATE SCHEMA billing;
 ALTER SCHEMA billing OWNER TO postgres;
 
 --
--- TOC entry 8 (class 2615 OID 920175)
+-- TOC entry 8 (class 2615 OID 921585)
 -- Name: billing_log; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
@@ -24,7 +52,7 @@ CREATE SCHEMA billing_log;
 ALTER SCHEMA billing_log OWNER TO postgres;
 
 --
--- TOC entry 9 (class 2615 OID 920176)
+-- TOC entry 9 (class 2615 OID 921586)
 -- Name: billing_master; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
@@ -34,7 +62,7 @@ CREATE SCHEMA billing_master;
 ALTER SCHEMA billing_master OWNER TO postgres;
 
 --
--- TOC entry 10 (class 2615 OID 920177)
+-- TOC entry 10 (class 2615 OID 921587)
 -- Name: cts; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
@@ -44,7 +72,7 @@ CREATE SCHEMA cts;
 ALTER SCHEMA cts OWNER TO postgres;
 
 --
--- TOC entry 11 (class 2615 OID 920178)
+-- TOC entry 11 (class 2615 OID 921588)
 -- Name: jit; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
@@ -54,7 +82,7 @@ CREATE SCHEMA jit;
 ALTER SCHEMA jit OWNER TO postgres;
 
 --
--- TOC entry 12 (class 2615 OID 920179)
+-- TOC entry 12 (class 2615 OID 921589)
 -- Name: master; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
@@ -64,7 +92,7 @@ CREATE SCHEMA master;
 ALTER SCHEMA master OWNER TO postgres;
 
 --
--- TOC entry 13 (class 2615 OID 920180)
+-- TOC entry 13 (class 2615 OID 921590)
 -- Name: message_queue; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
@@ -74,7 +102,17 @@ CREATE SCHEMA message_queue;
 ALTER SCHEMA message_queue OWNER TO postgres;
 
 --
--- TOC entry 14 (class 2615 OID 920181)
+-- TOC entry 15 (class 2615 OID 1035941)
+-- Name: old; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA old;
+
+
+ALTER SCHEMA old OWNER TO postgres;
+
+--
+-- TOC entry 14 (class 2615 OID 921591)
 -- Name: report; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
@@ -84,7 +122,7 @@ CREATE SCHEMA report;
 ALTER SCHEMA report OWNER TO postgres;
 
 --
--- TOC entry 484 (class 1255 OID 920182)
+-- TOC entry 546 (class 1255 OID 921592)
 -- Name: adjust_allotment_by_billid(bigint); Type: FUNCTION; Schema: bantan; Owner: postgres
 --
 
@@ -132,7 +170,7 @@ $$;
 ALTER FUNCTION bantan.adjust_allotment_by_billid(p_bill_id bigint) OWNER TO postgres;
 
 --
--- TOC entry 442 (class 1255 OID 920183)
+-- TOC entry 524 (class 1255 OID 921593)
 -- Name: adjust_allotment_by_general_bill(bigint); Type: FUNCTION; Schema: bantan; Owner: postgres
 --
 
@@ -168,7 +206,7 @@ $$;
 ALTER FUNCTION bantan.adjust_allotment_by_general_bill(p_bill_id bigint) OWNER TO postgres;
 
 --
--- TOC entry 490 (class 1255 OID 920184)
+-- TOC entry 537 (class 1255 OID 921594)
 -- Name: bill_status_send_to_jit(); Type: FUNCTION; Schema: billing; Owner: postgres
 --
 
@@ -221,7 +259,7 @@ $$;
 ALTER FUNCTION billing.bill_status_send_to_jit() OWNER TO postgres;
 
 --
--- TOC entry 505 (class 1255 OID 920185)
+-- TOC entry 571 (class 1255 OID 921595)
 -- Name: cpin_regenerate_bill(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
@@ -357,7 +395,7 @@ $$;
 ALTER PROCEDURE billing.cpin_regenerate_bill(IN billing_details_payload jsonb, OUT inserted_id bigint, OUT _out_ref_no character varying) OWNER TO postgres;
 
 --
--- TOC entry 506 (class 1255 OID 920187)
+-- TOC entry 568 (class 1255 OID 921597)
 -- Name: enforce_unique_id(); Type: FUNCTION; Schema: billing; Owner: postgres
 --
 
@@ -376,7 +414,7 @@ $$;
 ALTER FUNCTION billing.enforce_unique_id() OWNER TO postgres;
 
 --
--- TOC entry 476 (class 1255 OID 920188)
+-- TOC entry 471 (class 1255 OID 921598)
 -- Name: fetch_cpin_failed_record(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
@@ -518,7 +556,7 @@ $$;
 ALTER PROCEDURE billing.fetch_cpin_failed_record(IN in_payload jsonb, OUT _out_failed_ben jsonb) OWNER TO postgres;
 
 --
--- TOC entry 477 (class 1255 OID 920189)
+-- TOC entry 472 (class 1255 OID 921599)
 -- Name: fetch_cpin_failed_record_bk(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
@@ -611,7 +649,7 @@ $$;
 ALTER PROCEDURE billing.fetch_cpin_failed_record_bk(IN in_payload jsonb, OUT _out_failed_ben jsonb) OWNER TO postgres;
 
 --
--- TOC entry 502 (class 1255 OID 920190)
+-- TOC entry 558 (class 1255 OID 921600)
 -- Name: fetch_cpin_failed_record_by_billids(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
@@ -708,7 +746,7 @@ $$;
 ALTER PROCEDURE billing.fetch_cpin_failed_record_by_billids(IN in_payload jsonb, OUT _out_failed_ben jsonb) OWNER TO postgres;
 
 --
--- TOC entry 414 (class 1255 OID 920191)
+-- TOC entry 488 (class 1255 OID 921601)
 -- Name: fetch_failed_ben_record_old(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
@@ -836,7 +874,7 @@ $$;
 ALTER PROCEDURE billing.fetch_failed_ben_record_old(IN in_payload jsonb, OUT _out_failed_ben jsonb) OWNER TO postgres;
 
 --
--- TOC entry 488 (class 1255 OID 920192)
+-- TOC entry 495 (class 1255 OID 921602)
 -- Name: forward_treasury_jit_bill(bigint, bigint, smallint); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
@@ -864,7 +902,7 @@ $$;
 ALTER PROCEDURE billing.forward_treasury_jit_bill(IN _bill_id bigint, IN _forwarded_by_userid bigint, IN _forwarded_status smallint) OWNER TO postgres;
 
 --
--- TOC entry 475 (class 1255 OID 920193)
+-- TOC entry 542 (class 1255 OID 921603)
 -- Name: get_bill_details_report(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
@@ -1011,7 +1049,7 @@ $$;
 ALTER PROCEDURE billing.get_bill_details_report(IN in_payload jsonb, OUT out_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 468 (class 1255 OID 920194)
+-- TOC entry 520 (class 1255 OID 921604)
 -- Name: get_bill_payload(bigint); Type: FUNCTION; Schema: billing; Owner: postgres
 --
 
@@ -1265,7 +1303,7 @@ $$;
 ALTER FUNCTION billing.get_bill_payload(p_bill_id bigint) OWNER TO postgres;
 
 --
--- TOC entry 499 (class 1255 OID 920196)
+-- TOC entry 561 (class 1255 OID 921606)
 -- Name: get_bill_payload_last_working(bigint); Type: FUNCTION; Schema: billing; Owner: postgres
 --
 
@@ -1534,7 +1572,7 @@ $$;
 ALTER FUNCTION billing.get_bill_payload_last_working(p_bill_id bigint) OWNER TO postgres;
 
 --
--- TOC entry 495 (class 1255 OID 920198)
+-- TOC entry 494 (class 1255 OID 921608)
 -- Name: get_bill_payload_old(bigint); Type: FUNCTION; Schema: billing; Owner: postgres
 --
 
@@ -1801,7 +1839,7 @@ $$;
 ALTER FUNCTION billing.get_bill_payload_old(p_bill_id bigint) OWNER TO postgres;
 
 --
--- TOC entry 446 (class 1255 OID 920200)
+-- TOC entry 490 (class 1255 OID 921610)
 -- Name: get_failed_success_ben_report(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
@@ -2014,7 +2052,7 @@ $$;
 ALTER PROCEDURE billing.get_failed_success_ben_report(IN in_payload jsonb, OUT out_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 492 (class 1255 OID 920202)
+-- TOC entry 497 (class 1255 OID 921612)
 -- Name: get_failed_success_ben_report_bk(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
@@ -2205,7 +2243,7 @@ $$;
 ALTER PROCEDURE billing.get_failed_success_ben_report_bk(IN in_payload jsonb, OUT out_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 443 (class 1255 OID 920204)
+-- TOC entry 486 (class 1255 OID 921614)
 -- Name: get_non_salary_tds_details_report(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
@@ -2302,7 +2340,7 @@ $$;
 ALTER PROCEDURE billing.get_non_salary_tds_details_report(IN in_payload jsonb, OUT is_done boolean, OUT message_out text, OUT out_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 423 (class 1255 OID 920205)
+-- TOC entry 527 (class 1255 OID 921615)
 -- Name: get_pfms_process_log_status(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
@@ -2347,7 +2385,7 @@ $$;
 ALTER PROCEDURE billing.get_pfms_process_log_status(IN in_payload jsonb, OUT out_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 447 (class 1255 OID 920206)
+-- TOC entry 523 (class 1255 OID 921616)
 -- Name: get_tds_details_report(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
@@ -2487,7 +2525,7 @@ $$;
 ALTER PROCEDURE billing.get_tds_details_report(IN in_payload jsonb, OUT is_done boolean, OUT message_out text, OUT out_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 471 (class 1255 OID 920207)
+-- TOC entry 563 (class 1255 OID 921617)
 -- Name: get_tds_on_gst_details_report(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
@@ -2609,7 +2647,7 @@ $$;
 ALTER PROCEDURE billing.get_tds_on_gst_details_report(IN in_payload jsonb, OUT is_done boolean, OUT message_out text, OUT out_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 427 (class 1255 OID 920208)
+-- TOC entry 559 (class 1255 OID 921618)
 -- Name: insert_bill_allotment_details(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
@@ -2815,7 +2853,7 @@ $$;
 ALTER PROCEDURE billing.insert_bill_allotment_details(IN bill_allotment_details_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 503 (class 1255 OID 920210)
+-- TOC entry 549 (class 1255 OID 921620)
 -- Name: insert_bill_status_details(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
@@ -2859,7 +2897,7 @@ $$;
 ALTER PROCEDURE billing.insert_bill_status_details(IN bill_status_details_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 441 (class 1255 OID 920211)
+-- TOC entry 565 (class 1255 OID 921621)
 -- Name: insert_cpin_ecs(); Type: FUNCTION; Schema: billing; Owner: postgres
 --
 
@@ -2883,7 +2921,7 @@ $$;
 ALTER FUNCTION billing.insert_cpin_ecs() OWNER TO postgres;
 
 --
--- TOC entry 449 (class 1255 OID 920212)
+-- TOC entry 480 (class 1255 OID 921622)
 -- Name: insert_cpin_failed_bill(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
@@ -3269,7 +3307,7 @@ $$;
 ALTER PROCEDURE billing.insert_cpin_failed_bill(IN cpin_details_payload jsonb, OUT inserted_id bigint, OUT _out_ref_no character varying) OWNER TO postgres;
 
 --
--- TOC entry 433 (class 1255 OID 920214)
+-- TOC entry 569 (class 1255 OID 921624)
 -- Name: insert_cpin_failed_bill_old(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
@@ -3464,7 +3502,7 @@ $$;
 ALTER PROCEDURE billing.insert_cpin_failed_bill_old(IN cpin_details_payload jsonb, OUT inserted_id bigint, OUT _out_ref_no character varying) OWNER TO postgres;
 
 --
--- TOC entry 504 (class 1255 OID 920216)
+-- TOC entry 533 (class 1255 OID 921626)
 -- Name: insert_ddo_details_json_array(character varying, jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
@@ -3530,7 +3568,7 @@ $$;
 ALTER PROCEDURE billing.insert_ddo_details_json_array(IN ddocode character varying, IN jsonarray jsonb) OWNER TO postgres;
 
 --
--- TOC entry 410 (class 1255 OID 920217)
+-- TOC entry 513 (class 1255 OID 921627)
 -- Name: insert_jit_bill(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
@@ -3936,7 +3974,7 @@ $$;
 ALTER PROCEDURE billing.insert_jit_bill(IN billing_details_payload jsonb, OUT inserted_id bigint, OUT _out_ref_no character varying) OWNER TO postgres;
 
 --
--- TOC entry 421 (class 1255 OID 920219)
+-- TOC entry 518 (class 1255 OID 921629)
 -- Name: insert_jit_bill_without_bill_details_func(bigint); Type: FUNCTION; Schema: billing; Owner: postgres
 --
 
@@ -3952,7 +3990,7 @@ $$;
 ALTER FUNCTION billing.insert_jit_bill_without_bill_details_func(param1 bigint) OWNER TO postgres;
 
 --
--- TOC entry 415 (class 1255 OID 920220)
+-- TOC entry 510 (class 1255 OID 921630)
 -- Name: insert_jit_report(); Type: FUNCTION; Schema: billing; Owner: postgres
 --
 
@@ -4012,7 +4050,7 @@ $$;
 ALTER FUNCTION billing.insert_jit_report() OWNER TO postgres;
 
 --
--- TOC entry 431 (class 1255 OID 920221)
+-- TOC entry 489 (class 1255 OID 921631)
 -- Name: insert_pfms_failed_transaction_detail(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
@@ -4098,7 +4136,7 @@ $$;
 ALTER PROCEDURE billing.insert_pfms_failed_transaction_detail(IN failed_transaction_file_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 452 (class 1255 OID 920222)
+-- TOC entry 475 (class 1255 OID 921632)
 -- Name: insert_pfms_failed_transaction_detail_24092025(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
@@ -4154,7 +4192,7 @@ $$;
 ALTER PROCEDURE billing.insert_pfms_failed_transaction_detail_24092025(IN failed_transaction_file_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 489 (class 1255 OID 920223)
+-- TOC entry 567 (class 1255 OID 921633)
 -- Name: insert_pfms_file_status_details(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
@@ -4187,7 +4225,7 @@ $$;
 ALTER PROCEDURE billing.insert_pfms_file_status_details(IN pfms_file_status_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 478 (class 1255 OID 920224)
+-- TOC entry 504 (class 1255 OID 921634)
 -- Name: insert_return_memo_generated_bill(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
@@ -4215,7 +4253,7 @@ $$;
 ALTER PROCEDURE billing.insert_return_memo_generated_bill(IN return_memo_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 439 (class 1255 OID 920225)
+-- TOC entry 550 (class 1255 OID 921635)
 -- Name: insert_update_treasury_details(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
@@ -4300,7 +4338,7 @@ $$;
 ALTER PROCEDURE billing.insert_update_treasury_details(IN treasury_details_payload jsonb, OUT inserted_id integer) OWNER TO postgres;
 
 --
--- TOC entry 496 (class 1255 OID 920226)
+-- TOC entry 538 (class 1255 OID 921636)
 -- Name: jit_cancelled_fto_data(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
@@ -4571,7 +4609,7 @@ $$;
 ALTER PROCEDURE billing.jit_cancelled_fto_data(IN in_payload jsonb, OUT _out_jit_cancelled_fto jsonb) OWNER TO postgres;
 
 --
--- TOC entry 428 (class 1255 OID 920228)
+-- TOC entry 491 (class 1255 OID 921638)
 -- Name: pfms_file_status_send_to_jit(); Type: FUNCTION; Schema: billing; Owner: postgres
 --
 
@@ -4631,7 +4669,7 @@ $$;
 ALTER FUNCTION billing.pfms_file_status_send_to_jit() OWNER TO postgres;
 
 --
--- TOC entry 482 (class 1255 OID 920229)
+-- TOC entry 496 (class 1255 OID 921639)
 -- Name: sys_generated_bill_no_seq(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
@@ -4666,7 +4704,7 @@ $$;
 ALTER PROCEDURE billing.sys_generated_bill_no_seq(IN sys_generated_bill_no_payload jsonb, OUT _out_bill_no character varying) OWNER TO postgres;
 
 --
--- TOC entry 466 (class 1255 OID 920230)
+-- TOC entry 541 (class 1255 OID 921640)
 -- Name: trg_adjust_allotment_by_billid(); Type: FUNCTION; Schema: billing; Owner: postgres
 --
 
@@ -4694,7 +4732,7 @@ $$;
 ALTER FUNCTION billing.trg_adjust_allotment_by_billid() OWNER TO postgres;
 
 --
--- TOC entry 453 (class 1255 OID 920231)
+-- TOC entry 514 (class 1255 OID 921641)
 -- Name: update_bill_detail_prov(bigint, bigint); Type: FUNCTION; Schema: billing; Owner: postgres
 --
 
@@ -4714,7 +4752,7 @@ $$;
 ALTER FUNCTION billing.update_bill_detail_prov(v_bill_id bigint, v_allotment_id bigint) OWNER TO postgres;
 
 --
--- TOC entry 460 (class 1255 OID 920232)
+-- TOC entry 525 (class 1255 OID 921642)
 -- Name: update_cpin_ecs(); Type: FUNCTION; Schema: billing; Owner: postgres
 --
 
@@ -4737,7 +4775,7 @@ $$;
 ALTER FUNCTION billing.update_cpin_ecs() OWNER TO postgres;
 
 --
--- TOC entry 483 (class 1255 OID 920233)
+-- TOC entry 507 (class 1255 OID 921643)
 -- Name: update_incorrect_beneficiary_dtl(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
@@ -4775,7 +4813,7 @@ $$;
 ALTER PROCEDURE billing.update_incorrect_beneficiary_dtl(IN correct_beneficiary_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 465 (class 1255 OID 920234)
+-- TOC entry 481 (class 1255 OID 921644)
 -- Name: log_table_changes(); Type: FUNCTION; Schema: billing_log; Owner: postgres
 --
 
@@ -4895,7 +4933,7 @@ $$;
 ALTER FUNCTION billing_log.log_table_changes() OWNER TO postgres;
 
 --
--- TOC entry 430 (class 1255 OID 920235)
+-- TOC entry 522 (class 1255 OID 921645)
 -- Name: delete_cpin(bigint, text); Type: PROCEDURE; Schema: billing_master; Owner: postgres
 --
 
@@ -4928,7 +4966,7 @@ $$;
 ALTER PROCEDURE billing_master.delete_cpin(IN v_bill_id bigint, IN cpin_number text) OWNER TO postgres;
 
 --
--- TOC entry 451 (class 1255 OID 920236)
+-- TOC entry 492 (class 1255 OID 921646)
 -- Name: delete_cpin_old1(text); Type: PROCEDURE; Schema: billing_master; Owner: postgres
 --
 
@@ -4962,7 +5000,7 @@ $$;
 ALTER PROCEDURE billing_master.delete_cpin_old1(IN cpin_number text) OWNER TO postgres;
 
 --
--- TOC entry 436 (class 1255 OID 920237)
+-- TOC entry 532 (class 1255 OID 921647)
 -- Name: delete_cpin_old2(bigint, text); Type: PROCEDURE; Schema: billing_master; Owner: postgres
 --
 
@@ -4999,7 +5037,7 @@ $$;
 ALTER PROCEDURE billing_master.delete_cpin_old2(IN bill_id bigint, IN cpin_number text) OWNER TO postgres;
 
 --
--- TOC entry 497 (class 1255 OID 920238)
+-- TOC entry 474 (class 1255 OID 921648)
 -- Name: get_cpin_vender_details(character varying, integer, integer); Type: FUNCTION; Schema: billing_master; Owner: postgres
 --
 
@@ -5096,7 +5134,7 @@ $$;
 ALTER FUNCTION billing_master.get_cpin_vender_details(v_cpinid character varying, p_page_number integer, p_page_size integer) OWNER TO postgres;
 
 --
--- TOC entry 426 (class 1255 OID 920239)
+-- TOC entry 484 (class 1255 OID 921649)
 -- Name: get_ddo_allotment(bigint, text); Type: FUNCTION; Schema: billing_master; Owner: postgres
 --
 
@@ -5148,7 +5186,7 @@ $$;
 ALTER FUNCTION billing_master.get_ddo_allotment(activehoaid bigint, ddocode text) OWNER TO postgres;
 
 --
--- TOC entry 481 (class 1255 OID 920240)
+-- TOC entry 506 (class 1255 OID 921650)
 -- Name: getcpinwithdetails(text); Type: FUNCTION; Schema: billing_master; Owner: postgres
 --
 
@@ -5168,7 +5206,7 @@ $$;
 ALTER FUNCTION billing_master.getcpinwithdetails(cpinidparam text) OWNER TO postgres;
 
 --
--- TOC entry 425 (class 1255 OID 920241)
+-- TOC entry 521 (class 1255 OID 921651)
 -- Name: jit_insert_cpinmaster_cpinvendormst_billgst(jsonb); Type: PROCEDURE; Schema: billing_master; Owner: postgres
 --
 
@@ -5258,7 +5296,7 @@ $$;
 ALTER PROCEDURE billing_master.jit_insert_cpinmaster_cpinvendormst_billgst(IN in_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 473 (class 1255 OID 920242)
+-- TOC entry 530 (class 1255 OID 921652)
 -- Name: jit_insert_cpinmaster_cpinvendormst_billgst_old1(jsonb); Type: PROCEDURE; Schema: billing_master; Owner: postgres
 --
 
@@ -5357,7 +5395,7 @@ $$;
 ALTER PROCEDURE billing_master.jit_insert_cpinmaster_cpinvendormst_billgst_old1(IN in_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 462 (class 1255 OID 920243)
+-- TOC entry 479 (class 1255 OID 921653)
 -- Name: jit_insert_cpinmaster_cpinvendormst_billgst_old2(jsonb); Type: PROCEDURE; Schema: billing_master; Owner: postgres
 --
 
@@ -5465,7 +5503,7 @@ $$;
 ALTER PROCEDURE billing_master.jit_insert_cpinmaster_cpinvendormst_billgst_old2(IN in_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 419 (class 1255 OID 920244)
+-- TOC entry 539 (class 1255 OID 921654)
 -- Name: update_ddo_transfer_details(jsonb); Type: PROCEDURE; Schema: billing_master; Owner: postgres
 --
 
@@ -5518,7 +5556,7 @@ $$;
 ALTER PROCEDURE billing_master.update_ddo_transfer_details(IN ddo_transfer_details_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 440 (class 1255 OID 920245)
+-- TOC entry 543 (class 1255 OID 921655)
 -- Name: adjust_allotment_failed_beneficiary(bigint, bigint); Type: FUNCTION; Schema: cts; Owner: postgres
 --
 
@@ -5584,7 +5622,7 @@ $$;
 ALTER FUNCTION cts.adjust_allotment_failed_beneficiary(v_bill_id bigint, v_failed_transaction_amount bigint) OWNER TO postgres;
 
 --
--- TOC entry 413 (class 1255 OID 920246)
+-- TOC entry 509 (class 1255 OID 921656)
 -- Name: get_transaction_summary(); Type: FUNCTION; Schema: cts; Owner: postgres
 --
 
@@ -5688,7 +5726,7 @@ $$;
 ALTER FUNCTION cts.get_transaction_summary() OWNER TO postgres;
 
 --
--- TOC entry 501 (class 1255 OID 920247)
+-- TOC entry 570 (class 1255 OID 921657)
 -- Name: get_transaction_summary(smallint); Type: FUNCTION; Schema: cts; Owner: postgres
 --
 
@@ -5844,7 +5882,7 @@ $$;
 ALTER FUNCTION cts.get_transaction_summary(p_finyear smallint) OWNER TO postgres;
 
 --
--- TOC entry 459 (class 1255 OID 920248)
+-- TOC entry 515 (class 1255 OID 921658)
 -- Name: insert_failed_transaction_ben_detail(jsonb); Type: PROCEDURE; Schema: cts; Owner: postgres
 --
 
@@ -5946,7 +5984,7 @@ $$;
 ALTER PROCEDURE cts.insert_failed_transaction_ben_detail(IN failed_transaction_ben_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 494 (class 1255 OID 920249)
+-- TOC entry 564 (class 1255 OID 921659)
 -- Name: insert_failed_transaction_ben_detail_old(jsonb); Type: PROCEDURE; Schema: cts; Owner: postgres
 --
 
@@ -6005,7 +6043,7 @@ $$;
 ALTER PROCEDURE cts.insert_failed_transaction_ben_detail_old(IN failed_transaction_ben_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 416 (class 1255 OID 920250)
+-- TOC entry 478 (class 1255 OID 921660)
 -- Name: insert_list_of_payment(record, bigint, integer, date, bigint, bigint, date, record, bigint); Type: FUNCTION; Schema: cts; Owner: postgres
 --
 
@@ -6103,7 +6141,7 @@ $$;
 ALTER FUNCTION cts.insert_list_of_payment(in_hoa_details record, in_voucher_id bigint, in_voucher_no integer, in_voucher_date date, in_token_id bigint, in_token_no bigint, in_token_date date, in_bill_details record, in_payment_advice_id bigint) OWNER TO postgres;
 
 --
--- TOC entry 424 (class 1255 OID 920251)
+-- TOC entry 503 (class 1255 OID 921661)
 -- Name: insert_success_transaction_ben_detail(jsonb); Type: PROCEDURE; Schema: cts; Owner: postgres
 --
 
@@ -6198,7 +6236,7 @@ $$;
 ALTER PROCEDURE cts.insert_success_transaction_ben_detail(IN success_transaction_ben_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 469 (class 1255 OID 920252)
+-- TOC entry 493 (class 1255 OID 921662)
 -- Name: insert_token_details(jsonb); Type: PROCEDURE; Schema: cts; Owner: postgres
 --
 
@@ -6231,7 +6269,7 @@ $$;
 ALTER PROCEDURE cts.insert_token_details(IN in_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 493 (class 1255 OID 920253)
+-- TOC entry 552 (class 1255 OID 921663)
 -- Name: insert_token_details_func(jsonb); Type: FUNCTION; Schema: cts; Owner: postgres
 --
 
@@ -6247,7 +6285,7 @@ $$;
 ALTER FUNCTION cts.insert_token_details_func(param1 jsonb) OWNER TO postgres;
 
 --
--- TOC entry 507 (class 1255 OID 920254)
+-- TOC entry 482 (class 1255 OID 921664)
 -- Name: insert_voucher_details(jsonb); Type: PROCEDURE; Schema: cts; Owner: postgres
 --
 
@@ -6316,7 +6354,7 @@ $$;
 ALTER PROCEDURE cts.insert_voucher_details(IN in_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 474 (class 1255 OID 920255)
+-- TOC entry 534 (class 1255 OID 921665)
 -- Name: insert_voucher_details_func(jsonb); Type: FUNCTION; Schema: cts; Owner: postgres
 --
 
@@ -6332,7 +6370,7 @@ $$;
 ALTER FUNCTION cts.insert_voucher_details_func(param1 jsonb) OWNER TO postgres;
 
 --
--- TOC entry 434 (class 1255 OID 920256)
+-- TOC entry 572 (class 1255 OID 921666)
 -- Name: trg_adjust_allotment_failed_beneficiary(); Type: FUNCTION; Schema: cts; Owner: postgres
 --
 
@@ -6352,7 +6390,7 @@ $$;
 ALTER FUNCTION cts.trg_adjust_allotment_failed_beneficiary() OWNER TO postgres;
 
 --
--- TOC entry 412 (class 1255 OID 920257)
+-- TOC entry 508 (class 1255 OID 921667)
 -- Name: update_ddo_allotment_actual_amount_from_treasury(jsonb); Type: PROCEDURE; Schema: cts; Owner: postgres
 --
 
@@ -6381,7 +6419,7 @@ $$;
 ALTER PROCEDURE cts.update_ddo_allotment_actual_amount_from_treasury(IN in_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 429 (class 1255 OID 920258)
+-- TOC entry 553 (class 1255 OID 921668)
 -- Name: bkend_update_jit_allotment_func(character varying, character, bigint, smallint, bigint, bigint); Type: FUNCTION; Schema: jit; Owner: postgres
 --
 
@@ -6420,7 +6458,7 @@ $$;
 ALTER FUNCTION jit.bkend_update_jit_allotment_func(_sanction_no character varying, _ddo_code character, _active_hoa_id bigint, _financial_year smallint, _old_limit_amount bigint, _new_self_limit_amount bigint) OWNER TO postgres;
 
 --
--- TOC entry 437 (class 1255 OID 920259)
+-- TOC entry 556 (class 1255 OID 921669)
 -- Name: cancel_fto_from_bill(jsonb, character varying, character varying, bigint); Type: PROCEDURE; Schema: jit; Owner: postgres
 --
 
@@ -6451,7 +6489,7 @@ $$;
 ALTER PROCEDURE jit.cancel_fto_from_bill(IN in_payload jsonb, IN queuename character varying, IN refno character varying, IN billid bigint) OWNER TO postgres;
 
 --
--- TOC entry 417 (class 1255 OID 920260)
+-- TOC entry 562 (class 1255 OID 921670)
 -- Name: get_failed_transaction_details(); Type: FUNCTION; Schema: jit; Owner: postgres
 --
 
@@ -6534,7 +6572,7 @@ $$;
 ALTER FUNCTION jit.get_failed_transaction_details() OWNER TO postgres;
 
 --
--- TOC entry 498 (class 1255 OID 920261)
+-- TOC entry 476 (class 1255 OID 921671)
 -- Name: get_failed_transaction_details_manual_generation(); Type: FUNCTION; Schema: jit; Owner: postgres
 --
 
@@ -6618,7 +6656,7 @@ $$;
 ALTER FUNCTION jit.get_failed_transaction_details_manual_generation() OWNER TO postgres;
 
 --
--- TOC entry 467 (class 1255 OID 920262)
+-- TOC entry 555 (class 1255 OID 921672)
 -- Name: get_jit_allotments(jsonb); Type: PROCEDURE; Schema: jit; Owner: postgres
 --
 
@@ -6675,7 +6713,7 @@ $$;
 ALTER PROCEDURE jit.get_jit_allotments(IN in_payload jsonb, OUT out_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 508 (class 1255 OID 920263)
+-- TOC entry 483 (class 1255 OID 921673)
 -- Name: get_success_transaction_details(); Type: FUNCTION; Schema: jit; Owner: postgres
 --
 
@@ -6751,7 +6789,7 @@ $$;
 ALTER FUNCTION jit.get_success_transaction_details() OWNER TO postgres;
 
 --
--- TOC entry 463 (class 1255 OID 920264)
+-- TOC entry 511 (class 1255 OID 921674)
 -- Name: insert_agency_ddo_mapping_details(jsonb); Type: PROCEDURE; Schema: jit; Owner: postgres
 --
 
@@ -6794,7 +6832,7 @@ $$;
 ALTER PROCEDURE jit.insert_agency_ddo_mapping_details(IN in_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 408 (class 1255 OID 920265)
+-- TOC entry 531 (class 1255 OID 921675)
 -- Name: insert_hoa_details(jsonb); Type: PROCEDURE; Schema: jit; Owner: postgres
 --
 
@@ -6875,7 +6913,7 @@ $$;
 ALTER PROCEDURE jit.insert_hoa_details(IN jit_hoa_details_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 485 (class 1255 OID 920266)
+-- TOC entry 526 (class 1255 OID 921676)
 -- Name: insert_jit_allotment(jsonb); Type: PROCEDURE; Schema: jit; Owner: postgres
 --
 
@@ -7061,7 +7099,7 @@ $$;
 ALTER PROCEDURE jit.insert_jit_allotment(IN jit_allotment_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 422 (class 1255 OID 920268)
+-- TOC entry 501 (class 1255 OID 921678)
 -- Name: insert_jit_allotment_withdrawal(jsonb); Type: PROCEDURE; Schema: jit; Owner: postgres
 --
 
@@ -7203,7 +7241,7 @@ $$;
 ALTER PROCEDURE jit.insert_jit_allotment_withdrawal(IN jit_withdrawl_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 444 (class 1255 OID 920269)
+-- TOC entry 477 (class 1255 OID 921679)
 -- Name: insert_jit_details(jsonb); Type: PROCEDURE; Schema: jit; Owner: postgres
 --
 
@@ -7466,7 +7504,7 @@ $$;
 ALTER PROCEDURE jit.insert_jit_details(IN jit_details_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 458 (class 1255 OID 920271)
+-- TOC entry 551 (class 1255 OID 921681)
 -- Name: insert_jit_details_wo_tsa_exp_details(jsonb); Type: PROCEDURE; Schema: jit; Owner: postgres
 --
 
@@ -7642,7 +7680,7 @@ $$;
 ALTER PROCEDURE jit.insert_jit_details_wo_tsa_exp_details(IN jit_details_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 456 (class 1255 OID 920273)
+-- TOC entry 536 (class 1255 OID 921683)
 -- Name: insert_jit_report(); Type: FUNCTION; Schema: jit; Owner: postgres
 --
 
@@ -7680,7 +7718,7 @@ $$;
 ALTER FUNCTION jit.insert_jit_report() OWNER TO postgres;
 
 --
--- TOC entry 457 (class 1255 OID 920274)
+-- TOC entry 547 (class 1255 OID 921684)
 -- Name: insert_jit_scheme_config_master(jsonb); Type: FUNCTION; Schema: jit; Owner: postgres
 --
 
@@ -7802,7 +7840,7 @@ $$;
 ALTER FUNCTION jit.insert_jit_scheme_config_master(in_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 407 (class 1255 OID 920275)
+-- TOC entry 566 (class 1255 OID 921685)
 -- Name: insert_mother_sanction_allocation(jsonb, character varying); Type: PROCEDURE; Schema: jit; Owner: postgres
 --
 
@@ -7852,7 +7890,7 @@ $$;
 ALTER PROCEDURE jit.insert_mother_sanction_allocation(IN jit_hoa_details_payload jsonb, IN _queue_name character varying) OWNER TO postgres;
 
 --
--- TOC entry 448 (class 1255 OID 920276)
+-- TOC entry 554 (class 1255 OID 921686)
 -- Name: insert_return_fto_details(jsonb); Type: PROCEDURE; Schema: jit; Owner: postgres
 --
 
@@ -7918,7 +7956,7 @@ $$;
 ALTER PROCEDURE jit.insert_return_fto_details(IN return_fto_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 409 (class 1255 OID 920277)
+-- TOC entry 473 (class 1255 OID 921687)
 -- Name: insert_return_fto_details(jsonb, character varying); Type: PROCEDURE; Schema: jit; Owner: postgres
 --
 
@@ -7954,7 +7992,7 @@ $$;
 ALTER PROCEDURE jit.insert_return_fto_details(IN return_fto_payload jsonb, IN _queue_name character varying, OUT updated_count integer) OWNER TO postgres;
 
 --
--- TOC entry 411 (class 1255 OID 920278)
+-- TOC entry 487 (class 1255 OID 921688)
 -- Name: send_ddo_agency_mapping_response(jsonb); Type: PROCEDURE; Schema: jit; Owner: postgres
 --
 
@@ -7996,7 +8034,7 @@ $$;
 ALTER PROCEDURE jit.send_ddo_agency_mapping_response(IN in_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 470 (class 1255 OID 920279)
+-- TOC entry 502 (class 1255 OID 921689)
 -- Name: send_rejected_fto(jsonb); Type: PROCEDURE; Schema: jit; Owner: postgres
 --
 
@@ -8078,7 +8116,7 @@ $$;
 ALTER PROCEDURE jit.send_rejected_fto(IN in_payload jsonb) OWNER TO postgres;
 
 --
--- TOC entry 480 (class 1255 OID 920280)
+-- TOC entry 517 (class 1255 OID 921690)
 -- Name: consume_logs_insert_trigger(); Type: FUNCTION; Schema: message_queue; Owner: postgres
 --
 
@@ -8095,7 +8133,7 @@ $$;
 ALTER FUNCTION message_queue.consume_logs_insert_trigger() OWNER TO postgres;
 
 --
--- TOC entry 445 (class 1255 OID 920281)
+-- TOC entry 557 (class 1255 OID 921691)
 -- Name: ensure_consume_logs_partition_for_date(date); Type: FUNCTION; Schema: message_queue; Owner: postgres
 --
 
@@ -8138,7 +8176,7 @@ $$;
 ALTER FUNCTION message_queue.ensure_consume_logs_partition_for_date(p_date date) OWNER TO postgres;
 
 --
--- TOC entry 479 (class 1255 OID 920282)
+-- TOC entry 519 (class 1255 OID 921692)
 -- Name: fto_ack_send_to_jit(); Type: FUNCTION; Schema: message_queue; Owner: postgres
 --
 
@@ -8176,7 +8214,7 @@ $$;
 ALTER FUNCTION message_queue.fto_ack_send_to_jit() OWNER TO postgres;
 
 --
--- TOC entry 420 (class 1255 OID 920283)
+-- TOC entry 535 (class 1255 OID 921693)
 -- Name: get_failed_transactions(character varying); Type: FUNCTION; Schema: message_queue; Owner: postgres
 --
 
@@ -8575,7 +8613,7 @@ $$;
 ALTER FUNCTION message_queue.get_failed_transactions(queue_name character varying) OWNER TO postgres;
 
 --
--- TOC entry 455 (class 1255 OID 920285)
+-- TOC entry 512 (class 1255 OID 921695)
 -- Name: get_queue_name_by_identifier(character varying); Type: FUNCTION; Schema: message_queue; Owner: postgres
 --
 
@@ -8591,7 +8629,7 @@ $$;
 ALTER FUNCTION message_queue.get_queue_name_by_identifier(in_identifier character varying) OWNER TO postgres;
 
 --
--- TOC entry 454 (class 1255 OID 920286)
+-- TOC entry 528 (class 1255 OID 921696)
 -- Name: insert_message_queue(character varying, jsonb); Type: FUNCTION; Schema: message_queue; Owner: postgres
 --
 
@@ -8645,7 +8683,7 @@ $$;
 ALTER FUNCTION message_queue.insert_message_queue(p_queue_identifier_name character varying, p_message jsonb) OWNER TO postgres;
 
 --
--- TOC entry 464 (class 1255 OID 920287)
+-- TOC entry 548 (class 1255 OID 921697)
 -- Name: insert_message_queue_15092025(character varying, jsonb); Type: FUNCTION; Schema: message_queue; Owner: postgres
 --
 
@@ -8673,7 +8711,7 @@ $$;
 ALTER FUNCTION message_queue.insert_message_queue_15092025(p_queue_identifier_name character varying, p_message jsonb) OWNER TO postgres;
 
 --
--- TOC entry 226 (class 1259 OID 920288)
+-- TOC entry 227 (class 1259 OID 921698)
 -- Name: ddo_allotment_sequence; Type: SEQUENCE; Schema: bantan; Owner: postgres
 --
 
@@ -8689,10 +8727,8 @@ ALTER SEQUENCE bantan.ddo_allotment_sequence OWNER TO postgres;
 
 SET default_tablespace = '';
 
-SET default_table_access_method = heap;
-
 --
--- TOC entry 227 (class 1259 OID 920289)
+-- TOC entry 437 (class 1259 OID 1036679)
 -- Name: ddo_allotment_transactions; Type: TABLE; Schema: bantan; Owner: postgres
 --
 
@@ -8740,26 +8776,83 @@ CREATE TABLE bantan.ddo_allotment_transactions (
     treasury_code character(3),
     grant_in_aid_type smallint,
     is_send boolean DEFAULT false NOT NULL
-);
+)
+PARTITION BY LIST (financial_year);
 
 
 ALTER TABLE bantan.ddo_allotment_transactions OWNER TO postgres;
 
 --
--- TOC entry 6141 (class 0 OID 0)
--- Dependencies: 227
+-- TOC entry 6976 (class 0 OID 0)
+-- Dependencies: 437
 -- Name: COLUMN ddo_allotment_transactions.sender_user_type; Type: COMMENT; Schema: bantan; Owner: postgres
 --
 
 COMMENT ON COLUMN bantan.ddo_allotment_transactions.sender_user_type IS '1 - SAO, 2 - DDO, 3 - JIT';
 
 
+SET default_table_access_method = heap;
+
 --
--- TOC entry 228 (class 1259 OID 920304)
--- Name: ddo_wallet; Type: TABLE; Schema: bantan; Owner: postgres
+-- TOC entry 438 (class 1259 OID 1036697)
+-- Name: ddo_allotment_transactions_2526; Type: TABLE; Schema: bantan; Owner: postgres
 --
 
-CREATE TABLE bantan.ddo_wallet (
+CREATE TABLE bantan.ddo_allotment_transactions_2526 (
+    allotment_id bigint DEFAULT nextval('bantan.ddo_allotment_sequence'::regclass) NOT NULL,
+    transaction_id bigint,
+    sanction_id bigint,
+    memo_number character varying,
+    memo_date date,
+    from_allotment_id bigint,
+    financial_year smallint NOT NULL,
+    sender_user_type smallint,
+    sender_sao_ddo_code character(200),
+    receiver_user_type smallint,
+    receiver_sao_ddo_code character(12) NOT NULL,
+    dept_code character(2),
+    demand_no character(2),
+    major_head character(4),
+    submajor_head character(2),
+    minor_head character(3),
+    plan_status character(2),
+    scheme_head character(3),
+    detail_head character(2),
+    subdetail_head character(2),
+    voted_charged character(1),
+    budget_alloted_amount bigint DEFAULT 0,
+    reappropriated_amount bigint DEFAULT 0,
+    augment_amount bigint DEFAULT 0,
+    surrender_amount bigint DEFAULT 0,
+    revised_amount bigint DEFAULT 0,
+    ceiling_amount bigint DEFAULT 0 NOT NULL,
+    provisional_released_amount bigint DEFAULT 0,
+    actual_released_amount numeric(10,0) DEFAULT 0,
+    map_type smallint,
+    sanction_type smallint,
+    status smallint,
+    allotment_date date,
+    remarks character varying(200),
+    created_by_userid bigint,
+    created_at timestamp without time zone,
+    updated_by_userid bigint,
+    updated_at timestamp without time zone,
+    uo_id bigint,
+    active_hoa_id bigint NOT NULL,
+    treasury_code character(3),
+    grant_in_aid_type smallint,
+    is_send boolean DEFAULT false NOT NULL
+);
+
+
+ALTER TABLE bantan.ddo_allotment_transactions_2526 OWNER TO postgres;
+
+--
+-- TOC entry 229 (class 1259 OID 921714)
+-- Name: bantan_ddo_wallet; Type: TABLE; Schema: old; Owner: postgres
+--
+
+CREATE TABLE old.bantan_ddo_wallet (
     id bigint NOT NULL,
     sao_ddo_code character(12) NOT NULL,
     dept_code character(2),
@@ -8791,14 +8884,14 @@ CREATE TABLE bantan.ddo_wallet (
 );
 
 
-ALTER TABLE bantan.ddo_wallet OWNER TO postgres;
+ALTER TABLE old.bantan_ddo_wallet OWNER TO postgres;
 
 --
--- TOC entry 229 (class 1259 OID 920316)
--- Name: ddo_wallet_id_seq; Type: SEQUENCE; Schema: bantan; Owner: postgres
+-- TOC entry 230 (class 1259 OID 921726)
+-- Name: ddo_wallet_id_seq; Type: SEQUENCE; Schema: old; Owner: postgres
 --
 
-CREATE SEQUENCE bantan.ddo_wallet_id_seq
+CREATE SEQUENCE old.ddo_wallet_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -8806,23 +8899,102 @@ CREATE SEQUENCE bantan.ddo_wallet_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE bantan.ddo_wallet_id_seq OWNER TO postgres;
+ALTER SEQUENCE old.ddo_wallet_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6142 (class 0 OID 0)
--- Dependencies: 229
--- Name: ddo_wallet_id_seq; Type: SEQUENCE OWNED BY; Schema: bantan; Owner: postgres
+-- TOC entry 6977 (class 0 OID 0)
+-- Dependencies: 230
+-- Name: ddo_wallet_id_seq; Type: SEQUENCE OWNED BY; Schema: old; Owner: postgres
 --
 
-ALTER SEQUENCE bantan.ddo_wallet_id_seq OWNED BY bantan.ddo_wallet.id;
+ALTER SEQUENCE old.ddo_wallet_id_seq OWNED BY old.bantan_ddo_wallet.id;
 
 
 --
--- TOC entry 230 (class 1259 OID 920317)
--- Name: bill_details; Type: TABLE; Schema: billing; Owner: postgres
+-- TOC entry 416 (class 1259 OID 1036025)
+-- Name: ddo_wallet; Type: TABLE; Schema: bantan; Owner: postgres
 --
 
-CREATE TABLE billing.bill_details (
+CREATE TABLE bantan.ddo_wallet (
+    id bigint DEFAULT nextval('old.ddo_wallet_id_seq'::regclass) NOT NULL,
+    sao_ddo_code character(12) NOT NULL,
+    dept_code character(2),
+    demand_no character(2),
+    major_head character(4),
+    submajor_head character(2),
+    minor_head character(3),
+    plan_status character(2),
+    scheme_head character(3),
+    detail_head character(2),
+    subdetail_head character(2),
+    voted_charged character(1),
+    budget_alloted_amount bigint DEFAULT 0,
+    reappropriated_amount bigint DEFAULT 0,
+    augment_amount bigint DEFAULT 0,
+    surrender_amount bigint DEFAULT 0,
+    revised_amount bigint DEFAULT 0,
+    ceiling_amount bigint DEFAULT 0 NOT NULL,
+    provisional_released_amount bigint DEFAULT 0,
+    actual_released_amount bigint DEFAULT 0,
+    created_at timestamp without time zone,
+    created_by integer,
+    updated_at timestamp without time zone,
+    updated_by integer,
+    active_hoa_id bigint NOT NULL,
+    treasury_code character(3),
+    financial_year smallint NOT NULL,
+    is_active boolean DEFAULT false
+)
+PARTITION BY LIST (financial_year);
+
+
+ALTER TABLE bantan.ddo_wallet OWNER TO postgres;
+
+--
+-- TOC entry 417 (class 1259 OID 1036043)
+-- Name: ddo_wallet_2526; Type: TABLE; Schema: bantan; Owner: postgres
+--
+
+CREATE TABLE bantan.ddo_wallet_2526 (
+    id bigint DEFAULT nextval('old.ddo_wallet_id_seq'::regclass) NOT NULL,
+    sao_ddo_code character(12) NOT NULL,
+    dept_code character(2),
+    demand_no character(2),
+    major_head character(4),
+    submajor_head character(2),
+    minor_head character(3),
+    plan_status character(2),
+    scheme_head character(3),
+    detail_head character(2),
+    subdetail_head character(2),
+    voted_charged character(1),
+    budget_alloted_amount bigint DEFAULT 0,
+    reappropriated_amount bigint DEFAULT 0,
+    augment_amount bigint DEFAULT 0,
+    surrender_amount bigint DEFAULT 0,
+    revised_amount bigint DEFAULT 0,
+    ceiling_amount bigint DEFAULT 0 NOT NULL,
+    provisional_released_amount bigint DEFAULT 0,
+    actual_released_amount bigint DEFAULT 0,
+    created_at timestamp without time zone,
+    created_by integer,
+    updated_at timestamp without time zone,
+    updated_by integer,
+    active_hoa_id bigint NOT NULL,
+    treasury_code character(3),
+    financial_year smallint NOT NULL,
+    is_active boolean DEFAULT false
+);
+
+
+ALTER TABLE bantan.ddo_wallet_2526 OWNER TO postgres;
+
+--
+-- TOC entry 231 (class 1259 OID 921727)
+-- Name: billing_bill_details; Type: TABLE; Schema: old; Owner: postgres
+--
+
+CREATE TABLE old.billing_bill_details (
     bill_id bigint NOT NULL,
     bill_no character(15),
     bill_date date NOT NULL,
@@ -8880,14 +9052,14 @@ CREATE TABLE billing.bill_details (
 );
 
 
-ALTER TABLE billing.bill_details OWNER TO postgres;
+ALTER TABLE old.billing_bill_details OWNER TO postgres;
 
 --
--- TOC entry 231 (class 1259 OID 920341)
--- Name: jit_ecs_additional; Type: TABLE; Schema: billing; Owner: postgres
+-- TOC entry 232 (class 1259 OID 921751)
+-- Name: billing_jit_ecs_additional; Type: TABLE; Schema: old; Owner: postgres
 --
 
-CREATE TABLE billing.jit_ecs_additional (
+CREATE TABLE old.billing_jit_ecs_additional (
     id bigint NOT NULL,
     ecs_id bigint NOT NULL,
     bill_id bigint NOT NULL,
@@ -8916,73 +9088,73 @@ CREATE TABLE billing.jit_ecs_additional (
 );
 
 
-ALTER TABLE billing.jit_ecs_additional OWNER TO postgres;
+ALTER TABLE old.billing_jit_ecs_additional OWNER TO postgres;
 
 --
--- TOC entry 6143 (class 0 OID 0)
--- Dependencies: 231
--- Name: COLUMN jit_ecs_additional.urban_rural_flag; Type: COMMENT; Schema: billing; Owner: postgres
+-- TOC entry 6978 (class 0 OID 0)
+-- Dependencies: 232
+-- Name: COLUMN billing_jit_ecs_additional.urban_rural_flag; Type: COMMENT; Schema: old; Owner: postgres
 --
 
-COMMENT ON COLUMN billing.jit_ecs_additional.urban_rural_flag IS 'Urban/Rural/NA flag: U=Urban, R=Rural, N=Not Applicable';
-
-
---
--- TOC entry 6144 (class 0 OID 0)
--- Dependencies: 231
--- Name: COLUMN jit_ecs_additional.block_lgd; Type: COMMENT; Schema: billing; Owner: postgres
---
-
-COMMENT ON COLUMN billing.jit_ecs_additional.block_lgd IS 'LGD code for block';
+COMMENT ON COLUMN old.billing_jit_ecs_additional.urban_rural_flag IS 'Urban/Rural/NA flag: U=Urban, R=Rural, N=Not Applicable';
 
 
 --
--- TOC entry 6145 (class 0 OID 0)
--- Dependencies: 231
--- Name: COLUMN jit_ecs_additional.panchayat_lgd; Type: COMMENT; Schema: billing; Owner: postgres
+-- TOC entry 6979 (class 0 OID 0)
+-- Dependencies: 232
+-- Name: COLUMN billing_jit_ecs_additional.block_lgd; Type: COMMENT; Schema: old; Owner: postgres
 --
 
-COMMENT ON COLUMN billing.jit_ecs_additional.panchayat_lgd IS 'LGD code for panchayat';
-
-
---
--- TOC entry 6146 (class 0 OID 0)
--- Dependencies: 231
--- Name: COLUMN jit_ecs_additional.village_lgd; Type: COMMENT; Schema: billing; Owner: postgres
---
-
-COMMENT ON COLUMN billing.jit_ecs_additional.village_lgd IS 'LGD code for village';
+COMMENT ON COLUMN old.billing_jit_ecs_additional.block_lgd IS 'LGD code for block';
 
 
 --
--- TOC entry 6147 (class 0 OID 0)
--- Dependencies: 231
--- Name: COLUMN jit_ecs_additional.tehsil_lgd; Type: COMMENT; Schema: billing; Owner: postgres
+-- TOC entry 6980 (class 0 OID 0)
+-- Dependencies: 232
+-- Name: COLUMN billing_jit_ecs_additional.panchayat_lgd; Type: COMMENT; Schema: old; Owner: postgres
 --
 
-COMMENT ON COLUMN billing.jit_ecs_additional.tehsil_lgd IS 'LGD code for tehsil';
-
-
---
--- TOC entry 6148 (class 0 OID 0)
--- Dependencies: 231
--- Name: COLUMN jit_ecs_additional.town_lgd; Type: COMMENT; Schema: billing; Owner: postgres
---
-
-COMMENT ON COLUMN billing.jit_ecs_additional.town_lgd IS 'LGD code for town';
+COMMENT ON COLUMN old.billing_jit_ecs_additional.panchayat_lgd IS 'LGD code for panchayat';
 
 
 --
--- TOC entry 6149 (class 0 OID 0)
--- Dependencies: 231
--- Name: COLUMN jit_ecs_additional.ward_lgd; Type: COMMENT; Schema: billing; Owner: postgres
+-- TOC entry 6981 (class 0 OID 0)
+-- Dependencies: 232
+-- Name: COLUMN billing_jit_ecs_additional.village_lgd; Type: COMMENT; Schema: old; Owner: postgres
 --
 
-COMMENT ON COLUMN billing.jit_ecs_additional.ward_lgd IS 'LGD code for ward';
+COMMENT ON COLUMN old.billing_jit_ecs_additional.village_lgd IS 'LGD code for village';
 
 
 --
--- TOC entry 232 (class 1259 OID 920348)
+-- TOC entry 6982 (class 0 OID 0)
+-- Dependencies: 232
+-- Name: COLUMN billing_jit_ecs_additional.tehsil_lgd; Type: COMMENT; Schema: old; Owner: postgres
+--
+
+COMMENT ON COLUMN old.billing_jit_ecs_additional.tehsil_lgd IS 'LGD code for tehsil';
+
+
+--
+-- TOC entry 6983 (class 0 OID 0)
+-- Dependencies: 232
+-- Name: COLUMN billing_jit_ecs_additional.town_lgd; Type: COMMENT; Schema: old; Owner: postgres
+--
+
+COMMENT ON COLUMN old.billing_jit_ecs_additional.town_lgd IS 'LGD code for town';
+
+
+--
+-- TOC entry 6984 (class 0 OID 0)
+-- Dependencies: 232
+-- Name: COLUMN billing_jit_ecs_additional.ward_lgd; Type: COMMENT; Schema: old; Owner: postgres
+--
+
+COMMENT ON COLUMN old.billing_jit_ecs_additional.ward_lgd IS 'LGD code for ward';
+
+
+--
+-- TOC entry 233 (class 1259 OID 921758)
 -- Name: agency_details_view; Type: VIEW; Schema: billing; Owner: postgres
 --
 
@@ -8992,8 +9164,8 @@ CREATE VIEW billing.agency_details_view AS
             ecs.agency_code,
             ecs.agency_name,
             bd.ddo_code
-           FROM (billing.jit_ecs_additional ecs
-             JOIN billing.bill_details bd ON ((bd.bill_id = ecs.bill_id)))
+           FROM (old.billing_jit_ecs_additional ecs
+             JOIN old.billing_bill_details bd ON ((bd.bill_id = ecs.bill_id)))
           GROUP BY ecs.bill_id, ecs.agency_code, ecs.agency_name, bd.ddo_code
         )
  SELECT DISTINCT agency_code,
@@ -9005,11 +9177,11 @@ CREATE VIEW billing.agency_details_view AS
 ALTER VIEW billing.agency_details_view OWNER TO postgres;
 
 --
--- TOC entry 233 (class 1259 OID 920353)
--- Name: bill_btdetail; Type: TABLE; Schema: billing; Owner: postgres
+-- TOC entry 234 (class 1259 OID 921763)
+-- Name: billing_bill_btdetail; Type: TABLE; Schema: old; Owner: postgres
 --
 
-CREATE TABLE billing.bill_btdetail (
+CREATE TABLE old.billing_bill_btdetail (
     id bigint NOT NULL,
     bill_id bigint NOT NULL,
     bt_serial integer,
@@ -9027,14 +9199,14 @@ CREATE TABLE billing.bill_btdetail (
 );
 
 
-ALTER TABLE billing.bill_btdetail OWNER TO postgres;
+ALTER TABLE old.billing_bill_btdetail OWNER TO postgres;
 
 --
--- TOC entry 234 (class 1259 OID 920356)
--- Name: bill_btdetail_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
+-- TOC entry 235 (class 1259 OID 921766)
+-- Name: bill_btdetail_id_seq; Type: SEQUENCE; Schema: old; Owner: postgres
 --
 
-CREATE SEQUENCE billing.bill_btdetail_id_seq
+CREATE SEQUENCE old.bill_btdetail_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -9042,94 +9214,319 @@ CREATE SEQUENCE billing.bill_btdetail_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE billing.bill_btdetail_id_seq OWNER TO postgres;
+ALTER SEQUENCE old.bill_btdetail_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6150 (class 0 OID 0)
--- Dependencies: 234
--- Name: bill_btdetail_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: postgres
+-- TOC entry 6985 (class 0 OID 0)
+-- Dependencies: 235
+-- Name: bill_btdetail_id_seq; Type: SEQUENCE OWNED BY; Schema: old; Owner: postgres
 --
 
-ALTER SEQUENCE billing.bill_btdetail_id_seq OWNED BY billing.bill_btdetail.id;
+ALTER SEQUENCE old.bill_btdetail_id_seq OWNED BY old.billing_bill_btdetail.id;
 
 
 --
--- TOC entry 235 (class 1259 OID 920357)
--- Name: bill_gst; Type: TABLE; Schema: billing; Owner: postgres
+-- TOC entry 441 (class 1259 OID 1036758)
+-- Name: bill_btdetail; Type: TABLE; Schema: billing; Owner: postgres
 --
 
-CREATE TABLE billing.bill_gst (
-    id bigint NOT NULL,
-    bill_id bigint,
-    cpin_id bigint,
-    ddo_gstn character varying(255),
+CREATE TABLE billing.bill_btdetail (
+    id bigint DEFAULT nextval('old.bill_btdetail_id_seq'::regclass) NOT NULL,
+    bill_id bigint NOT NULL,
+    bt_serial integer,
+    bt_type smallint,
+    amount bigint,
     ddo_code character(9),
+    treasury_code character(3),
+    status smallint,
+    created_by bigint,
+    created_at timestamp without time zone,
+    updated_by bigint,
+    updated_at timestamp without time zone,
+    financial_year smallint NOT NULL,
+    payee_id character varying(20)
+)
+PARTITION BY LIST (financial_year);
+
+
+ALTER TABLE billing.bill_btdetail OWNER TO postgres;
+
+--
+-- TOC entry 442 (class 1259 OID 1036765)
+-- Name: bill_btdetail_2425; Type: TABLE; Schema: billing; Owner: postgres
+--
+
+CREATE TABLE billing.bill_btdetail_2425 (
+    id bigint DEFAULT nextval('old.bill_btdetail_id_seq'::regclass) NOT NULL,
+    bill_id bigint NOT NULL,
+    bt_serial integer,
+    bt_type smallint,
+    amount bigint,
+    ddo_code character(9),
+    treasury_code character(3),
+    status smallint,
+    created_by bigint,
+    created_at timestamp without time zone,
+    updated_by bigint,
+    updated_at timestamp without time zone,
+    financial_year smallint NOT NULL,
+    payee_id character varying(20)
+);
+
+
+ALTER TABLE billing.bill_btdetail_2425 OWNER TO postgres;
+
+--
+-- TOC entry 443 (class 1259 OID 1036772)
+-- Name: bill_btdetail_2526; Type: TABLE; Schema: billing; Owner: postgres
+--
+
+CREATE TABLE billing.bill_btdetail_2526 (
+    id bigint DEFAULT nextval('old.bill_btdetail_id_seq'::regclass) NOT NULL,
+    bill_id bigint NOT NULL,
+    bt_serial integer,
+    bt_type smallint,
+    amount bigint,
+    ddo_code character(9),
+    treasury_code character(3),
+    status smallint,
+    created_by bigint,
+    created_at timestamp without time zone,
+    updated_by bigint,
+    updated_at timestamp without time zone,
+    financial_year smallint NOT NULL,
+    payee_id character varying(20)
+);
+
+
+ALTER TABLE billing.bill_btdetail_2526 OWNER TO postgres;
+
+--
+-- TOC entry 238 (class 1259 OID 921773)
+-- Name: bill_details_bill_id_seq; Type: SEQUENCE; Schema: old; Owner: postgres
+--
+
+CREATE SEQUENCE old.bill_details_bill_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE old.bill_details_bill_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 6986 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: bill_details_bill_id_seq; Type: SEQUENCE OWNED BY; Schema: old; Owner: postgres
+--
+
+ALTER SEQUENCE old.bill_details_bill_id_seq OWNED BY old.billing_bill_details.bill_id;
+
+
+--
+-- TOC entry 428 (class 1259 OID 1036187)
+-- Name: bill_details; Type: TABLE; Schema: billing; Owner: postgres
+--
+
+CREATE TABLE billing.bill_details (
+    bill_id bigint DEFAULT nextval('old.bill_details_bill_id_seq'::regclass) NOT NULL,
+    bill_no character(15),
+    bill_date date NOT NULL,
+    bill_mode smallint DEFAULT 0,
+    reference_no character(20),
+    tr_master_id smallint NOT NULL,
+    payment_mode smallint NOT NULL,
+    financial_year smallint NOT NULL,
+    demand character(2),
+    major_head character(4),
+    sub_major_head character(2),
+    minor_head character(3),
+    plan_status character(2),
+    scheme_head character(3),
+    detail_head character(2),
+    voted_charged character(1),
+    gross_amount bigint DEFAULT 0,
+    net_amount bigint DEFAULT 0,
+    bt_amount bigint DEFAULT 0,
+    sanction_no character varying(25),
+    sanction_amt bigint DEFAULT 0,
+    sanction_date date,
+    sanction_by character varying(100),
+    remarks character varying(100),
+    ddo_code character(9),
+    is_extended_part_filled boolean DEFAULT false NOT NULL,
+    is_deleted boolean DEFAULT false NOT NULL,
+    treasury_code character(3),
+    is_gem boolean DEFAULT false NOT NULL,
+    status smallint NOT NULL,
     created_by_userid bigint,
     created_at timestamp without time zone DEFAULT now(),
     updated_by_userid bigint,
     updated_at timestamp without time zone,
-    tr_id smallint,
-    is_deleted boolean DEFAULT false,
-    financial_year smallint
+    form_version smallint DEFAULT 1 NOT NULL,
+    form_revision_no smallint DEFAULT 1 NOT NULL,
+    sna_grant_type integer,
+    css_ben_type integer,
+    treasury_bt bigint DEFAULT 0,
+    ag_bt bigint DEFAULT 0,
+    bill_components jsonb,
+    aafs_project_id integer,
+    scheme_code character varying(50),
+    scheme_name character varying(300),
+    bill_type character varying(15),
+    is_cancelled boolean DEFAULT false,
+    is_gst boolean DEFAULT false,
+    gst_amount bigint DEFAULT 0,
+    tr_components jsonb,
+    is_regenerated boolean DEFAULT false,
+    service_provider_id integer,
+    payee_count smallint,
+    is_reissued boolean DEFAULT false,
+    is_cpin_regenerated boolean DEFAULT false
+)
+PARTITION BY LIST (financial_year);
+
+
+ALTER TABLE billing.bill_details OWNER TO postgres;
+
+--
+-- TOC entry 429 (class 1259 OID 1036215)
+-- Name: bill_details_2425; Type: TABLE; Schema: billing; Owner: postgres
+--
+
+CREATE TABLE billing.bill_details_2425 (
+    bill_id bigint DEFAULT nextval('old.bill_details_bill_id_seq'::regclass) NOT NULL,
+    bill_no character(15),
+    bill_date date NOT NULL,
+    bill_mode smallint DEFAULT 0,
+    reference_no character(20),
+    tr_master_id smallint NOT NULL,
+    payment_mode smallint NOT NULL,
+    financial_year smallint NOT NULL,
+    demand character(2),
+    major_head character(4),
+    sub_major_head character(2),
+    minor_head character(3),
+    plan_status character(2),
+    scheme_head character(3),
+    detail_head character(2),
+    voted_charged character(1),
+    gross_amount bigint DEFAULT 0,
+    net_amount bigint DEFAULT 0,
+    bt_amount bigint DEFAULT 0,
+    sanction_no character varying(25),
+    sanction_amt bigint DEFAULT 0,
+    sanction_date date,
+    sanction_by character varying(100),
+    remarks character varying(100),
+    ddo_code character(9),
+    is_extended_part_filled boolean DEFAULT false NOT NULL,
+    is_deleted boolean DEFAULT false NOT NULL,
+    treasury_code character(3),
+    is_gem boolean DEFAULT false NOT NULL,
+    status smallint NOT NULL,
+    created_by_userid bigint,
+    created_at timestamp without time zone DEFAULT now(),
+    updated_by_userid bigint,
+    updated_at timestamp without time zone,
+    form_version smallint DEFAULT 1 NOT NULL,
+    form_revision_no smallint DEFAULT 1 NOT NULL,
+    sna_grant_type integer,
+    css_ben_type integer,
+    treasury_bt bigint DEFAULT 0,
+    ag_bt bigint DEFAULT 0,
+    bill_components jsonb,
+    aafs_project_id integer,
+    scheme_code character varying(50),
+    scheme_name character varying(300),
+    bill_type character varying(15),
+    is_cancelled boolean DEFAULT false,
+    is_gst boolean DEFAULT false,
+    gst_amount bigint DEFAULT 0,
+    tr_components jsonb,
+    is_regenerated boolean DEFAULT false,
+    service_provider_id integer,
+    payee_count smallint,
+    is_reissued boolean DEFAULT false,
+    is_cpin_regenerated boolean DEFAULT false
 );
 
 
-ALTER TABLE billing.bill_gst OWNER TO postgres;
+ALTER TABLE billing.bill_details_2425 OWNER TO postgres;
 
 --
--- TOC entry 236 (class 1259 OID 920362)
--- Name: bill_cpin_mapping_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
+-- TOC entry 430 (class 1259 OID 1036245)
+-- Name: bill_details_2526; Type: TABLE; Schema: billing; Owner: postgres
 --
 
-CREATE SEQUENCE billing.bill_cpin_mapping_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
+CREATE TABLE billing.bill_details_2526 (
+    bill_id bigint DEFAULT nextval('old.bill_details_bill_id_seq'::regclass) NOT NULL,
+    bill_no character(15),
+    bill_date date NOT NULL,
+    bill_mode smallint DEFAULT 0,
+    reference_no character(20),
+    tr_master_id smallint NOT NULL,
+    payment_mode smallint NOT NULL,
+    financial_year smallint NOT NULL,
+    demand character(2),
+    major_head character(4),
+    sub_major_head character(2),
+    minor_head character(3),
+    plan_status character(2),
+    scheme_head character(3),
+    detail_head character(2),
+    voted_charged character(1),
+    gross_amount bigint DEFAULT 0,
+    net_amount bigint DEFAULT 0,
+    bt_amount bigint DEFAULT 0,
+    sanction_no character varying(25),
+    sanction_amt bigint DEFAULT 0,
+    sanction_date date,
+    sanction_by character varying(100),
+    remarks character varying(100),
+    ddo_code character(9),
+    is_extended_part_filled boolean DEFAULT false NOT NULL,
+    is_deleted boolean DEFAULT false NOT NULL,
+    treasury_code character(3),
+    is_gem boolean DEFAULT false NOT NULL,
+    status smallint NOT NULL,
+    created_by_userid bigint,
+    created_at timestamp without time zone DEFAULT now(),
+    updated_by_userid bigint,
+    updated_at timestamp without time zone,
+    form_version smallint DEFAULT 1 NOT NULL,
+    form_revision_no smallint DEFAULT 1 NOT NULL,
+    sna_grant_type integer,
+    css_ben_type integer,
+    treasury_bt bigint DEFAULT 0,
+    ag_bt bigint DEFAULT 0,
+    bill_components jsonb,
+    aafs_project_id integer,
+    scheme_code character varying(50),
+    scheme_name character varying(300),
+    bill_type character varying(15),
+    is_cancelled boolean DEFAULT false,
+    is_gst boolean DEFAULT false,
+    gst_amount bigint DEFAULT 0,
+    tr_components jsonb,
+    is_regenerated boolean DEFAULT false,
+    service_provider_id integer,
+    payee_count smallint,
+    is_reissued boolean DEFAULT false,
+    is_cpin_regenerated boolean DEFAULT false
+);
 
 
-ALTER SEQUENCE billing.bill_cpin_mapping_id_seq OWNER TO postgres;
+ALTER TABLE billing.bill_details_2526 OWNER TO postgres;
 
 --
--- TOC entry 6151 (class 0 OID 0)
--- Dependencies: 236
--- Name: bill_cpin_mapping_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: postgres
+-- TOC entry 239 (class 1259 OID 921774)
+-- Name: billing_bill_ecs_neft_details; Type: TABLE; Schema: old; Owner: postgres
 --
 
-ALTER SEQUENCE billing.bill_cpin_mapping_id_seq OWNED BY billing.bill_gst.id;
-
-
---
--- TOC entry 237 (class 1259 OID 920363)
--- Name: bill_details_bill_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
---
-
-CREATE SEQUENCE billing.bill_details_bill_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER SEQUENCE billing.bill_details_bill_id_seq OWNER TO postgres;
-
---
--- TOC entry 6152 (class 0 OID 0)
--- Dependencies: 237
--- Name: bill_details_bill_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: postgres
---
-
-ALTER SEQUENCE billing.bill_details_bill_id_seq OWNED BY billing.bill_details.bill_id;
-
-
---
--- TOC entry 238 (class 1259 OID 920364)
--- Name: bill_ecs_neft_details; Type: TABLE; Schema: billing; Owner: postgres
---
-
-CREATE TABLE billing.bill_ecs_neft_details (
+CREATE TABLE old.billing_bill_ecs_neft_details (
     id bigint NOT NULL,
     bill_id bigint NOT NULL,
     payee_name character varying(100),
@@ -9158,14 +9555,264 @@ CREATE TABLE billing.bill_ecs_neft_details (
 );
 
 
+ALTER TABLE old.billing_bill_ecs_neft_details OWNER TO postgres;
+
+--
+-- TOC entry 255 (class 1259 OID 921839)
+-- Name: ecs_neft_details_id_seq; Type: SEQUENCE; Schema: old; Owner: postgres
+--
+
+CREATE SEQUENCE old.ecs_neft_details_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE old.ecs_neft_details_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 6987 (class 0 OID 0)
+-- Dependencies: 255
+-- Name: ecs_neft_details_id_seq; Type: SEQUENCE OWNED BY; Schema: old; Owner: postgres
+--
+
+ALTER SEQUENCE old.ecs_neft_details_id_seq OWNED BY old.billing_bill_ecs_neft_details.id;
+
+
+--
+-- TOC entry 444 (class 1259 OID 1036840)
+-- Name: bill_ecs_neft_details; Type: TABLE; Schema: billing; Owner: postgres
+--
+
+CREATE TABLE billing.bill_ecs_neft_details (
+    id bigint DEFAULT nextval('old.ecs_neft_details_id_seq'::regclass) NOT NULL,
+    bill_id bigint NOT NULL,
+    payee_name character varying(100),
+    beneficiary_id character varying(100),
+    payee_type character(2),
+    pan_no character(10),
+    contact_number character(15),
+    beneficiary_type character(2),
+    address character varying(200),
+    email character varying(60),
+    ifsc_code character(11),
+    account_type smallint,
+    bank_account_number character(20),
+    bank_name character varying(50),
+    amount bigint,
+    status smallint DEFAULT 1,
+    is_active smallint DEFAULT 1,
+    created_by_userid bigint,
+    created_at timestamp without time zone DEFAULT now(),
+    updated_by_userid bigint,
+    updated_at timestamp without time zone,
+    e_pradan_id bigint,
+    financial_year smallint NOT NULL,
+    is_cancelled boolean DEFAULT false,
+    is_gst boolean DEFAULT false
+)
+PARTITION BY LIST (financial_year);
+
+
 ALTER TABLE billing.bill_ecs_neft_details OWNER TO postgres;
 
 --
--- TOC entry 239 (class 1259 OID 920374)
--- Name: bill_jit_components; Type: TABLE; Schema: billing; Owner: postgres
+-- TOC entry 445 (class 1259 OID 1036855)
+-- Name: bill_ecs_neft_details_2425; Type: TABLE; Schema: billing; Owner: postgres
 --
 
-CREATE TABLE billing.bill_jit_components (
+CREATE TABLE billing.bill_ecs_neft_details_2425 (
+    id bigint DEFAULT nextval('old.ecs_neft_details_id_seq'::regclass) NOT NULL,
+    bill_id bigint NOT NULL,
+    payee_name character varying(100),
+    beneficiary_id character varying(100),
+    payee_type character(2),
+    pan_no character(10),
+    contact_number character(15),
+    beneficiary_type character(2),
+    address character varying(200),
+    email character varying(60),
+    ifsc_code character(11),
+    account_type smallint,
+    bank_account_number character(20),
+    bank_name character varying(50),
+    amount bigint,
+    status smallint DEFAULT 1,
+    is_active smallint DEFAULT 1,
+    created_by_userid bigint,
+    created_at timestamp without time zone DEFAULT now(),
+    updated_by_userid bigint,
+    updated_at timestamp without time zone,
+    e_pradan_id bigint,
+    financial_year smallint NOT NULL,
+    is_cancelled boolean DEFAULT false,
+    is_gst boolean DEFAULT false
+);
+
+
+ALTER TABLE billing.bill_ecs_neft_details_2425 OWNER TO postgres;
+
+--
+-- TOC entry 446 (class 1259 OID 1036872)
+-- Name: bill_ecs_neft_details_2526; Type: TABLE; Schema: billing; Owner: postgres
+--
+
+CREATE TABLE billing.bill_ecs_neft_details_2526 (
+    id bigint DEFAULT nextval('old.ecs_neft_details_id_seq'::regclass) NOT NULL,
+    bill_id bigint NOT NULL,
+    payee_name character varying(100),
+    beneficiary_id character varying(100),
+    payee_type character(2),
+    pan_no character(10),
+    contact_number character(15),
+    beneficiary_type character(2),
+    address character varying(200),
+    email character varying(60),
+    ifsc_code character(11),
+    account_type smallint,
+    bank_account_number character(20),
+    bank_name character varying(50),
+    amount bigint,
+    status smallint DEFAULT 1,
+    is_active smallint DEFAULT 1,
+    created_by_userid bigint,
+    created_at timestamp without time zone DEFAULT now(),
+    updated_by_userid bigint,
+    updated_at timestamp without time zone,
+    e_pradan_id bigint,
+    financial_year smallint NOT NULL,
+    is_cancelled boolean DEFAULT false,
+    is_gst boolean DEFAULT false
+);
+
+
+ALTER TABLE billing.bill_ecs_neft_details_2526 OWNER TO postgres;
+
+--
+-- TOC entry 236 (class 1259 OID 921767)
+-- Name: billing_bill_gst; Type: TABLE; Schema: old; Owner: postgres
+--
+
+CREATE TABLE old.billing_bill_gst (
+    id bigint NOT NULL,
+    bill_id bigint,
+    cpin_id bigint,
+    ddo_gstn character varying(255),
+    ddo_code character(9),
+    created_by_userid bigint,
+    created_at timestamp without time zone DEFAULT now(),
+    updated_by_userid bigint,
+    updated_at timestamp without time zone,
+    tr_id smallint,
+    is_deleted boolean DEFAULT false,
+    financial_year smallint
+);
+
+
+ALTER TABLE old.billing_bill_gst OWNER TO postgres;
+
+--
+-- TOC entry 237 (class 1259 OID 921772)
+-- Name: bill_cpin_mapping_id_seq; Type: SEQUENCE; Schema: old; Owner: postgres
+--
+
+CREATE SEQUENCE old.bill_cpin_mapping_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE old.bill_cpin_mapping_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 6988 (class 0 OID 0)
+-- Dependencies: 237
+-- Name: bill_cpin_mapping_id_seq; Type: SEQUENCE OWNED BY; Schema: old; Owner: postgres
+--
+
+ALTER SEQUENCE old.bill_cpin_mapping_id_seq OWNED BY old.billing_bill_gst.id;
+
+
+--
+-- TOC entry 453 (class 1259 OID 1037061)
+-- Name: bill_gst; Type: TABLE; Schema: billing; Owner: postgres
+--
+
+CREATE TABLE billing.bill_gst (
+    id bigint DEFAULT nextval('old.bill_cpin_mapping_id_seq'::regclass) NOT NULL,
+    bill_id bigint,
+    cpin_id bigint,
+    ddo_gstn character varying(255),
+    ddo_code character(9),
+    created_by_userid bigint,
+    created_at timestamp without time zone DEFAULT now(),
+    updated_by_userid bigint,
+    updated_at timestamp without time zone,
+    tr_id smallint,
+    is_deleted boolean DEFAULT false,
+    financial_year smallint NOT NULL
+)
+PARTITION BY LIST (financial_year);
+
+
+ALTER TABLE billing.bill_gst OWNER TO postgres;
+
+--
+-- TOC entry 454 (class 1259 OID 1037073)
+-- Name: bill_gst_2425; Type: TABLE; Schema: billing; Owner: postgres
+--
+
+CREATE TABLE billing.bill_gst_2425 (
+    id bigint DEFAULT nextval('old.bill_cpin_mapping_id_seq'::regclass) NOT NULL,
+    bill_id bigint,
+    cpin_id bigint,
+    ddo_gstn character varying(255),
+    ddo_code character(9),
+    created_by_userid bigint,
+    created_at timestamp without time zone DEFAULT now(),
+    updated_by_userid bigint,
+    updated_at timestamp without time zone,
+    tr_id smallint,
+    is_deleted boolean DEFAULT false,
+    financial_year smallint NOT NULL
+);
+
+
+ALTER TABLE billing.bill_gst_2425 OWNER TO postgres;
+
+--
+-- TOC entry 455 (class 1259 OID 1037083)
+-- Name: bill_gst_2526; Type: TABLE; Schema: billing; Owner: postgres
+--
+
+CREATE TABLE billing.bill_gst_2526 (
+    id bigint DEFAULT nextval('old.bill_cpin_mapping_id_seq'::regclass) NOT NULL,
+    bill_id bigint,
+    cpin_id bigint,
+    ddo_gstn character varying(255),
+    ddo_code character(9),
+    created_by_userid bigint,
+    created_at timestamp without time zone DEFAULT now(),
+    updated_by_userid bigint,
+    updated_at timestamp without time zone,
+    tr_id smallint,
+    is_deleted boolean DEFAULT false,
+    financial_year smallint NOT NULL
+);
+
+
+ALTER TABLE billing.bill_gst_2526 OWNER TO postgres;
+
+--
+-- TOC entry 240 (class 1259 OID 921784)
+-- Name: billing_bill_jit_components; Type: TABLE; Schema: old; Owner: postgres
+--
+
+CREATE TABLE old.billing_bill_jit_components (
     bill_id bigint,
     payee_id character varying(50),
     componentcode character varying(50),
@@ -9177,14 +9824,14 @@ CREATE TABLE billing.bill_jit_components (
 );
 
 
-ALTER TABLE billing.bill_jit_components OWNER TO postgres;
+ALTER TABLE old.billing_bill_jit_components OWNER TO postgres;
 
 --
--- TOC entry 240 (class 1259 OID 920379)
--- Name: bill_jit_components_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
+-- TOC entry 241 (class 1259 OID 921789)
+-- Name: bill_jit_components_id_seq; Type: SEQUENCE; Schema: old; Owner: postgres
 --
 
-CREATE SEQUENCE billing.bill_jit_components_id_seq
+CREATE SEQUENCE old.bill_jit_components_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -9192,19 +9839,77 @@ CREATE SEQUENCE billing.bill_jit_components_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE billing.bill_jit_components_id_seq OWNER TO postgres;
+ALTER SEQUENCE old.bill_jit_components_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6153 (class 0 OID 0)
--- Dependencies: 240
--- Name: bill_jit_components_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: postgres
+-- TOC entry 6989 (class 0 OID 0)
+-- Dependencies: 241
+-- Name: bill_jit_components_id_seq; Type: SEQUENCE OWNED BY; Schema: old; Owner: postgres
 --
 
-ALTER SEQUENCE billing.bill_jit_components_id_seq OWNED BY billing.bill_jit_components.id;
+ALTER SEQUENCE old.bill_jit_components_id_seq OWNED BY old.billing_bill_jit_components.id;
 
 
 --
--- TOC entry 241 (class 1259 OID 920380)
+-- TOC entry 447 (class 1259 OID 1036928)
+-- Name: bill_jit_components; Type: TABLE; Schema: billing; Owner: postgres
+--
+
+CREATE TABLE billing.bill_jit_components (
+    bill_id bigint,
+    payee_id character varying(50),
+    componentcode character varying(50),
+    componentname character varying(300),
+    amount bigint,
+    slscode character varying(100),
+    id bigint DEFAULT nextval('old.bill_jit_components_id_seq'::regclass) NOT NULL,
+    financial_year smallint NOT NULL
+)
+PARTITION BY LIST (financial_year);
+
+
+ALTER TABLE billing.bill_jit_components OWNER TO postgres;
+
+--
+-- TOC entry 448 (class 1259 OID 1036939)
+-- Name: bill_jit_components_2425; Type: TABLE; Schema: billing; Owner: postgres
+--
+
+CREATE TABLE billing.bill_jit_components_2425 (
+    bill_id bigint,
+    payee_id character varying(50),
+    componentcode character varying(50),
+    componentname character varying(300),
+    amount bigint,
+    slscode character varying(100),
+    id bigint DEFAULT nextval('old.bill_jit_components_id_seq'::regclass) NOT NULL,
+    financial_year smallint NOT NULL
+);
+
+
+ALTER TABLE billing.bill_jit_components_2425 OWNER TO postgres;
+
+--
+-- TOC entry 449 (class 1259 OID 1036949)
+-- Name: bill_jit_components_2526; Type: TABLE; Schema: billing; Owner: postgres
+--
+
+CREATE TABLE billing.bill_jit_components_2526 (
+    bill_id bigint,
+    payee_id character varying(50),
+    componentcode character varying(50),
+    componentname character varying(300),
+    amount bigint,
+    slscode character varying(100),
+    id bigint DEFAULT nextval('old.bill_jit_components_id_seq'::regclass) NOT NULL,
+    financial_year smallint NOT NULL
+);
+
+
+ALTER TABLE billing.bill_jit_components_2526 OWNER TO postgres;
+
+--
+-- TOC entry 242 (class 1259 OID 921790)
 -- Name: bill_status_info; Type: TABLE; Schema: billing; Owner: postgres
 --
 
@@ -9221,7 +9926,7 @@ CREATE TABLE billing.bill_status_info (
 ALTER TABLE billing.bill_status_info OWNER TO postgres;
 
 --
--- TOC entry 242 (class 1259 OID 920384)
+-- TOC entry 243 (class 1259 OID 921794)
 -- Name: bill_status_info_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
 --
 
@@ -9236,8 +9941,8 @@ CREATE SEQUENCE billing.bill_status_info_id_seq
 ALTER SEQUENCE billing.bill_status_info_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6154 (class 0 OID 0)
--- Dependencies: 242
+-- TOC entry 6990 (class 0 OID 0)
+-- Dependencies: 243
 -- Name: bill_status_info_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: postgres
 --
 
@@ -9245,11 +9950,11 @@ ALTER SEQUENCE billing.bill_status_info_id_seq OWNED BY billing.bill_status_info
 
 
 --
--- TOC entry 243 (class 1259 OID 920385)
--- Name: bill_subdetail_info; Type: TABLE; Schema: billing; Owner: postgres
+-- TOC entry 244 (class 1259 OID 921795)
+-- Name: billing_bill_subdetail_info; Type: TABLE; Schema: old; Owner: postgres
 --
 
-CREATE TABLE billing.bill_subdetail_info (
+CREATE TABLE old.billing_bill_subdetail_info (
     id bigint NOT NULL,
     bill_id bigint NOT NULL,
     active_hoa_id bigint NOT NULL,
@@ -9265,14 +9970,14 @@ CREATE TABLE billing.bill_subdetail_info (
 );
 
 
-ALTER TABLE billing.bill_subdetail_info OWNER TO postgres;
+ALTER TABLE old.billing_bill_subdetail_info OWNER TO postgres;
 
 --
--- TOC entry 244 (class 1259 OID 920388)
--- Name: bill_subdetail_info_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
+-- TOC entry 245 (class 1259 OID 921798)
+-- Name: bill_subdetail_info_id_seq; Type: SEQUENCE; Schema: old; Owner: postgres
 --
 
-CREATE SEQUENCE billing.bill_subdetail_info_id_seq
+CREATE SEQUENCE old.bill_subdetail_info_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -9280,19 +9985,89 @@ CREATE SEQUENCE billing.bill_subdetail_info_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE billing.bill_subdetail_info_id_seq OWNER TO postgres;
+ALTER SEQUENCE old.bill_subdetail_info_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6155 (class 0 OID 0)
--- Dependencies: 244
--- Name: bill_subdetail_info_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: postgres
+-- TOC entry 6991 (class 0 OID 0)
+-- Dependencies: 245
+-- Name: bill_subdetail_info_id_seq; Type: SEQUENCE OWNED BY; Schema: old; Owner: postgres
 --
 
-ALTER SEQUENCE billing.bill_subdetail_info_id_seq OWNED BY billing.bill_subdetail_info.id;
+ALTER SEQUENCE old.bill_subdetail_info_id_seq OWNED BY old.billing_bill_subdetail_info.id;
 
 
 --
--- TOC entry 245 (class 1259 OID 920389)
+-- TOC entry 450 (class 1259 OID 1036978)
+-- Name: bill_subdetail_info; Type: TABLE; Schema: billing; Owner: postgres
+--
+
+CREATE TABLE billing.bill_subdetail_info (
+    id bigint DEFAULT nextval('old.bill_subdetail_info_id_seq'::regclass) NOT NULL,
+    bill_id bigint NOT NULL,
+    active_hoa_id bigint NOT NULL,
+    amount bigint,
+    status smallint,
+    created_by_userid bigint,
+    created_at timestamp without time zone,
+    updated_by_userid bigint,
+    updated_at timestamp without time zone,
+    financial_year smallint NOT NULL,
+    ddo_code character(9),
+    treasury_code character(3)
+)
+PARTITION BY LIST (financial_year);
+
+
+ALTER TABLE billing.bill_subdetail_info OWNER TO postgres;
+
+--
+-- TOC entry 451 (class 1259 OID 1036985)
+-- Name: bill_subdetail_info_2425; Type: TABLE; Schema: billing; Owner: postgres
+--
+
+CREATE TABLE billing.bill_subdetail_info_2425 (
+    id bigint DEFAULT nextval('old.bill_subdetail_info_id_seq'::regclass) NOT NULL,
+    bill_id bigint NOT NULL,
+    active_hoa_id bigint NOT NULL,
+    amount bigint,
+    status smallint,
+    created_by_userid bigint,
+    created_at timestamp without time zone,
+    updated_by_userid bigint,
+    updated_at timestamp without time zone,
+    financial_year smallint NOT NULL,
+    ddo_code character(9),
+    treasury_code character(3)
+);
+
+
+ALTER TABLE billing.bill_subdetail_info_2425 OWNER TO postgres;
+
+--
+-- TOC entry 452 (class 1259 OID 1036992)
+-- Name: bill_subdetail_info_2526; Type: TABLE; Schema: billing; Owner: postgres
+--
+
+CREATE TABLE billing.bill_subdetail_info_2526 (
+    id bigint DEFAULT nextval('old.bill_subdetail_info_id_seq'::regclass) NOT NULL,
+    bill_id bigint NOT NULL,
+    active_hoa_id bigint NOT NULL,
+    amount bigint,
+    status smallint,
+    created_by_userid bigint,
+    created_at timestamp without time zone,
+    updated_by_userid bigint,
+    updated_at timestamp without time zone,
+    financial_year smallint NOT NULL,
+    ddo_code character(9),
+    treasury_code character(3)
+);
+
+
+ALTER TABLE billing.bill_subdetail_info_2526 OWNER TO postgres;
+
+--
+-- TOC entry 246 (class 1259 OID 921799)
 -- Name: billing_pfms_file_status_details; Type: TABLE; Schema: billing; Owner: postgres
 --
 
@@ -9311,7 +10086,7 @@ CREATE TABLE billing.billing_pfms_file_status_details (
 ALTER TABLE billing.billing_pfms_file_status_details OWNER TO postgres;
 
 --
--- TOC entry 246 (class 1259 OID 920396)
+-- TOC entry 247 (class 1259 OID 921806)
 -- Name: billing_pfms_file_status_details_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
 --
 
@@ -9326,8 +10101,8 @@ CREATE SEQUENCE billing.billing_pfms_file_status_details_id_seq
 ALTER SEQUENCE billing.billing_pfms_file_status_details_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6156 (class 0 OID 0)
--- Dependencies: 246
+-- TOC entry 6992 (class 0 OID 0)
+-- Dependencies: 247
 -- Name: billing_pfms_file_status_details_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: postgres
 --
 
@@ -9335,11 +10110,11 @@ ALTER SEQUENCE billing.billing_pfms_file_status_details_id_seq OWNED BY billing.
 
 
 --
--- TOC entry 247 (class 1259 OID 920397)
--- Name: ddo_allotment_booked_bill; Type: TABLE; Schema: billing; Owner: postgres
+-- TOC entry 248 (class 1259 OID 921807)
+-- Name: billing_ddo_allotment_booked_bill; Type: TABLE; Schema: old; Owner: postgres
 --
 
-CREATE TABLE billing.ddo_allotment_booked_bill (
+CREATE TABLE old.billing_ddo_allotment_booked_bill (
     id integer NOT NULL,
     bill_id bigint NOT NULL,
     allotment_id bigint,
@@ -9360,14 +10135,14 @@ CREATE TABLE billing.ddo_allotment_booked_bill (
 );
 
 
-ALTER TABLE billing.ddo_allotment_booked_bill OWNER TO postgres;
+ALTER TABLE old.billing_ddo_allotment_booked_bill OWNER TO postgres;
 
 --
--- TOC entry 248 (class 1259 OID 920404)
--- Name: ddo_allotment_booked_bill_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
+-- TOC entry 249 (class 1259 OID 921814)
+-- Name: ddo_allotment_booked_bill_id_seq; Type: SEQUENCE; Schema: old; Owner: postgres
 --
 
-CREATE SEQUENCE billing.ddo_allotment_booked_bill_id_seq
+CREATE SEQUENCE old.ddo_allotment_booked_bill_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -9376,19 +10151,76 @@ CREATE SEQUENCE billing.ddo_allotment_booked_bill_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE billing.ddo_allotment_booked_bill_id_seq OWNER TO postgres;
+ALTER SEQUENCE old.ddo_allotment_booked_bill_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6157 (class 0 OID 0)
--- Dependencies: 248
--- Name: ddo_allotment_booked_bill_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: postgres
+-- TOC entry 6993 (class 0 OID 0)
+-- Dependencies: 249
+-- Name: ddo_allotment_booked_bill_id_seq; Type: SEQUENCE OWNED BY; Schema: old; Owner: postgres
 --
 
-ALTER SEQUENCE billing.ddo_allotment_booked_bill_id_seq OWNED BY billing.ddo_allotment_booked_bill.id;
+ALTER SEQUENCE old.ddo_allotment_booked_bill_id_seq OWNED BY old.billing_ddo_allotment_booked_bill.id;
 
 
 --
--- TOC entry 249 (class 1259 OID 920405)
+-- TOC entry 466 (class 1259 OID 1037480)
+-- Name: ddo_allotment_booked_bill; Type: TABLE; Schema: billing; Owner: postgres
+--
+
+CREATE TABLE billing.ddo_allotment_booked_bill (
+    id integer DEFAULT nextval('old.ddo_allotment_booked_bill_id_seq'::regclass) NOT NULL,
+    bill_id bigint NOT NULL,
+    allotment_id bigint,
+    amount bigint NOT NULL,
+    ddo_user_id integer,
+    ddo_code character(9),
+    treasury_code character(3),
+    created_by_userid bigint,
+    created_at timestamp without time zone,
+    updated_by_userid bigint,
+    updated_at timestamp without time zone,
+    financial_year smallint NOT NULL,
+    active_hoa_id bigint NOT NULL,
+    allotment_received bigint DEFAULT 0,
+    progressive_expenses bigint DEFAULT 0,
+    is_reissued boolean DEFAULT false,
+    is_duplicate boolean DEFAULT false
+)
+PARTITION BY LIST (financial_year);
+
+
+ALTER TABLE billing.ddo_allotment_booked_bill OWNER TO postgres;
+
+--
+-- TOC entry 467 (class 1259 OID 1037494)
+-- Name: ddo_allotment_booked_bill_2526; Type: TABLE; Schema: billing; Owner: postgres
+--
+
+CREATE TABLE billing.ddo_allotment_booked_bill_2526 (
+    id integer DEFAULT nextval('old.ddo_allotment_booked_bill_id_seq'::regclass) NOT NULL,
+    bill_id bigint NOT NULL,
+    allotment_id bigint,
+    amount bigint NOT NULL,
+    ddo_user_id integer,
+    ddo_code character(9),
+    treasury_code character(3),
+    created_by_userid bigint,
+    created_at timestamp without time zone,
+    updated_by_userid bigint,
+    updated_at timestamp without time zone,
+    financial_year smallint NOT NULL,
+    active_hoa_id bigint NOT NULL,
+    allotment_received bigint DEFAULT 0,
+    progressive_expenses bigint DEFAULT 0,
+    is_reissued boolean DEFAULT false,
+    is_duplicate boolean DEFAULT false
+);
+
+
+ALTER TABLE billing.ddo_allotment_booked_bill_2526 OWNER TO postgres;
+
+--
+-- TOC entry 250 (class 1259 OID 921815)
 -- Name: department_details_view; Type: VIEW; Schema: billing; Owner: postgres
 --
 
@@ -9402,7 +10234,7 @@ SELECT
 ALTER VIEW billing.department_details_view OWNER TO postgres;
 
 --
--- TOC entry 250 (class 1259 OID 920409)
+-- TOC entry 251 (class 1259 OID 921819)
 -- Name: ebill_jit_int_map_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
 --
 
@@ -9417,7 +10249,7 @@ CREATE SEQUENCE billing.ebill_jit_int_map_id_seq
 ALTER SEQUENCE billing.ebill_jit_int_map_id_seq OWNER TO postgres;
 
 --
--- TOC entry 251 (class 1259 OID 920410)
+-- TOC entry 408 (class 1259 OID 1035942)
 -- Name: ebill_jit_int_map; Type: TABLE; Schema: billing; Owner: postgres
 --
 
@@ -9431,14 +10263,15 @@ CREATE TABLE billing.ebill_jit_int_map (
     bill_id bigint NOT NULL,
     file_name character varying(32),
     created_at timestamp without time zone DEFAULT now(),
-    financial_year smallint
-);
+    financial_year smallint NOT NULL
+)
+PARTITION BY LIST (financial_year);
 
 
 ALTER TABLE billing.ebill_jit_int_map OWNER TO postgres;
 
 --
--- TOC entry 252 (class 1259 OID 920419)
+-- TOC entry 420 (class 1259 OID 1036099)
 -- Name: ebill_jit_int_map_01102025; Type: TABLE; Schema: billing; Owner: postgres
 --
 
@@ -9453,13 +10286,98 @@ CREATE TABLE billing.ebill_jit_int_map_01102025 (
     file_name character varying(32),
     created_at timestamp without time zone,
     financial_year smallint
-);
+)
+PARTITION BY LIST (financial_year);
 
 
 ALTER TABLE billing.ebill_jit_int_map_01102025 OWNER TO postgres;
 
 --
--- TOC entry 253 (class 1259 OID 920424)
+-- TOC entry 421 (class 1259 OID 1036102)
+-- Name: ebill_jit_int_map_01102025_2425; Type: TABLE; Schema: billing; Owner: postgres
+--
+
+CREATE TABLE billing.ebill_jit_int_map_01102025_2425 (
+    id bigint,
+    ebill_ref_no character(20),
+    jit_ref_no character varying(50),
+    is_active boolean,
+    error_details jsonb,
+    is_rejected boolean,
+    bill_id bigint,
+    file_name character varying(32),
+    created_at timestamp without time zone,
+    financial_year smallint
+);
+
+
+ALTER TABLE billing.ebill_jit_int_map_01102025_2425 OWNER TO postgres;
+
+--
+-- TOC entry 422 (class 1259 OID 1036108)
+-- Name: ebill_jit_int_map_01102025_2526; Type: TABLE; Schema: billing; Owner: postgres
+--
+
+CREATE TABLE billing.ebill_jit_int_map_01102025_2526 (
+    id bigint,
+    ebill_ref_no character(20),
+    jit_ref_no character varying(50),
+    is_active boolean,
+    error_details jsonb,
+    is_rejected boolean,
+    bill_id bigint,
+    file_name character varying(32),
+    created_at timestamp without time zone,
+    financial_year smallint
+);
+
+
+ALTER TABLE billing.ebill_jit_int_map_01102025_2526 OWNER TO postgres;
+
+--
+-- TOC entry 409 (class 1259 OID 1035953)
+-- Name: ebill_jit_int_map_2425; Type: TABLE; Schema: billing; Owner: postgres
+--
+
+CREATE TABLE billing.ebill_jit_int_map_2425 (
+    id bigint DEFAULT nextval('billing.ebill_jit_int_map_id_seq'::regclass) NOT NULL,
+    ebill_ref_no character(20) NOT NULL,
+    jit_ref_no character varying(50) NOT NULL,
+    is_active boolean DEFAULT true,
+    error_details jsonb,
+    is_rejected boolean DEFAULT false,
+    bill_id bigint NOT NULL,
+    file_name character varying(32),
+    created_at timestamp without time zone DEFAULT now(),
+    financial_year smallint NOT NULL
+);
+
+
+ALTER TABLE billing.ebill_jit_int_map_2425 OWNER TO postgres;
+
+--
+-- TOC entry 410 (class 1259 OID 1035967)
+-- Name: ebill_jit_int_map_2526; Type: TABLE; Schema: billing; Owner: postgres
+--
+
+CREATE TABLE billing.ebill_jit_int_map_2526 (
+    id bigint DEFAULT nextval('billing.ebill_jit_int_map_id_seq'::regclass) NOT NULL,
+    ebill_ref_no character(20) NOT NULL,
+    jit_ref_no character varying(50) NOT NULL,
+    is_active boolean DEFAULT true,
+    error_details jsonb,
+    is_rejected boolean DEFAULT false,
+    bill_id bigint NOT NULL,
+    file_name character varying(32),
+    created_at timestamp without time zone DEFAULT now(),
+    financial_year smallint NOT NULL
+);
+
+
+ALTER TABLE billing.ebill_jit_int_map_2526 OWNER TO postgres;
+
+--
+-- TOC entry 431 (class 1259 OID 1036341)
 -- Name: ebill_jit_int_map_bk_24092025; Type: TABLE; Schema: billing; Owner: postgres
 --
 
@@ -9474,37 +10392,56 @@ CREATE TABLE billing.ebill_jit_int_map_bk_24092025 (
     file_name character varying(32),
     created_at timestamp without time zone,
     financial_year smallint
-);
+)
+PARTITION BY LIST (financial_year);
 
 
 ALTER TABLE billing.ebill_jit_int_map_bk_24092025 OWNER TO postgres;
 
 --
--- TOC entry 254 (class 1259 OID 920429)
--- Name: ecs_neft_details_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
+-- TOC entry 432 (class 1259 OID 1036344)
+-- Name: ebill_jit_int_map_bk_24092025_2425; Type: TABLE; Schema: billing; Owner: postgres
 --
 
-CREATE SEQUENCE billing.ecs_neft_details_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
+CREATE TABLE billing.ebill_jit_int_map_bk_24092025_2425 (
+    id bigint,
+    ebill_ref_no character(20),
+    jit_ref_no character varying(50),
+    is_active boolean,
+    error_details jsonb,
+    is_rejected boolean,
+    bill_id bigint,
+    file_name character varying(32),
+    created_at timestamp without time zone,
+    financial_year smallint
+);
 
 
-ALTER SEQUENCE billing.ecs_neft_details_id_seq OWNER TO postgres;
-
---
--- TOC entry 6158 (class 0 OID 0)
--- Dependencies: 254
--- Name: ecs_neft_details_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: postgres
---
-
-ALTER SEQUENCE billing.ecs_neft_details_id_seq OWNED BY billing.bill_ecs_neft_details.id;
-
+ALTER TABLE billing.ebill_jit_int_map_bk_24092025_2425 OWNER TO postgres;
 
 --
--- TOC entry 255 (class 1259 OID 920430)
+-- TOC entry 433 (class 1259 OID 1036652)
+-- Name: ebill_jit_int_map_bk_24092025_2526; Type: TABLE; Schema: billing; Owner: postgres
+--
+
+CREATE TABLE billing.ebill_jit_int_map_bk_24092025_2526 (
+    id bigint,
+    ebill_ref_no character(20),
+    jit_ref_no character varying(50),
+    is_active boolean,
+    error_details jsonb,
+    is_rejected boolean,
+    bill_id bigint,
+    file_name character varying(32),
+    created_at timestamp without time zone,
+    financial_year smallint
+);
+
+
+ALTER TABLE billing.ebill_jit_int_map_bk_24092025_2526 OWNER TO postgres;
+
+--
+-- TOC entry 256 (class 1259 OID 921840)
 -- Name: active_hoa_mst; Type: TABLE; Schema: master; Owner: postgres
 --
 
@@ -9534,7 +10471,7 @@ CREATE TABLE master.active_hoa_mst (
 ALTER TABLE master.active_hoa_mst OWNER TO postgres;
 
 --
--- TOC entry 256 (class 1259 OID 920435)
+-- TOC entry 257 (class 1259 OID 921845)
 -- Name: hoa_details_view; Type: VIEW; Schema: billing; Owner: postgres
 --
 
@@ -9543,7 +10480,7 @@ CREATE VIEW billing.hoa_details_view AS
          SELECT billsub.bill_id,
             billsub.active_hoa_id,
             concat(hoa.demand_no, '-', hoa.major_head, '-', hoa.submajor_head, '-', hoa.minor_head, '-', hoa.scheme_head, '-', hoa.detail_head, '-', hoa.subdetail_head, '-', hoa.voted_charged) AS hoa
-           FROM (billing.bill_subdetail_info billsub
+           FROM (old.billing_bill_subdetail_info billsub
              JOIN master.active_hoa_mst hoa ON ((hoa.id = billsub.active_hoa_id)))
           GROUP BY billsub.bill_id, billsub.active_hoa_id, hoa.demand_no, hoa.major_head, hoa.submajor_head, hoa.minor_head, hoa.scheme_head, hoa.detail_head, hoa.subdetail_head, hoa.voted_charged
         )
@@ -9556,7 +10493,7 @@ CREATE VIEW billing.hoa_details_view AS
 ALTER VIEW billing.hoa_details_view OWNER TO postgres;
 
 --
--- TOC entry 257 (class 1259 OID 920440)
+-- TOC entry 258 (class 1259 OID 921850)
 -- Name: jit_ben_agency_map; Type: TABLE; Schema: billing; Owner: postgres
 --
 
@@ -9571,11 +10508,11 @@ CREATE TABLE billing.jit_ben_agency_map (
 ALTER TABLE billing.jit_ben_agency_map OWNER TO postgres;
 
 --
--- TOC entry 258 (class 1259 OID 920443)
--- Name: jit_ecs_additional_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
+-- TOC entry 259 (class 1259 OID 921853)
+-- Name: jit_ecs_additional_id_seq; Type: SEQUENCE; Schema: old; Owner: postgres
 --
 
-CREATE SEQUENCE billing.jit_ecs_additional_id_seq
+CREATE SEQUENCE old.jit_ecs_additional_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -9583,19 +10520,188 @@ CREATE SEQUENCE billing.jit_ecs_additional_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE billing.jit_ecs_additional_id_seq OWNER TO postgres;
+ALTER SEQUENCE old.jit_ecs_additional_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6159 (class 0 OID 0)
--- Dependencies: 258
--- Name: jit_ecs_additional_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: postgres
+-- TOC entry 6994 (class 0 OID 0)
+-- Dependencies: 259
+-- Name: jit_ecs_additional_id_seq; Type: SEQUENCE OWNED BY; Schema: old; Owner: postgres
 --
 
-ALTER SEQUENCE billing.jit_ecs_additional_id_seq OWNED BY billing.jit_ecs_additional.id;
+ALTER SEQUENCE old.jit_ecs_additional_id_seq OWNED BY old.billing_jit_ecs_additional.id;
 
 
 --
--- TOC entry 259 (class 1259 OID 920444)
+-- TOC entry 468 (class 1259 OID 1037563)
+-- Name: jit_ecs_additional; Type: TABLE; Schema: billing; Owner: postgres
+--
+
+CREATE TABLE billing.jit_ecs_additional (
+    id bigint DEFAULT nextval('old.jit_ecs_additional_id_seq'::regclass) NOT NULL,
+    ecs_id bigint NOT NULL,
+    bill_id bigint NOT NULL,
+    beneficiary_id character varying(100),
+    aadhar character varying(12),
+    gross_amount bigint,
+    net_amount bigint,
+    reissue_amount bigint,
+    top_up bigint,
+    end_to_end_id character varying(29),
+    agency_code character varying,
+    agency_name character varying(300),
+    districtcodelgd character(3),
+    jit_reference_no character varying,
+    is_cancelled boolean,
+    financial_year smallint NOT NULL,
+    state_code_lgd character(2),
+    urban_rural_flag character(1) DEFAULT 'N'::bpchar NOT NULL,
+    block_lgd character varying(10),
+    panchayat_lgd character varying(10),
+    village_lgd character varying(10),
+    tehsil_lgd character varying(10),
+    town_lgd character varying(10),
+    ward_lgd character varying(10)
+)
+PARTITION BY LIST (financial_year);
+
+
+ALTER TABLE billing.jit_ecs_additional OWNER TO postgres;
+
+--
+-- TOC entry 6995 (class 0 OID 0)
+-- Dependencies: 468
+-- Name: COLUMN jit_ecs_additional.urban_rural_flag; Type: COMMENT; Schema: billing; Owner: postgres
+--
+
+COMMENT ON COLUMN billing.jit_ecs_additional.urban_rural_flag IS 'Urban/Rural/NA flag: U=Urban, R=Rural, N=Not Applicable';
+
+
+--
+-- TOC entry 6996 (class 0 OID 0)
+-- Dependencies: 468
+-- Name: COLUMN jit_ecs_additional.block_lgd; Type: COMMENT; Schema: billing; Owner: postgres
+--
+
+COMMENT ON COLUMN billing.jit_ecs_additional.block_lgd IS 'LGD code for block';
+
+
+--
+-- TOC entry 6997 (class 0 OID 0)
+-- Dependencies: 468
+-- Name: COLUMN jit_ecs_additional.panchayat_lgd; Type: COMMENT; Schema: billing; Owner: postgres
+--
+
+COMMENT ON COLUMN billing.jit_ecs_additional.panchayat_lgd IS 'LGD code for panchayat';
+
+
+--
+-- TOC entry 6998 (class 0 OID 0)
+-- Dependencies: 468
+-- Name: COLUMN jit_ecs_additional.village_lgd; Type: COMMENT; Schema: billing; Owner: postgres
+--
+
+COMMENT ON COLUMN billing.jit_ecs_additional.village_lgd IS 'LGD code for village';
+
+
+--
+-- TOC entry 6999 (class 0 OID 0)
+-- Dependencies: 468
+-- Name: COLUMN jit_ecs_additional.tehsil_lgd; Type: COMMENT; Schema: billing; Owner: postgres
+--
+
+COMMENT ON COLUMN billing.jit_ecs_additional.tehsil_lgd IS 'LGD code for tehsil';
+
+
+--
+-- TOC entry 7000 (class 0 OID 0)
+-- Dependencies: 468
+-- Name: COLUMN jit_ecs_additional.town_lgd; Type: COMMENT; Schema: billing; Owner: postgres
+--
+
+COMMENT ON COLUMN billing.jit_ecs_additional.town_lgd IS 'LGD code for town';
+
+
+--
+-- TOC entry 7001 (class 0 OID 0)
+-- Dependencies: 468
+-- Name: COLUMN jit_ecs_additional.ward_lgd; Type: COMMENT; Schema: billing; Owner: postgres
+--
+
+COMMENT ON COLUMN billing.jit_ecs_additional.ward_lgd IS 'LGD code for ward';
+
+
+--
+-- TOC entry 469 (class 1259 OID 1037572)
+-- Name: jit_ecs_additional_2425; Type: TABLE; Schema: billing; Owner: postgres
+--
+
+CREATE TABLE billing.jit_ecs_additional_2425 (
+    id bigint DEFAULT nextval('old.jit_ecs_additional_id_seq'::regclass) NOT NULL,
+    ecs_id bigint NOT NULL,
+    bill_id bigint NOT NULL,
+    beneficiary_id character varying(100),
+    aadhar character varying(12),
+    gross_amount bigint,
+    net_amount bigint,
+    reissue_amount bigint,
+    top_up bigint,
+    end_to_end_id character varying(29),
+    agency_code character varying,
+    agency_name character varying(300),
+    districtcodelgd character(3),
+    jit_reference_no character varying,
+    is_cancelled boolean,
+    financial_year smallint NOT NULL,
+    state_code_lgd character(2),
+    urban_rural_flag character(1) DEFAULT 'N'::bpchar NOT NULL,
+    block_lgd character varying(10),
+    panchayat_lgd character varying(10),
+    village_lgd character varying(10),
+    tehsil_lgd character varying(10),
+    town_lgd character varying(10),
+    ward_lgd character varying(10)
+);
+
+
+ALTER TABLE billing.jit_ecs_additional_2425 OWNER TO postgres;
+
+--
+-- TOC entry 470 (class 1259 OID 1037584)
+-- Name: jit_ecs_additional_2526; Type: TABLE; Schema: billing; Owner: postgres
+--
+
+CREATE TABLE billing.jit_ecs_additional_2526 (
+    id bigint DEFAULT nextval('old.jit_ecs_additional_id_seq'::regclass) NOT NULL,
+    ecs_id bigint NOT NULL,
+    bill_id bigint NOT NULL,
+    beneficiary_id character varying(100),
+    aadhar character varying(12),
+    gross_amount bigint,
+    net_amount bigint,
+    reissue_amount bigint,
+    top_up bigint,
+    end_to_end_id character varying(29),
+    agency_code character varying,
+    agency_name character varying(300),
+    districtcodelgd character(3),
+    jit_reference_no character varying,
+    is_cancelled boolean,
+    financial_year smallint NOT NULL,
+    state_code_lgd character(2),
+    urban_rural_flag character(1) DEFAULT 'N'::bpchar NOT NULL,
+    block_lgd character varying(10),
+    panchayat_lgd character varying(10),
+    village_lgd character varying(10),
+    tehsil_lgd character varying(10),
+    town_lgd character varying(10),
+    ward_lgd character varying(10)
+);
+
+
+ALTER TABLE billing.jit_ecs_additional_2526 OWNER TO postgres;
+
+--
+-- TOC entry 260 (class 1259 OID 921854)
 -- Name: jit_fto_voucher; Type: TABLE; Schema: billing; Owner: postgres
 --
 
@@ -9613,7 +10719,7 @@ CREATE TABLE billing.jit_fto_voucher (
 ALTER TABLE billing.jit_fto_voucher OWNER TO postgres;
 
 --
--- TOC entry 260 (class 1259 OID 920447)
+-- TOC entry 261 (class 1259 OID 921857)
 -- Name: jit_fto_voucher_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
 --
 
@@ -9628,8 +10734,8 @@ CREATE SEQUENCE billing.jit_fto_voucher_id_seq
 ALTER SEQUENCE billing.jit_fto_voucher_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6160 (class 0 OID 0)
--- Dependencies: 260
+-- TOC entry 7002 (class 0 OID 0)
+-- Dependencies: 261
 -- Name: jit_fto_voucher_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: postgres
 --
 
@@ -9637,7 +10743,7 @@ ALTER SEQUENCE billing.jit_fto_voucher_id_seq OWNED BY billing.jit_fto_voucher.i
 
 
 --
--- TOC entry 261 (class 1259 OID 920448)
+-- TOC entry 262 (class 1259 OID 921858)
 -- Name: notification_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
 --
 
@@ -9652,7 +10758,7 @@ CREATE SEQUENCE billing.notification_id_seq
 ALTER SEQUENCE billing.notification_id_seq OWNER TO postgres;
 
 --
--- TOC entry 262 (class 1259 OID 920449)
+-- TOC entry 263 (class 1259 OID 921859)
 -- Name: notification; Type: TABLE; Schema: billing; Owner: postgres
 --
 
@@ -9673,7 +10779,7 @@ CREATE TABLE billing.notification (
 ALTER TABLE billing.notification OWNER TO postgres;
 
 --
--- TOC entry 263 (class 1259 OID 920458)
+-- TOC entry 264 (class 1259 OID 921868)
 -- Name: returned_memo_generated_bill; Type: TABLE; Schema: billing; Owner: postgres
 --
 
@@ -9689,7 +10795,7 @@ CREATE TABLE billing.returned_memo_generated_bill (
 ALTER TABLE billing.returned_memo_generated_bill OWNER TO postgres;
 
 --
--- TOC entry 264 (class 1259 OID 920463)
+-- TOC entry 265 (class 1259 OID 921873)
 -- Name: returned_memo_generated_bill_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
 --
 
@@ -9704,8 +10810,8 @@ CREATE SEQUENCE billing.returned_memo_generated_bill_id_seq
 ALTER SEQUENCE billing.returned_memo_generated_bill_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6161 (class 0 OID 0)
--- Dependencies: 264
+-- TOC entry 7003 (class 0 OID 0)
+-- Dependencies: 265
 -- Name: returned_memo_generated_bill_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: postgres
 --
 
@@ -9713,7 +10819,7 @@ ALTER SEQUENCE billing.returned_memo_generated_bill_id_seq OWNED BY billing.retu
 
 
 --
--- TOC entry 265 (class 1259 OID 920464)
+-- TOC entry 266 (class 1259 OID 921874)
 -- Name: slscode_details_view; Type: VIEW; Schema: billing; Owner: postgres
 --
 
@@ -9723,7 +10829,7 @@ CREATE VIEW billing.slscode_details_view AS
             bd.scheme_code,
             bd.scheme_name,
             bd.ddo_code
-           FROM billing.bill_details bd
+           FROM old.billing_bill_details bd
           GROUP BY bd.bill_id, bd.scheme_code, bd.scheme_name, bd.ddo_code
         )
  SELECT DISTINCT scheme_code,
@@ -9735,7 +10841,7 @@ CREATE VIEW billing.slscode_details_view AS
 ALTER VIEW billing.slscode_details_view OWNER TO postgres;
 
 --
--- TOC entry 266 (class 1259 OID 920469)
+-- TOC entry 267 (class 1259 OID 921879)
 -- Name: sys_generated_bill_no_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
 --
 
@@ -9750,7 +10856,7 @@ CREATE SEQUENCE billing.sys_generated_bill_no_seq
 ALTER SEQUENCE billing.sys_generated_bill_no_seq OWNER TO postgres;
 
 --
--- TOC entry 267 (class 1259 OID 920470)
+-- TOC entry 268 (class 1259 OID 921880)
 -- Name: tr_detail; Type: TABLE; Schema: billing; Owner: postgres
 --
 
@@ -9772,7 +10878,7 @@ CREATE TABLE billing.tr_detail (
 ALTER TABLE billing.tr_detail OWNER TO postgres;
 
 --
--- TOC entry 268 (class 1259 OID 920475)
+-- TOC entry 269 (class 1259 OID 921885)
 -- Name: tr_detail_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
 --
 
@@ -9788,8 +10894,8 @@ CREATE SEQUENCE billing.tr_detail_id_seq
 ALTER SEQUENCE billing.tr_detail_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6162 (class 0 OID 0)
--- Dependencies: 268
+-- TOC entry 7004 (class 0 OID 0)
+-- Dependencies: 269
 -- Name: tr_detail_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: postgres
 --
 
@@ -9797,7 +10903,7 @@ ALTER SEQUENCE billing.tr_detail_id_seq OWNED BY billing.tr_detail.id;
 
 
 --
--- TOC entry 269 (class 1259 OID 920476)
+-- TOC entry 270 (class 1259 OID 921886)
 -- Name: tr_10_detail; Type: TABLE; Schema: billing; Owner: postgres
 --
 
@@ -9821,7 +10927,7 @@ INHERITS (billing.tr_detail);
 ALTER TABLE billing.tr_10_detail OWNER TO postgres;
 
 --
--- TOC entry 270 (class 1259 OID 920484)
+-- TOC entry 271 (class 1259 OID 921894)
 -- Name: tr_12_detail; Type: TABLE; Schema: billing; Owner: postgres
 --
 
@@ -9845,7 +10951,7 @@ INHERITS (billing.tr_detail);
 ALTER TABLE billing.tr_12_detail OWNER TO postgres;
 
 --
--- TOC entry 271 (class 1259 OID 920492)
+-- TOC entry 272 (class 1259 OID 921902)
 -- Name: tr_26_detail_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
 --
 
@@ -9860,7 +10966,7 @@ CREATE SEQUENCE billing.tr_26_detail_id_seq
 ALTER SEQUENCE billing.tr_26_detail_id_seq OWNER TO postgres;
 
 --
--- TOC entry 272 (class 1259 OID 920493)
+-- TOC entry 273 (class 1259 OID 921903)
 -- Name: tr_26a_detail; Type: TABLE; Schema: billing; Owner: postgres
 --
 
@@ -9890,7 +10996,7 @@ INHERITS (billing.tr_detail);
 ALTER TABLE billing.tr_26a_detail OWNER TO postgres;
 
 --
--- TOC entry 273 (class 1259 OID 920514)
+-- TOC entry 274 (class 1259 OID 921924)
 -- Name: audit_log_id_seq; Type: SEQUENCE; Schema: billing_log; Owner: postgres
 --
 
@@ -9905,7 +11011,7 @@ CREATE SEQUENCE billing_log.audit_log_id_seq
 ALTER SEQUENCE billing_log.audit_log_id_seq OWNER TO postgres;
 
 --
--- TOC entry 274 (class 1259 OID 920515)
+-- TOC entry 275 (class 1259 OID 921925)
 -- Name: audit_log; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
@@ -9925,7 +11031,7 @@ PARTITION BY RANGE (change_timestamp);
 ALTER TABLE billing_log.audit_log OWNER TO postgres;
 
 --
--- TOC entry 275 (class 1259 OID 920519)
+-- TOC entry 276 (class 1259 OID 921929)
 -- Name: audit_log_2025_05; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
@@ -9944,7 +11050,7 @@ CREATE TABLE billing_log.audit_log_2025_05 (
 ALTER TABLE billing_log.audit_log_2025_05 OWNER TO postgres;
 
 --
--- TOC entry 276 (class 1259 OID 920525)
+-- TOC entry 277 (class 1259 OID 921935)
 -- Name: audit_log_2025_06; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
@@ -9963,7 +11069,7 @@ CREATE TABLE billing_log.audit_log_2025_06 (
 ALTER TABLE billing_log.audit_log_2025_06 OWNER TO postgres;
 
 --
--- TOC entry 277 (class 1259 OID 920531)
+-- TOC entry 278 (class 1259 OID 921941)
 -- Name: audit_log_2025_07; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
@@ -9982,7 +11088,7 @@ CREATE TABLE billing_log.audit_log_2025_07 (
 ALTER TABLE billing_log.audit_log_2025_07 OWNER TO postgres;
 
 --
--- TOC entry 278 (class 1259 OID 920537)
+-- TOC entry 279 (class 1259 OID 921947)
 -- Name: audit_log_2025_08; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
@@ -10001,7 +11107,7 @@ CREATE TABLE billing_log.audit_log_2025_08 (
 ALTER TABLE billing_log.audit_log_2025_08 OWNER TO postgres;
 
 --
--- TOC entry 279 (class 1259 OID 920543)
+-- TOC entry 280 (class 1259 OID 921953)
 -- Name: audit_log_2025_09; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
@@ -10020,7 +11126,7 @@ CREATE TABLE billing_log.audit_log_2025_09 (
 ALTER TABLE billing_log.audit_log_2025_09 OWNER TO postgres;
 
 --
--- TOC entry 280 (class 1259 OID 920549)
+-- TOC entry 281 (class 1259 OID 921959)
 -- Name: audit_log_2025_10; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
@@ -10039,7 +11145,7 @@ CREATE TABLE billing_log.audit_log_2025_10 (
 ALTER TABLE billing_log.audit_log_2025_10 OWNER TO postgres;
 
 --
--- TOC entry 281 (class 1259 OID 920555)
+-- TOC entry 282 (class 1259 OID 921965)
 -- Name: audit_log_2025_11; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
@@ -10058,7 +11164,7 @@ CREATE TABLE billing_log.audit_log_2025_11 (
 ALTER TABLE billing_log.audit_log_2025_11 OWNER TO postgres;
 
 --
--- TOC entry 282 (class 1259 OID 920561)
+-- TOC entry 283 (class 1259 OID 921971)
 -- Name: audit_log_2025_12; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
@@ -10077,7 +11183,7 @@ CREATE TABLE billing_log.audit_log_2025_12 (
 ALTER TABLE billing_log.audit_log_2025_12 OWNER TO postgres;
 
 --
--- TOC entry 283 (class 1259 OID 920567)
+-- TOC entry 284 (class 1259 OID 921977)
 -- Name: audit_log_2026_01; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
@@ -10096,7 +11202,7 @@ CREATE TABLE billing_log.audit_log_2026_01 (
 ALTER TABLE billing_log.audit_log_2026_01 OWNER TO postgres;
 
 --
--- TOC entry 284 (class 1259 OID 920573)
+-- TOC entry 285 (class 1259 OID 921983)
 -- Name: audit_log_2026_02; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
@@ -10115,7 +11221,7 @@ CREATE TABLE billing_log.audit_log_2026_02 (
 ALTER TABLE billing_log.audit_log_2026_02 OWNER TO postgres;
 
 --
--- TOC entry 285 (class 1259 OID 920579)
+-- TOC entry 286 (class 1259 OID 921989)
 -- Name: audit_log_2026_03; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
@@ -10134,7 +11240,7 @@ CREATE TABLE billing_log.audit_log_2026_03 (
 ALTER TABLE billing_log.audit_log_2026_03 OWNER TO postgres;
 
 --
--- TOC entry 286 (class 1259 OID 920585)
+-- TOC entry 287 (class 1259 OID 921995)
 -- Name: audit_log_2026_04; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
@@ -10153,7 +11259,7 @@ CREATE TABLE billing_log.audit_log_2026_04 (
 ALTER TABLE billing_log.audit_log_2026_04 OWNER TO postgres;
 
 --
--- TOC entry 287 (class 1259 OID 920591)
+-- TOC entry 288 (class 1259 OID 922001)
 -- Name: cheque_details_id_seq; Type: SEQUENCE; Schema: billing_log; Owner: postgres
 --
 
@@ -10168,7 +11274,7 @@ CREATE SEQUENCE billing_log.cheque_details_id_seq
 ALTER SEQUENCE billing_log.cheque_details_id_seq OWNER TO postgres;
 
 --
--- TOC entry 288 (class 1259 OID 920592)
+-- TOC entry 289 (class 1259 OID 922002)
 -- Name: ddo_id_seq; Type: SEQUENCE; Schema: billing_log; Owner: postgres
 --
 
@@ -10183,7 +11289,7 @@ CREATE SEQUENCE billing_log.ddo_id_seq
 ALTER SEQUENCE billing_log.ddo_id_seq OWNER TO postgres;
 
 --
--- TOC entry 289 (class 1259 OID 920593)
+-- TOC entry 290 (class 1259 OID 922003)
 -- Name: ddo_log; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
@@ -10222,7 +11328,7 @@ CREATE TABLE billing_log.ddo_log (
 ALTER TABLE billing_log.ddo_log OWNER TO postgres;
 
 --
--- TOC entry 290 (class 1259 OID 920598)
+-- TOC entry 291 (class 1259 OID 922008)
 -- Name: ddo_log_id_seq; Type: SEQUENCE; Schema: billing_log; Owner: postgres
 --
 
@@ -10237,8 +11343,8 @@ CREATE SEQUENCE billing_log.ddo_log_id_seq
 ALTER SEQUENCE billing_log.ddo_log_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6163 (class 0 OID 0)
--- Dependencies: 290
+-- TOC entry 7005 (class 0 OID 0)
+-- Dependencies: 291
 -- Name: ddo_log_id_seq; Type: SEQUENCE OWNED BY; Schema: billing_log; Owner: postgres
 --
 
@@ -10246,11 +11352,11 @@ ALTER SEQUENCE billing_log.ddo_log_id_seq OWNED BY billing_log.ddo_log.id;
 
 
 --
--- TOC entry 291 (class 1259 OID 920599)
--- Name: ebill_jit_int_map_log; Type: TABLE; Schema: billing_log; Owner: postgres
+-- TOC entry 292 (class 1259 OID 922009)
+-- Name: billing_log_ebill_jit_int_map_log; Type: TABLE; Schema: old; Owner: postgres
 --
 
-CREATE TABLE billing_log.ebill_jit_int_map_log (
+CREATE TABLE old.billing_log_ebill_jit_int_map_log (
     id bigint NOT NULL,
     ebill_ref_no character(20) NOT NULL,
     jit_ref_no character varying(50) NOT NULL,
@@ -10264,14 +11370,14 @@ CREATE TABLE billing_log.ebill_jit_int_map_log (
 );
 
 
-ALTER TABLE billing_log.ebill_jit_int_map_log OWNER TO postgres;
+ALTER TABLE old.billing_log_ebill_jit_int_map_log OWNER TO postgres;
 
 --
--- TOC entry 292 (class 1259 OID 920607)
--- Name: ebill_jit_int_map_log_id_seq; Type: SEQUENCE; Schema: billing_log; Owner: postgres
+-- TOC entry 293 (class 1259 OID 922017)
+-- Name: ebill_jit_int_map_log_id_seq; Type: SEQUENCE; Schema: old; Owner: postgres
 --
 
-CREATE SEQUENCE billing_log.ebill_jit_int_map_log_id_seq
+CREATE SEQUENCE old.ebill_jit_int_map_log_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -10279,19 +11385,41 @@ CREATE SEQUENCE billing_log.ebill_jit_int_map_log_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE billing_log.ebill_jit_int_map_log_id_seq OWNER TO postgres;
+ALTER SEQUENCE old.ebill_jit_int_map_log_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6164 (class 0 OID 0)
--- Dependencies: 292
--- Name: ebill_jit_int_map_log_id_seq; Type: SEQUENCE OWNED BY; Schema: billing_log; Owner: postgres
+-- TOC entry 7006 (class 0 OID 0)
+-- Dependencies: 293
+-- Name: ebill_jit_int_map_log_id_seq; Type: SEQUENCE OWNED BY; Schema: old; Owner: postgres
 --
 
-ALTER SEQUENCE billing_log.ebill_jit_int_map_log_id_seq OWNED BY billing_log.ebill_jit_int_map_log.id;
+ALTER SEQUENCE old.ebill_jit_int_map_log_id_seq OWNED BY old.billing_log_ebill_jit_int_map_log.id;
 
 
 --
--- TOC entry 293 (class 1259 OID 920608)
+-- TOC entry 423 (class 1259 OID 1036113)
+-- Name: ebill_jit_int_map_log; Type: TABLE; Schema: billing_log; Owner: postgres
+--
+
+CREATE TABLE billing_log.ebill_jit_int_map_log (
+    id bigint DEFAULT nextval('old.ebill_jit_int_map_log_id_seq'::regclass) NOT NULL,
+    ebill_ref_no character(20) NOT NULL,
+    jit_ref_no character varying(50) NOT NULL,
+    is_active boolean DEFAULT true,
+    error_details jsonb,
+    is_rejected boolean DEFAULT false,
+    bill_id bigint NOT NULL,
+    file_name character varying(32),
+    created_at timestamp without time zone DEFAULT now(),
+    financial_year smallint NOT NULL
+)
+PARTITION BY LIST (financial_year);
+
+
+ALTER TABLE billing_log.ebill_jit_int_map_log OWNER TO postgres;
+
+--
+-- TOC entry 294 (class 1259 OID 922018)
 -- Name: scheme_config_master_log; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
@@ -10324,7 +11452,7 @@ CREATE TABLE billing_log.scheme_config_master_log (
 ALTER TABLE billing_log.scheme_config_master_log OWNER TO postgres;
 
 --
--- TOC entry 294 (class 1259 OID 920614)
+-- TOC entry 295 (class 1259 OID 922024)
 -- Name: scheme_config_master_log_id_seq; Type: SEQUENCE; Schema: billing_log; Owner: postgres
 --
 
@@ -10339,8 +11467,8 @@ CREATE SEQUENCE billing_log.scheme_config_master_log_id_seq
 ALTER SEQUENCE billing_log.scheme_config_master_log_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6165 (class 0 OID 0)
--- Dependencies: 294
+-- TOC entry 7007 (class 0 OID 0)
+-- Dependencies: 295
 -- Name: scheme_config_master_log_id_seq; Type: SEQUENCE OWNED BY; Schema: billing_log; Owner: postgres
 --
 
@@ -10348,7 +11476,7 @@ ALTER SEQUENCE billing_log.scheme_config_master_log_id_seq OWNED BY billing_log.
 
 
 --
--- TOC entry 295 (class 1259 OID 920615)
+-- TOC entry 296 (class 1259 OID 922025)
 -- Name: bill_project_contrctor_mapping_id_seq; Type: SEQUENCE; Schema: billing_master; Owner: postgres
 --
 
@@ -10363,7 +11491,7 @@ CREATE SEQUENCE billing_master.bill_project_contrctor_mapping_id_seq
 ALTER SEQUENCE billing_master.bill_project_contrctor_mapping_id_seq OWNER TO postgres;
 
 --
--- TOC entry 296 (class 1259 OID 920616)
+-- TOC entry 297 (class 1259 OID 922026)
 -- Name: bill_status_master; Type: TABLE; Schema: billing_master; Owner: postgres
 --
 
@@ -10376,7 +11504,7 @@ CREATE TABLE billing_master.bill_status_master (
 ALTER TABLE billing_master.bill_status_master OWNER TO postgres;
 
 --
--- TOC entry 297 (class 1259 OID 920621)
+-- TOC entry 298 (class 1259 OID 922031)
 -- Name: bt_details; Type: TABLE; Schema: billing_master; Owner: postgres
 --
 
@@ -10404,7 +11532,7 @@ CREATE TABLE billing_master.bt_details (
 ALTER TABLE billing_master.bt_details OWNER TO postgres;
 
 --
--- TOC entry 298 (class 1259 OID 920626)
+-- TOC entry 299 (class 1259 OID 922036)
 -- Name: cpin_master_id_seq; Type: SEQUENCE; Schema: billing_master; Owner: postgres
 --
 
@@ -10419,7 +11547,7 @@ CREATE SEQUENCE billing_master.cpin_master_id_seq
 ALTER SEQUENCE billing_master.cpin_master_id_seq OWNER TO postgres;
 
 --
--- TOC entry 299 (class 1259 OID 920627)
+-- TOC entry 413 (class 1259 OID 1035996)
 -- Name: cpin_master; Type: TABLE; Schema: billing_master; Owner: postgres
 --
 
@@ -10441,14 +11569,73 @@ CREATE TABLE billing_master.cpin_master (
     epsid bigint,
     cpin_date date,
     is_active boolean DEFAULT true NOT NULL,
-    financial_year smallint
-);
+    financial_year smallint NOT NULL
+)
+PARTITION BY LIST (financial_year);
 
 
 ALTER TABLE billing_master.cpin_master OWNER TO postgres;
 
 --
--- TOC entry 300 (class 1259 OID 920634)
+-- TOC entry 414 (class 1259 OID 1036004)
+-- Name: cpin_master_2425; Type: TABLE; Schema: billing_master; Owner: postgres
+--
+
+CREATE TABLE billing_master.cpin_master_2425 (
+    id bigint DEFAULT nextval('billing_master.cpin_master_id_seq'::regclass) NOT NULL,
+    cpin_id character varying(14),
+    cpin_amount numeric NOT NULL,
+    cpin_date_tcs timestamp without time zone,
+    cpin_type integer,
+    cpin_sub_type integer,
+    active_flag integer,
+    status smallint,
+    created_at timestamp without time zone,
+    created_by_userid bigint,
+    updated_by_userid bigint,
+    updated_at timestamp without time zone,
+    ddo_gstin character varying(15),
+    vendor_data jsonb,
+    epsid bigint,
+    cpin_date date,
+    is_active boolean DEFAULT true NOT NULL,
+    financial_year smallint NOT NULL
+);
+
+
+ALTER TABLE billing_master.cpin_master_2425 OWNER TO postgres;
+
+--
+-- TOC entry 415 (class 1259 OID 1036014)
+-- Name: cpin_master_2526; Type: TABLE; Schema: billing_master; Owner: postgres
+--
+
+CREATE TABLE billing_master.cpin_master_2526 (
+    id bigint DEFAULT nextval('billing_master.cpin_master_id_seq'::regclass) NOT NULL,
+    cpin_id character varying(14),
+    cpin_amount numeric NOT NULL,
+    cpin_date_tcs timestamp without time zone,
+    cpin_type integer,
+    cpin_sub_type integer,
+    active_flag integer,
+    status smallint,
+    created_at timestamp without time zone,
+    created_by_userid bigint,
+    updated_by_userid bigint,
+    updated_at timestamp without time zone,
+    ddo_gstin character varying(15),
+    vendor_data jsonb,
+    epsid bigint,
+    cpin_date date,
+    is_active boolean DEFAULT true NOT NULL,
+    financial_year smallint NOT NULL
+);
+
+
+ALTER TABLE billing_master.cpin_master_2526 OWNER TO postgres;
+
+--
+-- TOC entry 301 (class 1259 OID 922044)
 -- Name: cpin_vender_mst_id_seq; Type: SEQUENCE; Schema: billing_master; Owner: postgres
 --
 
@@ -10463,7 +11650,7 @@ CREATE SEQUENCE billing_master.cpin_vender_mst_id_seq
 ALTER SEQUENCE billing_master.cpin_vender_mst_id_seq OWNER TO postgres;
 
 --
--- TOC entry 301 (class 1259 OID 920635)
+-- TOC entry 302 (class 1259 OID 922045)
 -- Name: cpin_vender_mst; Type: TABLE; Schema: billing_master; Owner: postgres
 --
 
@@ -10490,7 +11677,7 @@ CREATE TABLE billing_master.cpin_vender_mst (
 ALTER TABLE billing_master.cpin_vender_mst OWNER TO postgres;
 
 --
--- TOC entry 302 (class 1259 OID 920641)
+-- TOC entry 303 (class 1259 OID 922051)
 -- Name: rbi_gst_master; Type: TABLE; Schema: billing_master; Owner: postgres
 --
 
@@ -10507,7 +11694,7 @@ CREATE TABLE billing_master.rbi_gst_master (
 ALTER TABLE billing_master.rbi_gst_master OWNER TO postgres;
 
 --
--- TOC entry 303 (class 1259 OID 920648)
+-- TOC entry 304 (class 1259 OID 922058)
 -- Name: rbi_gst_master_id_seq; Type: SEQUENCE; Schema: billing_master; Owner: postgres
 --
 
@@ -10523,8 +11710,8 @@ CREATE SEQUENCE billing_master.rbi_gst_master_id_seq
 ALTER SEQUENCE billing_master.rbi_gst_master_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6166 (class 0 OID 0)
--- Dependencies: 303
+-- TOC entry 7008 (class 0 OID 0)
+-- Dependencies: 304
 -- Name: rbi_gst_master_id_seq; Type: SEQUENCE OWNED BY; Schema: billing_master; Owner: postgres
 --
 
@@ -10532,7 +11719,7 @@ ALTER SEQUENCE billing_master.rbi_gst_master_id_seq OWNED BY billing_master.rbi_
 
 
 --
--- TOC entry 304 (class 1259 OID 920649)
+-- TOC entry 305 (class 1259 OID 922059)
 -- Name: service_provider_consumer_master_id_seq; Type: SEQUENCE; Schema: billing_master; Owner: postgres
 --
 
@@ -10547,7 +11734,7 @@ CREATE SEQUENCE billing_master.service_provider_consumer_master_id_seq
 ALTER SEQUENCE billing_master.service_provider_consumer_master_id_seq OWNER TO postgres;
 
 --
--- TOC entry 305 (class 1259 OID 920650)
+-- TOC entry 306 (class 1259 OID 922060)
 -- Name: tr_master; Type: TABLE; Schema: billing_master; Owner: postgres
 --
 
@@ -10570,7 +11757,7 @@ CREATE TABLE billing_master.tr_master (
 ALTER TABLE billing_master.tr_master OWNER TO postgres;
 
 --
--- TOC entry 306 (class 1259 OID 920655)
+-- TOC entry 307 (class 1259 OID 922065)
 -- Name: tr_master_checklist; Type: TABLE; Schema: billing_master; Owner: postgres
 --
 
@@ -10587,11 +11774,11 @@ CREATE TABLE billing_master.tr_master_checklist (
 ALTER TABLE billing_master.tr_master_checklist OWNER TO postgres;
 
 --
--- TOC entry 307 (class 1259 OID 920660)
--- Name: failed_transaction_beneficiary; Type: TABLE; Schema: cts; Owner: postgres
+-- TOC entry 308 (class 1259 OID 922070)
+-- Name: cts_failed_transaction_beneficiary; Type: TABLE; Schema: old; Owner: postgres
 --
 
-CREATE TABLE cts.failed_transaction_beneficiary (
+CREATE TABLE old.cts_failed_transaction_beneficiary (
     id bigint NOT NULL,
     bill_id bigint NOT NULL,
     treasury_code character(3),
@@ -10634,14 +11821,14 @@ CREATE TABLE cts.failed_transaction_beneficiary (
 );
 
 
-ALTER TABLE cts.failed_transaction_beneficiary OWNER TO postgres;
+ALTER TABLE old.cts_failed_transaction_beneficiary OWNER TO postgres;
 
 --
--- TOC entry 308 (class 1259 OID 920671)
--- Name: success_transaction_beneficiary; Type: TABLE; Schema: cts; Owner: postgres
+-- TOC entry 309 (class 1259 OID 922081)
+-- Name: cts_success_transaction_beneficiary; Type: TABLE; Schema: old; Owner: postgres
 --
 
-CREATE TABLE cts.success_transaction_beneficiary (
+CREATE TABLE old.cts_success_transaction_beneficiary (
     id bigint NOT NULL,
     bill_id bigint NOT NULL,
     treasury_code character(3),
@@ -10671,10 +11858,10 @@ CREATE TABLE cts.success_transaction_beneficiary (
 );
 
 
-ALTER TABLE cts.success_transaction_beneficiary OWNER TO postgres;
+ALTER TABLE old.cts_success_transaction_beneficiary OWNER TO postgres;
 
 --
--- TOC entry 309 (class 1259 OID 920679)
+-- TOC entry 310 (class 1259 OID 922089)
 -- Name: bill_wise_gst_success_failed_transaction_summary; Type: VIEW; Schema: cts; Owner: postgres
 --
 
@@ -10685,15 +11872,15 @@ CREATE VIEW cts.bill_wise_gst_success_failed_transaction_summary AS
             max(bd.gross_amount) AS gross_amount,
             max(bd.net_amount) AS net_amount,
             count(ecs.id) AS payee_count
-           FROM (billing.bill_details bd
-             JOIN billing.bill_ecs_neft_details ecs ON ((ecs.bill_id = bd.bill_id)))
+           FROM (old.billing_bill_details bd
+             JOIN old.billing_bill_ecs_neft_details ecs ON ((ecs.bill_id = bd.bill_id)))
           WHERE (ecs.is_gst = true)
           GROUP BY bd.bill_id, bd.financial_year
         ), success_data AS (
          SELECT sb.bill_id,
             count(sb.ecs_id) AS success_count,
             sum(sb.amount) AS success_amount
-           FROM cts.success_transaction_beneficiary sb
+           FROM old.cts_success_transaction_beneficiary sb
           WHERE ((sb.is_gst = true) AND (sb.is_active = 1))
           GROUP BY sb.bill_id
         ), failed_data AS (
@@ -10701,7 +11888,7 @@ CREATE VIEW cts.bill_wise_gst_success_failed_transaction_summary AS
             count(fb.beneficiary_id) AS failed_count,
             sum(fb.failed_transaction_amount) AS failed_amount,
             COALESCE(bool_or(fb.is_reissued), false) AS is_reissued
-           FROM cts.failed_transaction_beneficiary fb
+           FROM old.cts_failed_transaction_beneficiary fb
           WHERE ((fb.is_gst = true) AND (fb.is_active = 1))
           GROUP BY fb.bill_id
         ), success_failed_transaction AS (
@@ -10739,7 +11926,7 @@ CREATE VIEW cts.bill_wise_gst_success_failed_transaction_summary AS
 ALTER VIEW cts.bill_wise_gst_success_failed_transaction_summary OWNER TO postgres;
 
 --
--- TOC entry 310 (class 1259 OID 920684)
+-- TOC entry 311 (class 1259 OID 922094)
 -- Name: bill_wise_success_failed_transaction_summary; Type: VIEW; Schema: cts; Owner: postgres
 --
 
@@ -10750,15 +11937,15 @@ CREATE VIEW cts.bill_wise_success_failed_transaction_summary AS
             max(bd.gross_amount) AS gross_amount,
             max(bd.net_amount) AS net_amount,
             count(ecs.id) AS payee_count
-           FROM (billing.bill_details bd
-             JOIN billing.bill_ecs_neft_details ecs ON ((ecs.bill_id = bd.bill_id)))
+           FROM (old.billing_bill_details bd
+             JOIN old.billing_bill_ecs_neft_details ecs ON ((ecs.bill_id = bd.bill_id)))
           WHERE (ecs.is_gst = false)
           GROUP BY bd.bill_id, bd.financial_year
         ), success_data AS (
          SELECT sb.bill_id,
             count(sb.ecs_id) AS success_count,
             sum(sb.amount) AS success_amount
-           FROM cts.success_transaction_beneficiary sb
+           FROM old.cts_success_transaction_beneficiary sb
           WHERE ((sb.is_gst = false) AND (sb.is_active = 1))
           GROUP BY sb.bill_id
         ), failed_data AS (
@@ -10766,7 +11953,7 @@ CREATE VIEW cts.bill_wise_success_failed_transaction_summary AS
             count(fb.beneficiary_id) AS failed_count,
             sum(fb.failed_transaction_amount) AS failed_amount,
             COALESCE(bool_or(fb.is_reissued), false) AS is_reissued
-           FROM cts.failed_transaction_beneficiary fb
+           FROM old.cts_failed_transaction_beneficiary fb
           WHERE ((fb.is_gst = false) AND (fb.is_active = 1))
           GROUP BY fb.bill_id
         ), success_failed_transaction AS (
@@ -10804,7 +11991,7 @@ CREATE VIEW cts.bill_wise_success_failed_transaction_summary AS
 ALTER VIEW cts.bill_wise_success_failed_transaction_summary OWNER TO postgres;
 
 --
--- TOC entry 311 (class 1259 OID 920689)
+-- TOC entry 439 (class 1259 OID 1036749)
 -- Name: challan; Type: TABLE; Schema: cts; Owner: postgres
 --
 
@@ -10828,17 +12015,193 @@ CREATE TABLE cts.challan (
     token_id bigint NOT NULL,
     payment_advice_id bigint,
     module_id smallint,
-    financial_year smallint,
+    financial_year smallint NOT NULL,
     created_by bigint NOT NULL,
     created_at timestamp without time zone DEFAULT now(),
     bill_id bigint
-);
+)
+PARTITION BY LIST (financial_year);
 
 
 ALTER TABLE cts.challan OWNER TO postgres;
 
 --
--- TOC entry 312 (class 1259 OID 920693)
+-- TOC entry 315 (class 1259 OID 922113)
+-- Name: failed_transaction_beneficiary_id_seq; Type: SEQUENCE; Schema: old; Owner: postgres
+--
+
+CREATE SEQUENCE old.failed_transaction_beneficiary_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE old.failed_transaction_beneficiary_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 7009 (class 0 OID 0)
+-- Dependencies: 315
+-- Name: failed_transaction_beneficiary_id_seq; Type: SEQUENCE OWNED BY; Schema: old; Owner: postgres
+--
+
+ALTER SEQUENCE old.failed_transaction_beneficiary_id_seq OWNED BY old.cts_failed_transaction_beneficiary.id;
+
+
+--
+-- TOC entry 456 (class 1259 OID 1037127)
+-- Name: failed_transaction_beneficiary; Type: TABLE; Schema: cts; Owner: postgres
+--
+
+CREATE TABLE cts.failed_transaction_beneficiary (
+    id bigint DEFAULT nextval('old.failed_transaction_beneficiary_id_seq'::regclass) NOT NULL,
+    bill_id bigint NOT NULL,
+    treasury_code character(3),
+    ddo_code character(9),
+    payee_name character varying(100),
+    account_no character(20),
+    ifsc_code character(11),
+    bank_name character varying,
+    created_by_userid bigint,
+    created_at timestamp without time zone DEFAULT now(),
+    corrected_by bigint,
+    corrected_at timestamp without time zone,
+    is_active smallint,
+    financial_year smallint NOT NULL,
+    failed_transaction_amount bigint,
+    beneficiary_id bigint,
+    bill_ref_no character varying,
+    jit_ref_no character varying,
+    end_to_end_id character varying(29),
+    status smallint DEFAULT 0 NOT NULL,
+    payee_id character varying,
+    agency_code character varying,
+    failed_reason_code character varying,
+    failed_reason_desc character varying,
+    total_ben_failed_amount bigint,
+    is_gst boolean DEFAULT false,
+    accepted_date_time timestamp without time zone,
+    is_corrected boolean DEFAULT false,
+    challan_no integer,
+    major_head character(4),
+    challan_date date,
+    cancel_certificate_date date,
+    cancel_certificate_no character varying,
+    utr_no character varying,
+    is_certificate_generated boolean DEFAULT false,
+    file_name character(32),
+    gst_bill_id bigint,
+    is_reissued boolean DEFAULT false,
+    bill_fin_year smallint
+)
+PARTITION BY LIST (financial_year);
+
+
+ALTER TABLE cts.failed_transaction_beneficiary OWNER TO postgres;
+
+--
+-- TOC entry 457 (class 1259 OID 1037142)
+-- Name: failed_transaction_beneficiary_2425; Type: TABLE; Schema: cts; Owner: postgres
+--
+
+CREATE TABLE cts.failed_transaction_beneficiary_2425 (
+    id bigint DEFAULT nextval('old.failed_transaction_beneficiary_id_seq'::regclass) NOT NULL,
+    bill_id bigint NOT NULL,
+    treasury_code character(3),
+    ddo_code character(9),
+    payee_name character varying(100),
+    account_no character(20),
+    ifsc_code character(11),
+    bank_name character varying,
+    created_by_userid bigint,
+    created_at timestamp without time zone DEFAULT now(),
+    corrected_by bigint,
+    corrected_at timestamp without time zone,
+    is_active smallint,
+    financial_year smallint NOT NULL,
+    failed_transaction_amount bigint,
+    beneficiary_id bigint,
+    bill_ref_no character varying,
+    jit_ref_no character varying,
+    end_to_end_id character varying(29),
+    status smallint DEFAULT 0 NOT NULL,
+    payee_id character varying,
+    agency_code character varying,
+    failed_reason_code character varying,
+    failed_reason_desc character varying,
+    total_ben_failed_amount bigint,
+    is_gst boolean DEFAULT false,
+    accepted_date_time timestamp without time zone,
+    is_corrected boolean DEFAULT false,
+    challan_no integer,
+    major_head character(4),
+    challan_date date,
+    cancel_certificate_date date,
+    cancel_certificate_no character varying,
+    utr_no character varying,
+    is_certificate_generated boolean DEFAULT false,
+    file_name character(32),
+    gst_bill_id bigint,
+    is_reissued boolean DEFAULT false,
+    bill_fin_year smallint
+);
+
+
+ALTER TABLE cts.failed_transaction_beneficiary_2425 OWNER TO postgres;
+
+--
+-- TOC entry 458 (class 1259 OID 1037159)
+-- Name: failed_transaction_beneficiary_2526; Type: TABLE; Schema: cts; Owner: postgres
+--
+
+CREATE TABLE cts.failed_transaction_beneficiary_2526 (
+    id bigint DEFAULT nextval('old.failed_transaction_beneficiary_id_seq'::regclass) NOT NULL,
+    bill_id bigint NOT NULL,
+    treasury_code character(3),
+    ddo_code character(9),
+    payee_name character varying(100),
+    account_no character(20),
+    ifsc_code character(11),
+    bank_name character varying,
+    created_by_userid bigint,
+    created_at timestamp without time zone DEFAULT now(),
+    corrected_by bigint,
+    corrected_at timestamp without time zone,
+    is_active smallint,
+    financial_year smallint NOT NULL,
+    failed_transaction_amount bigint,
+    beneficiary_id bigint,
+    bill_ref_no character varying,
+    jit_ref_no character varying,
+    end_to_end_id character varying(29),
+    status smallint DEFAULT 0 NOT NULL,
+    payee_id character varying,
+    agency_code character varying,
+    failed_reason_code character varying,
+    failed_reason_desc character varying,
+    total_ben_failed_amount bigint,
+    is_gst boolean DEFAULT false,
+    accepted_date_time timestamp without time zone,
+    is_corrected boolean DEFAULT false,
+    challan_no integer,
+    major_head character(4),
+    challan_date date,
+    cancel_certificate_date date,
+    cancel_certificate_no character varying,
+    utr_no character varying,
+    is_certificate_generated boolean DEFAULT false,
+    file_name character(32),
+    gst_bill_id bigint,
+    is_reissued boolean DEFAULT false,
+    bill_fin_year smallint
+);
+
+
+ALTER TABLE cts.failed_transaction_beneficiary_2526 OWNER TO postgres;
+
+--
+-- TOC entry 313 (class 1259 OID 922103)
 -- Name: failed_transaction_beneficiary_id_seq_bk; Type: SEQUENCE; Schema: cts; Owner: postgres
 --
 
@@ -10853,7 +12216,7 @@ CREATE SEQUENCE cts.failed_transaction_beneficiary_id_seq_bk
 ALTER SEQUENCE cts.failed_transaction_beneficiary_id_seq_bk OWNER TO postgres;
 
 --
--- TOC entry 313 (class 1259 OID 920694)
+-- TOC entry 459 (class 1259 OID 1037239)
 -- Name: failed_transaction_beneficiary_bk; Type: TABLE; Schema: cts; Owner: postgres
 --
 
@@ -10871,7 +12234,52 @@ CREATE TABLE cts.failed_transaction_beneficiary_bk (
     corrected_by bigint,
     corrected_at timestamp without time zone,
     is_active smallint,
-    financial_year smallint,
+    financial_year smallint NOT NULL,
+    failed_transaction_amount bigint,
+    beneficiary_id bigint,
+    bill_ref_no character varying,
+    jit_ref_no character varying,
+    end_to_end_id character varying(29),
+    status smallint DEFAULT 0 NOT NULL,
+    payee_id character varying,
+    agency_code character varying,
+    failed_reason_code character varying,
+    failed_reason_desc character varying,
+    total_ben_failed_amount bigint,
+    is_gst boolean DEFAULT false,
+    accepted_date_time timestamp without time zone,
+    is_corrected boolean DEFAULT false,
+    challan_no integer,
+    major_head character(4),
+    challan_date date,
+    cancel_certificate_date date,
+    cancel_certificate_no character varying
+)
+PARTITION BY LIST (financial_year);
+
+
+ALTER TABLE cts.failed_transaction_beneficiary_bk OWNER TO postgres;
+
+--
+-- TOC entry 460 (class 1259 OID 1037249)
+-- Name: failed_transaction_beneficiary_bk_2425; Type: TABLE; Schema: cts; Owner: postgres
+--
+
+CREATE TABLE cts.failed_transaction_beneficiary_bk_2425 (
+    id bigint DEFAULT nextval('cts.failed_transaction_beneficiary_id_seq_bk'::regclass) NOT NULL,
+    bill_id bigint NOT NULL,
+    treasury_code character(3),
+    ddo_code character(9),
+    payee_name character varying(100),
+    account_no character(18),
+    ifsc_code character(11),
+    bank_name character varying,
+    created_by_userid bigint,
+    created_at timestamp without time zone,
+    corrected_by bigint,
+    corrected_at timestamp without time zone,
+    is_active smallint,
+    financial_year smallint NOT NULL,
     failed_transaction_amount bigint,
     beneficiary_id bigint,
     bill_ref_no character varying,
@@ -10894,34 +12302,10 @@ CREATE TABLE cts.failed_transaction_beneficiary_bk (
 );
 
 
-ALTER TABLE cts.failed_transaction_beneficiary_bk OWNER TO postgres;
+ALTER TABLE cts.failed_transaction_beneficiary_bk_2425 OWNER TO postgres;
 
 --
--- TOC entry 314 (class 1259 OID 920703)
--- Name: failed_transaction_beneficiary_id_seq; Type: SEQUENCE; Schema: cts; Owner: postgres
---
-
-CREATE SEQUENCE cts.failed_transaction_beneficiary_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER SEQUENCE cts.failed_transaction_beneficiary_id_seq OWNER TO postgres;
-
---
--- TOC entry 6167 (class 0 OID 0)
--- Dependencies: 314
--- Name: failed_transaction_beneficiary_id_seq; Type: SEQUENCE OWNED BY; Schema: cts; Owner: postgres
---
-
-ALTER SEQUENCE cts.failed_transaction_beneficiary_id_seq OWNED BY cts.failed_transaction_beneficiary.id;
-
-
---
--- TOC entry 315 (class 1259 OID 920704)
+-- TOC entry 316 (class 1259 OID 922114)
 -- Name: gst; Type: TABLE; Schema: jit; Owner: postgres
 --
 
@@ -10957,7 +12341,7 @@ CREATE TABLE jit.gst (
 ALTER TABLE jit.gst OWNER TO postgres;
 
 --
--- TOC entry 316 (class 1259 OID 920711)
+-- TOC entry 317 (class 1259 OID 922121)
 -- Name: fto_wise_gst_success_failed_transaction_summary; Type: VIEW; Schema: cts; Owner: postgres
 --
 
@@ -10968,7 +12352,7 @@ CREATE VIEW cts.fto_wise_gst_success_failed_transaction_summary AS
             COALESCE(sum(bd.gross_amount), (0)::numeric) AS gross_amount,
             COALESCE(sum(bd.net_amount), (0)::numeric) AS net_amount,
             count(gst.payee_id) AS total_payee_count
-           FROM (billing.bill_details bd
+           FROM (old.billing_bill_details bd
              JOIN jit.gst gst ON ((gst.bill_id = bd.bill_id)))
           WHERE (gst.is_regenerated = false)
           GROUP BY gst.ref_no, bd.financial_year
@@ -10976,7 +12360,7 @@ CREATE VIEW cts.fto_wise_gst_success_failed_transaction_summary AS
          SELECT gst.ref_no,
             count(stb.ecs_id) AS success_payee_count,
             sum(stb.amount) AS success_amount
-           FROM (cts.success_transaction_beneficiary stb
+           FROM (old.cts_success_transaction_beneficiary stb
              JOIN jit.gst gst ON ((gst.bill_id = stb.bill_id)))
           WHERE ((stb.is_active = 1) AND (stb.is_gst = true) AND (gst.is_regenerated = false))
           GROUP BY gst.ref_no
@@ -10985,7 +12369,7 @@ CREATE VIEW cts.fto_wise_gst_success_failed_transaction_summary AS
             count(ftb.beneficiary_id) AS failed_payee_count,
             sum(ftb.failed_transaction_amount) AS failed_amount,
             COALESCE(bool_or(ftb.is_reissued), false) AS is_reissued
-           FROM (cts.failed_transaction_beneficiary ftb
+           FROM (old.cts_failed_transaction_beneficiary ftb
              JOIN jit.gst gst ON ((gst.bill_id = ftb.bill_id)))
           WHERE ((ftb.is_active = 1) AND (ftb.is_gst = true) AND (gst.is_regenerated = false))
           GROUP BY gst.ref_no
@@ -11010,7 +12394,7 @@ CREATE VIEW cts.fto_wise_gst_success_failed_transaction_summary AS
 ALTER VIEW cts.fto_wise_gst_success_failed_transaction_summary OWNER TO postgres;
 
 --
--- TOC entry 317 (class 1259 OID 920716)
+-- TOC entry 318 (class 1259 OID 922126)
 -- Name: fto_wise_success_failed_transaction_summary; Type: VIEW; Schema: cts; Owner: postgres
 --
 
@@ -11021,16 +12405,16 @@ CREATE VIEW cts.fto_wise_success_failed_transaction_summary AS
             COALESCE(sum(ecs_add.gross_amount), (0)::numeric) AS gross_amount,
             COALESCE(sum(ecs_add.net_amount), (0)::numeric) AS net_amount,
             count(ecs_add.ecs_id) AS total_payee_count
-           FROM (billing.bill_ecs_neft_details ecs
-             JOIN billing.jit_ecs_additional ecs_add ON ((ecs.id = ecs_add.ecs_id)))
+           FROM (old.billing_bill_ecs_neft_details ecs
+             JOIN old.billing_jit_ecs_additional ecs_add ON ((ecs.id = ecs_add.ecs_id)))
           WHERE (ecs.is_gst = false)
           GROUP BY ecs_add.jit_reference_no, ecs_add.financial_year
         ), success_summary AS (
          SELECT ecs_add.jit_reference_no AS jit_ref_no,
             count(stb.ecs_id) AS success_payee_count,
             sum(stb.amount) AS success_amount
-           FROM (cts.success_transaction_beneficiary stb
-             JOIN billing.jit_ecs_additional ecs_add ON ((stb.ecs_id = ecs_add.ecs_id)))
+           FROM (old.cts_success_transaction_beneficiary stb
+             JOIN old.billing_jit_ecs_additional ecs_add ON ((stb.ecs_id = ecs_add.ecs_id)))
           WHERE ((stb.is_gst = false) AND (stb.is_active = 1))
           GROUP BY ecs_add.jit_reference_no
         ), failed_summary AS (
@@ -11038,8 +12422,8 @@ CREATE VIEW cts.fto_wise_success_failed_transaction_summary AS
             count(ftb.beneficiary_id) AS failed_payee_count,
             sum(ftb.failed_transaction_amount) AS failed_amount,
             COALESCE(bool_or(ftb.is_reissued), false) AS is_reissued
-           FROM (cts.failed_transaction_beneficiary ftb
-             JOIN billing.jit_ecs_additional ecs_add ON ((ftb.beneficiary_id = ecs_add.ecs_id)))
+           FROM (old.cts_failed_transaction_beneficiary ftb
+             JOIN old.billing_jit_ecs_additional ecs_add ON ((ftb.beneficiary_id = ecs_add.ecs_id)))
           WHERE ((ftb.is_gst = false) AND (ftb.is_active = 1))
           GROUP BY ecs_add.jit_reference_no
         )
@@ -11063,7 +12447,143 @@ CREATE VIEW cts.fto_wise_success_failed_transaction_summary AS
 ALTER VIEW cts.fto_wise_success_failed_transaction_summary OWNER TO postgres;
 
 --
--- TOC entry 318 (class 1259 OID 920721)
+-- TOC entry 321 (class 1259 OID 922140)
+-- Name: success_transaction_beneficiary_id_seq; Type: SEQUENCE; Schema: old; Owner: postgres
+--
+
+CREATE SEQUENCE old.success_transaction_beneficiary_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE old.success_transaction_beneficiary_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 7010 (class 0 OID 0)
+-- Dependencies: 321
+-- Name: success_transaction_beneficiary_id_seq; Type: SEQUENCE OWNED BY; Schema: old; Owner: postgres
+--
+
+ALTER SEQUENCE old.success_transaction_beneficiary_id_seq OWNED BY old.cts_success_transaction_beneficiary.id;
+
+
+--
+-- TOC entry 461 (class 1259 OID 1037307)
+-- Name: success_transaction_beneficiary; Type: TABLE; Schema: cts; Owner: postgres
+--
+
+CREATE TABLE cts.success_transaction_beneficiary (
+    id bigint DEFAULT nextval('old.success_transaction_beneficiary_id_seq'::regclass) NOT NULL,
+    bill_id bigint NOT NULL,
+    treasury_code character(3),
+    ddo_code character(9),
+    payee_name character varying(100),
+    account_no character(20),
+    ifsc_code character(11),
+    bank_name character varying,
+    created_by_userid bigint,
+    created_at timestamp without time zone DEFAULT now(),
+    is_active smallint,
+    financial_year smallint NOT NULL,
+    amount bigint,
+    beneficiary_id bigint,
+    bill_ref_no character varying,
+    jit_ref_no character varying,
+    end_to_end_id character varying(29),
+    status smallint DEFAULT 0 NOT NULL,
+    payee_id character varying,
+    agency_code character varying,
+    total_amount bigint,
+    is_gst boolean DEFAULT false,
+    ecs_id bigint,
+    utr_number character varying(22),
+    accepted_date_time timestamp without time zone,
+    file_name character(32)
+)
+PARTITION BY LIST (financial_year);
+
+
+ALTER TABLE cts.success_transaction_beneficiary OWNER TO postgres;
+
+--
+-- TOC entry 462 (class 1259 OID 1037319)
+-- Name: success_transaction_beneficiary_2425; Type: TABLE; Schema: cts; Owner: postgres
+--
+
+CREATE TABLE cts.success_transaction_beneficiary_2425 (
+    id bigint DEFAULT nextval('old.success_transaction_beneficiary_id_seq'::regclass) NOT NULL,
+    bill_id bigint NOT NULL,
+    treasury_code character(3),
+    ddo_code character(9),
+    payee_name character varying(100),
+    account_no character(20),
+    ifsc_code character(11),
+    bank_name character varying,
+    created_by_userid bigint,
+    created_at timestamp without time zone DEFAULT now(),
+    is_active smallint,
+    financial_year smallint NOT NULL,
+    amount bigint,
+    beneficiary_id bigint,
+    bill_ref_no character varying,
+    jit_ref_no character varying,
+    end_to_end_id character varying(29),
+    status smallint DEFAULT 0 NOT NULL,
+    payee_id character varying,
+    agency_code character varying,
+    total_amount bigint,
+    is_gst boolean DEFAULT false,
+    ecs_id bigint,
+    utr_number character varying(22),
+    accepted_date_time timestamp without time zone,
+    file_name character(32)
+);
+
+
+ALTER TABLE cts.success_transaction_beneficiary_2425 OWNER TO postgres;
+
+--
+-- TOC entry 463 (class 1259 OID 1037333)
+-- Name: success_transaction_beneficiary_2526; Type: TABLE; Schema: cts; Owner: postgres
+--
+
+CREATE TABLE cts.success_transaction_beneficiary_2526 (
+    id bigint DEFAULT nextval('old.success_transaction_beneficiary_id_seq'::regclass) NOT NULL,
+    bill_id bigint NOT NULL,
+    treasury_code character(3),
+    ddo_code character(9),
+    payee_name character varying(100),
+    account_no character(20),
+    ifsc_code character(11),
+    bank_name character varying,
+    created_by_userid bigint,
+    created_at timestamp without time zone DEFAULT now(),
+    is_active smallint,
+    financial_year smallint NOT NULL,
+    amount bigint,
+    beneficiary_id bigint,
+    bill_ref_no character varying,
+    jit_ref_no character varying,
+    end_to_end_id character varying(29),
+    status smallint DEFAULT 0 NOT NULL,
+    payee_id character varying,
+    agency_code character varying,
+    total_amount bigint,
+    is_gst boolean DEFAULT false,
+    ecs_id bigint,
+    utr_number character varying(22),
+    accepted_date_time timestamp without time zone,
+    file_name character(32)
+);
+
+
+ALTER TABLE cts.success_transaction_beneficiary_2526 OWNER TO postgres;
+
+--
+-- TOC entry 319 (class 1259 OID 922131)
 -- Name: success_transaction_beneficiary_id_seq_bk; Type: SEQUENCE; Schema: cts; Owner: postgres
 --
 
@@ -11078,7 +12598,7 @@ CREATE SEQUENCE cts.success_transaction_beneficiary_id_seq_bk
 ALTER SEQUENCE cts.success_transaction_beneficiary_id_seq_bk OWNER TO postgres;
 
 --
--- TOC entry 319 (class 1259 OID 920722)
+-- TOC entry 464 (class 1259 OID 1037416)
 -- Name: success_transaction_beneficiary_bk; Type: TABLE; Schema: cts; Owner: postgres
 --
 
@@ -11094,7 +12614,44 @@ CREATE TABLE cts.success_transaction_beneficiary_bk (
     created_by_userid bigint,
     created_at timestamp without time zone,
     is_active smallint,
-    financial_year smallint,
+    financial_year smallint NOT NULL,
+    amount bigint,
+    beneficiary_id bigint,
+    bill_ref_no character varying,
+    jit_ref_no character varying,
+    end_to_end_id character varying(29),
+    status smallint DEFAULT 0 NOT NULL,
+    payee_id character varying,
+    agency_code character varying,
+    total_amount bigint,
+    is_gst boolean DEFAULT false,
+    ecs_id bigint,
+    utr_number character varying(22),
+    accepted_date_time timestamp without time zone
+)
+PARTITION BY LIST (financial_year);
+
+
+ALTER TABLE cts.success_transaction_beneficiary_bk OWNER TO postgres;
+
+--
+-- TOC entry 465 (class 1259 OID 1037424)
+-- Name: success_transaction_beneficiary_bk_2425; Type: TABLE; Schema: cts; Owner: postgres
+--
+
+CREATE TABLE cts.success_transaction_beneficiary_bk_2425 (
+    id bigint DEFAULT nextval('cts.success_transaction_beneficiary_id_seq_bk'::regclass) NOT NULL,
+    bill_id bigint NOT NULL,
+    treasury_code character(3),
+    ddo_code character(9),
+    payee_name character varying(100),
+    account_no character(18),
+    ifsc_code character(11),
+    bank_name character varying,
+    created_by_userid bigint,
+    created_at timestamp without time zone,
+    is_active smallint,
+    financial_year smallint NOT NULL,
     amount bigint,
     beneficiary_id bigint,
     bill_ref_no character varying,
@@ -11111,34 +12668,10 @@ CREATE TABLE cts.success_transaction_beneficiary_bk (
 );
 
 
-ALTER TABLE cts.success_transaction_beneficiary_bk OWNER TO postgres;
+ALTER TABLE cts.success_transaction_beneficiary_bk_2425 OWNER TO postgres;
 
 --
--- TOC entry 320 (class 1259 OID 920730)
--- Name: success_transaction_beneficiary_id_seq; Type: SEQUENCE; Schema: cts; Owner: postgres
---
-
-CREATE SEQUENCE cts.success_transaction_beneficiary_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER SEQUENCE cts.success_transaction_beneficiary_id_seq OWNER TO postgres;
-
---
--- TOC entry 6168 (class 0 OID 0)
--- Dependencies: 320
--- Name: success_transaction_beneficiary_id_seq; Type: SEQUENCE OWNED BY; Schema: cts; Owner: postgres
---
-
-ALTER SEQUENCE cts.success_transaction_beneficiary_id_seq OWNED BY cts.success_transaction_beneficiary.id;
-
-
---
--- TOC entry 321 (class 1259 OID 920731)
+-- TOC entry 322 (class 1259 OID 922141)
 -- Name: token; Type: TABLE; Schema: cts; Owner: postgres
 --
 
@@ -11149,14 +12682,14 @@ CREATE TABLE cts.token (
     entity_id bigint NOT NULL,
     ddo_code character(9),
     treasury_code character(3),
-    financial_year_id smallint
+    financial_year smallint
 );
 
 
 ALTER TABLE cts.token OWNER TO postgres;
 
 --
--- TOC entry 322 (class 1259 OID 920734)
+-- TOC entry 323 (class 1259 OID 922144)
 -- Name: voucher; Type: TABLE; Schema: cts; Owner: postgres
 --
 
@@ -11166,7 +12699,7 @@ CREATE TABLE cts.voucher (
     voucher_date date NOT NULL,
     major_head character(4) NOT NULL,
     amount bigint NOT NULL,
-    financial_year_id smallint NOT NULL,
+    financial_year smallint NOT NULL,
     bill_id bigint NOT NULL,
     token_id bigint NOT NULL,
     treasury_code character(3) NOT NULL,
@@ -11178,7 +12711,7 @@ CREATE TABLE cts.voucher (
 ALTER TABLE cts.voucher OWNER TO postgres;
 
 --
--- TOC entry 323 (class 1259 OID 920739)
+-- TOC entry 324 (class 1259 OID 922149)
 -- Name: voucher_id_seq; Type: SEQUENCE; Schema: cts; Owner: postgres
 --
 
@@ -11193,7 +12726,7 @@ CREATE SEQUENCE cts.voucher_id_seq
 ALTER SEQUENCE cts.voucher_id_seq OWNER TO postgres;
 
 --
--- TOC entry 324 (class 1259 OID 920740)
+-- TOC entry 325 (class 1259 OID 922150)
 -- Name: voucher_id_seq1; Type: SEQUENCE; Schema: cts; Owner: postgres
 --
 
@@ -11208,8 +12741,8 @@ CREATE SEQUENCE cts.voucher_id_seq1
 ALTER SEQUENCE cts.voucher_id_seq1 OWNER TO postgres;
 
 --
--- TOC entry 6169 (class 0 OID 0)
--- Dependencies: 324
+-- TOC entry 7011 (class 0 OID 0)
+-- Dependencies: 325
 -- Name: voucher_id_seq1; Type: SEQUENCE OWNED BY; Schema: cts; Owner: postgres
 --
 
@@ -11217,11 +12750,11 @@ ALTER SEQUENCE cts.voucher_id_seq1 OWNED BY cts.voucher.id;
 
 
 --
--- TOC entry 325 (class 1259 OID 920741)
--- Name: ddo_agency_mapping_details; Type: TABLE; Schema: jit; Owner: postgres
+-- TOC entry 326 (class 1259 OID 922151)
+-- Name: jit_ddo_agency_mapping_details; Type: TABLE; Schema: old; Owner: postgres
 --
 
-CREATE TABLE jit.ddo_agency_mapping_details (
+CREATE TABLE old.jit_ddo_agency_mapping_details (
     id bigint NOT NULL,
     agency_code character varying(100) NOT NULL,
     agency_name character varying(200),
@@ -11237,23 +12770,23 @@ CREATE TABLE jit.ddo_agency_mapping_details (
 );
 
 
-ALTER TABLE jit.ddo_agency_mapping_details OWNER TO postgres;
+ALTER TABLE old.jit_ddo_agency_mapping_details OWNER TO postgres;
 
 --
--- TOC entry 6170 (class 0 OID 0)
--- Dependencies: 325
--- Name: COLUMN ddo_agency_mapping_details.action_type; Type: COMMENT; Schema: jit; Owner: postgres
+-- TOC entry 7012 (class 0 OID 0)
+-- Dependencies: 326
+-- Name: COLUMN jit_ddo_agency_mapping_details.action_type; Type: COMMENT; Schema: old; Owner: postgres
 --
 
-COMMENT ON COLUMN jit.ddo_agency_mapping_details.action_type IS '0 for reject, 1 for approve';
+COMMENT ON COLUMN old.jit_ddo_agency_mapping_details.action_type IS '0 for reject, 1 for approve';
 
 
 --
--- TOC entry 326 (class 1259 OID 920747)
--- Name: ddo_agency_mapping_details_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
+-- TOC entry 327 (class 1259 OID 922157)
+-- Name: ddo_agency_mapping_details_id_seq; Type: SEQUENCE; Schema: old; Owner: postgres
 --
 
-CREATE SEQUENCE jit.ddo_agency_mapping_details_id_seq
+CREATE SEQUENCE old.ddo_agency_mapping_details_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -11261,19 +12794,75 @@ CREATE SEQUENCE jit.ddo_agency_mapping_details_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE jit.ddo_agency_mapping_details_id_seq OWNER TO postgres;
+ALTER SEQUENCE old.ddo_agency_mapping_details_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6171 (class 0 OID 0)
--- Dependencies: 326
--- Name: ddo_agency_mapping_details_id_seq; Type: SEQUENCE OWNED BY; Schema: jit; Owner: postgres
+-- TOC entry 7013 (class 0 OID 0)
+-- Dependencies: 327
+-- Name: ddo_agency_mapping_details_id_seq; Type: SEQUENCE OWNED BY; Schema: old; Owner: postgres
 --
 
-ALTER SEQUENCE jit.ddo_agency_mapping_details_id_seq OWNED BY jit.ddo_agency_mapping_details.id;
+ALTER SEQUENCE old.ddo_agency_mapping_details_id_seq OWNED BY old.jit_ddo_agency_mapping_details.id;
 
 
 --
--- TOC entry 327 (class 1259 OID 920748)
+-- TOC entry 411 (class 1259 OID 1035980)
+-- Name: ddo_agency_mapping_details; Type: TABLE; Schema: jit; Owner: postgres
+--
+
+CREATE TABLE jit.ddo_agency_mapping_details (
+    id bigint DEFAULT nextval('old.ddo_agency_mapping_details_id_seq'::regclass) NOT NULL,
+    agency_code character varying(100) NOT NULL,
+    agency_name character varying(200),
+    sls_code character varying(100) NOT NULL,
+    ddo_code character varying(9) NOT NULL,
+    treasury_code character varying(3),
+    jit_requested_msg character varying(100),
+    response_msg character varying(100),
+    received_at timestamp without time zone DEFAULT now() NOT NULL,
+    action_taken_at timestamp without time zone NOT NULL,
+    action_type smallint,
+    financial_year smallint NOT NULL
+)
+PARTITION BY LIST (financial_year);
+
+
+ALTER TABLE jit.ddo_agency_mapping_details OWNER TO postgres;
+
+--
+-- TOC entry 7014 (class 0 OID 0)
+-- Dependencies: 411
+-- Name: COLUMN ddo_agency_mapping_details.action_type; Type: COMMENT; Schema: jit; Owner: postgres
+--
+
+COMMENT ON COLUMN jit.ddo_agency_mapping_details.action_type IS '0 for reject, 1 for approve';
+
+
+--
+-- TOC entry 412 (class 1259 OID 1035987)
+-- Name: ddo_agency_mapping_details_2526; Type: TABLE; Schema: jit; Owner: postgres
+--
+
+CREATE TABLE jit.ddo_agency_mapping_details_2526 (
+    id bigint DEFAULT nextval('old.ddo_agency_mapping_details_id_seq'::regclass) NOT NULL,
+    agency_code character varying(100) NOT NULL,
+    agency_name character varying(200),
+    sls_code character varying(100) NOT NULL,
+    ddo_code character varying(9) NOT NULL,
+    treasury_code character varying(3),
+    jit_requested_msg character varying(100),
+    response_msg character varying(100),
+    received_at timestamp without time zone DEFAULT now() NOT NULL,
+    action_taken_at timestamp without time zone NOT NULL,
+    action_type smallint,
+    financial_year smallint NOT NULL
+);
+
+
+ALTER TABLE jit.ddo_agency_mapping_details_2526 OWNER TO postgres;
+
+--
+-- TOC entry 328 (class 1259 OID 922158)
 -- Name: exp_payee_components; Type: TABLE; Schema: jit; Owner: postgres
 --
 
@@ -11296,7 +12885,7 @@ CREATE TABLE jit.exp_payee_components (
 ALTER TABLE jit.exp_payee_components OWNER TO postgres;
 
 --
--- TOC entry 328 (class 1259 OID 920753)
+-- TOC entry 329 (class 1259 OID 922163)
 -- Name: exp_payee_components_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
 --
 
@@ -11311,8 +12900,8 @@ CREATE SEQUENCE jit.exp_payee_components_id_seq
 ALTER SEQUENCE jit.exp_payee_components_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6172 (class 0 OID 0)
--- Dependencies: 328
+-- TOC entry 7015 (class 0 OID 0)
+-- Dependencies: 329
 -- Name: exp_payee_components_id_seq; Type: SEQUENCE OWNED BY; Schema: jit; Owner: postgres
 --
 
@@ -11320,7 +12909,7 @@ ALTER SEQUENCE jit.exp_payee_components_id_seq OWNED BY jit.exp_payee_components
 
 
 --
--- TOC entry 329 (class 1259 OID 920754)
+-- TOC entry 330 (class 1259 OID 922164)
 -- Name: fto_voucher; Type: TABLE; Schema: jit; Owner: postgres
 --
 
@@ -11344,7 +12933,7 @@ CREATE TABLE jit.fto_voucher (
 ALTER TABLE jit.fto_voucher OWNER TO postgres;
 
 --
--- TOC entry 330 (class 1259 OID 920759)
+-- TOC entry 331 (class 1259 OID 922169)
 -- Name: fto_voucher_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
 --
 
@@ -11359,8 +12948,8 @@ CREATE SEQUENCE jit.fto_voucher_id_seq
 ALTER SEQUENCE jit.fto_voucher_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6173 (class 0 OID 0)
--- Dependencies: 330
+-- TOC entry 7016 (class 0 OID 0)
+-- Dependencies: 331
 -- Name: fto_voucher_id_seq; Type: SEQUENCE OWNED BY; Schema: jit; Owner: postgres
 --
 
@@ -11368,7 +12957,7 @@ ALTER SEQUENCE jit.fto_voucher_id_seq OWNED BY jit.fto_voucher.id;
 
 
 --
--- TOC entry 331 (class 1259 OID 920760)
+-- TOC entry 332 (class 1259 OID 922170)
 -- Name: gst_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
 --
 
@@ -11383,8 +12972,8 @@ CREATE SEQUENCE jit.gst_id_seq
 ALTER SEQUENCE jit.gst_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6174 (class 0 OID 0)
--- Dependencies: 331
+-- TOC entry 7017 (class 0 OID 0)
+-- Dependencies: 332
 -- Name: gst_id_seq; Type: SEQUENCE OWNED BY; Schema: jit; Owner: postgres
 --
 
@@ -11392,14 +12981,14 @@ ALTER SEQUENCE jit.gst_id_seq OWNED BY jit.gst.id;
 
 
 --
--- TOC entry 332 (class 1259 OID 920761)
+-- TOC entry 333 (class 1259 OID 922171)
 -- Name: jit_allotment; Type: TABLE; Schema: jit; Owner: postgres
 --
 
 CREATE TABLE jit.jit_allotment (
     id bigint NOT NULL,
     sls_code character varying,
-    fin_year smallint,
+    financial_year smallint,
     self_limit_amount bigint NOT NULL,
     hoa_id bigint NOT NULL,
     treasury_code character(3) NOT NULL,
@@ -11418,7 +13007,7 @@ CREATE TABLE jit.jit_allotment (
 ALTER TABLE jit.jit_allotment OWNER TO postgres;
 
 --
--- TOC entry 333 (class 1259 OID 920767)
+-- TOC entry 334 (class 1259 OID 922177)
 -- Name: jit_allotment_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
 --
 
@@ -11433,8 +13022,8 @@ CREATE SEQUENCE jit.jit_allotment_id_seq
 ALTER SEQUENCE jit.jit_allotment_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6175 (class 0 OID 0)
--- Dependencies: 333
+-- TOC entry 7018 (class 0 OID 0)
+-- Dependencies: 334
 -- Name: jit_allotment_id_seq; Type: SEQUENCE OWNED BY; Schema: jit; Owner: postgres
 --
 
@@ -11442,7 +13031,7 @@ ALTER SEQUENCE jit.jit_allotment_id_seq OWNED BY jit.jit_allotment.id;
 
 
 --
--- TOC entry 334 (class 1259 OID 920768)
+-- TOC entry 335 (class 1259 OID 922178)
 -- Name: jit_fto_sanction_booking; Type: TABLE; Schema: jit; Owner: postgres
 --
 
@@ -11464,7 +13053,7 @@ CREATE TABLE jit.jit_fto_sanction_booking (
 ALTER TABLE jit.jit_fto_sanction_booking OWNER TO postgres;
 
 --
--- TOC entry 335 (class 1259 OID 920774)
+-- TOC entry 336 (class 1259 OID 922184)
 -- Name: jit_fto_sanction_booking_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
 --
 
@@ -11479,8 +13068,8 @@ CREATE SEQUENCE jit.jit_fto_sanction_booking_id_seq
 ALTER SEQUENCE jit.jit_fto_sanction_booking_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6176 (class 0 OID 0)
--- Dependencies: 335
+-- TOC entry 7019 (class 0 OID 0)
+-- Dependencies: 336
 -- Name: jit_fto_sanction_booking_id_seq; Type: SEQUENCE OWNED BY; Schema: jit; Owner: postgres
 --
 
@@ -11488,7 +13077,7 @@ ALTER SEQUENCE jit.jit_fto_sanction_booking_id_seq OWNED BY jit.jit_fto_sanction
 
 
 --
--- TOC entry 336 (class 1259 OID 920775)
+-- TOC entry 337 (class 1259 OID 922185)
 -- Name: jit_pullback_request; Type: TABLE; Schema: jit; Owner: postgres
 --
 
@@ -11507,7 +13096,7 @@ CREATE TABLE jit.jit_pullback_request (
 ALTER TABLE jit.jit_pullback_request OWNER TO postgres;
 
 --
--- TOC entry 337 (class 1259 OID 920780)
+-- TOC entry 338 (class 1259 OID 922190)
 -- Name: jit_pullback_request_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
 --
 
@@ -11522,8 +13111,8 @@ CREATE SEQUENCE jit.jit_pullback_request_id_seq
 ALTER SEQUENCE jit.jit_pullback_request_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6177 (class 0 OID 0)
--- Dependencies: 337
+-- TOC entry 7020 (class 0 OID 0)
+-- Dependencies: 338
 -- Name: jit_pullback_request_id_seq; Type: SEQUENCE OWNED BY; Schema: jit; Owner: postgres
 --
 
@@ -11531,7 +13120,7 @@ ALTER SEQUENCE jit.jit_pullback_request_id_seq OWNED BY jit.jit_pullback_request
 
 
 --
--- TOC entry 338 (class 1259 OID 920781)
+-- TOC entry 339 (class 1259 OID 922191)
 -- Name: jit_report_details; Type: TABLE; Schema: jit; Owner: postgres
 --
 
@@ -11556,7 +13145,7 @@ CREATE TABLE jit.jit_report_details (
 ALTER TABLE jit.jit_report_details OWNER TO postgres;
 
 --
--- TOC entry 339 (class 1259 OID 920793)
+-- TOC entry 340 (class 1259 OID 922203)
 -- Name: jit_report_details_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
 --
 
@@ -11571,8 +13160,8 @@ CREATE SEQUENCE jit.jit_report_details_id_seq
 ALTER SEQUENCE jit.jit_report_details_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6178 (class 0 OID 0)
--- Dependencies: 339
+-- TOC entry 7021 (class 0 OID 0)
+-- Dependencies: 340
 -- Name: jit_report_details_id_seq; Type: SEQUENCE OWNED BY; Schema: jit; Owner: postgres
 --
 
@@ -11580,14 +13169,14 @@ ALTER SEQUENCE jit.jit_report_details_id_seq OWNED BY jit.jit_report_details.id;
 
 
 --
--- TOC entry 340 (class 1259 OID 920794)
+-- TOC entry 341 (class 1259 OID 922204)
 -- Name: jit_withdrawl; Type: TABLE; Schema: jit; Owner: postgres
 --
 
 CREATE TABLE jit.jit_withdrawl (
     id bigint NOT NULL,
     sls_code character varying,
-    fin_year smallint,
+    financial_year smallint,
     self_limit_amount bigint NOT NULL,
     hoa_id bigint NOT NULL,
     treasury_code character(3) NOT NULL,
@@ -11607,7 +13196,7 @@ CREATE TABLE jit.jit_withdrawl (
 ALTER TABLE jit.jit_withdrawl OWNER TO postgres;
 
 --
--- TOC entry 341 (class 1259 OID 920801)
+-- TOC entry 342 (class 1259 OID 922211)
 -- Name: jit_withdrawl_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
 --
 
@@ -11622,8 +13211,8 @@ CREATE SEQUENCE jit.jit_withdrawl_id_seq
 ALTER SEQUENCE jit.jit_withdrawl_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6179 (class 0 OID 0)
--- Dependencies: 341
+-- TOC entry 7022 (class 0 OID 0)
+-- Dependencies: 342
 -- Name: jit_withdrawl_id_seq; Type: SEQUENCE OWNED BY; Schema: jit; Owner: postgres
 --
 
@@ -11631,7 +13220,7 @@ ALTER SEQUENCE jit.jit_withdrawl_id_seq OWNED BY jit.jit_withdrawl.id;
 
 
 --
--- TOC entry 342 (class 1259 OID 920802)
+-- TOC entry 343 (class 1259 OID 922212)
 -- Name: mother_sanction_allocation; Type: TABLE; Schema: jit; Owner: postgres
 --
 
@@ -11639,7 +13228,7 @@ CREATE TABLE jit.mother_sanction_allocation (
     id bigint NOT NULL,
     sls_scheme_code character varying,
     sanction_amount bigint,
-    fin_year smallint,
+    financial_year smallint,
     center_share_amount bigint,
     state_share_amount bigint,
     state_topup_amount bigint,
@@ -11668,8 +13257,8 @@ CREATE TABLE jit.mother_sanction_allocation (
 ALTER TABLE jit.mother_sanction_allocation OWNER TO postgres;
 
 --
--- TOC entry 6180 (class 0 OID 0)
--- Dependencies: 342
+-- TOC entry 7023 (class 0 OID 0)
+-- Dependencies: 343
 -- Name: COLUMN mother_sanction_allocation.send_to_cts; Type: COMMENT; Schema: jit; Owner: postgres
 --
 
@@ -11677,7 +13266,7 @@ COMMENT ON COLUMN jit.mother_sanction_allocation.send_to_cts IS '0 for not yet s
 
 
 --
--- TOC entry 343 (class 1259 OID 920808)
+-- TOC entry 344 (class 1259 OID 922218)
 -- Name: mother_sanction_allocation_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
 --
 
@@ -11692,8 +13281,8 @@ CREATE SEQUENCE jit.mother_sanction_allocation_id_seq
 ALTER SEQUENCE jit.mother_sanction_allocation_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6181 (class 0 OID 0)
--- Dependencies: 343
+-- TOC entry 7024 (class 0 OID 0)
+-- Dependencies: 344
 -- Name: mother_sanction_allocation_id_seq; Type: SEQUENCE OWNED BY; Schema: jit; Owner: postgres
 --
 
@@ -11701,7 +13290,7 @@ ALTER SEQUENCE jit.mother_sanction_allocation_id_seq OWNED BY jit.mother_sanctio
 
 
 --
--- TOC entry 344 (class 1259 OID 920809)
+-- TOC entry 345 (class 1259 OID 922219)
 -- Name: payee_deduction; Type: TABLE; Schema: jit; Owner: postgres
 --
 
@@ -11723,7 +13312,7 @@ CREATE TABLE jit.payee_deduction (
 ALTER TABLE jit.payee_deduction OWNER TO postgres;
 
 --
--- TOC entry 345 (class 1259 OID 920814)
+-- TOC entry 346 (class 1259 OID 922224)
 -- Name: payee_deduction_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
 --
 
@@ -11738,8 +13327,8 @@ CREATE SEQUENCE jit.payee_deduction_id_seq
 ALTER SEQUENCE jit.payee_deduction_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6182 (class 0 OID 0)
--- Dependencies: 345
+-- TOC entry 7025 (class 0 OID 0)
+-- Dependencies: 346
 -- Name: payee_deduction_id_seq; Type: SEQUENCE OWNED BY; Schema: jit; Owner: postgres
 --
 
@@ -11747,7 +13336,7 @@ ALTER SEQUENCE jit.payee_deduction_id_seq OWNED BY jit.payee_deduction.id;
 
 
 --
--- TOC entry 346 (class 1259 OID 920815)
+-- TOC entry 347 (class 1259 OID 922225)
 -- Name: scheme_config_master; Type: TABLE; Schema: jit; Owner: postgres
 --
 
@@ -11777,7 +13366,7 @@ CREATE TABLE jit.scheme_config_master (
 ALTER TABLE jit.scheme_config_master OWNER TO postgres;
 
 --
--- TOC entry 347 (class 1259 OID 920822)
+-- TOC entry 348 (class 1259 OID 922232)
 -- Name: scheme_config_master_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
 --
 
@@ -11792,8 +13381,8 @@ CREATE SEQUENCE jit.scheme_config_master_id_seq
 ALTER SEQUENCE jit.scheme_config_master_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6183 (class 0 OID 0)
--- Dependencies: 347
+-- TOC entry 7026 (class 0 OID 0)
+-- Dependencies: 348
 -- Name: scheme_config_master_id_seq; Type: SEQUENCE OWNED BY; Schema: jit; Owner: postgres
 --
 
@@ -11801,11 +13390,11 @@ ALTER SEQUENCE jit.scheme_config_master_id_seq OWNED BY jit.scheme_config_master
 
 
 --
--- TOC entry 348 (class 1259 OID 920823)
--- Name: tsa_exp_details; Type: TABLE; Schema: jit; Owner: postgres
+-- TOC entry 349 (class 1259 OID 922233)
+-- Name: jit_tsa_exp_details; Type: TABLE; Schema: old; Owner: postgres
 --
 
-CREATE TABLE jit.tsa_exp_details (
+CREATE TABLE old.jit_tsa_exp_details (
     id bigint NOT NULL,
     ref_no character varying(50),
     sls_code character varying(50),
@@ -11854,14 +13443,14 @@ CREATE TABLE jit.tsa_exp_details (
 );
 
 
-ALTER TABLE jit.tsa_exp_details OWNER TO postgres;
+ALTER TABLE old.jit_tsa_exp_details OWNER TO postgres;
 
 --
--- TOC entry 349 (class 1259 OID 920834)
--- Name: tsa_exp_details_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
+-- TOC entry 350 (class 1259 OID 922244)
+-- Name: tsa_exp_details_id_seq; Type: SEQUENCE; Schema: old; Owner: postgres
 --
 
-CREATE SEQUENCE jit.tsa_exp_details_id_seq
+CREATE SEQUENCE old.tsa_exp_details_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -11869,19 +13458,132 @@ CREATE SEQUENCE jit.tsa_exp_details_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE jit.tsa_exp_details_id_seq OWNER TO postgres;
+ALTER SEQUENCE old.tsa_exp_details_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6184 (class 0 OID 0)
--- Dependencies: 349
--- Name: tsa_exp_details_id_seq; Type: SEQUENCE OWNED BY; Schema: jit; Owner: postgres
+-- TOC entry 7027 (class 0 OID 0)
+-- Dependencies: 350
+-- Name: tsa_exp_details_id_seq; Type: SEQUENCE OWNED BY; Schema: old; Owner: postgres
 --
 
-ALTER SEQUENCE jit.tsa_exp_details_id_seq OWNED BY jit.tsa_exp_details.id;
+ALTER SEQUENCE old.tsa_exp_details_id_seq OWNED BY old.jit_tsa_exp_details.id;
 
 
 --
--- TOC entry 350 (class 1259 OID 920835)
+-- TOC entry 424 (class 1259 OID 1036124)
+-- Name: tsa_exp_details; Type: TABLE; Schema: jit; Owner: postgres
+--
+
+CREATE TABLE jit.tsa_exp_details (
+    id bigint DEFAULT nextval('old.tsa_exp_details_id_seq'::regclass) NOT NULL,
+    ref_no character varying(50),
+    sls_code character varying(50),
+    scheme_name character varying,
+    agency_code character varying(100),
+    agency_name character varying,
+    hoa_id bigint,
+    treas_code character varying(3),
+    ddo_code character varying(9),
+    is_top_up boolean,
+    is_reissue boolean,
+    net_amount numeric(12,2),
+    gross_amount numeric(12,2),
+    topup_amount numeric,
+    reissue_amount numeric,
+    total_bt numeric,
+    total_gst numeric,
+    payee_count integer,
+    category_code character varying,
+    district_code_lgd character varying,
+    total_amt_for_cs_calc_sc numeric,
+    total_amt_for_cs_calc_scoc numeric,
+    total_amt_for_cs_calc_sccc numeric,
+    total_amt_for_cs_calc_scsal numeric,
+    total_amt_for_cs_calc_st numeric,
+    total_amt_for_cs_calc_stoc numeric,
+    total_amt_for_cs_calc_stcc numeric,
+    total_amt_for_cs_calc_stsal numeric,
+    total_amt_for_cs_calc_ot numeric,
+    total_amt_for_cs_calc_otoc numeric,
+    total_amt_for_cs_calc_otcc numeric,
+    total_amt_for_cs_calc_otsal numeric,
+    created_at timestamp without time zone DEFAULT now(),
+    created_by_userid bigint,
+    is_mapped boolean DEFAULT false,
+    is_rejected boolean DEFAULT false,
+    total_treasury_bt numeric DEFAULT 0,
+    total_ag_bt numeric DEFAULT 0,
+    fto_type character varying(15),
+    system_rejected boolean DEFAULT false,
+    reject_reason character varying(100),
+    rejected_at timestamp without time zone,
+    rejected_by bigint,
+    financial_year smallint NOT NULL,
+    old_jit_ref_no character varying(50)
+)
+PARTITION BY LIST (financial_year);
+
+
+ALTER TABLE jit.tsa_exp_details OWNER TO postgres;
+
+--
+-- TOC entry 425 (class 1259 OID 1036139)
+-- Name: tsa_exp_details_2526; Type: TABLE; Schema: jit; Owner: postgres
+--
+
+CREATE TABLE jit.tsa_exp_details_2526 (
+    id bigint DEFAULT nextval('old.tsa_exp_details_id_seq'::regclass) NOT NULL,
+    ref_no character varying(50),
+    sls_code character varying(50),
+    scheme_name character varying,
+    agency_code character varying(100),
+    agency_name character varying,
+    hoa_id bigint,
+    treas_code character varying(3),
+    ddo_code character varying(9),
+    is_top_up boolean,
+    is_reissue boolean,
+    net_amount numeric(12,2),
+    gross_amount numeric(12,2),
+    topup_amount numeric,
+    reissue_amount numeric,
+    total_bt numeric,
+    total_gst numeric,
+    payee_count integer,
+    category_code character varying,
+    district_code_lgd character varying,
+    total_amt_for_cs_calc_sc numeric,
+    total_amt_for_cs_calc_scoc numeric,
+    total_amt_for_cs_calc_sccc numeric,
+    total_amt_for_cs_calc_scsal numeric,
+    total_amt_for_cs_calc_st numeric,
+    total_amt_for_cs_calc_stoc numeric,
+    total_amt_for_cs_calc_stcc numeric,
+    total_amt_for_cs_calc_stsal numeric,
+    total_amt_for_cs_calc_ot numeric,
+    total_amt_for_cs_calc_otoc numeric,
+    total_amt_for_cs_calc_otcc numeric,
+    total_amt_for_cs_calc_otsal numeric,
+    created_at timestamp without time zone DEFAULT now(),
+    created_by_userid bigint,
+    is_mapped boolean DEFAULT false,
+    is_rejected boolean DEFAULT false,
+    total_treasury_bt numeric DEFAULT 0,
+    total_ag_bt numeric DEFAULT 0,
+    fto_type character varying(15),
+    system_rejected boolean DEFAULT false,
+    reject_reason character varying(100),
+    rejected_at timestamp without time zone,
+    rejected_by bigint,
+    financial_year smallint NOT NULL,
+    old_jit_ref_no character varying(50)
+);
+
+
+ALTER TABLE jit.tsa_exp_details_2526 OWNER TO postgres;
+
+--
+-- TOC entry 351 (class 1259 OID 922245)
 -- Name: tsa_payeemaster; Type: TABLE; Schema: jit; Owner: postgres
 --
 
@@ -11922,8 +13624,8 @@ CREATE TABLE jit.tsa_payeemaster (
 ALTER TABLE jit.tsa_payeemaster OWNER TO postgres;
 
 --
--- TOC entry 6185 (class 0 OID 0)
--- Dependencies: 350
+-- TOC entry 7028 (class 0 OID 0)
+-- Dependencies: 351
 -- Name: COLUMN tsa_payeemaster.urban_rural_flag; Type: COMMENT; Schema: jit; Owner: postgres
 --
 
@@ -11931,8 +13633,8 @@ COMMENT ON COLUMN jit.tsa_payeemaster.urban_rural_flag IS 'Urban/Rural/NA flag: 
 
 
 --
--- TOC entry 6186 (class 0 OID 0)
--- Dependencies: 350
+-- TOC entry 7029 (class 0 OID 0)
+-- Dependencies: 351
 -- Name: COLUMN tsa_payeemaster.block_lgd; Type: COMMENT; Schema: jit; Owner: postgres
 --
 
@@ -11940,8 +13642,8 @@ COMMENT ON COLUMN jit.tsa_payeemaster.block_lgd IS 'LGD code for block';
 
 
 --
--- TOC entry 6187 (class 0 OID 0)
--- Dependencies: 350
+-- TOC entry 7030 (class 0 OID 0)
+-- Dependencies: 351
 -- Name: COLUMN tsa_payeemaster.panchayat_lgd; Type: COMMENT; Schema: jit; Owner: postgres
 --
 
@@ -11949,8 +13651,8 @@ COMMENT ON COLUMN jit.tsa_payeemaster.panchayat_lgd IS 'LGD code for panchayat';
 
 
 --
--- TOC entry 6188 (class 0 OID 0)
--- Dependencies: 350
+-- TOC entry 7031 (class 0 OID 0)
+-- Dependencies: 351
 -- Name: COLUMN tsa_payeemaster.village_lgd; Type: COMMENT; Schema: jit; Owner: postgres
 --
 
@@ -11958,8 +13660,8 @@ COMMENT ON COLUMN jit.tsa_payeemaster.village_lgd IS 'LGD code for village';
 
 
 --
--- TOC entry 6189 (class 0 OID 0)
--- Dependencies: 350
+-- TOC entry 7032 (class 0 OID 0)
+-- Dependencies: 351
 -- Name: COLUMN tsa_payeemaster.tehsil_lgd; Type: COMMENT; Schema: jit; Owner: postgres
 --
 
@@ -11967,8 +13669,8 @@ COMMENT ON COLUMN jit.tsa_payeemaster.tehsil_lgd IS 'LGD code for tehsil';
 
 
 --
--- TOC entry 6190 (class 0 OID 0)
--- Dependencies: 350
+-- TOC entry 7033 (class 0 OID 0)
+-- Dependencies: 351
 -- Name: COLUMN tsa_payeemaster.town_lgd; Type: COMMENT; Schema: jit; Owner: postgres
 --
 
@@ -11976,8 +13678,8 @@ COMMENT ON COLUMN jit.tsa_payeemaster.town_lgd IS 'LGD code for town';
 
 
 --
--- TOC entry 6191 (class 0 OID 0)
--- Dependencies: 350
+-- TOC entry 7034 (class 0 OID 0)
+-- Dependencies: 351
 -- Name: COLUMN tsa_payeemaster.ward_lgd; Type: COMMENT; Schema: jit; Owner: postgres
 --
 
@@ -11985,7 +13687,7 @@ COMMENT ON COLUMN jit.tsa_payeemaster.ward_lgd IS 'LGD code for ward';
 
 
 --
--- TOC entry 351 (class 1259 OID 920842)
+-- TOC entry 352 (class 1259 OID 922252)
 -- Name: tsa_payeemaster_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
 --
 
@@ -12000,8 +13702,8 @@ CREATE SEQUENCE jit.tsa_payeemaster_id_seq
 ALTER SEQUENCE jit.tsa_payeemaster_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6192 (class 0 OID 0)
--- Dependencies: 351
+-- TOC entry 7035 (class 0 OID 0)
+-- Dependencies: 352
 -- Name: tsa_payeemaster_id_seq; Type: SEQUENCE OWNED BY; Schema: jit; Owner: postgres
 --
 
@@ -12009,11 +13711,11 @@ ALTER SEQUENCE jit.tsa_payeemaster_id_seq OWNED BY jit.tsa_payeemaster.id;
 
 
 --
--- TOC entry 352 (class 1259 OID 920843)
--- Name: tsa_schemecomponent; Type: TABLE; Schema: jit; Owner: postgres
+-- TOC entry 353 (class 1259 OID 922253)
+-- Name: jit_tsa_schemecomponent; Type: TABLE; Schema: old; Owner: postgres
 --
 
-CREATE TABLE jit.tsa_schemecomponent (
+CREATE TABLE old.jit_tsa_schemecomponent (
     id bigint NOT NULL,
     slscode character varying(50),
     shemename character varying(300),
@@ -12024,14 +13726,14 @@ CREATE TABLE jit.tsa_schemecomponent (
 );
 
 
-ALTER TABLE jit.tsa_schemecomponent OWNER TO postgres;
+ALTER TABLE old.jit_tsa_schemecomponent OWNER TO postgres;
 
 --
--- TOC entry 353 (class 1259 OID 920848)
--- Name: tsa_schemecomponent_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
+-- TOC entry 354 (class 1259 OID 922258)
+-- Name: tsa_schemecomponent_id_seq; Type: SEQUENCE; Schema: old; Owner: postgres
 --
 
-CREATE SEQUENCE jit.tsa_schemecomponent_id_seq
+CREATE SEQUENCE old.tsa_schemecomponent_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -12039,19 +13741,38 @@ CREATE SEQUENCE jit.tsa_schemecomponent_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE jit.tsa_schemecomponent_id_seq OWNER TO postgres;
+ALTER SEQUENCE old.tsa_schemecomponent_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6193 (class 0 OID 0)
--- Dependencies: 353
--- Name: tsa_schemecomponent_id_seq; Type: SEQUENCE OWNED BY; Schema: jit; Owner: postgres
+-- TOC entry 7036 (class 0 OID 0)
+-- Dependencies: 354
+-- Name: tsa_schemecomponent_id_seq; Type: SEQUENCE OWNED BY; Schema: old; Owner: postgres
 --
 
-ALTER SEQUENCE jit.tsa_schemecomponent_id_seq OWNED BY jit.tsa_schemecomponent.id;
+ALTER SEQUENCE old.tsa_schemecomponent_id_seq OWNED BY old.jit_tsa_schemecomponent.id;
 
 
 --
--- TOC entry 354 (class 1259 OID 920849)
+-- TOC entry 434 (class 1259 OID 1036667)
+-- Name: tsa_schemecomponent; Type: TABLE; Schema: jit; Owner: postgres
+--
+
+CREATE TABLE jit.tsa_schemecomponent (
+    id bigint DEFAULT nextval('old.tsa_schemecomponent_id_seq'::regclass) NOT NULL,
+    slscode character varying(50),
+    shemename character varying(300),
+    componentcode character varying(50),
+    componentname character varying(200),
+    is_active boolean,
+    financial_year integer NOT NULL
+)
+PARTITION BY LIST (financial_year);
+
+
+ALTER TABLE jit.tsa_schemecomponent OWNER TO postgres;
+
+--
+-- TOC entry 355 (class 1259 OID 922259)
 -- Name: bank_type_master; Type: TABLE; Schema: master; Owner: postgres
 --
 
@@ -12066,7 +13787,7 @@ CREATE TABLE master.bank_type_master (
 ALTER TABLE master.bank_type_master OWNER TO postgres;
 
 --
--- TOC entry 355 (class 1259 OID 920855)
+-- TOC entry 356 (class 1259 OID 922265)
 -- Name: bank_type_master_id_seq; Type: SEQUENCE; Schema: master; Owner: postgres
 --
 
@@ -12082,8 +13803,8 @@ CREATE SEQUENCE master.bank_type_master_id_seq
 ALTER SEQUENCE master.bank_type_master_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6194 (class 0 OID 0)
--- Dependencies: 355
+-- TOC entry 7037 (class 0 OID 0)
+-- Dependencies: 356
 -- Name: bank_type_master_id_seq; Type: SEQUENCE OWNED BY; Schema: master; Owner: postgres
 --
 
@@ -12091,7 +13812,7 @@ ALTER SEQUENCE master.bank_type_master_id_seq OWNED BY master.bank_type_master.i
 
 
 --
--- TOC entry 356 (class 1259 OID 920856)
+-- TOC entry 357 (class 1259 OID 922266)
 -- Name: ddo; Type: TABLE; Schema: master; Owner: postgres
 --
 
@@ -12130,7 +13851,7 @@ CREATE TABLE master.ddo (
 ALTER TABLE master.ddo OWNER TO postgres;
 
 --
--- TOC entry 357 (class 1259 OID 920861)
+-- TOC entry 358 (class 1259 OID 922271)
 -- Name: ddo_id_seq; Type: SEQUENCE; Schema: master; Owner: postgres
 --
 
@@ -12145,8 +13866,8 @@ CREATE SEQUENCE master.ddo_id_seq
 ALTER SEQUENCE master.ddo_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6195 (class 0 OID 0)
--- Dependencies: 357
+-- TOC entry 7038 (class 0 OID 0)
+-- Dependencies: 358
 -- Name: ddo_id_seq; Type: SEQUENCE OWNED BY; Schema: master; Owner: postgres
 --
 
@@ -12154,7 +13875,7 @@ ALTER SEQUENCE master.ddo_id_seq OWNED BY master.ddo.id;
 
 
 --
--- TOC entry 358 (class 1259 OID 920862)
+-- TOC entry 359 (class 1259 OID 922272)
 -- Name: demand_major_mapping; Type: TABLE; Schema: master; Owner: postgres
 --
 
@@ -12169,7 +13890,7 @@ CREATE TABLE master.demand_major_mapping (
 ALTER TABLE master.demand_major_mapping OWNER TO postgres;
 
 --
--- TOC entry 359 (class 1259 OID 920865)
+-- TOC entry 360 (class 1259 OID 922275)
 -- Name: department; Type: TABLE; Schema: master; Owner: postgres
 --
 
@@ -12184,7 +13905,7 @@ CREATE TABLE master.department (
 ALTER TABLE master.department OWNER TO postgres;
 
 --
--- TOC entry 360 (class 1259 OID 920868)
+-- TOC entry 361 (class 1259 OID 922278)
 -- Name: detail_head; Type: TABLE; Schema: master; Owner: postgres
 --
 
@@ -12198,7 +13919,7 @@ CREATE TABLE master.detail_head (
 ALTER TABLE master.detail_head OWNER TO postgres;
 
 --
--- TOC entry 361 (class 1259 OID 920871)
+-- TOC entry 362 (class 1259 OID 922281)
 -- Name: financial_year_master_id_seq; Type: SEQUENCE; Schema: master; Owner: postgres
 --
 
@@ -12214,7 +13935,7 @@ CREATE SEQUENCE master.financial_year_master_id_seq
 ALTER SEQUENCE master.financial_year_master_id_seq OWNER TO postgres;
 
 --
--- TOC entry 362 (class 1259 OID 920872)
+-- TOC entry 363 (class 1259 OID 922282)
 -- Name: financial_year_master; Type: TABLE; Schema: master; Owner: postgres
 --
 
@@ -12232,7 +13953,7 @@ CREATE TABLE master.financial_year_master (
 ALTER TABLE master.financial_year_master OWNER TO postgres;
 
 --
--- TOC entry 363 (class 1259 OID 920876)
+-- TOC entry 364 (class 1259 OID 922286)
 -- Name: major_head; Type: TABLE; Schema: master; Owner: postgres
 --
 
@@ -12246,7 +13967,7 @@ CREATE TABLE master.major_head (
 ALTER TABLE master.major_head OWNER TO postgres;
 
 --
--- TOC entry 364 (class 1259 OID 920879)
+-- TOC entry 365 (class 1259 OID 922289)
 -- Name: minor_head; Type: TABLE; Schema: master; Owner: postgres
 --
 
@@ -12261,7 +13982,7 @@ CREATE TABLE master.minor_head (
 ALTER TABLE master.minor_head OWNER TO postgres;
 
 --
--- TOC entry 365 (class 1259 OID 920882)
+-- TOC entry 366 (class 1259 OID 922292)
 -- Name: pending_ddo_list; Type: TABLE; Schema: master; Owner: postgres
 --
 
@@ -12275,7 +13996,7 @@ CREATE TABLE master.pending_ddo_list (
 ALTER TABLE master.pending_ddo_list OWNER TO postgres;
 
 --
--- TOC entry 366 (class 1259 OID 920885)
+-- TOC entry 367 (class 1259 OID 922295)
 -- Name: rbi_ifsc_stock; Type: TABLE; Schema: master; Owner: postgres
 --
 
@@ -12297,7 +14018,7 @@ CREATE TABLE master.rbi_ifsc_stock (
 ALTER TABLE master.rbi_ifsc_stock OWNER TO postgres;
 
 --
--- TOC entry 367 (class 1259 OID 920890)
+-- TOC entry 368 (class 1259 OID 922300)
 -- Name: scheme_head; Type: TABLE; Schema: master; Owner: postgres
 --
 
@@ -12313,7 +14034,7 @@ CREATE TABLE master.scheme_head (
 ALTER TABLE master.scheme_head OWNER TO postgres;
 
 --
--- TOC entry 368 (class 1259 OID 920893)
+-- TOC entry 369 (class 1259 OID 922303)
 -- Name: sub_detail_head; Type: TABLE; Schema: master; Owner: postgres
 --
 
@@ -12328,7 +14049,7 @@ CREATE TABLE master.sub_detail_head (
 ALTER TABLE master.sub_detail_head OWNER TO postgres;
 
 --
--- TOC entry 369 (class 1259 OID 920896)
+-- TOC entry 370 (class 1259 OID 922306)
 -- Name: sub_major_head; Type: TABLE; Schema: master; Owner: postgres
 --
 
@@ -12343,7 +14064,7 @@ CREATE TABLE master.sub_major_head (
 ALTER TABLE master.sub_major_head OWNER TO postgres;
 
 --
--- TOC entry 370 (class 1259 OID 920899)
+-- TOC entry 371 (class 1259 OID 922309)
 -- Name: treasury; Type: TABLE; Schema: master; Owner: postgres
 --
 
@@ -12381,7 +14102,7 @@ CREATE TABLE master.treasury (
 ALTER TABLE master.treasury OWNER TO postgres;
 
 --
--- TOC entry 371 (class 1259 OID 920904)
+-- TOC entry 372 (class 1259 OID 922314)
 -- Name: treasury_id_seq; Type: SEQUENCE; Schema: master; Owner: postgres
 --
 
@@ -12397,8 +14118,8 @@ CREATE SEQUENCE master.treasury_id_seq
 ALTER SEQUENCE master.treasury_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6196 (class 0 OID 0)
--- Dependencies: 371
+-- TOC entry 7039 (class 0 OID 0)
+-- Dependencies: 372
 -- Name: treasury_id_seq; Type: SEQUENCE OWNED BY; Schema: master; Owner: postgres
 --
 
@@ -12406,7 +14127,7 @@ ALTER SEQUENCE master.treasury_id_seq OWNED BY master.treasury.id;
 
 
 --
--- TOC entry 372 (class 1259 OID 920905)
+-- TOC entry 373 (class 1259 OID 922315)
 -- Name: tsa_vendor_type; Type: TABLE; Schema: master; Owner: postgres
 --
 
@@ -12425,7 +14146,7 @@ CREATE TABLE master.tsa_vendor_type (
 ALTER TABLE master.tsa_vendor_type OWNER TO postgres;
 
 --
--- TOC entry 373 (class 1259 OID 920912)
+-- TOC entry 374 (class 1259 OID 922322)
 -- Name: tsa_vendor_type_id_seq; Type: SEQUENCE; Schema: master; Owner: postgres
 --
 
@@ -12440,8 +14161,8 @@ CREATE SEQUENCE master.tsa_vendor_type_id_seq
 ALTER SEQUENCE master.tsa_vendor_type_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6197 (class 0 OID 0)
--- Dependencies: 373
+-- TOC entry 7040 (class 0 OID 0)
+-- Dependencies: 374
 -- Name: tsa_vendor_type_id_seq; Type: SEQUENCE OWNED BY; Schema: master; Owner: postgres
 --
 
@@ -12449,7 +14170,7 @@ ALTER SEQUENCE master.tsa_vendor_type_id_seq OWNED BY master.tsa_vendor_type.id;
 
 
 --
--- TOC entry 374 (class 1259 OID 920913)
+-- TOC entry 375 (class 1259 OID 922323)
 -- Name: consume_logs; Type: TABLE; Schema: message_queue; Owner: postgres
 --
 
@@ -12471,7 +14192,7 @@ CREATE TABLE message_queue.consume_logs (
 ALTER TABLE message_queue.consume_logs OWNER TO postgres;
 
 --
--- TOC entry 375 (class 1259 OID 920919)
+-- TOC entry 376 (class 1259 OID 922329)
 -- Name: consume_logs_id_seq; Type: SEQUENCE; Schema: message_queue; Owner: postgres
 --
 
@@ -12486,8 +14207,8 @@ CREATE SEQUENCE message_queue.consume_logs_id_seq
 ALTER SEQUENCE message_queue.consume_logs_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6198 (class 0 OID 0)
--- Dependencies: 375
+-- TOC entry 7041 (class 0 OID 0)
+-- Dependencies: 376
 -- Name: consume_logs_id_seq; Type: SEQUENCE OWNED BY; Schema: message_queue; Owner: postgres
 --
 
@@ -12495,7 +14216,7 @@ ALTER SEQUENCE message_queue.consume_logs_id_seq OWNED BY message_queue.consume_
 
 
 --
--- TOC entry 376 (class 1259 OID 920920)
+-- TOC entry 377 (class 1259 OID 922330)
 -- Name: consume_logs_partition; Type: TABLE; Schema: message_queue; Owner: postgres
 --
 
@@ -12518,7 +14239,7 @@ PARTITION BY RANGE (created_at);
 ALTER TABLE message_queue.consume_logs_partition OWNER TO postgres;
 
 --
--- TOC entry 377 (class 1259 OID 920925)
+-- TOC entry 378 (class 1259 OID 922335)
 -- Name: message_queue_logs; Type: TABLE; Schema: message_queue; Owner: postgres
 --
 
@@ -12536,7 +14257,7 @@ CREATE TABLE message_queue.message_queue_logs (
 ALTER TABLE message_queue.message_queue_logs OWNER TO postgres;
 
 --
--- TOC entry 378 (class 1259 OID 920931)
+-- TOC entry 379 (class 1259 OID 922341)
 -- Name: message_queues; Type: TABLE; Schema: message_queue; Owner: postgres
 --
 
@@ -12554,7 +14275,7 @@ CREATE TABLE message_queue.message_queues (
 ALTER TABLE message_queue.message_queues OWNER TO postgres;
 
 --
--- TOC entry 379 (class 1259 OID 920938)
+-- TOC entry 380 (class 1259 OID 922348)
 -- Name: queues_master; Type: TABLE; Schema: message_queue; Owner: postgres
 --
 
@@ -12576,7 +14297,7 @@ CREATE TABLE message_queue.queues_master (
 ALTER TABLE message_queue.queues_master OWNER TO postgres;
 
 --
--- TOC entry 380 (class 1259 OID 920945)
+-- TOC entry 381 (class 1259 OID 922355)
 -- Name: queues_master_id_seq; Type: SEQUENCE; Schema: message_queue; Owner: postgres
 --
 
@@ -12591,8 +14312,8 @@ CREATE SEQUENCE message_queue.queues_master_id_seq
 ALTER SEQUENCE message_queue.queues_master_id_seq OWNER TO postgres;
 
 --
--- TOC entry 6199 (class 0 OID 0)
--- Dependencies: 380
+-- TOC entry 7042 (class 0 OID 0)
+-- Dependencies: 381
 -- Name: queues_master_id_seq; Type: SEQUENCE OWNED BY; Schema: message_queue; Owner: postgres
 --
 
@@ -12600,7 +14321,525 @@ ALTER SEQUENCE message_queue.queues_master_id_seq OWNED BY message_queue.queues_
 
 
 --
--- TOC entry 381 (class 1259 OID 920946)
+-- TOC entry 228 (class 1259 OID 921699)
+-- Name: bantan_ddo_allotment_transactions; Type: TABLE; Schema: old; Owner: postgres
+--
+
+CREATE TABLE old.bantan_ddo_allotment_transactions (
+    allotment_id bigint DEFAULT nextval('bantan.ddo_allotment_sequence'::regclass) NOT NULL,
+    transaction_id bigint,
+    sanction_id bigint,
+    memo_number character varying,
+    memo_date date,
+    from_allotment_id bigint,
+    financial_year smallint NOT NULL,
+    sender_user_type smallint,
+    sender_sao_ddo_code character(200),
+    receiver_user_type smallint,
+    receiver_sao_ddo_code character(12) NOT NULL,
+    dept_code character(2),
+    demand_no character(2),
+    major_head character(4),
+    submajor_head character(2),
+    minor_head character(3),
+    plan_status character(2),
+    scheme_head character(3),
+    detail_head character(2),
+    subdetail_head character(2),
+    voted_charged character(1),
+    budget_alloted_amount bigint DEFAULT 0,
+    reappropriated_amount bigint DEFAULT 0,
+    augment_amount bigint DEFAULT 0,
+    surrender_amount bigint DEFAULT 0,
+    revised_amount bigint DEFAULT 0,
+    ceiling_amount bigint DEFAULT 0 NOT NULL,
+    provisional_released_amount bigint DEFAULT 0,
+    actual_released_amount numeric(10,0) DEFAULT 0,
+    map_type smallint,
+    sanction_type smallint,
+    status smallint,
+    allotment_date date,
+    remarks character varying(200),
+    created_by_userid bigint,
+    created_at timestamp without time zone,
+    updated_by_userid bigint,
+    updated_at timestamp without time zone,
+    uo_id bigint,
+    active_hoa_id bigint NOT NULL,
+    treasury_code character(3),
+    grant_in_aid_type smallint,
+    is_send boolean DEFAULT false NOT NULL
+);
+
+
+ALTER TABLE old.bantan_ddo_allotment_transactions OWNER TO postgres;
+
+--
+-- TOC entry 7043 (class 0 OID 0)
+-- Dependencies: 228
+-- Name: COLUMN bantan_ddo_allotment_transactions.sender_user_type; Type: COMMENT; Schema: old; Owner: postgres
+--
+
+COMMENT ON COLUMN old.bantan_ddo_allotment_transactions.sender_user_type IS '1 - SAO, 2 - DDO, 3 - JIT';
+
+
+--
+-- TOC entry 252 (class 1259 OID 921820)
+-- Name: billing_ebill_jit_int_map; Type: TABLE; Schema: old; Owner: postgres
+--
+
+CREATE TABLE old.billing_ebill_jit_int_map (
+    id bigint DEFAULT nextval('billing.ebill_jit_int_map_id_seq'::regclass) NOT NULL,
+    ebill_ref_no character(20) NOT NULL,
+    jit_ref_no character varying(50) NOT NULL,
+    is_active boolean DEFAULT true,
+    error_details jsonb,
+    is_rejected boolean DEFAULT false,
+    bill_id bigint NOT NULL,
+    file_name character varying(32),
+    created_at timestamp without time zone DEFAULT now(),
+    financial_year smallint
+);
+
+
+ALTER TABLE old.billing_ebill_jit_int_map OWNER TO postgres;
+
+--
+-- TOC entry 253 (class 1259 OID 921829)
+-- Name: billing_ebill_jit_int_map_01102025; Type: TABLE; Schema: old; Owner: postgres
+--
+
+CREATE TABLE old.billing_ebill_jit_int_map_01102025 (
+    id bigint,
+    ebill_ref_no character(20),
+    jit_ref_no character varying(50),
+    is_active boolean,
+    error_details jsonb,
+    is_rejected boolean,
+    bill_id bigint,
+    file_name character varying(32),
+    created_at timestamp without time zone,
+    financial_year smallint
+);
+
+
+ALTER TABLE old.billing_ebill_jit_int_map_01102025 OWNER TO postgres;
+
+--
+-- TOC entry 254 (class 1259 OID 921834)
+-- Name: billing_ebill_jit_int_map_bk_24092025; Type: TABLE; Schema: old; Owner: postgres
+--
+
+CREATE TABLE old.billing_ebill_jit_int_map_bk_24092025 (
+    id bigint,
+    ebill_ref_no character(20),
+    jit_ref_no character varying(50),
+    is_active boolean,
+    error_details jsonb,
+    is_rejected boolean,
+    bill_id bigint,
+    file_name character varying(32),
+    created_at timestamp without time zone,
+    financial_year smallint
+);
+
+
+ALTER TABLE old.billing_ebill_jit_int_map_bk_24092025 OWNER TO postgres;
+
+--
+-- TOC entry 300 (class 1259 OID 922037)
+-- Name: billing_master_cpin_master; Type: TABLE; Schema: old; Owner: postgres
+--
+
+CREATE TABLE old.billing_master_cpin_master (
+    id bigint DEFAULT nextval('billing_master.cpin_master_id_seq'::regclass) NOT NULL,
+    cpin_id character varying(14),
+    cpin_amount numeric NOT NULL,
+    cpin_date_tcs timestamp without time zone,
+    cpin_type integer,
+    cpin_sub_type integer,
+    active_flag integer,
+    status smallint,
+    created_at timestamp without time zone,
+    created_by_userid bigint,
+    updated_by_userid bigint,
+    updated_at timestamp without time zone,
+    ddo_gstin character varying(15),
+    vendor_data jsonb,
+    epsid bigint,
+    cpin_date date,
+    is_active boolean DEFAULT true NOT NULL,
+    financial_year smallint
+);
+
+
+ALTER TABLE old.billing_master_cpin_master OWNER TO postgres;
+
+--
+-- TOC entry 312 (class 1259 OID 922099)
+-- Name: cts_challan; Type: TABLE; Schema: old; Owner: postgres
+--
+
+CREATE TABLE old.cts_challan (
+    id bigint NOT NULL,
+    challan_no integer NOT NULL,
+    challan_date date NOT NULL,
+    amount bigint NOT NULL,
+    tr_code character(4) NOT NULL,
+    ddo_code character(9),
+    treasury_code character(3),
+    demand_no character(2),
+    major_head character(4),
+    submajor_head character(2),
+    minor_head character(3),
+    scheme_head character(3),
+    detail_head character(2),
+    subdetail_head character(2),
+    plan_status character(2),
+    voted_charged character(1),
+    token_id bigint NOT NULL,
+    payment_advice_id bigint,
+    module_id smallint,
+    financial_year smallint,
+    created_by bigint NOT NULL,
+    created_at timestamp without time zone DEFAULT now(),
+    bill_id bigint
+);
+
+
+ALTER TABLE old.cts_challan OWNER TO postgres;
+
+--
+-- TOC entry 314 (class 1259 OID 922104)
+-- Name: cts_failed_transaction_beneficiary_bk; Type: TABLE; Schema: old; Owner: postgres
+--
+
+CREATE TABLE old.cts_failed_transaction_beneficiary_bk (
+    id bigint DEFAULT nextval('cts.failed_transaction_beneficiary_id_seq_bk'::regclass) NOT NULL,
+    bill_id bigint NOT NULL,
+    treasury_code character(3),
+    ddo_code character(9),
+    payee_name character varying(100),
+    account_no character(18),
+    ifsc_code character(11),
+    bank_name character varying,
+    created_by_userid bigint,
+    created_at timestamp without time zone,
+    corrected_by bigint,
+    corrected_at timestamp without time zone,
+    is_active smallint,
+    financial_year smallint,
+    failed_transaction_amount bigint,
+    beneficiary_id bigint,
+    bill_ref_no character varying,
+    jit_ref_no character varying,
+    end_to_end_id character varying(29),
+    status smallint DEFAULT 0 NOT NULL,
+    payee_id character varying,
+    agency_code character varying,
+    failed_reason_code character varying,
+    failed_reason_desc character varying,
+    total_ben_failed_amount bigint,
+    is_gst boolean DEFAULT false,
+    accepted_date_time timestamp without time zone,
+    is_corrected boolean DEFAULT false,
+    challan_no integer,
+    major_head character(4),
+    challan_date date,
+    cancel_certificate_date date,
+    cancel_certificate_no character varying
+);
+
+
+ALTER TABLE old.cts_failed_transaction_beneficiary_bk OWNER TO postgres;
+
+--
+-- TOC entry 320 (class 1259 OID 922132)
+-- Name: cts_success_transaction_beneficiary_bk; Type: TABLE; Schema: old; Owner: postgres
+--
+
+CREATE TABLE old.cts_success_transaction_beneficiary_bk (
+    id bigint DEFAULT nextval('cts.success_transaction_beneficiary_id_seq_bk'::regclass) NOT NULL,
+    bill_id bigint NOT NULL,
+    treasury_code character(3),
+    ddo_code character(9),
+    payee_name character varying(100),
+    account_no character(18),
+    ifsc_code character(11),
+    bank_name character varying,
+    created_by_userid bigint,
+    created_at timestamp without time zone,
+    is_active smallint,
+    financial_year smallint,
+    amount bigint,
+    beneficiary_id bigint,
+    bill_ref_no character varying,
+    jit_ref_no character varying,
+    end_to_end_id character varying(29),
+    status smallint DEFAULT 0 NOT NULL,
+    payee_id character varying,
+    agency_code character varying,
+    total_amount bigint,
+    is_gst boolean DEFAULT false,
+    ecs_id bigint,
+    utr_number character varying(22),
+    accepted_date_time timestamp without time zone
+);
+
+
+ALTER TABLE old.cts_success_transaction_beneficiary_bk OWNER TO postgres;
+
+--
+-- TOC entry 382 (class 1259 OID 922356)
+-- Name: public_bill_ecs_neft_details; Type: TABLE; Schema: old; Owner: postgres
+--
+
+CREATE TABLE old.public_bill_ecs_neft_details (
+    id bigint,
+    bill_id bigint,
+    payee_name character varying(100),
+    beneficiary_id character varying(100),
+    payee_type character(2),
+    pan_no character(10),
+    contact_number character(15),
+    beneficiary_type character(2),
+    address character varying(200),
+    email character varying(60),
+    ifsc_code character(11),
+    account_type smallint,
+    bank_account_number character(20),
+    bank_name character varying(50),
+    amount bigint,
+    status smallint,
+    is_active smallint,
+    created_by_userid bigint,
+    created_at timestamp without time zone,
+    updated_by_userid bigint,
+    updated_at timestamp without time zone,
+    e_pradan_id bigint,
+    financial_year smallint,
+    is_cancelled boolean,
+    is_gst boolean
+);
+
+
+ALTER TABLE old.public_bill_ecs_neft_details OWNER TO postgres;
+
+--
+-- TOC entry 384 (class 1259 OID 922366)
+-- Name: public_cts_failed_transaction_beneficiary; Type: TABLE; Schema: old; Owner: postgres
+--
+
+CREATE TABLE old.public_cts_failed_transaction_beneficiary (
+    id bigint,
+    transaction_lot_id bigint,
+    transaction_lot_ben_id bigint,
+    entity_id bigint,
+    entity_name character varying,
+    treasury_code character(3),
+    ddo_code character(9),
+    payee_name character varying(100),
+    account_no character(18),
+    ifsc_code character(11),
+    bank_name character varying,
+    is_corrected smallint,
+    created_by_userid bigint,
+    created_at timestamp without time zone,
+    corrected_by bigint,
+    corrected_at timestamp without time zone,
+    status smallint,
+    financial_year smallint,
+    failed_transaction_amount bigint,
+    beneficiary_id bigint,
+    module_id smallint,
+    failed_code character(200),
+    is_gst boolean,
+    accepted_at timestamp without time zone,
+    challan_major_head character(4),
+    challan_no integer,
+    challan_date date,
+    challan_ref_no character varying(15),
+    rbi_book_date date
+);
+
+
+ALTER TABLE old.public_cts_failed_transaction_beneficiary OWNER TO postgres;
+
+--
+-- TOC entry 385 (class 1259 OID 922371)
+-- Name: public_cts_failed_transaction_beneficiary_1; Type: TABLE; Schema: old; Owner: postgres
+--
+
+CREATE TABLE old.public_cts_failed_transaction_beneficiary_1 (
+    id bigint,
+    transaction_lot_id bigint,
+    transaction_lot_ben_id bigint,
+    entity_id bigint,
+    entity_name character varying,
+    treasury_code character(3),
+    ddo_code character(9),
+    payee_name character varying(100),
+    account_no character(18),
+    ifsc_code character(11),
+    bank_name character varying,
+    is_corrected smallint,
+    created_by_userid bigint,
+    created_at timestamp without time zone,
+    corrected_by bigint,
+    corrected_at timestamp without time zone,
+    status smallint,
+    financial_year smallint,
+    failed_transaction_amount bigint,
+    beneficiary_id bigint,
+    module_id smallint,
+    failed_code character(200),
+    is_gst boolean,
+    accepted_at timestamp without time zone,
+    challan_major_head character(4),
+    challan_no integer,
+    challan_date date,
+    challan_ref_no character varying(15),
+    rbi_book_date date
+);
+
+
+ALTER TABLE old.public_cts_failed_transaction_beneficiary_1 OWNER TO postgres;
+
+--
+-- TOC entry 386 (class 1259 OID 922376)
+-- Name: public_cts_success_transaction_beneficiarys; Type: TABLE; Schema: old; Owner: postgres
+--
+
+CREATE TABLE old.public_cts_success_transaction_beneficiarys (
+    id bigint,
+    transaction_lot_id bigint,
+    transaction_lot_ben_id bigint,
+    ben_ecs_id bigint,
+    entity_name character varying,
+    treasury_code character(3),
+    ddo_code character(9),
+    payee_name character varying(100),
+    account_no character(18),
+    ifsc_code character(11),
+    bank_name character varying,
+    created_by_userid bigint,
+    created_at timestamp without time zone,
+    status smallint,
+    financial_year smallint,
+    amount bigint,
+    beneficiary_id character varying(50),
+    module_id smallint,
+    utr_no character(22),
+    end_to_end_id character(29),
+    is_gst boolean,
+    accepted_at timestamp without time zone,
+    entity_id bigint,
+    rbi_book_date date
+);
+
+
+ALTER TABLE old.public_cts_success_transaction_beneficiarys OWNER TO postgres;
+
+--
+-- TOC entry 387 (class 1259 OID 922381)
+-- Name: public_cts_success_transaction_beneficiarys_1; Type: TABLE; Schema: old; Owner: postgres
+--
+
+CREATE TABLE old.public_cts_success_transaction_beneficiarys_1 (
+    id bigint,
+    transaction_lot_id bigint,
+    transaction_lot_ben_id bigint,
+    ben_ecs_id bigint,
+    entity_name character varying,
+    treasury_code character(3),
+    ddo_code character(9),
+    payee_name character varying(100),
+    account_no character(18),
+    ifsc_code character(11),
+    bank_name character varying,
+    created_by_userid bigint,
+    created_at timestamp without time zone,
+    status smallint,
+    financial_year smallint,
+    amount bigint,
+    beneficiary_id character varying(50),
+    module_id smallint,
+    utr_no character(22),
+    end_to_end_id character(29),
+    is_gst boolean,
+    accepted_at timestamp without time zone,
+    entity_id bigint,
+    rbi_book_date date
+);
+
+
+ALTER TABLE old.public_cts_success_transaction_beneficiarys_1 OWNER TO postgres;
+
+--
+-- TOC entry 391 (class 1259 OID 922399)
+-- Name: public_failed_beneficiary_2425; Type: TABLE; Schema: old; Owner: postgres
+--
+
+CREATE TABLE old.public_failed_beneficiary_2425 (
+    bill_id bigint,
+    treasury_code character(3),
+    ddo_code character(9),
+    financial_year smallint,
+    payee_name character varying(100),
+    account_no text,
+    ifsc_code character(11),
+    bank_name character varying,
+    failed_transaction_amount bigint,
+    beneficiary_id character varying(50),
+    ecs_id bigint,
+    end_to_end_id character(29),
+    utr_no character(22),
+    accepted_at timestamp without time zone,
+    jit_reference_no character varying,
+    agency_code character varying,
+    failed_reason_code text,
+    failed_reason_desc text,
+    is_gst boolean,
+    challan_major_head character(4),
+    challan_no integer,
+    challan_date date,
+    challan_cert_no text,
+    cancellation_date date
+);
+
+
+ALTER TABLE old.public_failed_beneficiary_2425 OWNER TO postgres;
+
+--
+-- TOC entry 400 (class 1259 OID 922434)
+-- Name: public_success_beneficiary_2425; Type: TABLE; Schema: old; Owner: postgres
+--
+
+CREATE TABLE old.public_success_beneficiary_2425 (
+    bill_id bigint,
+    treasury_code character(3),
+    ddo_code character(9),
+    financial_year smallint,
+    payee_name character varying(100),
+    account_no text,
+    ifsc_code character(11),
+    bank_name character varying,
+    amount bigint,
+    beneficiary_id character varying(50),
+    ecs_id bigint,
+    end_to_end_id character(29),
+    utr_no text,
+    accepted_at timestamp without time zone,
+    jit_reference_no character varying,
+    agency_code character varying,
+    is_gst boolean
+);
+
+
+ALTER TABLE old.public_success_beneficiary_2425 OWNER TO postgres;
+
+--
+-- TOC entry 435 (class 1259 OID 1036673)
 -- Name: bill_ecs_neft_details; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -12630,13 +14869,14 @@ CREATE TABLE public.bill_ecs_neft_details (
     financial_year smallint,
     is_cancelled boolean,
     is_gst boolean
-);
+)
+PARTITION BY LIST (financial_year);
 
 
 ALTER TABLE public.bill_ecs_neft_details OWNER TO postgres;
 
 --
--- TOC entry 382 (class 1259 OID 920951)
+-- TOC entry 383 (class 1259 OID 922361)
 -- Name: bill_status_info_2425; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -12652,7 +14892,7 @@ CREATE TABLE public.bill_status_info_2425 (
 ALTER TABLE public.bill_status_info_2425 OWNER TO postgres;
 
 --
--- TOC entry 383 (class 1259 OID 920956)
+-- TOC entry 436 (class 1259 OID 1036676)
 -- Name: cts_failed_transaction_beneficiary; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -12686,13 +14926,14 @@ CREATE TABLE public.cts_failed_transaction_beneficiary (
     challan_date date,
     challan_ref_no character varying(15),
     rbi_book_date date
-);
+)
+PARTITION BY LIST (financial_year);
 
 
 ALTER TABLE public.cts_failed_transaction_beneficiary OWNER TO postgres;
 
 --
--- TOC entry 384 (class 1259 OID 920961)
+-- TOC entry 440 (class 1259 OID 1036755)
 -- Name: cts_failed_transaction_beneficiary_1; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -12726,13 +14967,14 @@ CREATE TABLE public.cts_failed_transaction_beneficiary_1 (
     challan_date date,
     challan_ref_no character varying(15),
     rbi_book_date date
-);
+)
+PARTITION BY LIST (financial_year);
 
 
 ALTER TABLE public.cts_failed_transaction_beneficiary_1 OWNER TO postgres;
 
 --
--- TOC entry 385 (class 1259 OID 920966)
+-- TOC entry 419 (class 1259 OID 1036096)
 -- Name: cts_success_transaction_beneficiarys; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -12761,13 +15003,14 @@ CREATE TABLE public.cts_success_transaction_beneficiarys (
     accepted_at timestamp without time zone,
     entity_id bigint,
     rbi_book_date date
-);
+)
+PARTITION BY LIST (financial_year);
 
 
 ALTER TABLE public.cts_success_transaction_beneficiarys OWNER TO postgres;
 
 --
--- TOC entry 386 (class 1259 OID 920971)
+-- TOC entry 418 (class 1259 OID 1036093)
 -- Name: cts_success_transaction_beneficiarys_1; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -12796,13 +15039,14 @@ CREATE TABLE public.cts_success_transaction_beneficiarys_1 (
     accepted_at timestamp without time zone,
     entity_id bigint,
     rbi_book_date date
-);
+)
+PARTITION BY LIST (financial_year);
 
 
 ALTER TABLE public.cts_success_transaction_beneficiarys_1 OWNER TO postgres;
 
 --
--- TOC entry 387 (class 1259 OID 920976)
+-- TOC entry 388 (class 1259 OID 922386)
 -- Name: ebill_jit_int_map_bk_01102025; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -12819,7 +15063,7 @@ CREATE TABLE public.ebill_jit_int_map_bk_01102025 (
 ALTER TABLE public.ebill_jit_int_map_bk_01102025 OWNER TO postgres;
 
 --
--- TOC entry 388 (class 1259 OID 920981)
+-- TOC entry 389 (class 1259 OID 922391)
 -- Name: ebilling_jit_voucher; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -12842,7 +15086,7 @@ CREATE TABLE public.ebilling_jit_voucher (
 ALTER TABLE public.ebilling_jit_voucher OWNER TO postgres;
 
 --
--- TOC entry 389 (class 1259 OID 920988)
+-- TOC entry 390 (class 1259 OID 922398)
 -- Name: ebilling_jit_voucher_id_seq1; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -12857,8 +15101,8 @@ CREATE SEQUENCE public.ebilling_jit_voucher_id_seq1
 ALTER SEQUENCE public.ebilling_jit_voucher_id_seq1 OWNER TO postgres;
 
 --
--- TOC entry 6200 (class 0 OID 0)
--- Dependencies: 389
+-- TOC entry 7044 (class 0 OID 0)
+-- Dependencies: 390
 -- Name: ebilling_jit_voucher_id_seq1; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -12866,7 +15110,7 @@ ALTER SEQUENCE public.ebilling_jit_voucher_id_seq1 OWNED BY public.ebilling_jit_
 
 
 --
--- TOC entry 390 (class 1259 OID 920989)
+-- TOC entry 427 (class 1259 OID 1036184)
 -- Name: failed_beneficiary_2425; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -12895,13 +15139,14 @@ CREATE TABLE public.failed_beneficiary_2425 (
     challan_date date,
     challan_cert_no text,
     cancellation_date date
-);
+)
+PARTITION BY LIST (financial_year);
 
 
 ALTER TABLE public.failed_beneficiary_2425 OWNER TO postgres;
 
 --
--- TOC entry 391 (class 1259 OID 920994)
+-- TOC entry 392 (class 1259 OID 922404)
 -- Name: failed_ecs_end_to_end_id; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -12915,7 +15160,7 @@ CREATE TABLE public.failed_ecs_end_to_end_id (
 ALTER TABLE public.failed_ecs_end_to_end_id OWNER TO postgres;
 
 --
--- TOC entry 392 (class 1259 OID 920997)
+-- TOC entry 393 (class 1259 OID 922407)
 -- Name: failed_utr_no; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -12929,7 +15174,7 @@ CREATE TABLE public.failed_utr_no (
 ALTER TABLE public.failed_utr_no OWNER TO postgres;
 
 --
--- TOC entry 393 (class 1259 OID 921000)
+-- TOC entry 394 (class 1259 OID 922410)
 -- Name: jit_success_20250708; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -12942,7 +15187,7 @@ CREATE TABLE public.jit_success_20250708 (
 ALTER TABLE public.jit_success_20250708 OWNER TO postgres;
 
 --
--- TOC entry 394 (class 1259 OID 921003)
+-- TOC entry 395 (class 1259 OID 922413)
 -- Name: jit_voucher_29072025; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -12954,7 +15199,7 @@ CREATE TABLE public.jit_voucher_29072025 (
 ALTER TABLE public.jit_voucher_29072025 OWNER TO postgres;
 
 --
--- TOC entry 395 (class 1259 OID 921006)
+-- TOC entry 396 (class 1259 OID 922416)
 -- Name: match_success_02062025; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -12967,7 +15212,7 @@ CREATE TABLE public.match_success_02062025 (
 ALTER TABLE public.match_success_02062025 OWNER TO postgres;
 
 --
--- TOC entry 396 (class 1259 OID 921009)
+-- TOC entry 397 (class 1259 OID 922419)
 -- Name: message_queue_wbjit_cts_billing_success_beneficiary; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -12985,7 +15230,7 @@ CREATE TABLE public.message_queue_wbjit_cts_billing_success_beneficiary (
 ALTER TABLE public.message_queue_wbjit_cts_billing_success_beneficiary OWNER TO postgres;
 
 --
--- TOC entry 397 (class 1259 OID 921014)
+-- TOC entry 398 (class 1259 OID 922424)
 -- Name: process_failed_ben_success_31052025; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -12997,7 +15242,7 @@ CREATE TABLE public.process_failed_ben_success_31052025 (
 ALTER TABLE public.process_failed_ben_success_31052025 OWNER TO postgres;
 
 --
--- TOC entry 398 (class 1259 OID 921019)
+-- TOC entry 399 (class 1259 OID 922429)
 -- Name: result_payload; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -13009,7 +15254,7 @@ CREATE TABLE public.result_payload (
 ALTER TABLE public.result_payload OWNER TO postgres;
 
 --
--- TOC entry 399 (class 1259 OID 921024)
+-- TOC entry 426 (class 1259 OID 1036180)
 -- Name: success_beneficiary_2425; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -13031,13 +15276,14 @@ CREATE TABLE public.success_beneficiary_2425 (
     jit_reference_no character varying,
     agency_code character varying,
     is_gst boolean
-);
+)
+PARTITION BY LIST (financial_year);
 
 
 ALTER TABLE public.success_beneficiary_2425 OWNER TO postgres;
 
 --
--- TOC entry 400 (class 1259 OID 921029)
+-- TOC entry 401 (class 1259 OID 922439)
 -- Name: success_ecs_end_to_end_id; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -13051,7 +15297,7 @@ CREATE TABLE public.success_ecs_end_to_end_id (
 ALTER TABLE public.success_ecs_end_to_end_id OWNER TO postgres;
 
 --
--- TOC entry 401 (class 1259 OID 921032)
+-- TOC entry 402 (class 1259 OID 922442)
 -- Name: test; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -13063,7 +15309,7 @@ CREATE TABLE public.test (
 ALTER TABLE public.test OWNER TO postgres;
 
 --
--- TOC entry 402 (class 1259 OID 921035)
+-- TOC entry 403 (class 1259 OID 922445)
 -- Name: tr_26a; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -13103,7 +15349,7 @@ CREATE TABLE public.tr_26a (
 ALTER TABLE public.tr_26a OWNER TO postgres;
 
 --
--- TOC entry 403 (class 1259 OID 921040)
+-- TOC entry 404 (class 1259 OID 922450)
 -- Name: tsa_exp_sanction_details; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -13122,7 +15368,7 @@ CREATE TABLE public.tsa_exp_sanction_details (
 ALTER TABLE public.tsa_exp_sanction_details OWNER TO postgres;
 
 --
--- TOC entry 404 (class 1259 OID 921045)
+-- TOC entry 405 (class 1259 OID 922455)
 -- Name: voucher_2526_171025; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -13132,7 +15378,7 @@ CREATE TABLE public.voucher_2526_171025 (
     voucher_date date,
     major_head character(4),
     amount bigint,
-    financial_year_id smallint,
+    financial_year smallint,
     bill_id bigint,
     token_id bigint,
     treasury_code character(3),
@@ -13144,7 +15390,7 @@ CREATE TABLE public.voucher_2526_171025 (
 ALTER TABLE public.voucher_2526_171025 OWNER TO postgres;
 
 --
--- TOC entry 405 (class 1259 OID 921048)
+-- TOC entry 406 (class 1259 OID 922458)
 -- Name: voucher_payload; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -13156,7 +15402,7 @@ CREATE TABLE public.voucher_payload (
 ALTER TABLE public.voucher_payload OWNER TO postgres;
 
 --
--- TOC entry 406 (class 1259 OID 921053)
+-- TOC entry 407 (class 1259 OID 922463)
 -- Name: failed_success_ben_report_view; Type: TABLE; Schema: report; Owner: postgres
 --
 
@@ -13181,7 +15427,7 @@ CREATE TABLE report.failed_success_ben_report_view (
     agency_name character(300),
     jit_reference_no character varying,
     fin_year character(9),
-    fin_year_id smallint,
+    financial_year smallint,
     token_number bigint
 );
 
@@ -13189,7 +15435,191 @@ CREATE TABLE report.failed_success_ben_report_view (
 ALTER TABLE report.failed_success_ben_report_view OWNER TO postgres;
 
 --
--- TOC entry 5384 (class 0 OID 0)
+-- TOC entry 5662 (class 0 OID 0)
+-- Name: ddo_allotment_transactions_2526; Type: TABLE ATTACH; Schema: bantan; Owner: postgres
+--
+
+ALTER TABLE ONLY bantan.ddo_allotment_transactions ATTACH PARTITION bantan.ddo_allotment_transactions_2526 FOR VALUES IN ('2526');
+
+
+--
+-- TOC entry 5654 (class 0 OID 0)
+-- Name: ddo_wallet_2526; Type: TABLE ATTACH; Schema: bantan; Owner: postgres
+--
+
+ALTER TABLE ONLY bantan.ddo_wallet ATTACH PARTITION bantan.ddo_wallet_2526 FOR VALUES IN ('2526');
+
+
+--
+-- TOC entry 5663 (class 0 OID 0)
+-- Name: bill_btdetail_2425; Type: TABLE ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.bill_btdetail ATTACH PARTITION billing.bill_btdetail_2425 FOR VALUES IN ('2425');
+
+
+--
+-- TOC entry 5664 (class 0 OID 0)
+-- Name: bill_btdetail_2526; Type: TABLE ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.bill_btdetail ATTACH PARTITION billing.bill_btdetail_2526 FOR VALUES IN ('2526');
+
+
+--
+-- TOC entry 5658 (class 0 OID 0)
+-- Name: bill_details_2425; Type: TABLE ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.bill_details ATTACH PARTITION billing.bill_details_2425 FOR VALUES IN ('2425');
+
+
+--
+-- TOC entry 5659 (class 0 OID 0)
+-- Name: bill_details_2526; Type: TABLE ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.bill_details ATTACH PARTITION billing.bill_details_2526 FOR VALUES IN ('2526');
+
+
+--
+-- TOC entry 5665 (class 0 OID 0)
+-- Name: bill_ecs_neft_details_2425; Type: TABLE ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.bill_ecs_neft_details ATTACH PARTITION billing.bill_ecs_neft_details_2425 FOR VALUES IN ('2425');
+
+
+--
+-- TOC entry 5666 (class 0 OID 0)
+-- Name: bill_ecs_neft_details_2526; Type: TABLE ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.bill_ecs_neft_details ATTACH PARTITION billing.bill_ecs_neft_details_2526 FOR VALUES IN ('2526');
+
+
+--
+-- TOC entry 5671 (class 0 OID 0)
+-- Name: bill_gst_2425; Type: TABLE ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.bill_gst ATTACH PARTITION billing.bill_gst_2425 FOR VALUES IN ('2425');
+
+
+--
+-- TOC entry 5672 (class 0 OID 0)
+-- Name: bill_gst_2526; Type: TABLE ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.bill_gst ATTACH PARTITION billing.bill_gst_2526 FOR VALUES IN ('2526');
+
+
+--
+-- TOC entry 5667 (class 0 OID 0)
+-- Name: bill_jit_components_2425; Type: TABLE ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.bill_jit_components ATTACH PARTITION billing.bill_jit_components_2425 FOR VALUES IN ('2425');
+
+
+--
+-- TOC entry 5668 (class 0 OID 0)
+-- Name: bill_jit_components_2526; Type: TABLE ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.bill_jit_components ATTACH PARTITION billing.bill_jit_components_2526 FOR VALUES IN ('2526');
+
+
+--
+-- TOC entry 5669 (class 0 OID 0)
+-- Name: bill_subdetail_info_2425; Type: TABLE ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.bill_subdetail_info ATTACH PARTITION billing.bill_subdetail_info_2425 FOR VALUES IN ('2425');
+
+
+--
+-- TOC entry 5670 (class 0 OID 0)
+-- Name: bill_subdetail_info_2526; Type: TABLE ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.bill_subdetail_info ATTACH PARTITION billing.bill_subdetail_info_2526 FOR VALUES IN ('2526');
+
+
+--
+-- TOC entry 5679 (class 0 OID 0)
+-- Name: ddo_allotment_booked_bill_2526; Type: TABLE ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.ddo_allotment_booked_bill ATTACH PARTITION billing.ddo_allotment_booked_bill_2526 FOR VALUES IN ('2526');
+
+
+--
+-- TOC entry 5655 (class 0 OID 0)
+-- Name: ebill_jit_int_map_01102025_2425; Type: TABLE ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.ebill_jit_int_map_01102025 ATTACH PARTITION billing.ebill_jit_int_map_01102025_2425 FOR VALUES IN ('2425');
+
+
+--
+-- TOC entry 5656 (class 0 OID 0)
+-- Name: ebill_jit_int_map_01102025_2526; Type: TABLE ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.ebill_jit_int_map_01102025 ATTACH PARTITION billing.ebill_jit_int_map_01102025_2526 FOR VALUES IN ('2526');
+
+
+--
+-- TOC entry 5649 (class 0 OID 0)
+-- Name: ebill_jit_int_map_2425; Type: TABLE ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.ebill_jit_int_map ATTACH PARTITION billing.ebill_jit_int_map_2425 FOR VALUES IN ('2425');
+
+
+--
+-- TOC entry 5650 (class 0 OID 0)
+-- Name: ebill_jit_int_map_2526; Type: TABLE ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.ebill_jit_int_map ATTACH PARTITION billing.ebill_jit_int_map_2526 FOR VALUES IN ('2526');
+
+
+--
+-- TOC entry 5660 (class 0 OID 0)
+-- Name: ebill_jit_int_map_bk_24092025_2425; Type: TABLE ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.ebill_jit_int_map_bk_24092025 ATTACH PARTITION billing.ebill_jit_int_map_bk_24092025_2425 FOR VALUES IN ('2425');
+
+
+--
+-- TOC entry 5661 (class 0 OID 0)
+-- Name: ebill_jit_int_map_bk_24092025_2526; Type: TABLE ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.ebill_jit_int_map_bk_24092025 ATTACH PARTITION billing.ebill_jit_int_map_bk_24092025_2526 FOR VALUES IN ('2526');
+
+
+--
+-- TOC entry 5680 (class 0 OID 0)
+-- Name: jit_ecs_additional_2425; Type: TABLE ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.jit_ecs_additional ATTACH PARTITION billing.jit_ecs_additional_2425 FOR VALUES IN ('2425');
+
+
+--
+-- TOC entry 5681 (class 0 OID 0)
+-- Name: jit_ecs_additional_2526; Type: TABLE ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.jit_ecs_additional ATTACH PARTITION billing.jit_ecs_additional_2526 FOR VALUES IN ('2526');
+
+
+--
+-- TOC entry 5637 (class 0 OID 0)
 -- Name: audit_log_2025_05; Type: TABLE ATTACH; Schema: billing_log; Owner: postgres
 --
 
@@ -13197,7 +15627,7 @@ ALTER TABLE ONLY billing_log.audit_log ATTACH PARTITION billing_log.audit_log_20
 
 
 --
--- TOC entry 5385 (class 0 OID 0)
+-- TOC entry 5638 (class 0 OID 0)
 -- Name: audit_log_2025_06; Type: TABLE ATTACH; Schema: billing_log; Owner: postgres
 --
 
@@ -13205,7 +15635,7 @@ ALTER TABLE ONLY billing_log.audit_log ATTACH PARTITION billing_log.audit_log_20
 
 
 --
--- TOC entry 5386 (class 0 OID 0)
+-- TOC entry 5639 (class 0 OID 0)
 -- Name: audit_log_2025_07; Type: TABLE ATTACH; Schema: billing_log; Owner: postgres
 --
 
@@ -13213,7 +15643,7 @@ ALTER TABLE ONLY billing_log.audit_log ATTACH PARTITION billing_log.audit_log_20
 
 
 --
--- TOC entry 5387 (class 0 OID 0)
+-- TOC entry 5640 (class 0 OID 0)
 -- Name: audit_log_2025_08; Type: TABLE ATTACH; Schema: billing_log; Owner: postgres
 --
 
@@ -13221,7 +15651,7 @@ ALTER TABLE ONLY billing_log.audit_log ATTACH PARTITION billing_log.audit_log_20
 
 
 --
--- TOC entry 5388 (class 0 OID 0)
+-- TOC entry 5641 (class 0 OID 0)
 -- Name: audit_log_2025_09; Type: TABLE ATTACH; Schema: billing_log; Owner: postgres
 --
 
@@ -13229,7 +15659,7 @@ ALTER TABLE ONLY billing_log.audit_log ATTACH PARTITION billing_log.audit_log_20
 
 
 --
--- TOC entry 5389 (class 0 OID 0)
+-- TOC entry 5642 (class 0 OID 0)
 -- Name: audit_log_2025_10; Type: TABLE ATTACH; Schema: billing_log; Owner: postgres
 --
 
@@ -13237,7 +15667,7 @@ ALTER TABLE ONLY billing_log.audit_log ATTACH PARTITION billing_log.audit_log_20
 
 
 --
--- TOC entry 5390 (class 0 OID 0)
+-- TOC entry 5643 (class 0 OID 0)
 -- Name: audit_log_2025_11; Type: TABLE ATTACH; Schema: billing_log; Owner: postgres
 --
 
@@ -13245,7 +15675,7 @@ ALTER TABLE ONLY billing_log.audit_log ATTACH PARTITION billing_log.audit_log_20
 
 
 --
--- TOC entry 5391 (class 0 OID 0)
+-- TOC entry 5644 (class 0 OID 0)
 -- Name: audit_log_2025_12; Type: TABLE ATTACH; Schema: billing_log; Owner: postgres
 --
 
@@ -13253,7 +15683,7 @@ ALTER TABLE ONLY billing_log.audit_log ATTACH PARTITION billing_log.audit_log_20
 
 
 --
--- TOC entry 5392 (class 0 OID 0)
+-- TOC entry 5645 (class 0 OID 0)
 -- Name: audit_log_2026_01; Type: TABLE ATTACH; Schema: billing_log; Owner: postgres
 --
 
@@ -13261,7 +15691,7 @@ ALTER TABLE ONLY billing_log.audit_log ATTACH PARTITION billing_log.audit_log_20
 
 
 --
--- TOC entry 5393 (class 0 OID 0)
+-- TOC entry 5646 (class 0 OID 0)
 -- Name: audit_log_2026_02; Type: TABLE ATTACH; Schema: billing_log; Owner: postgres
 --
 
@@ -13269,7 +15699,7 @@ ALTER TABLE ONLY billing_log.audit_log ATTACH PARTITION billing_log.audit_log_20
 
 
 --
--- TOC entry 5394 (class 0 OID 0)
+-- TOC entry 5647 (class 0 OID 0)
 -- Name: audit_log_2026_03; Type: TABLE ATTACH; Schema: billing_log; Owner: postgres
 --
 
@@ -13277,7 +15707,7 @@ ALTER TABLE ONLY billing_log.audit_log ATTACH PARTITION billing_log.audit_log_20
 
 
 --
--- TOC entry 5395 (class 0 OID 0)
+-- TOC entry 5648 (class 0 OID 0)
 -- Name: audit_log_2026_04; Type: TABLE ATTACH; Schema: billing_log; Owner: postgres
 --
 
@@ -13285,55 +15715,87 @@ ALTER TABLE ONLY billing_log.audit_log ATTACH PARTITION billing_log.audit_log_20
 
 
 --
--- TOC entry 5406 (class 2604 OID 921058)
--- Name: ddo_wallet id; Type: DEFAULT; Schema: bantan; Owner: postgres
+-- TOC entry 5652 (class 0 OID 0)
+-- Name: cpin_master_2425; Type: TABLE ATTACH; Schema: billing_master; Owner: postgres
 --
 
-ALTER TABLE ONLY bantan.ddo_wallet ALTER COLUMN id SET DEFAULT nextval('bantan.ddo_wallet_id_seq'::regclass);
-
-
---
--- TOC entry 5438 (class 2604 OID 921059)
--- Name: bill_btdetail id; Type: DEFAULT; Schema: billing; Owner: postgres
---
-
-ALTER TABLE ONLY billing.bill_btdetail ALTER COLUMN id SET DEFAULT nextval('billing.bill_btdetail_id_seq'::regclass);
+ALTER TABLE ONLY billing_master.cpin_master ATTACH PARTITION billing_master.cpin_master_2425 FOR VALUES IN ('2425');
 
 
 --
--- TOC entry 5416 (class 2604 OID 921060)
--- Name: bill_details bill_id; Type: DEFAULT; Schema: billing; Owner: postgres
+-- TOC entry 5653 (class 0 OID 0)
+-- Name: cpin_master_2526; Type: TABLE ATTACH; Schema: billing_master; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.bill_details ALTER COLUMN bill_id SET DEFAULT nextval('billing.bill_details_bill_id_seq'::regclass);
-
-
---
--- TOC entry 5442 (class 2604 OID 921061)
--- Name: bill_ecs_neft_details id; Type: DEFAULT; Schema: billing; Owner: postgres
---
-
-ALTER TABLE ONLY billing.bill_ecs_neft_details ALTER COLUMN id SET DEFAULT nextval('billing.ecs_neft_details_id_seq'::regclass);
+ALTER TABLE ONLY billing_master.cpin_master ATTACH PARTITION billing_master.cpin_master_2526 FOR VALUES IN ('2526');
 
 
 --
--- TOC entry 5439 (class 2604 OID 921062)
--- Name: bill_gst id; Type: DEFAULT; Schema: billing; Owner: postgres
+-- TOC entry 5673 (class 0 OID 0)
+-- Name: failed_transaction_beneficiary_2425; Type: TABLE ATTACH; Schema: cts; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.bill_gst ALTER COLUMN id SET DEFAULT nextval('billing.bill_cpin_mapping_id_seq'::regclass);
-
-
---
--- TOC entry 5448 (class 2604 OID 921063)
--- Name: bill_jit_components id; Type: DEFAULT; Schema: billing; Owner: postgres
---
-
-ALTER TABLE ONLY billing.bill_jit_components ALTER COLUMN id SET DEFAULT nextval('billing.bill_jit_components_id_seq'::regclass);
+ALTER TABLE ONLY cts.failed_transaction_beneficiary ATTACH PARTITION cts.failed_transaction_beneficiary_2425 FOR VALUES IN ('2425');
 
 
 --
--- TOC entry 5449 (class 2604 OID 921064)
+-- TOC entry 5674 (class 0 OID 0)
+-- Name: failed_transaction_beneficiary_2526; Type: TABLE ATTACH; Schema: cts; Owner: postgres
+--
+
+ALTER TABLE ONLY cts.failed_transaction_beneficiary ATTACH PARTITION cts.failed_transaction_beneficiary_2526 FOR VALUES IN ('2526');
+
+
+--
+-- TOC entry 5675 (class 0 OID 0)
+-- Name: failed_transaction_beneficiary_bk_2425; Type: TABLE ATTACH; Schema: cts; Owner: postgres
+--
+
+ALTER TABLE ONLY cts.failed_transaction_beneficiary_bk ATTACH PARTITION cts.failed_transaction_beneficiary_bk_2425 FOR VALUES IN ('2425');
+
+
+--
+-- TOC entry 5676 (class 0 OID 0)
+-- Name: success_transaction_beneficiary_2425; Type: TABLE ATTACH; Schema: cts; Owner: postgres
+--
+
+ALTER TABLE ONLY cts.success_transaction_beneficiary ATTACH PARTITION cts.success_transaction_beneficiary_2425 FOR VALUES IN ('2425');
+
+
+--
+-- TOC entry 5677 (class 0 OID 0)
+-- Name: success_transaction_beneficiary_2526; Type: TABLE ATTACH; Schema: cts; Owner: postgres
+--
+
+ALTER TABLE ONLY cts.success_transaction_beneficiary ATTACH PARTITION cts.success_transaction_beneficiary_2526 FOR VALUES IN ('2526');
+
+
+--
+-- TOC entry 5678 (class 0 OID 0)
+-- Name: success_transaction_beneficiary_bk_2425; Type: TABLE ATTACH; Schema: cts; Owner: postgres
+--
+
+ALTER TABLE ONLY cts.success_transaction_beneficiary_bk ATTACH PARTITION cts.success_transaction_beneficiary_bk_2425 FOR VALUES IN ('2425');
+
+
+--
+-- TOC entry 5651 (class 0 OID 0)
+-- Name: ddo_agency_mapping_details_2526; Type: TABLE ATTACH; Schema: jit; Owner: postgres
+--
+
+ALTER TABLE ONLY jit.ddo_agency_mapping_details ATTACH PARTITION jit.ddo_agency_mapping_details_2526 FOR VALUES IN ('2526');
+
+
+--
+-- TOC entry 5657 (class 0 OID 0)
+-- Name: tsa_exp_details_2526; Type: TABLE ATTACH; Schema: jit; Owner: postgres
+--
+
+ALTER TABLE ONLY jit.tsa_exp_details ATTACH PARTITION jit.tsa_exp_details_2526 FOR VALUES IN ('2526');
+
+
+--
+-- TOC entry 5735 (class 2604 OID 922474)
 -- Name: bill_status_info id; Type: DEFAULT; Schema: billing; Owner: postgres
 --
 
@@ -13341,15 +15803,7 @@ ALTER TABLE ONLY billing.bill_status_info ALTER COLUMN id SET DEFAULT nextval('b
 
 
 --
--- TOC entry 5451 (class 2604 OID 921065)
--- Name: bill_subdetail_info id; Type: DEFAULT; Schema: billing; Owner: postgres
---
-
-ALTER TABLE ONLY billing.bill_subdetail_info ALTER COLUMN id SET DEFAULT nextval('billing.bill_subdetail_info_id_seq'::regclass);
-
-
---
--- TOC entry 5452 (class 2604 OID 921066)
+-- TOC entry 5738 (class 2604 OID 922476)
 -- Name: billing_pfms_file_status_details id; Type: DEFAULT; Schema: billing; Owner: postgres
 --
 
@@ -13357,23 +15811,7 @@ ALTER TABLE ONLY billing.billing_pfms_file_status_details ALTER COLUMN id SET DE
 
 
 --
--- TOC entry 5455 (class 2604 OID 921067)
--- Name: ddo_allotment_booked_bill id; Type: DEFAULT; Schema: billing; Owner: postgres
---
-
-ALTER TABLE ONLY billing.ddo_allotment_booked_bill ALTER COLUMN id SET DEFAULT nextval('billing.ddo_allotment_booked_bill_id_seq'::regclass);
-
-
---
--- TOC entry 5436 (class 2604 OID 921068)
--- Name: jit_ecs_additional id; Type: DEFAULT; Schema: billing; Owner: postgres
---
-
-ALTER TABLE ONLY billing.jit_ecs_additional ALTER COLUMN id SET DEFAULT nextval('billing.jit_ecs_additional_id_seq'::regclass);
-
-
---
--- TOC entry 5464 (class 2604 OID 921069)
+-- TOC entry 5750 (class 2604 OID 922479)
 -- Name: jit_fto_voucher id; Type: DEFAULT; Schema: billing; Owner: postgres
 --
 
@@ -13381,7 +15819,7 @@ ALTER TABLE ONLY billing.jit_fto_voucher ALTER COLUMN id SET DEFAULT nextval('bi
 
 
 --
--- TOC entry 5469 (class 2604 OID 921070)
+-- TOC entry 5755 (class 2604 OID 922480)
 -- Name: returned_memo_generated_bill id; Type: DEFAULT; Schema: billing; Owner: postgres
 --
 
@@ -13389,7 +15827,7 @@ ALTER TABLE ONLY billing.returned_memo_generated_bill ALTER COLUMN id SET DEFAUL
 
 
 --
--- TOC entry 5479 (class 2604 OID 921071)
+-- TOC entry 5765 (class 2604 OID 922481)
 -- Name: tr_26a_detail id; Type: DEFAULT; Schema: billing; Owner: postgres
 --
 
@@ -13397,7 +15835,7 @@ ALTER TABLE ONLY billing.tr_26a_detail ALTER COLUMN id SET DEFAULT nextval('bill
 
 
 --
--- TOC entry 5480 (class 2604 OID 921072)
+-- TOC entry 5766 (class 2604 OID 922482)
 -- Name: tr_26a_detail status; Type: DEFAULT; Schema: billing; Owner: postgres
 --
 
@@ -13405,7 +15843,7 @@ ALTER TABLE ONLY billing.tr_26a_detail ALTER COLUMN status SET DEFAULT 1;
 
 
 --
--- TOC entry 5481 (class 2604 OID 921073)
+-- TOC entry 5767 (class 2604 OID 922483)
 -- Name: tr_26a_detail created_at; Type: DEFAULT; Schema: billing; Owner: postgres
 --
 
@@ -13413,7 +15851,7 @@ ALTER TABLE ONLY billing.tr_26a_detail ALTER COLUMN created_at SET DEFAULT now()
 
 
 --
--- TOC entry 5470 (class 2604 OID 921074)
+-- TOC entry 5756 (class 2604 OID 922484)
 -- Name: tr_detail id; Type: DEFAULT; Schema: billing; Owner: postgres
 --
 
@@ -13421,7 +15859,7 @@ ALTER TABLE ONLY billing.tr_detail ALTER COLUMN id SET DEFAULT nextval('billing.
 
 
 --
--- TOC entry 5509 (class 2604 OID 921075)
+-- TOC entry 5795 (class 2604 OID 922485)
 -- Name: ddo_log id; Type: DEFAULT; Schema: billing_log; Owner: postgres
 --
 
@@ -13429,15 +15867,7 @@ ALTER TABLE ONLY billing_log.ddo_log ALTER COLUMN id SET DEFAULT nextval('billin
 
 
 --
--- TOC entry 5510 (class 2604 OID 921076)
--- Name: ebill_jit_int_map_log id; Type: DEFAULT; Schema: billing_log; Owner: postgres
---
-
-ALTER TABLE ONLY billing_log.ebill_jit_int_map_log ALTER COLUMN id SET DEFAULT nextval('billing_log.ebill_jit_int_map_log_id_seq'::regclass);
-
-
---
--- TOC entry 5514 (class 2604 OID 921077)
+-- TOC entry 5800 (class 2604 OID 922487)
 -- Name: scheme_config_master_log id; Type: DEFAULT; Schema: billing_log; Owner: postgres
 --
 
@@ -13445,7 +15875,7 @@ ALTER TABLE ONLY billing_log.scheme_config_master_log ALTER COLUMN id SET DEFAUL
 
 
 --
--- TOC entry 5519 (class 2604 OID 921078)
+-- TOC entry 5805 (class 2604 OID 922488)
 -- Name: rbi_gst_master id; Type: DEFAULT; Schema: billing_master; Owner: postgres
 --
 
@@ -13453,23 +15883,7 @@ ALTER TABLE ONLY billing_master.rbi_gst_master ALTER COLUMN id SET DEFAULT nextv
 
 
 --
--- TOC entry 5524 (class 2604 OID 921079)
--- Name: failed_transaction_beneficiary id; Type: DEFAULT; Schema: cts; Owner: postgres
---
-
-ALTER TABLE ONLY cts.failed_transaction_beneficiary ALTER COLUMN id SET DEFAULT nextval('cts.failed_transaction_beneficiary_id_seq'::regclass);
-
-
---
--- TOC entry 5531 (class 2604 OID 921080)
--- Name: success_transaction_beneficiary id; Type: DEFAULT; Schema: cts; Owner: postgres
---
-
-ALTER TABLE ONLY cts.success_transaction_beneficiary ALTER COLUMN id SET DEFAULT nextval('cts.success_transaction_beneficiary_id_seq'::regclass);
-
-
---
--- TOC entry 5546 (class 2604 OID 921081)
+-- TOC entry 5832 (class 2604 OID 922491)
 -- Name: voucher id; Type: DEFAULT; Schema: cts; Owner: postgres
 --
 
@@ -13477,15 +15891,7 @@ ALTER TABLE ONLY cts.voucher ALTER COLUMN id SET DEFAULT nextval('cts.voucher_id
 
 
 --
--- TOC entry 5549 (class 2604 OID 921082)
--- Name: ddo_agency_mapping_details id; Type: DEFAULT; Schema: jit; Owner: postgres
---
-
-ALTER TABLE ONLY jit.ddo_agency_mapping_details ALTER COLUMN id SET DEFAULT nextval('jit.ddo_agency_mapping_details_id_seq'::regclass);
-
-
---
--- TOC entry 5551 (class 2604 OID 921083)
+-- TOC entry 5837 (class 2604 OID 922493)
 -- Name: exp_payee_components id; Type: DEFAULT; Schema: jit; Owner: postgres
 --
 
@@ -13493,7 +15899,7 @@ ALTER TABLE ONLY jit.exp_payee_components ALTER COLUMN id SET DEFAULT nextval('j
 
 
 --
--- TOC entry 5552 (class 2604 OID 921084)
+-- TOC entry 5838 (class 2604 OID 922494)
 -- Name: fto_voucher id; Type: DEFAULT; Schema: jit; Owner: postgres
 --
 
@@ -13501,7 +15907,7 @@ ALTER TABLE ONLY jit.fto_voucher ALTER COLUMN id SET DEFAULT nextval('jit.fto_vo
 
 
 --
--- TOC entry 5540 (class 2604 OID 921085)
+-- TOC entry 5826 (class 2604 OID 922495)
 -- Name: gst id; Type: DEFAULT; Schema: jit; Owner: postgres
 --
 
@@ -13509,7 +15915,7 @@ ALTER TABLE ONLY jit.gst ALTER COLUMN id SET DEFAULT nextval('jit.gst_id_seq'::r
 
 
 --
--- TOC entry 5553 (class 2604 OID 921086)
+-- TOC entry 5839 (class 2604 OID 922496)
 -- Name: jit_allotment id; Type: DEFAULT; Schema: jit; Owner: postgres
 --
 
@@ -13517,7 +15923,7 @@ ALTER TABLE ONLY jit.jit_allotment ALTER COLUMN id SET DEFAULT nextval('jit.jit_
 
 
 --
--- TOC entry 5555 (class 2604 OID 921087)
+-- TOC entry 5841 (class 2604 OID 922497)
 -- Name: jit_fto_sanction_booking id; Type: DEFAULT; Schema: jit; Owner: postgres
 --
 
@@ -13525,7 +15931,7 @@ ALTER TABLE ONLY jit.jit_fto_sanction_booking ALTER COLUMN id SET DEFAULT nextva
 
 
 --
--- TOC entry 5557 (class 2604 OID 921088)
+-- TOC entry 5843 (class 2604 OID 922498)
 -- Name: jit_pullback_request id; Type: DEFAULT; Schema: jit; Owner: postgres
 --
 
@@ -13533,7 +15939,7 @@ ALTER TABLE ONLY jit.jit_pullback_request ALTER COLUMN id SET DEFAULT nextval('j
 
 
 --
--- TOC entry 5558 (class 2604 OID 921089)
+-- TOC entry 5844 (class 2604 OID 922499)
 -- Name: jit_report_details id; Type: DEFAULT; Schema: jit; Owner: postgres
 --
 
@@ -13541,7 +15947,7 @@ ALTER TABLE ONLY jit.jit_report_details ALTER COLUMN id SET DEFAULT nextval('jit
 
 
 --
--- TOC entry 5566 (class 2604 OID 921090)
+-- TOC entry 5852 (class 2604 OID 922500)
 -- Name: jit_withdrawl id; Type: DEFAULT; Schema: jit; Owner: postgres
 --
 
@@ -13549,7 +15955,7 @@ ALTER TABLE ONLY jit.jit_withdrawl ALTER COLUMN id SET DEFAULT nextval('jit.jit_
 
 
 --
--- TOC entry 5569 (class 2604 OID 921091)
+-- TOC entry 5855 (class 2604 OID 922501)
 -- Name: mother_sanction_allocation id; Type: DEFAULT; Schema: jit; Owner: postgres
 --
 
@@ -13557,7 +15963,7 @@ ALTER TABLE ONLY jit.mother_sanction_allocation ALTER COLUMN id SET DEFAULT next
 
 
 --
--- TOC entry 5571 (class 2604 OID 921092)
+-- TOC entry 5857 (class 2604 OID 922502)
 -- Name: payee_deduction id; Type: DEFAULT; Schema: jit; Owner: postgres
 --
 
@@ -13565,7 +15971,7 @@ ALTER TABLE ONLY jit.payee_deduction ALTER COLUMN id SET DEFAULT nextval('jit.pa
 
 
 --
--- TOC entry 5572 (class 2604 OID 921093)
+-- TOC entry 5858 (class 2604 OID 922503)
 -- Name: scheme_config_master id; Type: DEFAULT; Schema: jit; Owner: postgres
 --
 
@@ -13573,15 +15979,7 @@ ALTER TABLE ONLY jit.scheme_config_master ALTER COLUMN id SET DEFAULT nextval('j
 
 
 --
--- TOC entry 5575 (class 2604 OID 921094)
--- Name: tsa_exp_details id; Type: DEFAULT; Schema: jit; Owner: postgres
---
-
-ALTER TABLE ONLY jit.tsa_exp_details ALTER COLUMN id SET DEFAULT nextval('jit.tsa_exp_details_id_seq'::regclass);
-
-
---
--- TOC entry 5582 (class 2604 OID 921095)
+-- TOC entry 5868 (class 2604 OID 922505)
 -- Name: tsa_payeemaster id; Type: DEFAULT; Schema: jit; Owner: postgres
 --
 
@@ -13589,15 +15987,7 @@ ALTER TABLE ONLY jit.tsa_payeemaster ALTER COLUMN id SET DEFAULT nextval('jit.ts
 
 
 --
--- TOC entry 5584 (class 2604 OID 921096)
--- Name: tsa_schemecomponent id; Type: DEFAULT; Schema: jit; Owner: postgres
---
-
-ALTER TABLE ONLY jit.tsa_schemecomponent ALTER COLUMN id SET DEFAULT nextval('jit.tsa_schemecomponent_id_seq'::regclass);
-
-
---
--- TOC entry 5585 (class 2604 OID 921097)
+-- TOC entry 5871 (class 2604 OID 922507)
 -- Name: bank_type_master id; Type: DEFAULT; Schema: master; Owner: postgres
 --
 
@@ -13605,7 +15995,7 @@ ALTER TABLE ONLY master.bank_type_master ALTER COLUMN id SET DEFAULT nextval('ma
 
 
 --
--- TOC entry 5587 (class 2604 OID 921098)
+-- TOC entry 5873 (class 2604 OID 922508)
 -- Name: ddo id; Type: DEFAULT; Schema: master; Owner: postgres
 --
 
@@ -13613,7 +16003,7 @@ ALTER TABLE ONLY master.ddo ALTER COLUMN id SET DEFAULT nextval('master.ddo_id_s
 
 
 --
--- TOC entry 5589 (class 2604 OID 921099)
+-- TOC entry 5875 (class 2604 OID 922509)
 -- Name: treasury id; Type: DEFAULT; Schema: master; Owner: postgres
 --
 
@@ -13621,7 +16011,7 @@ ALTER TABLE ONLY master.treasury ALTER COLUMN id SET DEFAULT nextval('master.tre
 
 
 --
--- TOC entry 5590 (class 2604 OID 921100)
+-- TOC entry 5876 (class 2604 OID 922510)
 -- Name: tsa_vendor_type id; Type: DEFAULT; Schema: master; Owner: postgres
 --
 
@@ -13629,7 +16019,7 @@ ALTER TABLE ONLY master.tsa_vendor_type ALTER COLUMN id SET DEFAULT nextval('mas
 
 
 --
--- TOC entry 5593 (class 2604 OID 921101)
+-- TOC entry 5879 (class 2604 OID 922511)
 -- Name: consume_logs id; Type: DEFAULT; Schema: message_queue; Owner: postgres
 --
 
@@ -13637,7 +16027,7 @@ ALTER TABLE ONLY message_queue.consume_logs ALTER COLUMN id SET DEFAULT nextval(
 
 
 --
--- TOC entry 5600 (class 2604 OID 921102)
+-- TOC entry 5886 (class 2604 OID 922512)
 -- Name: queues_master id; Type: DEFAULT; Schema: message_queue; Owner: postgres
 --
 
@@ -13645,7 +16035,127 @@ ALTER TABLE ONLY message_queue.queues_master ALTER COLUMN id SET DEFAULT nextval
 
 
 --
--- TOC entry 5603 (class 2604 OID 921103)
+-- TOC entry 5692 (class 2604 OID 922468)
+-- Name: bantan_ddo_wallet id; Type: DEFAULT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.bantan_ddo_wallet ALTER COLUMN id SET DEFAULT nextval('old.ddo_wallet_id_seq'::regclass);
+
+
+--
+-- TOC entry 5724 (class 2604 OID 922469)
+-- Name: billing_bill_btdetail id; Type: DEFAULT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_btdetail ALTER COLUMN id SET DEFAULT nextval('old.bill_btdetail_id_seq'::regclass);
+
+
+--
+-- TOC entry 5702 (class 2604 OID 922470)
+-- Name: billing_bill_details bill_id; Type: DEFAULT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_details ALTER COLUMN bill_id SET DEFAULT nextval('old.bill_details_bill_id_seq'::regclass);
+
+
+--
+-- TOC entry 5728 (class 2604 OID 922471)
+-- Name: billing_bill_ecs_neft_details id; Type: DEFAULT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_ecs_neft_details ALTER COLUMN id SET DEFAULT nextval('old.ecs_neft_details_id_seq'::regclass);
+
+
+--
+-- TOC entry 5725 (class 2604 OID 922472)
+-- Name: billing_bill_gst id; Type: DEFAULT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_gst ALTER COLUMN id SET DEFAULT nextval('old.bill_cpin_mapping_id_seq'::regclass);
+
+
+--
+-- TOC entry 5734 (class 2604 OID 922473)
+-- Name: billing_bill_jit_components id; Type: DEFAULT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_jit_components ALTER COLUMN id SET DEFAULT nextval('old.bill_jit_components_id_seq'::regclass);
+
+
+--
+-- TOC entry 5737 (class 2604 OID 922475)
+-- Name: billing_bill_subdetail_info id; Type: DEFAULT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_subdetail_info ALTER COLUMN id SET DEFAULT nextval('old.bill_subdetail_info_id_seq'::regclass);
+
+
+--
+-- TOC entry 5741 (class 2604 OID 922477)
+-- Name: billing_ddo_allotment_booked_bill id; Type: DEFAULT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_ddo_allotment_booked_bill ALTER COLUMN id SET DEFAULT nextval('old.ddo_allotment_booked_bill_id_seq'::regclass);
+
+
+--
+-- TOC entry 5722 (class 2604 OID 922478)
+-- Name: billing_jit_ecs_additional id; Type: DEFAULT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_jit_ecs_additional ALTER COLUMN id SET DEFAULT nextval('old.jit_ecs_additional_id_seq'::regclass);
+
+
+--
+-- TOC entry 5796 (class 2604 OID 922486)
+-- Name: billing_log_ebill_jit_int_map_log id; Type: DEFAULT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_log_ebill_jit_int_map_log ALTER COLUMN id SET DEFAULT nextval('old.ebill_jit_int_map_log_id_seq'::regclass);
+
+
+--
+-- TOC entry 5810 (class 2604 OID 922489)
+-- Name: cts_failed_transaction_beneficiary id; Type: DEFAULT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_failed_transaction_beneficiary ALTER COLUMN id SET DEFAULT nextval('old.failed_transaction_beneficiary_id_seq'::regclass);
+
+
+--
+-- TOC entry 5817 (class 2604 OID 922490)
+-- Name: cts_success_transaction_beneficiary id; Type: DEFAULT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_success_transaction_beneficiary ALTER COLUMN id SET DEFAULT nextval('old.success_transaction_beneficiary_id_seq'::regclass);
+
+
+--
+-- TOC entry 5835 (class 2604 OID 922492)
+-- Name: jit_ddo_agency_mapping_details id; Type: DEFAULT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.jit_ddo_agency_mapping_details ALTER COLUMN id SET DEFAULT nextval('old.ddo_agency_mapping_details_id_seq'::regclass);
+
+
+--
+-- TOC entry 5861 (class 2604 OID 922504)
+-- Name: jit_tsa_exp_details id; Type: DEFAULT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.jit_tsa_exp_details ALTER COLUMN id SET DEFAULT nextval('old.tsa_exp_details_id_seq'::regclass);
+
+
+--
+-- TOC entry 5870 (class 2604 OID 922506)
+-- Name: jit_tsa_schemecomponent id; Type: DEFAULT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.jit_tsa_schemecomponent ALTER COLUMN id SET DEFAULT nextval('old.tsa_schemecomponent_id_seq'::regclass);
+
+
+--
+-- TOC entry 5889 (class 2604 OID 922513)
 -- Name: ebilling_jit_voucher id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -13653,34 +16163,61 @@ ALTER TABLE ONLY public.ebilling_jit_voucher ALTER COLUMN id SET DEFAULT nextval
 
 
 --
--- TOC entry 5609 (class 2606 OID 1008585)
--- Name: ddo_allotment_transactions ddo_allotment_transactions_memo_number_sender_sao_ddo_code__key; Type: CONSTRAINT; Schema: bantan; Owner: postgres
---
-
-ALTER TABLE ONLY bantan.ddo_allotment_transactions
-    ADD CONSTRAINT ddo_allotment_transactions_memo_number_sender_sao_ddo_code__key UNIQUE (memo_number, sender_sao_ddo_code, receiver_sao_ddo_code);
-
-
---
--- TOC entry 5611 (class 2606 OID 1008686)
+-- TOC entry 6439 (class 2606 OID 1036695)
 -- Name: ddo_allotment_transactions ddo_allotment_transactions_pkey; Type: CONSTRAINT; Schema: bantan; Owner: postgres
 --
 
 ALTER TABLE ONLY bantan.ddo_allotment_transactions
-    ADD CONSTRAINT ddo_allotment_transactions_pkey PRIMARY KEY (allotment_id);
+    ADD CONSTRAINT ddo_allotment_transactions_pkey PRIMARY KEY (allotment_id, financial_year);
 
 
 --
--- TOC entry 5613 (class 2606 OID 1008703)
+-- TOC entry 6441 (class 2606 OID 1036713)
+-- Name: ddo_allotment_transactions_2526 ddo_allotment_transactions_2526_pkey; Type: CONSTRAINT; Schema: bantan; Owner: postgres
+--
+
+ALTER TABLE ONLY bantan.ddo_allotment_transactions_2526
+    ADD CONSTRAINT ddo_allotment_transactions_2526_pkey PRIMARY KEY (allotment_id, financial_year);
+
+
+--
+-- TOC entry 6437 (class 2606 OID 1036693)
+-- Name: ddo_allotment_transactions ddo_allotment_transactions_memo_number_sender_sao_ddo_code__key; Type: CONSTRAINT; Schema: bantan; Owner: postgres
+--
+
+ALTER TABLE ONLY bantan.ddo_allotment_transactions
+    ADD CONSTRAINT ddo_allotment_transactions_memo_number_sender_sao_ddo_code__key UNIQUE (memo_number, sender_sao_ddo_code, receiver_sao_ddo_code, financial_year);
+
+
+--
+-- TOC entry 6443 (class 2606 OID 1036711)
+-- Name: ddo_allotment_transactions_2526 ddo_allotment_transactions_25_memo_number_sender_sao_ddo_co_key; Type: CONSTRAINT; Schema: bantan; Owner: postgres
+--
+
+ALTER TABLE ONLY bantan.ddo_allotment_transactions_2526
+    ADD CONSTRAINT ddo_allotment_transactions_25_memo_number_sender_sao_ddo_co_key UNIQUE (memo_number, sender_sao_ddo_code, receiver_sao_ddo_code, financial_year);
+
+
+--
+-- TOC entry 6403 (class 2606 OID 1036039)
 -- Name: ddo_wallet ddo_wallet_pkey; Type: CONSTRAINT; Schema: bantan; Owner: postgres
 --
 
 ALTER TABLE ONLY bantan.ddo_wallet
-    ADD CONSTRAINT ddo_wallet_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT ddo_wallet_pkey PRIMARY KEY (id, financial_year);
 
 
 --
--- TOC entry 5615 (class 2606 OID 1008721)
+-- TOC entry 6407 (class 2606 OID 1036057)
+-- Name: ddo_wallet_2526 ddo_wallet_2526_pkey; Type: CONSTRAINT; Schema: bantan; Owner: postgres
+--
+
+ALTER TABLE ONLY bantan.ddo_wallet_2526
+    ADD CONSTRAINT ddo_wallet_2526_pkey PRIMARY KEY (id, financial_year);
+
+
+--
+-- TOC entry 6405 (class 2606 OID 1036041)
 -- Name: ddo_wallet ddo_wallet_sao_ddo_code_active_hoa_id_financial_year_key; Type: CONSTRAINT; Schema: bantan; Owner: postgres
 --
 
@@ -13689,61 +16226,178 @@ ALTER TABLE ONLY bantan.ddo_wallet
 
 
 --
--- TOC entry 5625 (class 2606 OID 1008736)
+-- TOC entry 6409 (class 2606 OID 1036059)
+-- Name: ddo_wallet_2526 ddo_wallet_2526_sao_ddo_code_active_hoa_id_financial_year_key; Type: CONSTRAINT; Schema: bantan; Owner: postgres
+--
+
+ALTER TABLE ONLY bantan.ddo_wallet_2526
+    ADD CONSTRAINT ddo_wallet_2526_sao_ddo_code_active_hoa_id_financial_year_key UNIQUE (sao_ddo_code, active_hoa_id, financial_year);
+
+
+--
+-- TOC entry 6447 (class 2606 OID 1036763)
 -- Name: bill_btdetail bill_btdetail_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
 --
 
 ALTER TABLE ONLY billing.bill_btdetail
-    ADD CONSTRAINT bill_btdetail_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT bill_btdetail_pkey PRIMARY KEY (id, financial_year);
 
 
 --
--- TOC entry 5628 (class 2606 OID 1008770)
+-- TOC entry 6451 (class 2606 OID 1036770)
+-- Name: bill_btdetail_2425 bill_btdetail_2425_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.bill_btdetail_2425
+    ADD CONSTRAINT bill_btdetail_2425_pkey PRIMARY KEY (id, financial_year);
+
+
+--
+-- TOC entry 6454 (class 2606 OID 1036777)
+-- Name: bill_btdetail_2526 bill_btdetail_2526_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.bill_btdetail_2526
+    ADD CONSTRAINT bill_btdetail_2526_pkey PRIMARY KEY (id, financial_year);
+
+
+--
+-- TOC entry 6495 (class 2606 OID 1037068)
 -- Name: bill_gst bill_cpin_mapping_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
 --
 
 ALTER TABLE ONLY billing.bill_gst
-    ADD CONSTRAINT bill_cpin_mapping_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT bill_cpin_mapping_pkey PRIMARY KEY (id, financial_year);
 
 
 --
--- TOC entry 5618 (class 2606 OID 1008774)
+-- TOC entry 6424 (class 2606 OID 1036211)
 -- Name: bill_details bill_details_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
 --
 
 ALTER TABLE ONLY billing.bill_details
-    ADD CONSTRAINT bill_details_pkey PRIMARY KEY (bill_id);
+    ADD CONSTRAINT bill_details_pkey PRIMARY KEY (bill_id, financial_year);
 
 
 --
--- TOC entry 5630 (class 2606 OID 1008941)
+-- TOC entry 6429 (class 2606 OID 1036239)
+-- Name: bill_details_2425 bill_details_2425_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.bill_details_2425
+    ADD CONSTRAINT bill_details_2425_pkey PRIMARY KEY (bill_id, financial_year);
+
+
+--
+-- TOC entry 6433 (class 2606 OID 1036269)
+-- Name: bill_details_2526 bill_details_2526_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.bill_details_2526
+    ADD CONSTRAINT bill_details_2526_pkey PRIMARY KEY (bill_id, financial_year);
+
+
+--
+-- TOC entry 6456 (class 2606 OID 1036850)
 -- Name: bill_ecs_neft_details bill_ecs_neft_details_bill_id_bank_account_number_key; Type: CONSTRAINT; Schema: billing; Owner: postgres
 --
 
 ALTER TABLE ONLY billing.bill_ecs_neft_details
-    ADD CONSTRAINT bill_ecs_neft_details_bill_id_bank_account_number_key UNIQUE (bill_id, bank_account_number);
+    ADD CONSTRAINT bill_ecs_neft_details_bill_id_bank_account_number_key UNIQUE (bill_id, bank_account_number, financial_year);
 
 
 --
--- TOC entry 5632 (class 2606 OID 1010763)
+-- TOC entry 6462 (class 2606 OID 1036865)
+-- Name: bill_ecs_neft_details_2425 bill_ecs_neft_details_2425_bill_id_bank_account_number_fina_key; Type: CONSTRAINT; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.bill_ecs_neft_details_2425
+    ADD CONSTRAINT bill_ecs_neft_details_2425_bill_id_bank_account_number_fina_key UNIQUE (bill_id, bank_account_number, financial_year);
+
+
+--
+-- TOC entry 6458 (class 2606 OID 1036852)
 -- Name: bill_ecs_neft_details bill_ecs_neft_details_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
 --
 
 ALTER TABLE ONLY billing.bill_ecs_neft_details
-    ADD CONSTRAINT bill_ecs_neft_details_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT bill_ecs_neft_details_pkey PRIMARY KEY (id, financial_year);
 
 
 --
--- TOC entry 5636 (class 2606 OID 1011300)
+-- TOC entry 6466 (class 2606 OID 1036867)
+-- Name: bill_ecs_neft_details_2425 bill_ecs_neft_details_2425_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.bill_ecs_neft_details_2425
+    ADD CONSTRAINT bill_ecs_neft_details_2425_pkey PRIMARY KEY (id, financial_year);
+
+
+--
+-- TOC entry 6468 (class 2606 OID 1036882)
+-- Name: bill_ecs_neft_details_2526 bill_ecs_neft_details_2526_bill_id_bank_account_number_fina_key; Type: CONSTRAINT; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.bill_ecs_neft_details_2526
+    ADD CONSTRAINT bill_ecs_neft_details_2526_bill_id_bank_account_number_fina_key UNIQUE (bill_id, bank_account_number, financial_year);
+
+
+--
+-- TOC entry 6472 (class 2606 OID 1036884)
+-- Name: bill_ecs_neft_details_2526 bill_ecs_neft_details_2526_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.bill_ecs_neft_details_2526
+    ADD CONSTRAINT bill_ecs_neft_details_2526_pkey PRIMARY KEY (id, financial_year);
+
+
+--
+-- TOC entry 6497 (class 2606 OID 1037080)
+-- Name: bill_gst_2425 bill_gst_2425_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.bill_gst_2425
+    ADD CONSTRAINT bill_gst_2425_pkey PRIMARY KEY (id, financial_year);
+
+
+--
+-- TOC entry 6499 (class 2606 OID 1037090)
+-- Name: bill_gst_2526 bill_gst_2526_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.bill_gst_2526
+    ADD CONSTRAINT bill_gst_2526_pkey PRIMARY KEY (id, financial_year);
+
+
+--
+-- TOC entry 6474 (class 2606 OID 1036933)
 -- Name: bill_jit_components bill_jit_components_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
 --
 
 ALTER TABLE ONLY billing.bill_jit_components
-    ADD CONSTRAINT bill_jit_components_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT bill_jit_components_pkey PRIMARY KEY (id, financial_year);
 
 
 --
--- TOC entry 5640 (class 2606 OID 1011695)
+-- TOC entry 6480 (class 2606 OID 1036944)
+-- Name: bill_jit_components_2425 bill_jit_components_2425_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.bill_jit_components_2425
+    ADD CONSTRAINT bill_jit_components_2425_pkey PRIMARY KEY (id, financial_year);
+
+
+--
+-- TOC entry 6484 (class 2606 OID 1036954)
+-- Name: bill_jit_components_2526 bill_jit_components_2526_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.bill_jit_components_2526
+    ADD CONSTRAINT bill_jit_components_2526_pkey PRIMARY KEY (id, financial_year);
+
+
+--
+-- TOC entry 6167 (class 2606 OID 1034816)
 -- Name: bill_status_info bill_status_info_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
 --
 
@@ -13752,16 +16406,34 @@ ALTER TABLE ONLY billing.bill_status_info
 
 
 --
--- TOC entry 5642 (class 2606 OID 1012164)
+-- TOC entry 6486 (class 2606 OID 1036983)
 -- Name: bill_subdetail_info bill_subdetail_info_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
 --
 
 ALTER TABLE ONLY billing.bill_subdetail_info
-    ADD CONSTRAINT bill_subdetail_info_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT bill_subdetail_info_pkey PRIMARY KEY (id, financial_year);
 
 
 --
--- TOC entry 5645 (class 2606 OID 1012271)
+-- TOC entry 6490 (class 2606 OID 1036990)
+-- Name: bill_subdetail_info_2425 bill_subdetail_info_2425_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.bill_subdetail_info_2425
+    ADD CONSTRAINT bill_subdetail_info_2425_pkey PRIMARY KEY (id, financial_year);
+
+
+--
+-- TOC entry 6493 (class 2606 OID 1036997)
+-- Name: bill_subdetail_info_2526 bill_subdetail_info_2526_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.bill_subdetail_info_2526
+    ADD CONSTRAINT bill_subdetail_info_2526_pkey PRIMARY KEY (id, financial_year);
+
+
+--
+-- TOC entry 6172 (class 2606 OID 1034820)
 -- Name: billing_pfms_file_status_details billing_pfms_file_status_details_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
 --
 
@@ -13770,34 +16442,79 @@ ALTER TABLE ONLY billing.billing_pfms_file_status_details
 
 
 --
--- TOC entry 5647 (class 2606 OID 1012399)
+-- TOC entry 6536 (class 2606 OID 1037489)
 -- Name: ddo_allotment_booked_bill ddo_allotment_booked_bill_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
 --
 
 ALTER TABLE ONLY billing.ddo_allotment_booked_bill
-    ADD CONSTRAINT ddo_allotment_booked_bill_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT ddo_allotment_booked_bill_pkey PRIMARY KEY (id, financial_year);
 
 
 --
--- TOC entry 5649 (class 2606 OID 1012484)
+-- TOC entry 6538 (class 2606 OID 1037503)
+-- Name: ddo_allotment_booked_bill_2526 ddo_allotment_booked_bill_2526_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.ddo_allotment_booked_bill_2526
+    ADD CONSTRAINT ddo_allotment_booked_bill_2526_pkey PRIMARY KEY (id, financial_year);
+
+
+--
+-- TOC entry 6378 (class 2606 OID 1035950)
 -- Name: ebill_jit_int_map ebill_jit_int_map_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
 --
 
 ALTER TABLE ONLY billing.ebill_jit_int_map
-    ADD CONSTRAINT ebill_jit_int_map_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT ebill_jit_int_map_pkey PRIMARY KEY (id, financial_year);
 
 
 --
--- TOC entry 5622 (class 2606 OID 1012661)
+-- TOC entry 6384 (class 2606 OID 1035961)
+-- Name: ebill_jit_int_map_2425 ebill_jit_int_map_2425_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.ebill_jit_int_map_2425
+    ADD CONSTRAINT ebill_jit_int_map_2425_pkey PRIMARY KEY (id, financial_year);
+
+
+--
+-- TOC entry 6388 (class 2606 OID 1035975)
+-- Name: ebill_jit_int_map_2526 ebill_jit_int_map_2526_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.ebill_jit_int_map_2526
+    ADD CONSTRAINT ebill_jit_int_map_2526_pkey PRIMARY KEY (id, financial_year);
+
+
+--
+-- TOC entry 6541 (class 2606 OID 1037569)
 -- Name: jit_ecs_additional jit_ecs_additional_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
 --
 
 ALTER TABLE ONLY billing.jit_ecs_additional
-    ADD CONSTRAINT jit_ecs_additional_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT jit_ecs_additional_pkey PRIMARY KEY (id, financial_year);
 
 
 --
--- TOC entry 5657 (class 2606 OID 1012881)
+-- TOC entry 6546 (class 2606 OID 1037578)
+-- Name: jit_ecs_additional_2425 jit_ecs_additional_2425_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.jit_ecs_additional_2425
+    ADD CONSTRAINT jit_ecs_additional_2425_pkey PRIMARY KEY (id, financial_year);
+
+
+--
+-- TOC entry 6550 (class 2606 OID 1037590)
+-- Name: jit_ecs_additional_2526 jit_ecs_additional_2526_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
+--
+
+ALTER TABLE ONLY billing.jit_ecs_additional_2526
+    ADD CONSTRAINT jit_ecs_additional_2526_pkey PRIMARY KEY (id, financial_year);
+
+
+--
+-- TOC entry 6184 (class 2606 OID 1034828)
 -- Name: jit_fto_voucher jit_fto_voucher_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
 --
 
@@ -13806,7 +16523,7 @@ ALTER TABLE ONLY billing.jit_fto_voucher
 
 
 --
--- TOC entry 5660 (class 2606 OID 1012883)
+-- TOC entry 6187 (class 2606 OID 1034830)
 -- Name: notification notification_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
 --
 
@@ -13815,7 +16532,7 @@ ALTER TABLE ONLY billing.notification
 
 
 --
--- TOC entry 5662 (class 2606 OID 1013097)
+-- TOC entry 6189 (class 2606 OID 1034832)
 -- Name: returned_memo_generated_bill returned_memo_generated_bill_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
 --
 
@@ -13824,7 +16541,7 @@ ALTER TABLE ONLY billing.returned_memo_generated_bill
 
 
 --
--- TOC entry 5667 (class 2606 OID 1013132)
+-- TOC entry 6194 (class 2606 OID 1034834)
 -- Name: tr_10_detail tr_10_detail_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
 --
 
@@ -13833,7 +16550,7 @@ ALTER TABLE ONLY billing.tr_10_detail
 
 
 --
--- TOC entry 5671 (class 2606 OID 1013281)
+-- TOC entry 6198 (class 2606 OID 1034836)
 -- Name: tr_12_detail tr_12_detail_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
 --
 
@@ -13842,7 +16559,7 @@ ALTER TABLE ONLY billing.tr_12_detail
 
 
 --
--- TOC entry 5676 (class 2606 OID 1013294)
+-- TOC entry 6203 (class 2606 OID 1034838)
 -- Name: tr_26a_detail tr_26a_detail_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
 --
 
@@ -13851,7 +16568,7 @@ ALTER TABLE ONLY billing.tr_26a_detail
 
 
 --
--- TOC entry 5664 (class 2606 OID 1013473)
+-- TOC entry 6191 (class 2606 OID 1034840)
 -- Name: tr_detail tr_detail_pkey; Type: CONSTRAINT; Schema: billing; Owner: postgres
 --
 
@@ -13860,7 +16577,7 @@ ALTER TABLE ONLY billing.tr_detail
 
 
 --
--- TOC entry 5669 (class 2606 OID 1013475)
+-- TOC entry 6196 (class 2606 OID 1034842)
 -- Name: tr_10_detail unique_id_bill_tr_10; Type: CONSTRAINT; Schema: billing; Owner: postgres
 --
 
@@ -13869,7 +16586,7 @@ ALTER TABLE ONLY billing.tr_10_detail
 
 
 --
--- TOC entry 5673 (class 2606 OID 1013548)
+-- TOC entry 6200 (class 2606 OID 1034844)
 -- Name: tr_12_detail unique_id_bill_tr_12; Type: CONSTRAINT; Schema: billing; Owner: postgres
 --
 
@@ -13878,7 +16595,7 @@ ALTER TABLE ONLY billing.tr_12_detail
 
 
 --
--- TOC entry 5678 (class 2606 OID 1013558)
+-- TOC entry 6205 (class 2606 OID 1034846)
 -- Name: audit_log audit_log_pkey; Type: CONSTRAINT; Schema: billing_log; Owner: postgres
 --
 
@@ -13887,7 +16604,7 @@ ALTER TABLE ONLY billing_log.audit_log
 
 
 --
--- TOC entry 5680 (class 2606 OID 1013561)
+-- TOC entry 6207 (class 2606 OID 1034848)
 -- Name: audit_log_2025_05 audit_log_2025_05_pkey; Type: CONSTRAINT; Schema: billing_log; Owner: postgres
 --
 
@@ -13896,7 +16613,7 @@ ALTER TABLE ONLY billing_log.audit_log_2025_05
 
 
 --
--- TOC entry 5682 (class 2606 OID 1013569)
+-- TOC entry 6209 (class 2606 OID 1034850)
 -- Name: audit_log_2025_06 audit_log_2025_06_pkey; Type: CONSTRAINT; Schema: billing_log; Owner: postgres
 --
 
@@ -13905,7 +16622,7 @@ ALTER TABLE ONLY billing_log.audit_log_2025_06
 
 
 --
--- TOC entry 5684 (class 2606 OID 1013573)
+-- TOC entry 6211 (class 2606 OID 1034852)
 -- Name: audit_log_2025_07 audit_log_2025_07_pkey; Type: CONSTRAINT; Schema: billing_log; Owner: postgres
 --
 
@@ -13914,7 +16631,7 @@ ALTER TABLE ONLY billing_log.audit_log_2025_07
 
 
 --
--- TOC entry 5686 (class 2606 OID 1013582)
+-- TOC entry 6213 (class 2606 OID 1034854)
 -- Name: audit_log_2025_08 audit_log_2025_08_pkey; Type: CONSTRAINT; Schema: billing_log; Owner: postgres
 --
 
@@ -13923,7 +16640,7 @@ ALTER TABLE ONLY billing_log.audit_log_2025_08
 
 
 --
--- TOC entry 5688 (class 2606 OID 1013585)
+-- TOC entry 6215 (class 2606 OID 1034856)
 -- Name: audit_log_2025_09 audit_log_2025_09_pkey; Type: CONSTRAINT; Schema: billing_log; Owner: postgres
 --
 
@@ -13932,7 +16649,7 @@ ALTER TABLE ONLY billing_log.audit_log_2025_09
 
 
 --
--- TOC entry 5690 (class 2606 OID 1013593)
+-- TOC entry 6217 (class 2606 OID 1034858)
 -- Name: audit_log_2025_10 audit_log_2025_10_pkey; Type: CONSTRAINT; Schema: billing_log; Owner: postgres
 --
 
@@ -13941,7 +16658,7 @@ ALTER TABLE ONLY billing_log.audit_log_2025_10
 
 
 --
--- TOC entry 5692 (class 2606 OID 1013595)
+-- TOC entry 6219 (class 2606 OID 1034860)
 -- Name: audit_log_2025_11 audit_log_2025_11_pkey; Type: CONSTRAINT; Schema: billing_log; Owner: postgres
 --
 
@@ -13950,7 +16667,7 @@ ALTER TABLE ONLY billing_log.audit_log_2025_11
 
 
 --
--- TOC entry 5694 (class 2606 OID 1013606)
+-- TOC entry 6221 (class 2606 OID 1034862)
 -- Name: audit_log_2025_12 audit_log_2025_12_pkey; Type: CONSTRAINT; Schema: billing_log; Owner: postgres
 --
 
@@ -13959,7 +16676,7 @@ ALTER TABLE ONLY billing_log.audit_log_2025_12
 
 
 --
--- TOC entry 5696 (class 2606 OID 1013614)
+-- TOC entry 6223 (class 2606 OID 1034864)
 -- Name: audit_log_2026_01 audit_log_2026_01_pkey; Type: CONSTRAINT; Schema: billing_log; Owner: postgres
 --
 
@@ -13968,7 +16685,7 @@ ALTER TABLE ONLY billing_log.audit_log_2026_01
 
 
 --
--- TOC entry 5698 (class 2606 OID 1013625)
+-- TOC entry 6225 (class 2606 OID 1034866)
 -- Name: audit_log_2026_02 audit_log_2026_02_pkey; Type: CONSTRAINT; Schema: billing_log; Owner: postgres
 --
 
@@ -13977,7 +16694,7 @@ ALTER TABLE ONLY billing_log.audit_log_2026_02
 
 
 --
--- TOC entry 5700 (class 2606 OID 1013636)
+-- TOC entry 6227 (class 2606 OID 1034868)
 -- Name: audit_log_2026_03 audit_log_2026_03_pkey; Type: CONSTRAINT; Schema: billing_log; Owner: postgres
 --
 
@@ -13986,7 +16703,7 @@ ALTER TABLE ONLY billing_log.audit_log_2026_03
 
 
 --
--- TOC entry 5702 (class 2606 OID 1013646)
+-- TOC entry 6229 (class 2606 OID 1034870)
 -- Name: audit_log_2026_04 audit_log_2026_04_pkey; Type: CONSTRAINT; Schema: billing_log; Owner: postgres
 --
 
@@ -13995,7 +16712,7 @@ ALTER TABLE ONLY billing_log.audit_log_2026_04
 
 
 --
--- TOC entry 5704 (class 2606 OID 1013654)
+-- TOC entry 6231 (class 2606 OID 1034872)
 -- Name: ddo_log ddo_pkey; Type: CONSTRAINT; Schema: billing_log; Owner: postgres
 --
 
@@ -14004,16 +16721,16 @@ ALTER TABLE ONLY billing_log.ddo_log
 
 
 --
--- TOC entry 5706 (class 2606 OID 1013660)
+-- TOC entry 6411 (class 2606 OID 1036121)
 -- Name: ebill_jit_int_map_log ebill_jit_int_map_log_pkey; Type: CONSTRAINT; Schema: billing_log; Owner: postgres
 --
 
 ALTER TABLE ONLY billing_log.ebill_jit_int_map_log
-    ADD CONSTRAINT ebill_jit_int_map_log_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT ebill_jit_int_map_log_pkey PRIMARY KEY (id, financial_year);
 
 
 --
--- TOC entry 5710 (class 2606 OID 1013668)
+-- TOC entry 6237 (class 2606 OID 1034876)
 -- Name: bill_status_master bill_status_master_pkey; Type: CONSTRAINT; Schema: billing_master; Owner: postgres
 --
 
@@ -14022,7 +16739,7 @@ ALTER TABLE ONLY billing_master.bill_status_master
 
 
 --
--- TOC entry 5712 (class 2606 OID 1013670)
+-- TOC entry 6239 (class 2606 OID 1034878)
 -- Name: bt_details bt_details_bt_serial_key; Type: CONSTRAINT; Schema: billing_master; Owner: postgres
 --
 
@@ -14031,7 +16748,7 @@ ALTER TABLE ONLY billing_master.bt_details
 
 
 --
--- TOC entry 5714 (class 2606 OID 1013685)
+-- TOC entry 6241 (class 2606 OID 1034880)
 -- Name: bt_details bt_details_pkey; Type: CONSTRAINT; Schema: billing_master; Owner: postgres
 --
 
@@ -14040,16 +16757,34 @@ ALTER TABLE ONLY billing_master.bt_details
 
 
 --
--- TOC entry 5716 (class 2606 OID 1013698)
+-- TOC entry 6394 (class 2606 OID 1036002)
 -- Name: cpin_master cpin_master_pkey; Type: CONSTRAINT; Schema: billing_master; Owner: postgres
 --
 
 ALTER TABLE ONLY billing_master.cpin_master
-    ADD CONSTRAINT cpin_master_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT cpin_master_pkey PRIMARY KEY (id, financial_year);
 
 
 --
--- TOC entry 5719 (class 2606 OID 1013764)
+-- TOC entry 6398 (class 2606 OID 1036010)
+-- Name: cpin_master_2425 cpin_master_2425_pkey; Type: CONSTRAINT; Schema: billing_master; Owner: postgres
+--
+
+ALTER TABLE ONLY billing_master.cpin_master_2425
+    ADD CONSTRAINT cpin_master_2425_pkey PRIMARY KEY (id, financial_year);
+
+
+--
+-- TOC entry 6401 (class 2606 OID 1036020)
+-- Name: cpin_master_2526 cpin_master_2526_pkey; Type: CONSTRAINT; Schema: billing_master; Owner: postgres
+--
+
+ALTER TABLE ONLY billing_master.cpin_master_2526
+    ADD CONSTRAINT cpin_master_2526_pkey PRIMARY KEY (id, financial_year);
+
+
+--
+-- TOC entry 6246 (class 2606 OID 1034884)
 -- Name: cpin_vender_mst cpin_vender_mst_pkey; Type: CONSTRAINT; Schema: billing_master; Owner: postgres
 --
 
@@ -14058,7 +16793,7 @@ ALTER TABLE ONLY billing_master.cpin_vender_mst
 
 
 --
--- TOC entry 5721 (class 2606 OID 1013780)
+-- TOC entry 6248 (class 2606 OID 1034886)
 -- Name: rbi_gst_master rbi_gst_master_pkey; Type: CONSTRAINT; Schema: billing_master; Owner: postgres
 --
 
@@ -14067,7 +16802,7 @@ ALTER TABLE ONLY billing_master.rbi_gst_master
 
 
 --
--- TOC entry 5727 (class 2606 OID 1013785)
+-- TOC entry 6254 (class 2606 OID 1034888)
 -- Name: tr_master_checklist tr_master_checklist_pkey; Type: CONSTRAINT; Schema: billing_master; Owner: postgres
 --
 
@@ -14076,7 +16811,7 @@ ALTER TABLE ONLY billing_master.tr_master_checklist
 
 
 --
--- TOC entry 5723 (class 2606 OID 1013792)
+-- TOC entry 6250 (class 2606 OID 1034890)
 -- Name: tr_master tr_master_pkey; Type: CONSTRAINT; Schema: billing_master; Owner: postgres
 --
 
@@ -14085,7 +16820,7 @@ ALTER TABLE ONLY billing_master.tr_master
 
 
 --
--- TOC entry 5725 (class 2606 OID 1013797)
+-- TOC entry 6252 (class 2606 OID 1034892)
 -- Name: tr_master tr_master_wb_form_code_key; Type: CONSTRAINT; Schema: billing_master; Owner: postgres
 --
 
@@ -14094,70 +16829,160 @@ ALTER TABLE ONLY billing_master.tr_master
 
 
 --
--- TOC entry 5738 (class 2606 OID 1013801)
+-- TOC entry 6445 (class 2606 OID 1036754)
 -- Name: challan challan_pkey; Type: CONSTRAINT; Schema: cts; Owner: postgres
 --
 
 ALTER TABLE ONLY cts.challan
-    ADD CONSTRAINT challan_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT challan_pkey PRIMARY KEY (id, financial_year);
 
 
 --
--- TOC entry 5729 (class 2606 OID 1013808)
+-- TOC entry 6501 (class 2606 OID 1037138)
 -- Name: failed_transaction_beneficiary failed_transaction_beneficiary_beneficiary_id_end_to_end_id_key; Type: CONSTRAINT; Schema: cts; Owner: postgres
 --
 
 ALTER TABLE ONLY cts.failed_transaction_beneficiary
-    ADD CONSTRAINT failed_transaction_beneficiary_beneficiary_id_end_to_end_id_key UNIQUE (beneficiary_id, end_to_end_id);
+    ADD CONSTRAINT failed_transaction_beneficiary_beneficiary_id_end_to_end_id_key UNIQUE (beneficiary_id, end_to_end_id, financial_year);
 
 
 --
--- TOC entry 5731 (class 2606 OID 1013818)
+-- TOC entry 6505 (class 2606 OID 1037153)
+-- Name: failed_transaction_beneficiary_2425 failed_transaction_beneficiar_beneficiary_id_end_to_end_id__key; Type: CONSTRAINT; Schema: cts; Owner: postgres
+--
+
+ALTER TABLE ONLY cts.failed_transaction_beneficiary_2425
+    ADD CONSTRAINT failed_transaction_beneficiar_beneficiary_id_end_to_end_id__key UNIQUE (beneficiary_id, end_to_end_id, financial_year);
+
+
+--
+-- TOC entry 6509 (class 2606 OID 1037170)
+-- Name: failed_transaction_beneficiary_2526 failed_transaction_beneficiar_beneficiary_id_end_to_end_id_key1; Type: CONSTRAINT; Schema: cts; Owner: postgres
+--
+
+ALTER TABLE ONLY cts.failed_transaction_beneficiary_2526
+    ADD CONSTRAINT failed_transaction_beneficiar_beneficiary_id_end_to_end_id_key1 UNIQUE (beneficiary_id, end_to_end_id, financial_year);
+
+
+--
+-- TOC entry 6503 (class 2606 OID 1037140)
 -- Name: failed_transaction_beneficiary failed_transaction_beneficiary_pkey; Type: CONSTRAINT; Schema: cts; Owner: postgres
 --
 
 ALTER TABLE ONLY cts.failed_transaction_beneficiary
-    ADD CONSTRAINT failed_transaction_beneficiary_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT failed_transaction_beneficiary_pkey PRIMARY KEY (id, financial_year);
 
 
 --
--- TOC entry 5740 (class 2606 OID 1013820)
+-- TOC entry 6507 (class 2606 OID 1037155)
+-- Name: failed_transaction_beneficiary_2425 failed_transaction_beneficiary_2425_pkey; Type: CONSTRAINT; Schema: cts; Owner: postgres
+--
+
+ALTER TABLE ONLY cts.failed_transaction_beneficiary_2425
+    ADD CONSTRAINT failed_transaction_beneficiary_2425_pkey PRIMARY KEY (id, financial_year);
+
+
+--
+-- TOC entry 6511 (class 2606 OID 1037172)
+-- Name: failed_transaction_beneficiary_2526 failed_transaction_beneficiary_2526_pkey; Type: CONSTRAINT; Schema: cts; Owner: postgres
+--
+
+ALTER TABLE ONLY cts.failed_transaction_beneficiary_2526
+    ADD CONSTRAINT failed_transaction_beneficiary_2526_pkey PRIMARY KEY (id, financial_year);
+
+
+--
+-- TOC entry 6513 (class 2606 OID 1037247)
 -- Name: failed_transaction_beneficiary_bk failed_transaction_beneficiary_pkey_bk; Type: CONSTRAINT; Schema: cts; Owner: postgres
 --
 
 ALTER TABLE ONLY cts.failed_transaction_beneficiary_bk
-    ADD CONSTRAINT failed_transaction_beneficiary_pkey_bk PRIMARY KEY (id);
+    ADD CONSTRAINT failed_transaction_beneficiary_pkey_bk PRIMARY KEY (id, financial_year);
 
 
 --
--- TOC entry 5734 (class 2606 OID 1013828)
+-- TOC entry 6515 (class 2606 OID 1037257)
+-- Name: failed_transaction_beneficiary_bk_2425 failed_transaction_beneficiary_bk_2425_pkey; Type: CONSTRAINT; Schema: cts; Owner: postgres
+--
+
+ALTER TABLE ONLY cts.failed_transaction_beneficiary_bk_2425
+    ADD CONSTRAINT failed_transaction_beneficiary_bk_2425_pkey PRIMARY KEY (id, financial_year);
+
+
+--
+-- TOC entry 6518 (class 2606 OID 1037315)
 -- Name: success_transaction_beneficiary success_transaction_beneficiary_ecs_id_end_to_end_id_key; Type: CONSTRAINT; Schema: cts; Owner: postgres
 --
 
 ALTER TABLE ONLY cts.success_transaction_beneficiary
-    ADD CONSTRAINT success_transaction_beneficiary_ecs_id_end_to_end_id_key UNIQUE (ecs_id, end_to_end_id);
+    ADD CONSTRAINT success_transaction_beneficiary_ecs_id_end_to_end_id_key UNIQUE (ecs_id, end_to_end_id, financial_year);
 
 
 --
--- TOC entry 5736 (class 2606 OID 1014551)
+-- TOC entry 6527 (class 2606 OID 1037341)
+-- Name: success_transaction_beneficiary_2526 success_transaction_beneficia_ecs_id_end_to_end_id_financi_key1; Type: CONSTRAINT; Schema: cts; Owner: postgres
+--
+
+ALTER TABLE ONLY cts.success_transaction_beneficiary_2526
+    ADD CONSTRAINT success_transaction_beneficia_ecs_id_end_to_end_id_financi_key1 UNIQUE (ecs_id, end_to_end_id, financial_year);
+
+
+--
+-- TOC entry 6522 (class 2606 OID 1037327)
+-- Name: success_transaction_beneficiary_2425 success_transaction_beneficia_ecs_id_end_to_end_id_financia_key; Type: CONSTRAINT; Schema: cts; Owner: postgres
+--
+
+ALTER TABLE ONLY cts.success_transaction_beneficiary_2425
+    ADD CONSTRAINT success_transaction_beneficia_ecs_id_end_to_end_id_financia_key UNIQUE (ecs_id, end_to_end_id, financial_year);
+
+
+--
+-- TOC entry 6520 (class 2606 OID 1037317)
 -- Name: success_transaction_beneficiary success_transaction_beneficiary_pkey; Type: CONSTRAINT; Schema: cts; Owner: postgres
 --
 
 ALTER TABLE ONLY cts.success_transaction_beneficiary
-    ADD CONSTRAINT success_transaction_beneficiary_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT success_transaction_beneficiary_pkey PRIMARY KEY (id, financial_year);
 
 
 --
--- TOC entry 5744 (class 2606 OID 1014922)
+-- TOC entry 6525 (class 2606 OID 1037329)
+-- Name: success_transaction_beneficiary_2425 success_transaction_beneficiary_2425_pkey; Type: CONSTRAINT; Schema: cts; Owner: postgres
+--
+
+ALTER TABLE ONLY cts.success_transaction_beneficiary_2425
+    ADD CONSTRAINT success_transaction_beneficiary_2425_pkey PRIMARY KEY (id, financial_year);
+
+
+--
+-- TOC entry 6530 (class 2606 OID 1037343)
+-- Name: success_transaction_beneficiary_2526 success_transaction_beneficiary_2526_pkey; Type: CONSTRAINT; Schema: cts; Owner: postgres
+--
+
+ALTER TABLE ONLY cts.success_transaction_beneficiary_2526
+    ADD CONSTRAINT success_transaction_beneficiary_2526_pkey PRIMARY KEY (id, financial_year);
+
+
+--
+-- TOC entry 6532 (class 2606 OID 1037423)
 -- Name: success_transaction_beneficiary_bk success_transaction_beneficiary_pkey_bk; Type: CONSTRAINT; Schema: cts; Owner: postgres
 --
 
 ALTER TABLE ONLY cts.success_transaction_beneficiary_bk
-    ADD CONSTRAINT success_transaction_beneficiary_pkey_bk PRIMARY KEY (id);
+    ADD CONSTRAINT success_transaction_beneficiary_pkey_bk PRIMARY KEY (id, financial_year);
 
 
 --
--- TOC entry 5746 (class 2606 OID 1015150)
+-- TOC entry 6534 (class 2606 OID 1037431)
+-- Name: success_transaction_beneficiary_bk_2425 success_transaction_beneficiary_bk_2425_pkey; Type: CONSTRAINT; Schema: cts; Owner: postgres
+--
+
+ALTER TABLE ONLY cts.success_transaction_beneficiary_bk_2425
+    ADD CONSTRAINT success_transaction_beneficiary_bk_2425_pkey PRIMARY KEY (id, financial_year);
+
+
+--
+-- TOC entry 6273 (class 2606 OID 1034908)
 -- Name: token token_n_entity_id_key; Type: CONSTRAINT; Schema: cts; Owner: postgres
 --
 
@@ -14166,7 +16991,7 @@ ALTER TABLE ONLY cts.token
 
 
 --
--- TOC entry 5748 (class 2606 OID 1015257)
+-- TOC entry 6275 (class 2606 OID 1034910)
 -- Name: token token_n_pkey; Type: CONSTRAINT; Schema: cts; Owner: postgres
 --
 
@@ -14175,7 +17000,7 @@ ALTER TABLE ONLY cts.token
 
 
 --
--- TOC entry 5750 (class 2606 OID 1015305)
+-- TOC entry 6277 (class 2606 OID 1034912)
 -- Name: voucher voucher_bill_id_key; Type: CONSTRAINT; Schema: cts; Owner: postgres
 --
 
@@ -14184,7 +17009,7 @@ ALTER TABLE ONLY cts.voucher
 
 
 --
--- TOC entry 5752 (class 2606 OID 1015396)
+-- TOC entry 6279 (class 2606 OID 1034914)
 -- Name: voucher voucher_pkey1; Type: CONSTRAINT; Schema: cts; Owner: postgres
 --
 
@@ -14193,16 +17018,25 @@ ALTER TABLE ONLY cts.voucher
 
 
 --
--- TOC entry 5754 (class 2606 OID 1015433)
+-- TOC entry 6390 (class 2606 OID 1035986)
 -- Name: ddo_agency_mapping_details ddo_agency_mapping_details_pkey; Type: CONSTRAINT; Schema: jit; Owner: postgres
 --
 
 ALTER TABLE ONLY jit.ddo_agency_mapping_details
-    ADD CONSTRAINT ddo_agency_mapping_details_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT ddo_agency_mapping_details_pkey PRIMARY KEY (id, financial_year);
 
 
 --
--- TOC entry 5756 (class 2606 OID 1015442)
+-- TOC entry 6392 (class 2606 OID 1035993)
+-- Name: ddo_agency_mapping_details_2526 ddo_agency_mapping_details_2526_pkey; Type: CONSTRAINT; Schema: jit; Owner: postgres
+--
+
+ALTER TABLE ONLY jit.ddo_agency_mapping_details_2526
+    ADD CONSTRAINT ddo_agency_mapping_details_2526_pkey PRIMARY KEY (id, financial_year);
+
+
+--
+-- TOC entry 6283 (class 2606 OID 1034918)
 -- Name: exp_payee_components exp_payee_components_pkey; Type: CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -14211,7 +17045,7 @@ ALTER TABLE ONLY jit.exp_payee_components
 
 
 --
--- TOC entry 5758 (class 2606 OID 1015886)
+-- TOC entry 6285 (class 2606 OID 1034920)
 -- Name: fto_voucher fto_voucher_pkey; Type: CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -14220,7 +17054,7 @@ ALTER TABLE ONLY jit.fto_voucher
 
 
 --
--- TOC entry 5742 (class 2606 OID 1016274)
+-- TOC entry 6269 (class 2606 OID 1034922)
 -- Name: gst gst_pkey; Type: CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -14229,7 +17063,7 @@ ALTER TABLE ONLY jit.gst
 
 
 --
--- TOC entry 5760 (class 2606 OID 1016304)
+-- TOC entry 6287 (class 2606 OID 1034924)
 -- Name: jit_allotment jit_allotment_ddo_code_sanction_no_agency_code_key; Type: CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -14238,7 +17072,7 @@ ALTER TABLE ONLY jit.jit_allotment
 
 
 --
--- TOC entry 5762 (class 2606 OID 1016414)
+-- TOC entry 6289 (class 2606 OID 1034926)
 -- Name: jit_allotment jit_allotment_pkey; Type: CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -14247,7 +17081,7 @@ ALTER TABLE ONLY jit.jit_allotment
 
 
 --
--- TOC entry 5764 (class 2606 OID 1016433)
+-- TOC entry 6291 (class 2606 OID 1034928)
 -- Name: jit_fto_sanction_booking jit_fto_sanction_booking_pkey; Type: CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -14256,7 +17090,7 @@ ALTER TABLE ONLY jit.jit_fto_sanction_booking
 
 
 --
--- TOC entry 5766 (class 2606 OID 1016494)
+-- TOC entry 6293 (class 2606 OID 1034930)
 -- Name: jit_pullback_request jit_pullback_request_pkey; Type: CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -14265,7 +17099,7 @@ ALTER TABLE ONLY jit.jit_pullback_request
 
 
 --
--- TOC entry 5768 (class 2606 OID 1016501)
+-- TOC entry 6295 (class 2606 OID 1034932)
 -- Name: jit_report_details jit_report_details_ddo_code_hoa_id_key; Type: CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -14274,7 +17108,7 @@ ALTER TABLE ONLY jit.jit_report_details
 
 
 --
--- TOC entry 5770 (class 2606 OID 1016529)
+-- TOC entry 6297 (class 2606 OID 1034934)
 -- Name: jit_report_details jit_report_details_pkey; Type: CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -14283,7 +17117,7 @@ ALTER TABLE ONLY jit.jit_report_details
 
 
 --
--- TOC entry 5772 (class 2606 OID 1016543)
+-- TOC entry 6299 (class 2606 OID 1034936)
 -- Name: jit_withdrawl jit_withdrawl_ddo_code_agency_code_sanction_no_key; Type: CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -14292,7 +17126,7 @@ ALTER TABLE ONLY jit.jit_withdrawl
 
 
 --
--- TOC entry 5774 (class 2606 OID 1016545)
+-- TOC entry 6301 (class 2606 OID 1034938)
 -- Name: jit_withdrawl jit_withdrawl_pkey; Type: CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -14301,7 +17135,7 @@ ALTER TABLE ONLY jit.jit_withdrawl
 
 
 --
--- TOC entry 5776 (class 2606 OID 1016553)
+-- TOC entry 6303 (class 2606 OID 1034940)
 -- Name: mother_sanction_allocation mother_sanction_allocation_pkey; Type: CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -14310,7 +17144,7 @@ ALTER TABLE ONLY jit.mother_sanction_allocation
 
 
 --
--- TOC entry 5778 (class 2606 OID 1016555)
+-- TOC entry 6305 (class 2606 OID 1034942)
 -- Name: mother_sanction_allocation mother_sanction_allocation_sls_limit_distribution_id_head_w_key; Type: CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -14319,7 +17153,7 @@ ALTER TABLE ONLY jit.mother_sanction_allocation
 
 
 --
--- TOC entry 5780 (class 2606 OID 1016558)
+-- TOC entry 6307 (class 2606 OID 1034944)
 -- Name: payee_deduction payee_deduction_pkey; Type: CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -14328,7 +17162,7 @@ ALTER TABLE ONLY jit.payee_deduction
 
 
 --
--- TOC entry 5782 (class 2606 OID 1016630)
+-- TOC entry 6309 (class 2606 OID 1034946)
 -- Name: scheme_config_master scheme_config_master_pkey; Type: CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -14337,7 +17171,7 @@ ALTER TABLE ONLY jit.scheme_config_master
 
 
 --
--- TOC entry 5784 (class 2606 OID 1016633)
+-- TOC entry 6311 (class 2606 OID 1034948)
 -- Name: scheme_config_master scheme_config_master_sls_code_csscode_key; Type: CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -14346,25 +17180,43 @@ ALTER TABLE ONLY jit.scheme_config_master
 
 
 --
--- TOC entry 5786 (class 2606 OID 1016637)
+-- TOC entry 6415 (class 2606 OID 1036135)
 -- Name: tsa_exp_details tsa_exp_details_pkey; Type: CONSTRAINT; Schema: jit; Owner: postgres
 --
 
 ALTER TABLE ONLY jit.tsa_exp_details
-    ADD CONSTRAINT tsa_exp_details_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT tsa_exp_details_pkey PRIMARY KEY (id, financial_year);
 
 
 --
--- TOC entry 5788 (class 2606 OID 1016781)
+-- TOC entry 6419 (class 2606 OID 1036150)
+-- Name: tsa_exp_details_2526 tsa_exp_details_2526_pkey; Type: CONSTRAINT; Schema: jit; Owner: postgres
+--
+
+ALTER TABLE ONLY jit.tsa_exp_details_2526
+    ADD CONSTRAINT tsa_exp_details_2526_pkey PRIMARY KEY (id, financial_year);
+
+
+--
+-- TOC entry 6417 (class 2606 OID 1036137)
 -- Name: tsa_exp_details tsa_exp_details_unique_key_ref_no; Type: CONSTRAINT; Schema: jit; Owner: postgres
 --
 
 ALTER TABLE ONLY jit.tsa_exp_details
-    ADD CONSTRAINT tsa_exp_details_unique_key_ref_no UNIQUE (ref_no);
+    ADD CONSTRAINT tsa_exp_details_unique_key_ref_no UNIQUE (ref_no, financial_year);
 
 
 --
--- TOC entry 5790 (class 2606 OID 1017066)
+-- TOC entry 6421 (class 2606 OID 1036152)
+-- Name: tsa_exp_details_2526 tsa_exp_details_2526_ref_no_financial_year_key; Type: CONSTRAINT; Schema: jit; Owner: postgres
+--
+
+ALTER TABLE ONLY jit.tsa_exp_details_2526
+    ADD CONSTRAINT tsa_exp_details_2526_ref_no_financial_year_key UNIQUE (ref_no, financial_year);
+
+
+--
+-- TOC entry 6317 (class 2606 OID 1034954)
 -- Name: tsa_payeemaster tsa_payeemaster_pkey; Type: CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -14373,7 +17225,7 @@ ALTER TABLE ONLY jit.tsa_payeemaster
 
 
 --
--- TOC entry 5792 (class 2606 OID 1017497)
+-- TOC entry 6319 (class 2606 OID 1034957)
 -- Name: tsa_payeemaster tsa_payeemaster_ref_no_acc_no_key; Type: CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -14382,16 +17234,16 @@ ALTER TABLE ONLY jit.tsa_payeemaster
 
 
 --
--- TOC entry 5794 (class 2606 OID 1019445)
+-- TOC entry 6435 (class 2606 OID 1036672)
 -- Name: tsa_schemecomponent tsa_schemecomponent_pkey; Type: CONSTRAINT; Schema: jit; Owner: postgres
 --
 
 ALTER TABLE ONLY jit.tsa_schemecomponent
-    ADD CONSTRAINT tsa_schemecomponent_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT tsa_schemecomponent_pkey PRIMARY KEY (id, financial_year);
 
 
 --
--- TOC entry 5654 (class 2606 OID 1019820)
+-- TOC entry 6181 (class 2606 OID 1034968)
 -- Name: active_hoa_mst active_hoa_mst_pkey; Type: CONSTRAINT; Schema: master; Owner: postgres
 --
 
@@ -14400,7 +17252,7 @@ ALTER TABLE ONLY master.active_hoa_mst
 
 
 --
--- TOC entry 5796 (class 2606 OID 1019823)
+-- TOC entry 6323 (class 2606 OID 1034970)
 -- Name: bank_type_master bank_type_master_pkey; Type: CONSTRAINT; Schema: master; Owner: postgres
 --
 
@@ -14409,7 +17261,7 @@ ALTER TABLE ONLY master.bank_type_master
 
 
 --
--- TOC entry 5799 (class 2606 OID 1019835)
+-- TOC entry 6326 (class 2606 OID 1034972)
 -- Name: ddo ddo_ddo_code_key; Type: CONSTRAINT; Schema: master; Owner: postgres
 --
 
@@ -14418,7 +17270,7 @@ ALTER TABLE ONLY master.ddo
 
 
 --
--- TOC entry 5801 (class 2606 OID 1019963)
+-- TOC entry 6328 (class 2606 OID 1034974)
 -- Name: ddo ddo_pkey; Type: CONSTRAINT; Schema: master; Owner: postgres
 --
 
@@ -14427,7 +17279,7 @@ ALTER TABLE ONLY master.ddo
 
 
 --
--- TOC entry 5803 (class 2606 OID 1019975)
+-- TOC entry 6330 (class 2606 OID 1034976)
 -- Name: demand_major_mapping demand_major_mapping_pkey; Type: CONSTRAINT; Schema: master; Owner: postgres
 --
 
@@ -14436,7 +17288,7 @@ ALTER TABLE ONLY master.demand_major_mapping
 
 
 --
--- TOC entry 5805 (class 2606 OID 1019977)
+-- TOC entry 6332 (class 2606 OID 1034978)
 -- Name: department department_code_key; Type: CONSTRAINT; Schema: master; Owner: postgres
 --
 
@@ -14445,7 +17297,7 @@ ALTER TABLE ONLY master.department
 
 
 --
--- TOC entry 5807 (class 2606 OID 1019979)
+-- TOC entry 6334 (class 2606 OID 1034980)
 -- Name: department department_demand_code_key; Type: CONSTRAINT; Schema: master; Owner: postgres
 --
 
@@ -14454,7 +17306,7 @@ ALTER TABLE ONLY master.department
 
 
 --
--- TOC entry 5809 (class 2606 OID 1019983)
+-- TOC entry 6336 (class 2606 OID 1034982)
 -- Name: department department_pkey; Type: CONSTRAINT; Schema: master; Owner: postgres
 --
 
@@ -14463,7 +17315,7 @@ ALTER TABLE ONLY master.department
 
 
 --
--- TOC entry 5811 (class 2606 OID 1019986)
+-- TOC entry 6338 (class 2606 OID 1034984)
 -- Name: detail_head detail_head_pkey; Type: CONSTRAINT; Schema: master; Owner: postgres
 --
 
@@ -14472,7 +17324,7 @@ ALTER TABLE ONLY master.detail_head
 
 
 --
--- TOC entry 5813 (class 2606 OID 1019989)
+-- TOC entry 6340 (class 2606 OID 1034986)
 -- Name: financial_year_master financial_year_master_pkey; Type: CONSTRAINT; Schema: master; Owner: postgres
 --
 
@@ -14481,7 +17333,7 @@ ALTER TABLE ONLY master.financial_year_master
 
 
 --
--- TOC entry 5815 (class 2606 OID 1019998)
+-- TOC entry 6342 (class 2606 OID 1034988)
 -- Name: major_head major_head_code_key; Type: CONSTRAINT; Schema: master; Owner: postgres
 --
 
@@ -14490,7 +17342,7 @@ ALTER TABLE ONLY master.major_head
 
 
 --
--- TOC entry 5817 (class 2606 OID 1020007)
+-- TOC entry 6344 (class 2606 OID 1034990)
 -- Name: major_head major_head_pkey; Type: CONSTRAINT; Schema: master; Owner: postgres
 --
 
@@ -14499,7 +17351,7 @@ ALTER TABLE ONLY master.major_head
 
 
 --
--- TOC entry 5819 (class 2606 OID 1020011)
+-- TOC entry 6346 (class 2606 OID 1034992)
 -- Name: minor_head minor_head_pkey; Type: CONSTRAINT; Schema: master; Owner: postgres
 --
 
@@ -14508,7 +17360,7 @@ ALTER TABLE ONLY master.minor_head
 
 
 --
--- TOC entry 5822 (class 2606 OID 1020018)
+-- TOC entry 6349 (class 2606 OID 1034994)
 -- Name: rbi_ifsc_stock rbi_ifsc_stock_ifsc_key; Type: CONSTRAINT; Schema: master; Owner: postgres
 --
 
@@ -14517,7 +17369,7 @@ ALTER TABLE ONLY master.rbi_ifsc_stock
 
 
 --
--- TOC entry 5824 (class 2606 OID 1020886)
+-- TOC entry 6351 (class 2606 OID 1034996)
 -- Name: rbi_ifsc_stock rbi_ifsc_stock_pkey; Type: CONSTRAINT; Schema: master; Owner: postgres
 --
 
@@ -14526,7 +17378,7 @@ ALTER TABLE ONLY master.rbi_ifsc_stock
 
 
 --
--- TOC entry 5826 (class 2606 OID 1021807)
+-- TOC entry 6353 (class 2606 OID 1034998)
 -- Name: scheme_head scheme_head_pkey; Type: CONSTRAINT; Schema: master; Owner: postgres
 --
 
@@ -14535,7 +17387,7 @@ ALTER TABLE ONLY master.scheme_head
 
 
 --
--- TOC entry 5828 (class 2606 OID 1022079)
+-- TOC entry 6355 (class 2606 OID 1035000)
 -- Name: sub_detail_head sub_detail_head_pkey; Type: CONSTRAINT; Schema: master; Owner: postgres
 --
 
@@ -14544,7 +17396,7 @@ ALTER TABLE ONLY master.sub_detail_head
 
 
 --
--- TOC entry 5830 (class 2606 OID 1022516)
+-- TOC entry 6357 (class 2606 OID 1035002)
 -- Name: sub_major_head sub_major_head_pkey; Type: CONSTRAINT; Schema: master; Owner: postgres
 --
 
@@ -14553,7 +17405,7 @@ ALTER TABLE ONLY master.sub_major_head
 
 
 --
--- TOC entry 5833 (class 2606 OID 1022626)
+-- TOC entry 6360 (class 2606 OID 1035004)
 -- Name: treasury treasury_pkey; Type: CONSTRAINT; Schema: master; Owner: postgres
 --
 
@@ -14562,7 +17414,7 @@ ALTER TABLE ONLY master.treasury
 
 
 --
--- TOC entry 5835 (class 2606 OID 1022953)
+-- TOC entry 6362 (class 2606 OID 1035006)
 -- Name: treasury treasury_treasury_code_key; Type: CONSTRAINT; Schema: master; Owner: postgres
 --
 
@@ -14571,7 +17423,7 @@ ALTER TABLE ONLY master.treasury
 
 
 --
--- TOC entry 5837 (class 2606 OID 1023326)
+-- TOC entry 6364 (class 2606 OID 1035008)
 -- Name: tsa_vendor_type tsa_vendor_type_pkey; Type: CONSTRAINT; Schema: master; Owner: postgres
 --
 
@@ -14580,7 +17432,7 @@ ALTER TABLE ONLY master.tsa_vendor_type
 
 
 --
--- TOC entry 5839 (class 2606 OID 1023616)
+-- TOC entry 6366 (class 2606 OID 1035010)
 -- Name: consume_logs consume_logs_pkey; Type: CONSTRAINT; Schema: message_queue; Owner: postgres
 --
 
@@ -14589,7 +17441,7 @@ ALTER TABLE ONLY message_queue.consume_logs
 
 
 --
--- TOC entry 5841 (class 2606 OID 1024115)
+-- TOC entry 6368 (class 2606 OID 1035012)
 -- Name: consume_logs_partition consume_logs_pkey1; Type: CONSTRAINT; Schema: message_queue; Owner: postgres
 --
 
@@ -14598,7 +17450,7 @@ ALTER TABLE ONLY message_queue.consume_logs_partition
 
 
 --
--- TOC entry 5843 (class 2606 OID 1024123)
+-- TOC entry 6370 (class 2606 OID 1035014)
 -- Name: message_queue_logs message_queue_logs_pkey; Type: CONSTRAINT; Schema: message_queue; Owner: postgres
 --
 
@@ -14607,7 +17459,7 @@ ALTER TABLE ONLY message_queue.message_queue_logs
 
 
 --
--- TOC entry 5845 (class 2606 OID 1024794)
+-- TOC entry 6372 (class 2606 OID 1035016)
 -- Name: message_queues message_queues_pkey; Type: CONSTRAINT; Schema: message_queue; Owner: postgres
 --
 
@@ -14616,7 +17468,7 @@ ALTER TABLE ONLY message_queue.message_queues
 
 
 --
--- TOC entry 5847 (class 2606 OID 1024805)
+-- TOC entry 6374 (class 2606 OID 1035018)
 -- Name: queues_master queues_master_pkey; Type: CONSTRAINT; Schema: message_queue; Owner: postgres
 --
 
@@ -14625,7 +17477,250 @@ ALTER TABLE ONLY message_queue.queues_master
 
 
 --
--- TOC entry 5849 (class 2606 OID 1024813)
+-- TOC entry 6152 (class 2606 OID 1034804)
+-- Name: billing_bill_btdetail bill_btdetail_pkey; Type: CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_btdetail
+    ADD CONSTRAINT bill_btdetail_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 6155 (class 2606 OID 1034806)
+-- Name: billing_bill_gst bill_cpin_mapping_pkey; Type: CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_gst
+    ADD CONSTRAINT bill_cpin_mapping_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 6145 (class 2606 OID 1034808)
+-- Name: billing_bill_details bill_details_pkey; Type: CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_details
+    ADD CONSTRAINT bill_details_pkey PRIMARY KEY (bill_id);
+
+
+--
+-- TOC entry 6157 (class 2606 OID 1034810)
+-- Name: billing_bill_ecs_neft_details bill_ecs_neft_details_bill_id_bank_account_number_key; Type: CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_ecs_neft_details
+    ADD CONSTRAINT bill_ecs_neft_details_bill_id_bank_account_number_key UNIQUE (bill_id, bank_account_number);
+
+
+--
+-- TOC entry 6159 (class 2606 OID 1034812)
+-- Name: billing_bill_ecs_neft_details bill_ecs_neft_details_pkey; Type: CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_ecs_neft_details
+    ADD CONSTRAINT bill_ecs_neft_details_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 6163 (class 2606 OID 1034814)
+-- Name: billing_bill_jit_components bill_jit_components_pkey; Type: CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_jit_components
+    ADD CONSTRAINT bill_jit_components_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 6169 (class 2606 OID 1034818)
+-- Name: billing_bill_subdetail_info bill_subdetail_info_pkey; Type: CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_subdetail_info
+    ADD CONSTRAINT bill_subdetail_info_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 6265 (class 2606 OID 1034894)
+-- Name: cts_challan challan_pkey; Type: CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_challan
+    ADD CONSTRAINT challan_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 6243 (class 2606 OID 1034882)
+-- Name: billing_master_cpin_master cpin_master_pkey; Type: CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_master_cpin_master
+    ADD CONSTRAINT cpin_master_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 6281 (class 2606 OID 1034916)
+-- Name: jit_ddo_agency_mapping_details ddo_agency_mapping_details_pkey; Type: CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.jit_ddo_agency_mapping_details
+    ADD CONSTRAINT ddo_agency_mapping_details_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 6174 (class 2606 OID 1034822)
+-- Name: billing_ddo_allotment_booked_bill ddo_allotment_booked_bill_pkey; Type: CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_ddo_allotment_booked_bill
+    ADD CONSTRAINT ddo_allotment_booked_bill_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 6136 (class 2606 OID 1034796)
+-- Name: bantan_ddo_allotment_transactions ddo_allotment_transactions_memo_number_sender_sao_ddo_code__key; Type: CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.bantan_ddo_allotment_transactions
+    ADD CONSTRAINT ddo_allotment_transactions_memo_number_sender_sao_ddo_code__key UNIQUE (memo_number, sender_sao_ddo_code, receiver_sao_ddo_code);
+
+
+--
+-- TOC entry 6138 (class 2606 OID 1034798)
+-- Name: bantan_ddo_allotment_transactions ddo_allotment_transactions_pkey; Type: CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.bantan_ddo_allotment_transactions
+    ADD CONSTRAINT ddo_allotment_transactions_pkey PRIMARY KEY (allotment_id);
+
+
+--
+-- TOC entry 6140 (class 2606 OID 1034800)
+-- Name: bantan_ddo_wallet ddo_wallet_pkey; Type: CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.bantan_ddo_wallet
+    ADD CONSTRAINT ddo_wallet_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 6142 (class 2606 OID 1034802)
+-- Name: bantan_ddo_wallet ddo_wallet_sao_ddo_code_active_hoa_id_financial_year_key; Type: CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.bantan_ddo_wallet
+    ADD CONSTRAINT ddo_wallet_sao_ddo_code_active_hoa_id_financial_year_key UNIQUE (sao_ddo_code, active_hoa_id, financial_year);
+
+
+--
+-- TOC entry 6233 (class 2606 OID 1034874)
+-- Name: billing_log_ebill_jit_int_map_log ebill_jit_int_map_log_pkey; Type: CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_log_ebill_jit_int_map_log
+    ADD CONSTRAINT ebill_jit_int_map_log_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 6176 (class 2606 OID 1034824)
+-- Name: billing_ebill_jit_int_map ebill_jit_int_map_pkey; Type: CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_ebill_jit_int_map
+    ADD CONSTRAINT ebill_jit_int_map_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 6256 (class 2606 OID 1034896)
+-- Name: cts_failed_transaction_beneficiary failed_transaction_beneficiary_beneficiary_id_end_to_end_id_key; Type: CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_failed_transaction_beneficiary
+    ADD CONSTRAINT failed_transaction_beneficiary_beneficiary_id_end_to_end_id_key UNIQUE (beneficiary_id, end_to_end_id);
+
+
+--
+-- TOC entry 6258 (class 2606 OID 1034898)
+-- Name: cts_failed_transaction_beneficiary failed_transaction_beneficiary_pkey; Type: CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_failed_transaction_beneficiary
+    ADD CONSTRAINT failed_transaction_beneficiary_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 6267 (class 2606 OID 1034900)
+-- Name: cts_failed_transaction_beneficiary_bk failed_transaction_beneficiary_pkey_bk; Type: CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_failed_transaction_beneficiary_bk
+    ADD CONSTRAINT failed_transaction_beneficiary_pkey_bk PRIMARY KEY (id);
+
+
+--
+-- TOC entry 6149 (class 2606 OID 1034826)
+-- Name: billing_jit_ecs_additional jit_ecs_additional_pkey; Type: CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_jit_ecs_additional
+    ADD CONSTRAINT jit_ecs_additional_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 6261 (class 2606 OID 1034902)
+-- Name: cts_success_transaction_beneficiary success_transaction_beneficiary_ecs_id_end_to_end_id_key; Type: CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_success_transaction_beneficiary
+    ADD CONSTRAINT success_transaction_beneficiary_ecs_id_end_to_end_id_key UNIQUE (ecs_id, end_to_end_id);
+
+
+--
+-- TOC entry 6263 (class 2606 OID 1034904)
+-- Name: cts_success_transaction_beneficiary success_transaction_beneficiary_pkey; Type: CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_success_transaction_beneficiary
+    ADD CONSTRAINT success_transaction_beneficiary_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 6271 (class 2606 OID 1034906)
+-- Name: cts_success_transaction_beneficiary_bk success_transaction_beneficiary_pkey_bk; Type: CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_success_transaction_beneficiary_bk
+    ADD CONSTRAINT success_transaction_beneficiary_pkey_bk PRIMARY KEY (id);
+
+
+--
+-- TOC entry 6313 (class 2606 OID 1034950)
+-- Name: jit_tsa_exp_details tsa_exp_details_pkey; Type: CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.jit_tsa_exp_details
+    ADD CONSTRAINT tsa_exp_details_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 6315 (class 2606 OID 1034952)
+-- Name: jit_tsa_exp_details tsa_exp_details_unique_key_ref_no; Type: CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.jit_tsa_exp_details
+    ADD CONSTRAINT tsa_exp_details_unique_key_ref_no UNIQUE (ref_no);
+
+
+--
+-- TOC entry 6321 (class 2606 OID 1034966)
+-- Name: jit_tsa_schemecomponent tsa_schemecomponent_pkey; Type: CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.jit_tsa_schemecomponent
+    ADD CONSTRAINT tsa_schemecomponent_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 6376 (class 2606 OID 1035020)
 -- Name: ebilling_jit_voucher ebilling_jit_voucher_pkey2; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -14634,31 +17729,255 @@ ALTER TABLE ONLY public.ebilling_jit_voucher
 
 
 --
--- TOC entry 5616 (class 1259 OID 1024814)
+-- TOC entry 6448 (class 1259 OID 1036764)
+-- Name: ndx_bill_btdetail; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE INDEX ndx_bill_btdetail ON ONLY billing.bill_btdetail USING btree (bill_id);
+
+
+--
+-- TOC entry 6449 (class 1259 OID 1036771)
+-- Name: bill_btdetail_2425_bill_id_idx; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE INDEX bill_btdetail_2425_bill_id_idx ON billing.bill_btdetail_2425 USING btree (bill_id);
+
+
+--
+-- TOC entry 6452 (class 1259 OID 1036778)
+-- Name: bill_btdetail_2526_bill_id_idx; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE INDEX bill_btdetail_2526_bill_id_idx ON billing.bill_btdetail_2526 USING btree (bill_id);
+
+
+--
+-- TOC entry 6422 (class 1259 OID 1036212)
 -- Name: bill_details_bill_id_idx; Type: INDEX; Schema: billing; Owner: postgres
 --
 
-CREATE INDEX bill_details_bill_id_idx ON billing.bill_details USING btree (bill_id) WITH (deduplicate_items='false');
+CREATE INDEX bill_details_bill_id_idx ON ONLY billing.bill_details USING btree (bill_id) WITH (deduplicate_items='false');
 
 
 --
--- TOC entry 5637 (class 1259 OID 1024982)
+-- TOC entry 6426 (class 1259 OID 1036240)
+-- Name: bill_details_2425_bill_id_idx; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE INDEX bill_details_2425_bill_id_idx ON billing.bill_details_2425 USING btree (bill_id) WITH (deduplicate_items='false');
+
+
+--
+-- TOC entry 6425 (class 1259 OID 1036213)
+-- Name: unique_bill_details_active_bill_no; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE UNIQUE INDEX unique_bill_details_active_bill_no ON ONLY billing.bill_details USING btree (bill_no, financial_year) WHERE (is_deleted = false);
+
+
+--
+-- TOC entry 6427 (class 1259 OID 1036241)
+-- Name: bill_details_2425_bill_no_financial_year_idx; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE UNIQUE INDEX bill_details_2425_bill_no_financial_year_idx ON billing.bill_details_2425 USING btree (bill_no, financial_year) WHERE (is_deleted = false);
+
+
+--
+-- TOC entry 6430 (class 1259 OID 1036270)
+-- Name: bill_details_2526_bill_id_idx; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE INDEX bill_details_2526_bill_id_idx ON billing.bill_details_2526 USING btree (bill_id) WITH (deduplicate_items='false');
+
+
+--
+-- TOC entry 6431 (class 1259 OID 1036271)
+-- Name: bill_details_2526_bill_no_financial_year_idx; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE UNIQUE INDEX bill_details_2526_bill_no_financial_year_idx ON billing.bill_details_2526 USING btree (bill_no, financial_year) WHERE (is_deleted = false);
+
+
+--
+-- TOC entry 6459 (class 1259 OID 1036853)
+-- Name: ndx_bill_ecs_neft_details; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE INDEX ndx_bill_ecs_neft_details ON ONLY billing.bill_ecs_neft_details USING btree (bill_id);
+
+
+--
+-- TOC entry 6463 (class 1259 OID 1036868)
+-- Name: bill_ecs_neft_details_2425_bill_id_idx; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE INDEX bill_ecs_neft_details_2425_bill_id_idx ON billing.bill_ecs_neft_details_2425 USING btree (bill_id);
+
+
+--
+-- TOC entry 6460 (class 1259 OID 1036854)
+-- Name: ndx_ecs_id; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE INDEX ndx_ecs_id ON ONLY billing.bill_ecs_neft_details USING btree (id) WITH (deduplicate_items='false');
+
+
+--
+-- TOC entry 6464 (class 1259 OID 1036869)
+-- Name: bill_ecs_neft_details_2425_id_idx; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE INDEX bill_ecs_neft_details_2425_id_idx ON billing.bill_ecs_neft_details_2425 USING btree (id) WITH (deduplicate_items='false');
+
+
+--
+-- TOC entry 6469 (class 1259 OID 1036885)
+-- Name: bill_ecs_neft_details_2526_bill_id_idx; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE INDEX bill_ecs_neft_details_2526_bill_id_idx ON billing.bill_ecs_neft_details_2526 USING btree (bill_id);
+
+
+--
+-- TOC entry 6470 (class 1259 OID 1036886)
+-- Name: bill_ecs_neft_details_2526_id_idx; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE INDEX bill_ecs_neft_details_2526_id_idx ON billing.bill_ecs_neft_details_2526 USING btree (id) WITH (deduplicate_items='false');
+
+
+--
+-- TOC entry 6475 (class 1259 OID 1036934)
 -- Name: fki_bill_jit_components_bill_id_fkey; Type: INDEX; Schema: billing; Owner: postgres
 --
 
-CREATE INDEX fki_bill_jit_components_bill_id_fkey ON billing.bill_jit_components USING btree (bill_id);
+CREATE INDEX fki_bill_jit_components_bill_id_fkey ON ONLY billing.bill_jit_components USING btree (bill_id);
 
 
 --
--- TOC entry 5620 (class 1259 OID 1025285)
+-- TOC entry 6477 (class 1259 OID 1036945)
+-- Name: bill_jit_components_2425_bill_id_idx; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE INDEX bill_jit_components_2425_bill_id_idx ON billing.bill_jit_components_2425 USING btree (bill_id);
+
+
+--
+-- TOC entry 6476 (class 1259 OID 1036935)
+-- Name: ndx_bill_jit_components; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE INDEX ndx_bill_jit_components ON ONLY billing.bill_jit_components USING btree (bill_id);
+
+
+--
+-- TOC entry 6478 (class 1259 OID 1036946)
+-- Name: bill_jit_components_2425_bill_id_idx1; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE INDEX bill_jit_components_2425_bill_id_idx1 ON billing.bill_jit_components_2425 USING btree (bill_id);
+
+
+--
+-- TOC entry 6481 (class 1259 OID 1036955)
+-- Name: bill_jit_components_2526_bill_id_idx; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE INDEX bill_jit_components_2526_bill_id_idx ON billing.bill_jit_components_2526 USING btree (bill_id);
+
+
+--
+-- TOC entry 6482 (class 1259 OID 1036956)
+-- Name: bill_jit_components_2526_bill_id_idx1; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE INDEX bill_jit_components_2526_bill_id_idx1 ON billing.bill_jit_components_2526 USING btree (bill_id);
+
+
+--
+-- TOC entry 6487 (class 1259 OID 1036984)
+-- Name: ndx_bill_subdetail_info; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE INDEX ndx_bill_subdetail_info ON ONLY billing.bill_subdetail_info USING btree (bill_id);
+
+
+--
+-- TOC entry 6488 (class 1259 OID 1036991)
+-- Name: bill_subdetail_info_2425_bill_id_idx; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE INDEX bill_subdetail_info_2425_bill_id_idx ON billing.bill_subdetail_info_2425 USING btree (bill_id);
+
+
+--
+-- TOC entry 6491 (class 1259 OID 1036998)
+-- Name: bill_subdetail_info_2526_bill_id_idx; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE INDEX bill_subdetail_info_2526_bill_id_idx ON billing.bill_subdetail_info_2526 USING btree (bill_id);
+
+
+--
+-- TOC entry 6379 (class 1259 OID 1035951)
+-- Name: idx_ebill_jit_int_map_bill_id; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE INDEX idx_ebill_jit_int_map_bill_id ON ONLY billing.ebill_jit_int_map USING btree (bill_id);
+
+
+--
+-- TOC entry 6381 (class 1259 OID 1035962)
+-- Name: ebill_jit_int_map_2425_bill_id_idx; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE INDEX ebill_jit_int_map_2425_bill_id_idx ON billing.ebill_jit_int_map_2425 USING btree (bill_id);
+
+
+--
+-- TOC entry 6380 (class 1259 OID 1035952)
+-- Name: unique_active_ebill_jit_int_map; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE UNIQUE INDEX unique_active_ebill_jit_int_map ON ONLY billing.ebill_jit_int_map USING btree (jit_ref_no, financial_year) WHERE ((is_active = true) AND (is_rejected = false));
+
+
+--
+-- TOC entry 6382 (class 1259 OID 1035963)
+-- Name: ebill_jit_int_map_2425_jit_ref_no_financial_year_idx; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE UNIQUE INDEX ebill_jit_int_map_2425_jit_ref_no_financial_year_idx ON billing.ebill_jit_int_map_2425 USING btree (jit_ref_no, financial_year) WHERE ((is_active = true) AND (is_rejected = false));
+
+
+--
+-- TOC entry 6385 (class 1259 OID 1035976)
+-- Name: ebill_jit_int_map_2526_bill_id_idx; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE INDEX ebill_jit_int_map_2526_bill_id_idx ON billing.ebill_jit_int_map_2526 USING btree (bill_id);
+
+
+--
+-- TOC entry 6386 (class 1259 OID 1035977)
+-- Name: ebill_jit_int_map_2526_jit_ref_no_financial_year_idx; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE UNIQUE INDEX ebill_jit_int_map_2526_jit_ref_no_financial_year_idx ON billing.ebill_jit_int_map_2526 USING btree (jit_ref_no, financial_year) WHERE ((is_active = true) AND (is_rejected = false));
+
+
+--
+-- TOC entry 6539 (class 1259 OID 1037570)
 -- Name: fki_jit_ecs_additional_bill_id_fkey; Type: INDEX; Schema: billing; Owner: postgres
 --
 
-CREATE INDEX fki_jit_ecs_additional_bill_id_fkey ON billing.jit_ecs_additional USING btree (bill_id);
+CREATE INDEX fki_jit_ecs_additional_bill_id_fkey ON ONLY billing.jit_ecs_additional USING btree (bill_id);
 
 
 --
--- TOC entry 5655 (class 1259 OID 1025816)
+-- TOC entry 6182 (class 1259 OID 1035024)
 -- Name: fki_jit_fto_voucher_bill_id_fkey; Type: INDEX; Schema: billing; Owner: postgres
 --
 
@@ -14666,63 +17985,47 @@ CREATE INDEX fki_jit_fto_voucher_bill_id_fkey ON billing.jit_fto_voucher USING b
 
 
 --
--- TOC entry 5650 (class 1259 OID 1025819)
--- Name: idx_ebill_jit_int_map_bill_id; Type: INDEX; Schema: billing; Owner: postgres
+-- TOC entry 6543 (class 1259 OID 1037579)
+-- Name: jit_ecs_additional_2425_bill_id_idx; Type: INDEX; Schema: billing; Owner: postgres
 --
 
-CREATE INDEX idx_ebill_jit_int_map_bill_id ON billing.ebill_jit_int_map USING btree (bill_id);
-
-
---
--- TOC entry 5626 (class 1259 OID 1025943)
--- Name: ndx_bill_btdetail; Type: INDEX; Schema: billing; Owner: postgres
---
-
-CREATE INDEX ndx_bill_btdetail ON billing.bill_btdetail USING btree (bill_id);
+CREATE INDEX jit_ecs_additional_2425_bill_id_idx ON billing.jit_ecs_additional_2425 USING btree (bill_id);
 
 
 --
--- TOC entry 5633 (class 1259 OID 1025949)
--- Name: ndx_bill_ecs_neft_details; Type: INDEX; Schema: billing; Owner: postgres
---
-
-CREATE INDEX ndx_bill_ecs_neft_details ON billing.bill_ecs_neft_details USING btree (bill_id);
-
-
---
--- TOC entry 5638 (class 1259 OID 1026230)
--- Name: ndx_bill_jit_components; Type: INDEX; Schema: billing; Owner: postgres
---
-
-CREATE INDEX ndx_bill_jit_components ON billing.bill_jit_components USING btree (bill_id);
-
-
---
--- TOC entry 5643 (class 1259 OID 1026645)
--- Name: ndx_bill_subdetail_info; Type: INDEX; Schema: billing; Owner: postgres
---
-
-CREATE INDEX ndx_bill_subdetail_info ON billing.bill_subdetail_info USING btree (bill_id);
-
-
---
--- TOC entry 5634 (class 1259 OID 1026704)
--- Name: ndx_ecs_id; Type: INDEX; Schema: billing; Owner: postgres
---
-
-CREATE INDEX ndx_ecs_id ON billing.bill_ecs_neft_details USING btree (id) WITH (deduplicate_items='false');
-
-
---
--- TOC entry 5623 (class 1259 OID 1027020)
+-- TOC entry 6542 (class 1259 OID 1037571)
 -- Name: ndx_jit_ecs_additional; Type: INDEX; Schema: billing; Owner: postgres
 --
 
-CREATE INDEX ndx_jit_ecs_additional ON billing.jit_ecs_additional USING btree (bill_id);
+CREATE INDEX ndx_jit_ecs_additional ON ONLY billing.jit_ecs_additional USING btree (bill_id);
 
 
 --
--- TOC entry 5658 (class 1259 OID 1027258)
+-- TOC entry 6544 (class 1259 OID 1037580)
+-- Name: jit_ecs_additional_2425_bill_id_idx1; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE INDEX jit_ecs_additional_2425_bill_id_idx1 ON billing.jit_ecs_additional_2425 USING btree (bill_id);
+
+
+--
+-- TOC entry 6547 (class 1259 OID 1037591)
+-- Name: jit_ecs_additional_2526_bill_id_idx; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE INDEX jit_ecs_additional_2526_bill_id_idx ON billing.jit_ecs_additional_2526 USING btree (bill_id);
+
+
+--
+-- TOC entry 6548 (class 1259 OID 1037592)
+-- Name: jit_ecs_additional_2526_bill_id_idx1; Type: INDEX; Schema: billing; Owner: postgres
+--
+
+CREATE INDEX jit_ecs_additional_2526_bill_id_idx1 ON billing.jit_ecs_additional_2526 USING btree (bill_id);
+
+
+--
+-- TOC entry 6185 (class 1259 OID 1035032)
 -- Name: ndx_jit_fto_voucher; Type: INDEX; Schema: billing; Owner: postgres
 --
 
@@ -14730,7 +18033,7 @@ CREATE INDEX ndx_jit_fto_voucher ON billing.jit_fto_voucher USING btree (bill_id
 
 
 --
--- TOC entry 5665 (class 1259 OID 1027260)
+-- TOC entry 6192 (class 1259 OID 1035033)
 -- Name: ndx_tr_10_detail; Type: INDEX; Schema: billing; Owner: postgres
 --
 
@@ -14738,7 +18041,7 @@ CREATE INDEX ndx_tr_10_detail ON billing.tr_10_detail USING btree (bill_id);
 
 
 --
--- TOC entry 5674 (class 1259 OID 1027261)
+-- TOC entry 6201 (class 1259 OID 1035034)
 -- Name: ndx_tr_26a_detail; Type: INDEX; Schema: billing; Owner: postgres
 --
 
@@ -14746,55 +18049,71 @@ CREATE INDEX ndx_tr_26a_detail ON billing.tr_26a_detail USING btree (bill_id);
 
 
 --
--- TOC entry 5651 (class 1259 OID 1027265)
--- Name: unique_active_ebill_jit_int_map; Type: INDEX; Schema: billing; Owner: postgres
---
-
-CREATE UNIQUE INDEX unique_active_ebill_jit_int_map ON billing.ebill_jit_int_map USING btree (jit_ref_no) WHERE ((is_active = true) AND (is_rejected = false));
-
-
---
--- TOC entry 5619 (class 1259 OID 1027941)
--- Name: unique_bill_details_active_bill_no; Type: INDEX; Schema: billing; Owner: postgres
---
-
-CREATE UNIQUE INDEX unique_bill_details_active_bill_no ON billing.bill_details USING btree (bill_no) WHERE (is_deleted = false);
-
-
---
--- TOC entry 5707 (class 1259 OID 1028542)
+-- TOC entry 6412 (class 1259 OID 1036122)
 -- Name: idx_ebill_jit_int_map_log_bill_id; Type: INDEX; Schema: billing_log; Owner: postgres
 --
 
-CREATE INDEX idx_ebill_jit_int_map_log_bill_id ON billing_log.ebill_jit_int_map_log USING btree (bill_id);
+CREATE INDEX idx_ebill_jit_int_map_log_bill_id ON ONLY billing_log.ebill_jit_int_map_log USING btree (bill_id);
 
 
 --
--- TOC entry 5708 (class 1259 OID 1028546)
+-- TOC entry 6413 (class 1259 OID 1036123)
 -- Name: unique_active_ebill_jit_int_map_log; Type: INDEX; Schema: billing_log; Owner: postgres
 --
 
-CREATE UNIQUE INDEX unique_active_ebill_jit_int_map_log ON billing_log.ebill_jit_int_map_log USING btree (jit_ref_no) WHERE ((is_active = true) AND (is_rejected = false));
+CREATE UNIQUE INDEX unique_active_ebill_jit_int_map_log ON ONLY billing_log.ebill_jit_int_map_log USING btree (jit_ref_no, financial_year) WHERE ((is_active = true) AND (is_rejected = false));
 
 
 --
--- TOC entry 5717 (class 1259 OID 1028547)
+-- TOC entry 6395 (class 1259 OID 1036003)
 -- Name: unique_active_cpin; Type: INDEX; Schema: billing_master; Owner: postgres
 --
 
-CREATE UNIQUE INDEX unique_active_cpin ON billing_master.cpin_master USING btree (cpin_id) WHERE (is_active = true);
+CREATE UNIQUE INDEX unique_active_cpin ON ONLY billing_master.cpin_master USING btree (cpin_id, financial_year) WHERE (is_active = true);
 
 
 --
--- TOC entry 5732 (class 1259 OID 1028687)
+-- TOC entry 6396 (class 1259 OID 1036011)
+-- Name: cpin_master_2425_cpin_id_financial_year_idx; Type: INDEX; Schema: billing_master; Owner: postgres
+--
+
+CREATE UNIQUE INDEX cpin_master_2425_cpin_id_financial_year_idx ON billing_master.cpin_master_2425 USING btree (cpin_id, financial_year) WHERE (is_active = true);
+
+
+--
+-- TOC entry 6399 (class 1259 OID 1036021)
+-- Name: cpin_master_2526_cpin_id_financial_year_idx; Type: INDEX; Schema: billing_master; Owner: postgres
+--
+
+CREATE UNIQUE INDEX cpin_master_2526_cpin_id_financial_year_idx ON billing_master.cpin_master_2526 USING btree (cpin_id, financial_year) WHERE (is_active = true);
+
+
+--
+-- TOC entry 6516 (class 1259 OID 1037318)
 -- Name: idx_success_trans_ben_billid_endtoendid; Type: INDEX; Schema: cts; Owner: postgres
 --
 
-CREATE INDEX idx_success_trans_ben_billid_endtoendid ON cts.success_transaction_beneficiary USING btree (bill_id, end_to_end_id);
+CREATE INDEX idx_success_trans_ben_billid_endtoendid ON ONLY cts.success_transaction_beneficiary USING btree (bill_id, end_to_end_id);
 
 
 --
--- TOC entry 5652 (class 1259 OID 1030160)
+-- TOC entry 6523 (class 1259 OID 1037330)
+-- Name: success_transaction_beneficiary_2425_bill_id_end_to_end_id_idx; Type: INDEX; Schema: cts; Owner: postgres
+--
+
+CREATE INDEX success_transaction_beneficiary_2425_bill_id_end_to_end_id_idx ON cts.success_transaction_beneficiary_2425 USING btree (bill_id, end_to_end_id);
+
+
+--
+-- TOC entry 6528 (class 1259 OID 1037344)
+-- Name: success_transaction_beneficiary_2526_bill_id_end_to_end_id_idx; Type: INDEX; Schema: cts; Owner: postgres
+--
+
+CREATE INDEX success_transaction_beneficiary_2526_bill_id_end_to_end_id_idx ON cts.success_transaction_beneficiary_2526 USING btree (bill_id, end_to_end_id);
+
+
+--
+-- TOC entry 6179 (class 1259 OID 1035041)
 -- Name: active_hoa_mst_id_idx; Type: INDEX; Schema: master; Owner: postgres
 --
 
@@ -14802,7 +18121,7 @@ CREATE INDEX active_hoa_mst_id_idx ON master.active_hoa_mst USING btree (id) WIT
 
 
 --
--- TOC entry 5797 (class 1259 OID 1030161)
+-- TOC entry 6324 (class 1259 OID 1035042)
 -- Name: ddo_ddo_code_idx; Type: INDEX; Schema: master; Owner: postgres
 --
 
@@ -14810,7 +18129,7 @@ CREATE INDEX ddo_ddo_code_idx ON master.ddo USING btree (ddo_code) WITH (dedupli
 
 
 --
--- TOC entry 5820 (class 1259 OID 1030197)
+-- TOC entry 6347 (class 1259 OID 1035043)
 -- Name: rbi_ifsc_stock_ifsc_idx; Type: INDEX; Schema: master; Owner: postgres
 --
 
@@ -14818,7 +18137,7 @@ CREATE INDEX rbi_ifsc_stock_ifsc_idx ON master.rbi_ifsc_stock USING btree (ifsc)
 
 
 --
--- TOC entry 5831 (class 1259 OID 1031087)
+-- TOC entry 6358 (class 1259 OID 1035044)
 -- Name: treasury_code_idx; Type: INDEX; Schema: master; Owner: postgres
 --
 
@@ -14826,7 +18145,511 @@ CREATE INDEX treasury_code_idx ON master.treasury USING btree (code) WITH (dedup
 
 
 --
--- TOC entry 5850 (class 0 OID 0)
+-- TOC entry 6143 (class 1259 OID 1035021)
+-- Name: bill_details_bill_id_idx; Type: INDEX; Schema: old; Owner: postgres
+--
+
+CREATE INDEX bill_details_bill_id_idx ON old.billing_bill_details USING btree (bill_id) WITH (deduplicate_items='false');
+
+
+--
+-- TOC entry 6164 (class 1259 OID 1035022)
+-- Name: fki_bill_jit_components_bill_id_fkey; Type: INDEX; Schema: old; Owner: postgres
+--
+
+CREATE INDEX fki_bill_jit_components_bill_id_fkey ON old.billing_bill_jit_components USING btree (bill_id);
+
+
+--
+-- TOC entry 6147 (class 1259 OID 1035023)
+-- Name: fki_jit_ecs_additional_bill_id_fkey; Type: INDEX; Schema: old; Owner: postgres
+--
+
+CREATE INDEX fki_jit_ecs_additional_bill_id_fkey ON old.billing_jit_ecs_additional USING btree (bill_id);
+
+
+--
+-- TOC entry 6177 (class 1259 OID 1035025)
+-- Name: idx_ebill_jit_int_map_bill_id; Type: INDEX; Schema: old; Owner: postgres
+--
+
+CREATE INDEX idx_ebill_jit_int_map_bill_id ON old.billing_ebill_jit_int_map USING btree (bill_id);
+
+
+--
+-- TOC entry 6234 (class 1259 OID 1035037)
+-- Name: idx_ebill_jit_int_map_log_bill_id; Type: INDEX; Schema: old; Owner: postgres
+--
+
+CREATE INDEX idx_ebill_jit_int_map_log_bill_id ON old.billing_log_ebill_jit_int_map_log USING btree (bill_id);
+
+
+--
+-- TOC entry 6259 (class 1259 OID 1035040)
+-- Name: idx_success_trans_ben_billid_endtoendid; Type: INDEX; Schema: old; Owner: postgres
+--
+
+CREATE INDEX idx_success_trans_ben_billid_endtoendid ON old.cts_success_transaction_beneficiary USING btree (bill_id, end_to_end_id);
+
+
+--
+-- TOC entry 6153 (class 1259 OID 1035026)
+-- Name: ndx_bill_btdetail; Type: INDEX; Schema: old; Owner: postgres
+--
+
+CREATE INDEX ndx_bill_btdetail ON old.billing_bill_btdetail USING btree (bill_id);
+
+
+--
+-- TOC entry 6160 (class 1259 OID 1035027)
+-- Name: ndx_bill_ecs_neft_details; Type: INDEX; Schema: old; Owner: postgres
+--
+
+CREATE INDEX ndx_bill_ecs_neft_details ON old.billing_bill_ecs_neft_details USING btree (bill_id);
+
+
+--
+-- TOC entry 6165 (class 1259 OID 1035028)
+-- Name: ndx_bill_jit_components; Type: INDEX; Schema: old; Owner: postgres
+--
+
+CREATE INDEX ndx_bill_jit_components ON old.billing_bill_jit_components USING btree (bill_id);
+
+
+--
+-- TOC entry 6170 (class 1259 OID 1035029)
+-- Name: ndx_bill_subdetail_info; Type: INDEX; Schema: old; Owner: postgres
+--
+
+CREATE INDEX ndx_bill_subdetail_info ON old.billing_bill_subdetail_info USING btree (bill_id);
+
+
+--
+-- TOC entry 6161 (class 1259 OID 1035030)
+-- Name: ndx_ecs_id; Type: INDEX; Schema: old; Owner: postgres
+--
+
+CREATE INDEX ndx_ecs_id ON old.billing_bill_ecs_neft_details USING btree (id) WITH (deduplicate_items='false');
+
+
+--
+-- TOC entry 6150 (class 1259 OID 1035031)
+-- Name: ndx_jit_ecs_additional; Type: INDEX; Schema: old; Owner: postgres
+--
+
+CREATE INDEX ndx_jit_ecs_additional ON old.billing_jit_ecs_additional USING btree (bill_id);
+
+
+--
+-- TOC entry 6244 (class 1259 OID 1035039)
+-- Name: unique_active_cpin; Type: INDEX; Schema: old; Owner: postgres
+--
+
+CREATE UNIQUE INDEX unique_active_cpin ON old.billing_master_cpin_master USING btree (cpin_id) WHERE (is_active = true);
+
+
+--
+-- TOC entry 6178 (class 1259 OID 1035035)
+-- Name: unique_active_ebill_jit_int_map; Type: INDEX; Schema: old; Owner: postgres
+--
+
+CREATE UNIQUE INDEX unique_active_ebill_jit_int_map ON old.billing_ebill_jit_int_map USING btree (jit_ref_no) WHERE ((is_active = true) AND (is_rejected = false));
+
+
+--
+-- TOC entry 6235 (class 1259 OID 1035038)
+-- Name: unique_active_ebill_jit_int_map_log; Type: INDEX; Schema: old; Owner: postgres
+--
+
+CREATE UNIQUE INDEX unique_active_ebill_jit_int_map_log ON old.billing_log_ebill_jit_int_map_log USING btree (jit_ref_no) WHERE ((is_active = true) AND (is_rejected = false));
+
+
+--
+-- TOC entry 6146 (class 1259 OID 1035036)
+-- Name: unique_bill_details_active_bill_no; Type: INDEX; Schema: old; Owner: postgres
+--
+
+CREATE UNIQUE INDEX unique_bill_details_active_bill_no ON old.billing_bill_details USING btree (bill_no) WHERE (is_deleted = false);
+
+
+--
+-- TOC entry 6584 (class 0 OID 0)
+-- Name: ddo_allotment_transactions_2526_pkey; Type: INDEX ATTACH; Schema: bantan; Owner: postgres
+--
+
+ALTER INDEX bantan.ddo_allotment_transactions_pkey ATTACH PARTITION bantan.ddo_allotment_transactions_2526_pkey;
+
+
+--
+-- TOC entry 6585 (class 0 OID 0)
+-- Name: ddo_allotment_transactions_25_memo_number_sender_sao_ddo_co_key; Type: INDEX ATTACH; Schema: bantan; Owner: postgres
+--
+
+ALTER INDEX bantan.ddo_allotment_transactions_memo_number_sender_sao_ddo_code__key ATTACH PARTITION bantan.ddo_allotment_transactions_25_memo_number_sender_sao_ddo_co_key;
+
+
+--
+-- TOC entry 6574 (class 0 OID 0)
+-- Name: ddo_wallet_2526_pkey; Type: INDEX ATTACH; Schema: bantan; Owner: postgres
+--
+
+ALTER INDEX bantan.ddo_wallet_pkey ATTACH PARTITION bantan.ddo_wallet_2526_pkey;
+
+
+--
+-- TOC entry 6575 (class 0 OID 0)
+-- Name: ddo_wallet_2526_sao_ddo_code_active_hoa_id_financial_year_key; Type: INDEX ATTACH; Schema: bantan; Owner: postgres
+--
+
+ALTER INDEX bantan.ddo_wallet_sao_ddo_code_active_hoa_id_financial_year_key ATTACH PARTITION bantan.ddo_wallet_2526_sao_ddo_code_active_hoa_id_financial_year_key;
+
+
+--
+-- TOC entry 6586 (class 0 OID 0)
+-- Name: bill_btdetail_2425_bill_id_idx; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.ndx_bill_btdetail ATTACH PARTITION billing.bill_btdetail_2425_bill_id_idx;
+
+
+--
+-- TOC entry 6587 (class 0 OID 0)
+-- Name: bill_btdetail_2425_pkey; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.bill_btdetail_pkey ATTACH PARTITION billing.bill_btdetail_2425_pkey;
+
+
+--
+-- TOC entry 6588 (class 0 OID 0)
+-- Name: bill_btdetail_2526_bill_id_idx; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.ndx_bill_btdetail ATTACH PARTITION billing.bill_btdetail_2526_bill_id_idx;
+
+
+--
+-- TOC entry 6589 (class 0 OID 0)
+-- Name: bill_btdetail_2526_pkey; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.bill_btdetail_pkey ATTACH PARTITION billing.bill_btdetail_2526_pkey;
+
+
+--
+-- TOC entry 6578 (class 0 OID 0)
+-- Name: bill_details_2425_bill_id_idx; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.bill_details_bill_id_idx ATTACH PARTITION billing.bill_details_2425_bill_id_idx;
+
+
+--
+-- TOC entry 6579 (class 0 OID 0)
+-- Name: bill_details_2425_bill_no_financial_year_idx; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.unique_bill_details_active_bill_no ATTACH PARTITION billing.bill_details_2425_bill_no_financial_year_idx;
+
+
+--
+-- TOC entry 6580 (class 0 OID 0)
+-- Name: bill_details_2425_pkey; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.bill_details_pkey ATTACH PARTITION billing.bill_details_2425_pkey;
+
+
+--
+-- TOC entry 6581 (class 0 OID 0)
+-- Name: bill_details_2526_bill_id_idx; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.bill_details_bill_id_idx ATTACH PARTITION billing.bill_details_2526_bill_id_idx;
+
+
+--
+-- TOC entry 6582 (class 0 OID 0)
+-- Name: bill_details_2526_bill_no_financial_year_idx; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.unique_bill_details_active_bill_no ATTACH PARTITION billing.bill_details_2526_bill_no_financial_year_idx;
+
+
+--
+-- TOC entry 6583 (class 0 OID 0)
+-- Name: bill_details_2526_pkey; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.bill_details_pkey ATTACH PARTITION billing.bill_details_2526_pkey;
+
+
+--
+-- TOC entry 6590 (class 0 OID 0)
+-- Name: bill_ecs_neft_details_2425_bill_id_bank_account_number_fina_key; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.bill_ecs_neft_details_bill_id_bank_account_number_key ATTACH PARTITION billing.bill_ecs_neft_details_2425_bill_id_bank_account_number_fina_key;
+
+
+--
+-- TOC entry 6591 (class 0 OID 0)
+-- Name: bill_ecs_neft_details_2425_bill_id_idx; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.ndx_bill_ecs_neft_details ATTACH PARTITION billing.bill_ecs_neft_details_2425_bill_id_idx;
+
+
+--
+-- TOC entry 6592 (class 0 OID 0)
+-- Name: bill_ecs_neft_details_2425_id_idx; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.ndx_ecs_id ATTACH PARTITION billing.bill_ecs_neft_details_2425_id_idx;
+
+
+--
+-- TOC entry 6593 (class 0 OID 0)
+-- Name: bill_ecs_neft_details_2425_pkey; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.bill_ecs_neft_details_pkey ATTACH PARTITION billing.bill_ecs_neft_details_2425_pkey;
+
+
+--
+-- TOC entry 6594 (class 0 OID 0)
+-- Name: bill_ecs_neft_details_2526_bill_id_bank_account_number_fina_key; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.bill_ecs_neft_details_bill_id_bank_account_number_key ATTACH PARTITION billing.bill_ecs_neft_details_2526_bill_id_bank_account_number_fina_key;
+
+
+--
+-- TOC entry 6595 (class 0 OID 0)
+-- Name: bill_ecs_neft_details_2526_bill_id_idx; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.ndx_bill_ecs_neft_details ATTACH PARTITION billing.bill_ecs_neft_details_2526_bill_id_idx;
+
+
+--
+-- TOC entry 6596 (class 0 OID 0)
+-- Name: bill_ecs_neft_details_2526_id_idx; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.ndx_ecs_id ATTACH PARTITION billing.bill_ecs_neft_details_2526_id_idx;
+
+
+--
+-- TOC entry 6597 (class 0 OID 0)
+-- Name: bill_ecs_neft_details_2526_pkey; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.bill_ecs_neft_details_pkey ATTACH PARTITION billing.bill_ecs_neft_details_2526_pkey;
+
+
+--
+-- TOC entry 6608 (class 0 OID 0)
+-- Name: bill_gst_2425_pkey; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.bill_cpin_mapping_pkey ATTACH PARTITION billing.bill_gst_2425_pkey;
+
+
+--
+-- TOC entry 6609 (class 0 OID 0)
+-- Name: bill_gst_2526_pkey; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.bill_cpin_mapping_pkey ATTACH PARTITION billing.bill_gst_2526_pkey;
+
+
+--
+-- TOC entry 6598 (class 0 OID 0)
+-- Name: bill_jit_components_2425_bill_id_idx; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.fki_bill_jit_components_bill_id_fkey ATTACH PARTITION billing.bill_jit_components_2425_bill_id_idx;
+
+
+--
+-- TOC entry 6599 (class 0 OID 0)
+-- Name: bill_jit_components_2425_bill_id_idx1; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.ndx_bill_jit_components ATTACH PARTITION billing.bill_jit_components_2425_bill_id_idx1;
+
+
+--
+-- TOC entry 6600 (class 0 OID 0)
+-- Name: bill_jit_components_2425_pkey; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.bill_jit_components_pkey ATTACH PARTITION billing.bill_jit_components_2425_pkey;
+
+
+--
+-- TOC entry 6601 (class 0 OID 0)
+-- Name: bill_jit_components_2526_bill_id_idx; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.fki_bill_jit_components_bill_id_fkey ATTACH PARTITION billing.bill_jit_components_2526_bill_id_idx;
+
+
+--
+-- TOC entry 6602 (class 0 OID 0)
+-- Name: bill_jit_components_2526_bill_id_idx1; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.ndx_bill_jit_components ATTACH PARTITION billing.bill_jit_components_2526_bill_id_idx1;
+
+
+--
+-- TOC entry 6603 (class 0 OID 0)
+-- Name: bill_jit_components_2526_pkey; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.bill_jit_components_pkey ATTACH PARTITION billing.bill_jit_components_2526_pkey;
+
+
+--
+-- TOC entry 6604 (class 0 OID 0)
+-- Name: bill_subdetail_info_2425_bill_id_idx; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.ndx_bill_subdetail_info ATTACH PARTITION billing.bill_subdetail_info_2425_bill_id_idx;
+
+
+--
+-- TOC entry 6605 (class 0 OID 0)
+-- Name: bill_subdetail_info_2425_pkey; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.bill_subdetail_info_pkey ATTACH PARTITION billing.bill_subdetail_info_2425_pkey;
+
+
+--
+-- TOC entry 6606 (class 0 OID 0)
+-- Name: bill_subdetail_info_2526_bill_id_idx; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.ndx_bill_subdetail_info ATTACH PARTITION billing.bill_subdetail_info_2526_bill_id_idx;
+
+
+--
+-- TOC entry 6607 (class 0 OID 0)
+-- Name: bill_subdetail_info_2526_pkey; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.bill_subdetail_info_pkey ATTACH PARTITION billing.bill_subdetail_info_2526_pkey;
+
+
+--
+-- TOC entry 6622 (class 0 OID 0)
+-- Name: ddo_allotment_booked_bill_2526_pkey; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.ddo_allotment_booked_bill_pkey ATTACH PARTITION billing.ddo_allotment_booked_bill_2526_pkey;
+
+
+--
+-- TOC entry 6563 (class 0 OID 0)
+-- Name: ebill_jit_int_map_2425_bill_id_idx; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.idx_ebill_jit_int_map_bill_id ATTACH PARTITION billing.ebill_jit_int_map_2425_bill_id_idx;
+
+
+--
+-- TOC entry 6564 (class 0 OID 0)
+-- Name: ebill_jit_int_map_2425_jit_ref_no_financial_year_idx; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.unique_active_ebill_jit_int_map ATTACH PARTITION billing.ebill_jit_int_map_2425_jit_ref_no_financial_year_idx;
+
+
+--
+-- TOC entry 6565 (class 0 OID 0)
+-- Name: ebill_jit_int_map_2425_pkey; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.ebill_jit_int_map_pkey ATTACH PARTITION billing.ebill_jit_int_map_2425_pkey;
+
+
+--
+-- TOC entry 6566 (class 0 OID 0)
+-- Name: ebill_jit_int_map_2526_bill_id_idx; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.idx_ebill_jit_int_map_bill_id ATTACH PARTITION billing.ebill_jit_int_map_2526_bill_id_idx;
+
+
+--
+-- TOC entry 6567 (class 0 OID 0)
+-- Name: ebill_jit_int_map_2526_jit_ref_no_financial_year_idx; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.unique_active_ebill_jit_int_map ATTACH PARTITION billing.ebill_jit_int_map_2526_jit_ref_no_financial_year_idx;
+
+
+--
+-- TOC entry 6568 (class 0 OID 0)
+-- Name: ebill_jit_int_map_2526_pkey; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.ebill_jit_int_map_pkey ATTACH PARTITION billing.ebill_jit_int_map_2526_pkey;
+
+
+--
+-- TOC entry 6623 (class 0 OID 0)
+-- Name: jit_ecs_additional_2425_bill_id_idx; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.fki_jit_ecs_additional_bill_id_fkey ATTACH PARTITION billing.jit_ecs_additional_2425_bill_id_idx;
+
+
+--
+-- TOC entry 6624 (class 0 OID 0)
+-- Name: jit_ecs_additional_2425_bill_id_idx1; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.ndx_jit_ecs_additional ATTACH PARTITION billing.jit_ecs_additional_2425_bill_id_idx1;
+
+
+--
+-- TOC entry 6625 (class 0 OID 0)
+-- Name: jit_ecs_additional_2425_pkey; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.jit_ecs_additional_pkey ATTACH PARTITION billing.jit_ecs_additional_2425_pkey;
+
+
+--
+-- TOC entry 6626 (class 0 OID 0)
+-- Name: jit_ecs_additional_2526_bill_id_idx; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.fki_jit_ecs_additional_bill_id_fkey ATTACH PARTITION billing.jit_ecs_additional_2526_bill_id_idx;
+
+
+--
+-- TOC entry 6627 (class 0 OID 0)
+-- Name: jit_ecs_additional_2526_bill_id_idx1; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.ndx_jit_ecs_additional ATTACH PARTITION billing.jit_ecs_additional_2526_bill_id_idx1;
+
+
+--
+-- TOC entry 6628 (class 0 OID 0)
+-- Name: jit_ecs_additional_2526_pkey; Type: INDEX ATTACH; Schema: billing; Owner: postgres
+--
+
+ALTER INDEX billing.jit_ecs_additional_pkey ATTACH PARTITION billing.jit_ecs_additional_2526_pkey;
+
+
+--
+-- TOC entry 6551 (class 0 OID 0)
 -- Name: audit_log_2025_05_pkey; Type: INDEX ATTACH; Schema: billing_log; Owner: postgres
 --
 
@@ -14834,7 +18657,7 @@ ALTER INDEX billing_log.audit_log_pkey ATTACH PARTITION billing_log.audit_log_20
 
 
 --
--- TOC entry 5851 (class 0 OID 0)
+-- TOC entry 6552 (class 0 OID 0)
 -- Name: audit_log_2025_06_pkey; Type: INDEX ATTACH; Schema: billing_log; Owner: postgres
 --
 
@@ -14842,7 +18665,7 @@ ALTER INDEX billing_log.audit_log_pkey ATTACH PARTITION billing_log.audit_log_20
 
 
 --
--- TOC entry 5852 (class 0 OID 0)
+-- TOC entry 6553 (class 0 OID 0)
 -- Name: audit_log_2025_07_pkey; Type: INDEX ATTACH; Schema: billing_log; Owner: postgres
 --
 
@@ -14850,7 +18673,7 @@ ALTER INDEX billing_log.audit_log_pkey ATTACH PARTITION billing_log.audit_log_20
 
 
 --
--- TOC entry 5853 (class 0 OID 0)
+-- TOC entry 6554 (class 0 OID 0)
 -- Name: audit_log_2025_08_pkey; Type: INDEX ATTACH; Schema: billing_log; Owner: postgres
 --
 
@@ -14858,7 +18681,7 @@ ALTER INDEX billing_log.audit_log_pkey ATTACH PARTITION billing_log.audit_log_20
 
 
 --
--- TOC entry 5854 (class 0 OID 0)
+-- TOC entry 6555 (class 0 OID 0)
 -- Name: audit_log_2025_09_pkey; Type: INDEX ATTACH; Schema: billing_log; Owner: postgres
 --
 
@@ -14866,7 +18689,7 @@ ALTER INDEX billing_log.audit_log_pkey ATTACH PARTITION billing_log.audit_log_20
 
 
 --
--- TOC entry 5855 (class 0 OID 0)
+-- TOC entry 6556 (class 0 OID 0)
 -- Name: audit_log_2025_10_pkey; Type: INDEX ATTACH; Schema: billing_log; Owner: postgres
 --
 
@@ -14874,7 +18697,7 @@ ALTER INDEX billing_log.audit_log_pkey ATTACH PARTITION billing_log.audit_log_20
 
 
 --
--- TOC entry 5856 (class 0 OID 0)
+-- TOC entry 6557 (class 0 OID 0)
 -- Name: audit_log_2025_11_pkey; Type: INDEX ATTACH; Schema: billing_log; Owner: postgres
 --
 
@@ -14882,7 +18705,7 @@ ALTER INDEX billing_log.audit_log_pkey ATTACH PARTITION billing_log.audit_log_20
 
 
 --
--- TOC entry 5857 (class 0 OID 0)
+-- TOC entry 6558 (class 0 OID 0)
 -- Name: audit_log_2025_12_pkey; Type: INDEX ATTACH; Schema: billing_log; Owner: postgres
 --
 
@@ -14890,7 +18713,7 @@ ALTER INDEX billing_log.audit_log_pkey ATTACH PARTITION billing_log.audit_log_20
 
 
 --
--- TOC entry 5858 (class 0 OID 0)
+-- TOC entry 6559 (class 0 OID 0)
 -- Name: audit_log_2026_01_pkey; Type: INDEX ATTACH; Schema: billing_log; Owner: postgres
 --
 
@@ -14898,7 +18721,7 @@ ALTER INDEX billing_log.audit_log_pkey ATTACH PARTITION billing_log.audit_log_20
 
 
 --
--- TOC entry 5859 (class 0 OID 0)
+-- TOC entry 6560 (class 0 OID 0)
 -- Name: audit_log_2026_02_pkey; Type: INDEX ATTACH; Schema: billing_log; Owner: postgres
 --
 
@@ -14906,7 +18729,7 @@ ALTER INDEX billing_log.audit_log_pkey ATTACH PARTITION billing_log.audit_log_20
 
 
 --
--- TOC entry 5860 (class 0 OID 0)
+-- TOC entry 6561 (class 0 OID 0)
 -- Name: audit_log_2026_03_pkey; Type: INDEX ATTACH; Schema: billing_log; Owner: postgres
 --
 
@@ -14914,7 +18737,7 @@ ALTER INDEX billing_log.audit_log_pkey ATTACH PARTITION billing_log.audit_log_20
 
 
 --
--- TOC entry 5861 (class 0 OID 0)
+-- TOC entry 6562 (class 0 OID 0)
 -- Name: audit_log_2026_04_pkey; Type: INDEX ATTACH; Schema: billing_log; Owner: postgres
 --
 
@@ -14922,7 +18745,159 @@ ALTER INDEX billing_log.audit_log_pkey ATTACH PARTITION billing_log.audit_log_20
 
 
 --
--- TOC entry 6129 (class 2618 OID 920408)
+-- TOC entry 6570 (class 0 OID 0)
+-- Name: cpin_master_2425_cpin_id_financial_year_idx; Type: INDEX ATTACH; Schema: billing_master; Owner: postgres
+--
+
+ALTER INDEX billing_master.unique_active_cpin ATTACH PARTITION billing_master.cpin_master_2425_cpin_id_financial_year_idx;
+
+
+--
+-- TOC entry 6571 (class 0 OID 0)
+-- Name: cpin_master_2425_pkey; Type: INDEX ATTACH; Schema: billing_master; Owner: postgres
+--
+
+ALTER INDEX billing_master.cpin_master_pkey ATTACH PARTITION billing_master.cpin_master_2425_pkey;
+
+
+--
+-- TOC entry 6572 (class 0 OID 0)
+-- Name: cpin_master_2526_cpin_id_financial_year_idx; Type: INDEX ATTACH; Schema: billing_master; Owner: postgres
+--
+
+ALTER INDEX billing_master.unique_active_cpin ATTACH PARTITION billing_master.cpin_master_2526_cpin_id_financial_year_idx;
+
+
+--
+-- TOC entry 6573 (class 0 OID 0)
+-- Name: cpin_master_2526_pkey; Type: INDEX ATTACH; Schema: billing_master; Owner: postgres
+--
+
+ALTER INDEX billing_master.cpin_master_pkey ATTACH PARTITION billing_master.cpin_master_2526_pkey;
+
+
+--
+-- TOC entry 6610 (class 0 OID 0)
+-- Name: failed_transaction_beneficiar_beneficiary_id_end_to_end_id__key; Type: INDEX ATTACH; Schema: cts; Owner: postgres
+--
+
+ALTER INDEX cts.failed_transaction_beneficiary_beneficiary_id_end_to_end_id_key ATTACH PARTITION cts.failed_transaction_beneficiar_beneficiary_id_end_to_end_id__key;
+
+
+--
+-- TOC entry 6612 (class 0 OID 0)
+-- Name: failed_transaction_beneficiar_beneficiary_id_end_to_end_id_key1; Type: INDEX ATTACH; Schema: cts; Owner: postgres
+--
+
+ALTER INDEX cts.failed_transaction_beneficiary_beneficiary_id_end_to_end_id_key ATTACH PARTITION cts.failed_transaction_beneficiar_beneficiary_id_end_to_end_id_key1;
+
+
+--
+-- TOC entry 6611 (class 0 OID 0)
+-- Name: failed_transaction_beneficiary_2425_pkey; Type: INDEX ATTACH; Schema: cts; Owner: postgres
+--
+
+ALTER INDEX cts.failed_transaction_beneficiary_pkey ATTACH PARTITION cts.failed_transaction_beneficiary_2425_pkey;
+
+
+--
+-- TOC entry 6613 (class 0 OID 0)
+-- Name: failed_transaction_beneficiary_2526_pkey; Type: INDEX ATTACH; Schema: cts; Owner: postgres
+--
+
+ALTER INDEX cts.failed_transaction_beneficiary_pkey ATTACH PARTITION cts.failed_transaction_beneficiary_2526_pkey;
+
+
+--
+-- TOC entry 6614 (class 0 OID 0)
+-- Name: failed_transaction_beneficiary_bk_2425_pkey; Type: INDEX ATTACH; Schema: cts; Owner: postgres
+--
+
+ALTER INDEX cts.failed_transaction_beneficiary_pkey_bk ATTACH PARTITION cts.failed_transaction_beneficiary_bk_2425_pkey;
+
+
+--
+-- TOC entry 6618 (class 0 OID 0)
+-- Name: success_transaction_beneficia_ecs_id_end_to_end_id_financi_key1; Type: INDEX ATTACH; Schema: cts; Owner: postgres
+--
+
+ALTER INDEX cts.success_transaction_beneficiary_ecs_id_end_to_end_id_key ATTACH PARTITION cts.success_transaction_beneficia_ecs_id_end_to_end_id_financi_key1;
+
+
+--
+-- TOC entry 6615 (class 0 OID 0)
+-- Name: success_transaction_beneficia_ecs_id_end_to_end_id_financia_key; Type: INDEX ATTACH; Schema: cts; Owner: postgres
+--
+
+ALTER INDEX cts.success_transaction_beneficiary_ecs_id_end_to_end_id_key ATTACH PARTITION cts.success_transaction_beneficia_ecs_id_end_to_end_id_financia_key;
+
+
+--
+-- TOC entry 6616 (class 0 OID 0)
+-- Name: success_transaction_beneficiary_2425_bill_id_end_to_end_id_idx; Type: INDEX ATTACH; Schema: cts; Owner: postgres
+--
+
+ALTER INDEX cts.idx_success_trans_ben_billid_endtoendid ATTACH PARTITION cts.success_transaction_beneficiary_2425_bill_id_end_to_end_id_idx;
+
+
+--
+-- TOC entry 6617 (class 0 OID 0)
+-- Name: success_transaction_beneficiary_2425_pkey; Type: INDEX ATTACH; Schema: cts; Owner: postgres
+--
+
+ALTER INDEX cts.success_transaction_beneficiary_pkey ATTACH PARTITION cts.success_transaction_beneficiary_2425_pkey;
+
+
+--
+-- TOC entry 6619 (class 0 OID 0)
+-- Name: success_transaction_beneficiary_2526_bill_id_end_to_end_id_idx; Type: INDEX ATTACH; Schema: cts; Owner: postgres
+--
+
+ALTER INDEX cts.idx_success_trans_ben_billid_endtoendid ATTACH PARTITION cts.success_transaction_beneficiary_2526_bill_id_end_to_end_id_idx;
+
+
+--
+-- TOC entry 6620 (class 0 OID 0)
+-- Name: success_transaction_beneficiary_2526_pkey; Type: INDEX ATTACH; Schema: cts; Owner: postgres
+--
+
+ALTER INDEX cts.success_transaction_beneficiary_pkey ATTACH PARTITION cts.success_transaction_beneficiary_2526_pkey;
+
+
+--
+-- TOC entry 6621 (class 0 OID 0)
+-- Name: success_transaction_beneficiary_bk_2425_pkey; Type: INDEX ATTACH; Schema: cts; Owner: postgres
+--
+
+ALTER INDEX cts.success_transaction_beneficiary_pkey_bk ATTACH PARTITION cts.success_transaction_beneficiary_bk_2425_pkey;
+
+
+--
+-- TOC entry 6569 (class 0 OID 0)
+-- Name: ddo_agency_mapping_details_2526_pkey; Type: INDEX ATTACH; Schema: jit; Owner: postgres
+--
+
+ALTER INDEX jit.ddo_agency_mapping_details_pkey ATTACH PARTITION jit.ddo_agency_mapping_details_2526_pkey;
+
+
+--
+-- TOC entry 6576 (class 0 OID 0)
+-- Name: tsa_exp_details_2526_pkey; Type: INDEX ATTACH; Schema: jit; Owner: postgres
+--
+
+ALTER INDEX jit.tsa_exp_details_pkey ATTACH PARTITION jit.tsa_exp_details_2526_pkey;
+
+
+--
+-- TOC entry 6577 (class 0 OID 0)
+-- Name: tsa_exp_details_2526_ref_no_financial_year_key; Type: INDEX ATTACH; Schema: jit; Owner: postgres
+--
+
+ALTER INDEX jit.tsa_exp_details_unique_key_ref_no ATTACH PARTITION jit.tsa_exp_details_2526_ref_no_financial_year_key;
+
+
+--
+-- TOC entry 6964 (class 2618 OID 921818)
 -- Name: department_details_view _RETURN; Type: RULE; Schema: billing; Owner: postgres
 --
 
@@ -14931,7 +18906,7 @@ CREATE OR REPLACE VIEW billing.department_details_view AS
          SELECT bd.bill_id,
             bd.ddo_code,
             bd.demand
-           FROM billing.bill_details bd
+           FROM old.billing_bill_details bd
           GROUP BY bd.bill_id, bd.demand
         )
  SELECT DISTINCT dept.demand_code,
@@ -14943,7 +18918,7 @@ CREATE OR REPLACE VIEW billing.department_details_view AS
 
 
 --
--- TOC entry 5968 (class 2620 OID 1031089)
+-- TOC entry 6811 (class 2620 OID 1036696)
 -- Name: ddo_allotment_transactions audit_table_changes; Type: TRIGGER; Schema: bantan; Owner: postgres
 --
 
@@ -14951,7 +18926,7 @@ CREATE TRIGGER audit_table_changes AFTER INSERT OR DELETE OR UPDATE ON bantan.dd
 
 
 --
--- TOC entry 5969 (class 2620 OID 1031090)
+-- TOC entry 6808 (class 2620 OID 1036042)
 -- Name: ddo_wallet audit_table_changes; Type: TRIGGER; Schema: bantan; Owner: postgres
 --
 
@@ -14959,7 +18934,7 @@ CREATE TRIGGER audit_table_changes AFTER INSERT OR DELETE OR UPDATE ON bantan.dd
 
 
 --
--- TOC entry 5973 (class 2620 OID 1031091)
+-- TOC entry 6798 (class 2620 OID 1035048)
 -- Name: bill_status_info after_bill_insert_jit_report; Type: TRIGGER; Schema: billing; Owner: postgres
 --
 
@@ -14967,7 +18942,7 @@ CREATE TRIGGER after_bill_insert_jit_report AFTER INSERT OR UPDATE ON billing.bi
 
 
 --
--- TOC entry 5970 (class 2620 OID 1031092)
+-- TOC entry 6810 (class 2620 OID 1036214)
 -- Name: bill_details after_bill_status_update; Type: TRIGGER; Schema: billing; Owner: postgres
 --
 
@@ -14975,7 +18950,7 @@ CREATE TRIGGER after_bill_status_update AFTER UPDATE OF status, is_regenerated O
 
 
 --
--- TOC entry 5974 (class 2620 OID 1031093)
+-- TOC entry 6799 (class 2620 OID 1035050)
 -- Name: bill_status_info after_insert_update_bill_status_send_to_jit; Type: TRIGGER; Schema: billing; Owner: postgres
 --
 
@@ -14983,7 +18958,7 @@ CREATE TRIGGER after_insert_update_bill_status_send_to_jit AFTER INSERT OR UPDAT
 
 
 --
--- TOC entry 5975 (class 2620 OID 1031094)
+-- TOC entry 6800 (class 2620 OID 1035051)
 -- Name: billing_pfms_file_status_details after_insert_update_pfms_file_status_send_to_jit; Type: TRIGGER; Schema: billing; Owner: postgres
 --
 
@@ -14991,7 +18966,7 @@ CREATE TRIGGER after_insert_update_pfms_file_status_send_to_jit AFTER INSERT OR 
 
 
 --
--- TOC entry 5976 (class 2620 OID 1031095)
+-- TOC entry 6816 (class 2620 OID 1037490)
 -- Name: ddo_allotment_booked_bill after_reissue_bill_insert; Type: TRIGGER; Schema: billing; Owner: postgres
 --
 
@@ -14999,7 +18974,7 @@ CREATE TRIGGER after_reissue_bill_insert AFTER INSERT ON billing.ddo_allotment_b
 
 
 --
--- TOC entry 5977 (class 2620 OID 1031096)
+-- TOC entry 6817 (class 2620 OID 1037491)
 -- Name: ddo_allotment_booked_bill audit_table_changes; Type: TRIGGER; Schema: billing; Owner: postgres
 --
 
@@ -15007,7 +18982,7 @@ CREATE TRIGGER audit_table_changes AFTER INSERT OR DELETE OR UPDATE ON billing.d
 
 
 --
--- TOC entry 5971 (class 2620 OID 1031097)
+-- TOC entry 6812 (class 2620 OID 1037069)
 -- Name: bill_gst insert_bill_cpin_in_ecs; Type: TRIGGER; Schema: billing; Owner: postgres
 --
 
@@ -15015,7 +18990,7 @@ CREATE TRIGGER insert_bill_cpin_in_ecs AFTER INSERT ON billing.bill_gst FOR EACH
 
 
 --
--- TOC entry 5972 (class 2620 OID 1031098)
+-- TOC entry 6813 (class 2620 OID 1037070)
 -- Name: bill_gst trg_after_update_billing_bill_gst; Type: TRIGGER; Schema: billing; Owner: postgres
 --
 
@@ -15023,17 +18998,15 @@ CREATE TRIGGER trg_after_update_billing_bill_gst AFTER UPDATE OF is_deleted ON b
 
 
 --
--- TOC entry 5978 (class 2620 OID 1031099)
+-- TOC entry 6814 (class 2620 OID 1037141)
 -- Name: failed_transaction_beneficiary after_insert_on_failed_transaction; Type: TRIGGER; Schema: cts; Owner: postgres
 --
 
 CREATE TRIGGER after_insert_on_failed_transaction AFTER INSERT ON cts.failed_transaction_beneficiary FOR EACH ROW WHEN ((new.is_gst = false)) EXECUTE FUNCTION cts.trg_adjust_allotment_failed_beneficiary();
 
-ALTER TABLE cts.failed_transaction_beneficiary DISABLE TRIGGER after_insert_on_failed_transaction;
-
 
 --
--- TOC entry 5979 (class 2620 OID 1031100)
+-- TOC entry 6815 (class 2620 OID 1037248)
 -- Name: failed_transaction_beneficiary_bk after_insert_on_failed_transaction; Type: TRIGGER; Schema: cts; Owner: postgres
 --
 
@@ -15041,7 +19014,7 @@ CREATE TRIGGER after_insert_on_failed_transaction AFTER INSERT ON cts.failed_tra
 
 
 --
--- TOC entry 5981 (class 2620 OID 1031101)
+-- TOC entry 6809 (class 2620 OID 1036138)
 -- Name: tsa_exp_details after_fto_insert_jit_report; Type: TRIGGER; Schema: jit; Owner: postgres
 --
 
@@ -15049,7 +19022,7 @@ CREATE TRIGGER after_fto_insert_jit_report AFTER INSERT OR UPDATE ON jit.tsa_exp
 
 
 --
--- TOC entry 5980 (class 2620 OID 1031102)
+-- TOC entry 6805 (class 2620 OID 1035059)
 -- Name: jit_fto_sanction_booking audit_table_changes; Type: TRIGGER; Schema: jit; Owner: postgres
 --
 
@@ -15057,7 +19030,7 @@ CREATE TRIGGER audit_table_changes AFTER INSERT OR DELETE OR UPDATE ON jit.jit_f
 
 
 --
--- TOC entry 5982 (class 2620 OID 1031103)
+-- TOC entry 6807 (class 2620 OID 1035060)
 -- Name: consume_logs_partition trigger_ensure_consume_logs_partition; Type: TRIGGER; Schema: message_queue; Owner: postgres
 --
 
@@ -15065,214 +19038,296 @@ CREATE TRIGGER trigger_ensure_consume_logs_partition BEFORE INSERT ON message_qu
 
 
 --
--- TOC entry 5862 (class 2606 OID 1031104)
+-- TOC entry 6795 (class 2620 OID 1035049)
+-- Name: billing_bill_details after_bill_status_update; Type: TRIGGER; Schema: old; Owner: postgres
+--
+
+CREATE TRIGGER after_bill_status_update AFTER UPDATE OF status, is_regenerated ON old.billing_bill_details FOR EACH ROW WHEN ((((new.status = 106) AND (new.is_reissued = false)) OR ((new.is_regenerated = true) AND (new.is_reissued = false)))) EXECUTE FUNCTION billing.trg_adjust_allotment_by_billid();
+
+
+--
+-- TOC entry 6806 (class 2620 OID 1035058)
+-- Name: jit_tsa_exp_details after_fto_insert_jit_report; Type: TRIGGER; Schema: old; Owner: postgres
+--
+
+CREATE TRIGGER after_fto_insert_jit_report AFTER INSERT OR UPDATE ON old.jit_tsa_exp_details FOR EACH ROW EXECUTE FUNCTION jit.insert_jit_report();
+
+
+--
+-- TOC entry 6803 (class 2620 OID 1035056)
+-- Name: cts_failed_transaction_beneficiary after_insert_on_failed_transaction; Type: TRIGGER; Schema: old; Owner: postgres
+--
+
+CREATE TRIGGER after_insert_on_failed_transaction AFTER INSERT ON old.cts_failed_transaction_beneficiary FOR EACH ROW WHEN ((new.is_gst = false)) EXECUTE FUNCTION cts.trg_adjust_allotment_failed_beneficiary();
+
+ALTER TABLE old.cts_failed_transaction_beneficiary DISABLE TRIGGER after_insert_on_failed_transaction;
+
+
+--
+-- TOC entry 6804 (class 2620 OID 1035057)
+-- Name: cts_failed_transaction_beneficiary_bk after_insert_on_failed_transaction; Type: TRIGGER; Schema: old; Owner: postgres
+--
+
+CREATE TRIGGER after_insert_on_failed_transaction AFTER INSERT ON old.cts_failed_transaction_beneficiary_bk FOR EACH ROW WHEN ((new.is_gst = false)) EXECUTE FUNCTION cts.trg_adjust_allotment_failed_beneficiary();
+
+
+--
+-- TOC entry 6801 (class 2620 OID 1035052)
+-- Name: billing_ddo_allotment_booked_bill after_reissue_bill_insert; Type: TRIGGER; Schema: old; Owner: postgres
+--
+
+CREATE TRIGGER after_reissue_bill_insert AFTER INSERT ON old.billing_ddo_allotment_booked_bill FOR EACH ROW WHEN ((new.is_reissued = true)) EXECUTE FUNCTION billing.trg_adjust_allotment_by_billid();
+
+
+--
+-- TOC entry 6793 (class 2620 OID 1035046)
+-- Name: bantan_ddo_allotment_transactions audit_table_changes; Type: TRIGGER; Schema: old; Owner: postgres
+--
+
+CREATE TRIGGER audit_table_changes AFTER INSERT OR DELETE OR UPDATE ON old.bantan_ddo_allotment_transactions FOR EACH ROW EXECUTE FUNCTION billing_log.log_table_changes();
+
+
+--
+-- TOC entry 6794 (class 2620 OID 1035047)
+-- Name: bantan_ddo_wallet audit_table_changes; Type: TRIGGER; Schema: old; Owner: postgres
+--
+
+CREATE TRIGGER audit_table_changes AFTER INSERT OR DELETE OR UPDATE ON old.bantan_ddo_wallet FOR EACH ROW EXECUTE FUNCTION billing_log.log_table_changes();
+
+
+--
+-- TOC entry 6802 (class 2620 OID 1035053)
+-- Name: billing_ddo_allotment_booked_bill audit_table_changes; Type: TRIGGER; Schema: old; Owner: postgres
+--
+
+CREATE TRIGGER audit_table_changes AFTER INSERT OR DELETE OR UPDATE ON old.billing_ddo_allotment_booked_bill FOR EACH ROW EXECUTE FUNCTION billing_log.log_table_changes();
+
+
+--
+-- TOC entry 6796 (class 2620 OID 1035054)
+-- Name: billing_bill_gst insert_bill_cpin_in_ecs; Type: TRIGGER; Schema: old; Owner: postgres
+--
+
+CREATE TRIGGER insert_bill_cpin_in_ecs AFTER INSERT ON old.billing_bill_gst FOR EACH ROW EXECUTE FUNCTION billing.insert_cpin_ecs();
+
+
+--
+-- TOC entry 6797 (class 2620 OID 1035055)
+-- Name: billing_bill_gst trg_after_update_billing_bill_gst; Type: TRIGGER; Schema: old; Owner: postgres
+--
+
+CREATE TRIGGER trg_after_update_billing_bill_gst AFTER UPDATE OF is_deleted ON old.billing_bill_gst FOR EACH ROW WHEN ((new.is_deleted = true)) EXECUTE FUNCTION billing.update_cpin_ecs();
+
+
+--
+-- TOC entry 6748 (class 2606 OID 1036717)
 -- Name: ddo_allotment_transactions ddo_allotment_transactions_active_hoa_id_fkey; Type: FK CONSTRAINT; Schema: bantan; Owner: postgres
 --
 
-ALTER TABLE ONLY bantan.ddo_allotment_transactions
-    ADD CONSTRAINT ddo_allotment_transactions_active_hoa_id_fkey FOREIGN KEY (active_hoa_id) REFERENCES master.active_hoa_mst(id) NOT VALID;
+ALTER TABLE bantan.ddo_allotment_transactions
+    ADD CONSTRAINT ddo_allotment_transactions_active_hoa_id_fkey FOREIGN KEY (active_hoa_id) REFERENCES master.active_hoa_mst(id);
 
 
 --
--- TOC entry 5863 (class 2606 OID 1031109)
+-- TOC entry 6749 (class 2606 OID 1036725)
 -- Name: ddo_allotment_transactions ddo_allotment_transactions_financial_year_fkey; Type: FK CONSTRAINT; Schema: bantan; Owner: postgres
 --
 
-ALTER TABLE ONLY bantan.ddo_allotment_transactions
-    ADD CONSTRAINT ddo_allotment_transactions_financial_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id) NOT VALID;
+ALTER TABLE bantan.ddo_allotment_transactions
+    ADD CONSTRAINT ddo_allotment_transactions_financial_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id);
 
 
 --
--- TOC entry 5864 (class 2606 OID 1031114)
+-- TOC entry 6750 (class 2606 OID 1036733)
 -- Name: ddo_allotment_transactions ddo_allotment_transactions_receiver_sao_ddo_code_fkey; Type: FK CONSTRAINT; Schema: bantan; Owner: postgres
 --
 
-ALTER TABLE ONLY bantan.ddo_allotment_transactions
-    ADD CONSTRAINT ddo_allotment_transactions_receiver_sao_ddo_code_fkey FOREIGN KEY (receiver_sao_ddo_code) REFERENCES master.ddo(ddo_code) NOT VALID;
+ALTER TABLE bantan.ddo_allotment_transactions
+    ADD CONSTRAINT ddo_allotment_transactions_receiver_sao_ddo_code_fkey FOREIGN KEY (receiver_sao_ddo_code) REFERENCES master.ddo(ddo_code);
 
 
 --
--- TOC entry 5865 (class 2606 OID 1031119)
+-- TOC entry 6751 (class 2606 OID 1036741)
 -- Name: ddo_allotment_transactions ddo_allotment_transactions_treasury_code_fkey; Type: FK CONSTRAINT; Schema: bantan; Owner: postgres
 --
 
-ALTER TABLE ONLY bantan.ddo_allotment_transactions
-    ADD CONSTRAINT ddo_allotment_transactions_treasury_code_fkey FOREIGN KEY (treasury_code) REFERENCES master.treasury(code) NOT VALID;
+ALTER TABLE bantan.ddo_allotment_transactions
+    ADD CONSTRAINT ddo_allotment_transactions_treasury_code_fkey FOREIGN KEY (treasury_code) REFERENCES master.treasury(code);
 
 
 --
--- TOC entry 5866 (class 2606 OID 1031124)
+-- TOC entry 6735 (class 2606 OID 1036061)
 -- Name: ddo_wallet ddo_wallet_active_hoa_id_fkey; Type: FK CONSTRAINT; Schema: bantan; Owner: postgres
 --
 
-ALTER TABLE ONLY bantan.ddo_wallet
+ALTER TABLE bantan.ddo_wallet
     ADD CONSTRAINT ddo_wallet_active_hoa_id_fkey FOREIGN KEY (active_hoa_id) REFERENCES master.active_hoa_mst(id);
 
 
 --
--- TOC entry 5867 (class 2606 OID 1031129)
+-- TOC entry 6736 (class 2606 OID 1036069)
 -- Name: ddo_wallet ddo_wallet_financial_year_fkey; Type: FK CONSTRAINT; Schema: bantan; Owner: postgres
 --
 
-ALTER TABLE ONLY bantan.ddo_wallet
+ALTER TABLE bantan.ddo_wallet
     ADD CONSTRAINT ddo_wallet_financial_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id);
 
 
 --
--- TOC entry 5868 (class 2606 OID 1031134)
+-- TOC entry 6737 (class 2606 OID 1036077)
 -- Name: ddo_wallet ddo_wallet_sao_ddo_code_fkey; Type: FK CONSTRAINT; Schema: bantan; Owner: postgres
 --
 
-ALTER TABLE ONLY bantan.ddo_wallet
+ALTER TABLE bantan.ddo_wallet
     ADD CONSTRAINT ddo_wallet_sao_ddo_code_fkey FOREIGN KEY (sao_ddo_code) REFERENCES master.ddo(ddo_code);
 
 
 --
--- TOC entry 5869 (class 2606 OID 1031140)
+-- TOC entry 6738 (class 2606 OID 1036085)
 -- Name: ddo_wallet ddo_wallet_treasury_code_fkey; Type: FK CONSTRAINT; Schema: bantan; Owner: postgres
 --
 
-ALTER TABLE ONLY bantan.ddo_wallet
+ALTER TABLE bantan.ddo_wallet
     ADD CONSTRAINT ddo_wallet_treasury_code_fkey FOREIGN KEY (treasury_code) REFERENCES master.treasury(code);
 
 
 --
--- TOC entry 5878 (class 2606 OID 1031145)
+-- TOC entry 6752 (class 2606 OID 1036779)
 -- Name: bill_btdetail bill_btdetail_bill_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.bill_btdetail
-    ADD CONSTRAINT bill_btdetail_bill_id_fkey FOREIGN KEY (bill_id) REFERENCES billing.bill_details(bill_id) NOT VALID;
+ALTER TABLE billing.bill_btdetail
+    ADD CONSTRAINT bill_btdetail_bill_id_fkey FOREIGN KEY (bill_id, financial_year) REFERENCES billing.bill_details(bill_id, financial_year);
 
 
 --
--- TOC entry 5879 (class 2606 OID 1031150)
+-- TOC entry 6753 (class 2606 OID 1036796)
 -- Name: bill_btdetail bill_btdetail_bt_serial_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.bill_btdetail
-    ADD CONSTRAINT bill_btdetail_bt_serial_fkey FOREIGN KEY (bt_serial) REFERENCES billing_master.bt_details(bt_serial) NOT VALID;
+ALTER TABLE billing.bill_btdetail
+    ADD CONSTRAINT bill_btdetail_bt_serial_fkey FOREIGN KEY (bt_serial) REFERENCES billing_master.bt_details(bt_serial);
 
 
 --
--- TOC entry 5880 (class 2606 OID 1031156)
+-- TOC entry 6754 (class 2606 OID 1036807)
 -- Name: bill_btdetail bill_btdetail_ddo_code_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.bill_btdetail
-    ADD CONSTRAINT bill_btdetail_ddo_code_fkey FOREIGN KEY (ddo_code) REFERENCES master.ddo(ddo_code) NOT VALID;
+ALTER TABLE billing.bill_btdetail
+    ADD CONSTRAINT bill_btdetail_ddo_code_fkey FOREIGN KEY (ddo_code) REFERENCES master.ddo(ddo_code);
 
 
 --
--- TOC entry 5881 (class 2606 OID 1031161)
+-- TOC entry 6755 (class 2606 OID 1036818)
 -- Name: bill_btdetail bill_btdetail_financial_year_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.bill_btdetail
-    ADD CONSTRAINT bill_btdetail_financial_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id) NOT VALID;
+ALTER TABLE billing.bill_btdetail
+    ADD CONSTRAINT bill_btdetail_financial_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id);
 
 
 --
--- TOC entry 5882 (class 2606 OID 1031166)
+-- TOC entry 6756 (class 2606 OID 1036829)
 -- Name: bill_btdetail bill_btdetail_treasury_code_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.bill_btdetail
-    ADD CONSTRAINT bill_btdetail_treasury_code_fkey FOREIGN KEY (treasury_code) REFERENCES master.treasury(code) NOT VALID;
+ALTER TABLE billing.bill_btdetail
+    ADD CONSTRAINT bill_btdetail_treasury_code_fkey FOREIGN KEY (treasury_code) REFERENCES master.treasury(code);
 
 
 --
--- TOC entry 5870 (class 2606 OID 1031173)
+-- TOC entry 6742 (class 2606 OID 1036275)
 -- Name: bill_details bill_details_ddo_code_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.bill_details
-    ADD CONSTRAINT bill_details_ddo_code_fkey FOREIGN KEY (ddo_code) REFERENCES master.ddo(ddo_code) NOT VALID;
+ALTER TABLE billing.bill_details
+    ADD CONSTRAINT bill_details_ddo_code_fkey FOREIGN KEY (ddo_code) REFERENCES master.ddo(ddo_code);
 
 
 --
--- TOC entry 5871 (class 2606 OID 1031178)
+-- TOC entry 6743 (class 2606 OID 1036286)
 -- Name: bill_details bill_details_demand_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.bill_details
-    ADD CONSTRAINT bill_details_demand_fkey FOREIGN KEY (demand) REFERENCES master.department(demand_code) NOT VALID;
+ALTER TABLE billing.bill_details
+    ADD CONSTRAINT bill_details_demand_fkey FOREIGN KEY (demand) REFERENCES master.department(demand_code);
 
 
 --
--- TOC entry 5872 (class 2606 OID 1031183)
+-- TOC entry 6744 (class 2606 OID 1036297)
 -- Name: bill_details bill_details_financial_year_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.bill_details
-    ADD CONSTRAINT bill_details_financial_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id) NOT VALID;
+ALTER TABLE billing.bill_details
+    ADD CONSTRAINT bill_details_financial_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id);
 
 
 --
--- TOC entry 5873 (class 2606 OID 1031188)
+-- TOC entry 6745 (class 2606 OID 1036308)
 -- Name: bill_details bill_details_status_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.bill_details
-    ADD CONSTRAINT bill_details_status_fkey FOREIGN KEY (status) REFERENCES billing_master.bill_status_master(status_id) NOT VALID;
+ALTER TABLE billing.bill_details
+    ADD CONSTRAINT bill_details_status_fkey FOREIGN KEY (status) REFERENCES billing_master.bill_status_master(status_id);
 
 
 --
--- TOC entry 5874 (class 2606 OID 1031193)
+-- TOC entry 6746 (class 2606 OID 1036319)
 -- Name: bill_details bill_details_tr_master_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.bill_details
-    ADD CONSTRAINT bill_details_tr_master_id_fkey FOREIGN KEY (tr_master_id) REFERENCES billing_master.tr_master(id) NOT VALID;
+ALTER TABLE billing.bill_details
+    ADD CONSTRAINT bill_details_tr_master_id_fkey FOREIGN KEY (tr_master_id) REFERENCES billing_master.tr_master(id);
 
 
 --
--- TOC entry 5875 (class 2606 OID 1031198)
+-- TOC entry 6747 (class 2606 OID 1036330)
 -- Name: bill_details bill_details_treasury_code_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.bill_details
-    ADD CONSTRAINT bill_details_treasury_code_fkey FOREIGN KEY (treasury_code) REFERENCES master.treasury(code) NOT VALID;
+ALTER TABLE billing.bill_details
+    ADD CONSTRAINT bill_details_treasury_code_fkey FOREIGN KEY (treasury_code) REFERENCES master.treasury(code);
 
 
 --
--- TOC entry 5885 (class 2606 OID 1031203)
+-- TOC entry 6757 (class 2606 OID 1036889)
 -- Name: bill_ecs_neft_details bill_ecs_neft_details_bill_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.bill_ecs_neft_details
-    ADD CONSTRAINT bill_ecs_neft_details_bill_id_fkey FOREIGN KEY (bill_id) REFERENCES billing.bill_details(bill_id) NOT VALID;
+ALTER TABLE billing.bill_ecs_neft_details
+    ADD CONSTRAINT bill_ecs_neft_details_bill_id_fkey FOREIGN KEY (bill_id, financial_year) REFERENCES billing.bill_details(bill_id, financial_year);
 
 
 --
--- TOC entry 5886 (class 2606 OID 1031208)
+-- TOC entry 6758 (class 2606 OID 1036906)
 -- Name: bill_ecs_neft_details bill_ecs_neft_details_financial_year_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.bill_ecs_neft_details
-    ADD CONSTRAINT bill_ecs_neft_details_financial_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id) NOT VALID;
+ALTER TABLE billing.bill_ecs_neft_details
+    ADD CONSTRAINT bill_ecs_neft_details_financial_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id);
 
 
 --
--- TOC entry 5887 (class 2606 OID 1031213)
+-- TOC entry 6759 (class 2606 OID 1036917)
 -- Name: bill_ecs_neft_details bill_ecs_neft_details_ifsc_code_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.bill_ecs_neft_details
-    ADD CONSTRAINT bill_ecs_neft_details_ifsc_code_fkey FOREIGN KEY (ifsc_code) REFERENCES master.rbi_ifsc_stock(ifsc) NOT VALID;
+ALTER TABLE billing.bill_ecs_neft_details
+    ADD CONSTRAINT bill_ecs_neft_details_ifsc_code_fkey FOREIGN KEY (ifsc_code) REFERENCES master.rbi_ifsc_stock(ifsc);
 
 
 --
--- TOC entry 5888 (class 2606 OID 1031218)
+-- TOC entry 6760 (class 2606 OID 1036961)
 -- Name: bill_jit_components bill_jit_components_bill_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.bill_jit_components
-    ADD CONSTRAINT bill_jit_components_bill_id_fkey FOREIGN KEY (bill_id) REFERENCES billing.bill_details(bill_id);
+ALTER TABLE billing.bill_jit_components
+    ADD CONSTRAINT bill_jit_components_bill_id_fkey FOREIGN KEY (bill_id, financial_year) REFERENCES billing.bill_details(bill_id, financial_year);
 
 
 --
--- TOC entry 5889 (class 2606 OID 1031258)
+-- TOC entry 6656 (class 2606 OID 1035176)
 -- Name: bill_status_info bill_status_info_status_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
@@ -15281,187 +19336,187 @@ ALTER TABLE ONLY billing.bill_status_info
 
 
 --
--- TOC entry 5890 (class 2606 OID 1031308)
+-- TOC entry 6761 (class 2606 OID 1036999)
 -- Name: bill_subdetail_info bill_subdetail_info_active_hoa_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.bill_subdetail_info
-    ADD CONSTRAINT bill_subdetail_info_active_hoa_id_fkey FOREIGN KEY (active_hoa_id) REFERENCES master.active_hoa_mst(id) NOT VALID;
+ALTER TABLE billing.bill_subdetail_info
+    ADD CONSTRAINT bill_subdetail_info_active_hoa_id_fkey FOREIGN KEY (active_hoa_id) REFERENCES master.active_hoa_mst(id);
 
 
 --
--- TOC entry 5891 (class 2606 OID 1031313)
+-- TOC entry 6762 (class 2606 OID 1037010)
 -- Name: bill_subdetail_info bill_subdetail_info_bill_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.bill_subdetail_info
-    ADD CONSTRAINT bill_subdetail_info_bill_id_fkey FOREIGN KEY (bill_id) REFERENCES billing.bill_details(bill_id) NOT VALID;
+ALTER TABLE billing.bill_subdetail_info
+    ADD CONSTRAINT bill_subdetail_info_bill_id_fkey FOREIGN KEY (bill_id, financial_year) REFERENCES billing.bill_details(bill_id, financial_year);
 
 
 --
--- TOC entry 5892 (class 2606 OID 1031319)
+-- TOC entry 6763 (class 2606 OID 1037027)
 -- Name: bill_subdetail_info bill_subdetail_info_ddo_code_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.bill_subdetail_info
-    ADD CONSTRAINT bill_subdetail_info_ddo_code_fkey FOREIGN KEY (ddo_code) REFERENCES master.ddo(ddo_code) NOT VALID;
+ALTER TABLE billing.bill_subdetail_info
+    ADD CONSTRAINT bill_subdetail_info_ddo_code_fkey FOREIGN KEY (ddo_code) REFERENCES master.ddo(ddo_code);
 
 
 --
--- TOC entry 5893 (class 2606 OID 1031325)
+-- TOC entry 6764 (class 2606 OID 1037039)
 -- Name: bill_subdetail_info bill_subdetail_info_financial_year_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.bill_subdetail_info
-    ADD CONSTRAINT bill_subdetail_info_financial_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id) NOT VALID;
+ALTER TABLE billing.bill_subdetail_info
+    ADD CONSTRAINT bill_subdetail_info_financial_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id);
 
 
 --
--- TOC entry 5894 (class 2606 OID 1031330)
+-- TOC entry 6765 (class 2606 OID 1037050)
 -- Name: bill_subdetail_info bill_subdetail_info_treasury_code_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.bill_subdetail_info
-    ADD CONSTRAINT bill_subdetail_info_treasury_code_fkey FOREIGN KEY (treasury_code) REFERENCES master.treasury(code) NOT VALID;
+ALTER TABLE billing.bill_subdetail_info
+    ADD CONSTRAINT bill_subdetail_info_treasury_code_fkey FOREIGN KEY (treasury_code) REFERENCES master.treasury(code);
 
 
 --
--- TOC entry 5895 (class 2606 OID 1031335)
+-- TOC entry 6785 (class 2606 OID 1037506)
 -- Name: ddo_allotment_booked_bill ddo_allotment_booked_bill_active_hoa_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.ddo_allotment_booked_bill
-    ADD CONSTRAINT ddo_allotment_booked_bill_active_hoa_id_fkey FOREIGN KEY (active_hoa_id) REFERENCES master.active_hoa_mst(id) NOT VALID;
+ALTER TABLE billing.ddo_allotment_booked_bill
+    ADD CONSTRAINT ddo_allotment_booked_bill_active_hoa_id_fkey FOREIGN KEY (active_hoa_id) REFERENCES master.active_hoa_mst(id);
 
 
 --
--- TOC entry 5896 (class 2606 OID 1031340)
+-- TOC entry 6786 (class 2606 OID 1037514)
 -- Name: ddo_allotment_booked_bill ddo_allotment_booked_bill_allotment_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.ddo_allotment_booked_bill
-    ADD CONSTRAINT ddo_allotment_booked_bill_allotment_id_fkey FOREIGN KEY (allotment_id) REFERENCES bantan.ddo_allotment_transactions(allotment_id) NOT VALID;
+ALTER TABLE billing.ddo_allotment_booked_bill
+    ADD CONSTRAINT ddo_allotment_booked_bill_allotment_id_fkey FOREIGN KEY (allotment_id, financial_year) REFERENCES bantan.ddo_allotment_transactions(allotment_id, financial_year);
 
 
 --
--- TOC entry 5897 (class 2606 OID 1031346)
+-- TOC entry 6787 (class 2606 OID 1037525)
 -- Name: ddo_allotment_booked_bill ddo_allotment_booked_bill_bill_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.ddo_allotment_booked_bill
-    ADD CONSTRAINT ddo_allotment_booked_bill_bill_id_fkey FOREIGN KEY (bill_id) REFERENCES billing.bill_details(bill_id) NOT VALID;
+ALTER TABLE billing.ddo_allotment_booked_bill
+    ADD CONSTRAINT ddo_allotment_booked_bill_bill_id_fkey FOREIGN KEY (bill_id, financial_year) REFERENCES billing.bill_details(bill_id, financial_year);
 
 
 --
--- TOC entry 5898 (class 2606 OID 1031352)
+-- TOC entry 6788 (class 2606 OID 1037539)
 -- Name: ddo_allotment_booked_bill ddo_allotment_booked_bill_ddo_code_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.ddo_allotment_booked_bill
-    ADD CONSTRAINT ddo_allotment_booked_bill_ddo_code_fkey FOREIGN KEY (ddo_code) REFERENCES master.ddo(ddo_code) NOT VALID;
+ALTER TABLE billing.ddo_allotment_booked_bill
+    ADD CONSTRAINT ddo_allotment_booked_bill_ddo_code_fkey FOREIGN KEY (ddo_code) REFERENCES master.ddo(ddo_code);
 
 
 --
--- TOC entry 5899 (class 2606 OID 1031357)
+-- TOC entry 6789 (class 2606 OID 1037547)
 -- Name: ddo_allotment_booked_bill ddo_allotment_booked_bill_financial_year_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.ddo_allotment_booked_bill
-    ADD CONSTRAINT ddo_allotment_booked_bill_financial_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id) NOT VALID;
+ALTER TABLE billing.ddo_allotment_booked_bill
+    ADD CONSTRAINT ddo_allotment_booked_bill_financial_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id);
 
 
 --
--- TOC entry 5900 (class 2606 OID 1031362)
+-- TOC entry 6790 (class 2606 OID 1037555)
 -- Name: ddo_allotment_booked_bill ddo_allotment_booked_bill_treasury_code_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.ddo_allotment_booked_bill
-    ADD CONSTRAINT ddo_allotment_booked_bill_treasury_code_fkey FOREIGN KEY (treasury_code) REFERENCES master.treasury(code) NOT VALID;
+ALTER TABLE billing.ddo_allotment_booked_bill
+    ADD CONSTRAINT ddo_allotment_booked_bill_treasury_code_fkey FOREIGN KEY (treasury_code) REFERENCES master.treasury(code);
 
 
 --
--- TOC entry 5883 (class 2606 OID 1031367)
+-- TOC entry 6766 (class 2606 OID 1037093)
 -- Name: bill_gst fk_bill_id; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.bill_gst
-    ADD CONSTRAINT fk_bill_id FOREIGN KEY (bill_id) REFERENCES billing.bill_details(bill_id);
+ALTER TABLE billing.bill_gst
+    ADD CONSTRAINT fk_bill_id FOREIGN KEY (bill_id, financial_year) REFERENCES billing.bill_details(bill_id, financial_year);
 
 
 --
--- TOC entry 5884 (class 2606 OID 1031387)
+-- TOC entry 6767 (class 2606 OID 1037110)
 -- Name: bill_gst fk_cpin_id; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.bill_gst
-    ADD CONSTRAINT fk_cpin_id FOREIGN KEY (cpin_id) REFERENCES billing_master.cpin_master(id);
+ALTER TABLE billing.bill_gst
+    ADD CONSTRAINT fk_cpin_id FOREIGN KEY (cpin_id, financial_year) REFERENCES billing_master.cpin_master(id, financial_year);
 
 
 --
--- TOC entry 5876 (class 2606 OID 1031395)
+-- TOC entry 6791 (class 2606 OID 1037595)
 -- Name: jit_ecs_additional jit_ecs_additional_bill_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.jit_ecs_additional
-    ADD CONSTRAINT jit_ecs_additional_bill_id_fkey FOREIGN KEY (bill_id) REFERENCES billing.bill_details(bill_id) NOT VALID;
+ALTER TABLE billing.jit_ecs_additional
+    ADD CONSTRAINT jit_ecs_additional_bill_id_fkey FOREIGN KEY (bill_id, financial_year) REFERENCES billing.bill_details(bill_id, financial_year);
 
 
 --
--- TOC entry 5877 (class 2606 OID 1031401)
+-- TOC entry 6792 (class 2606 OID 1037612)
 -- Name: jit_ecs_additional jit_ecs_additional_ecs_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
-ALTER TABLE ONLY billing.jit_ecs_additional
-    ADD CONSTRAINT jit_ecs_additional_ecs_id_fkey FOREIGN KEY (ecs_id) REFERENCES billing.bill_ecs_neft_details(id);
+ALTER TABLE billing.jit_ecs_additional
+    ADD CONSTRAINT jit_ecs_additional_ecs_id_fkey FOREIGN KEY (ecs_id, financial_year) REFERENCES billing.bill_ecs_neft_details(id, financial_year);
 
 
 --
--- TOC entry 5901 (class 2606 OID 1031980)
+-- TOC entry 6668 (class 2606 OID 1035256)
 -- Name: jit_fto_voucher jit_fto_voucher_bill_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
 ALTER TABLE ONLY billing.jit_fto_voucher
-    ADD CONSTRAINT jit_fto_voucher_bill_id_fkey FOREIGN KEY (bill_id) REFERENCES billing.bill_details(bill_id);
+    ADD CONSTRAINT jit_fto_voucher_bill_id_fkey FOREIGN KEY (bill_id) REFERENCES old.billing_bill_details(bill_id);
 
 
 --
--- TOC entry 5902 (class 2606 OID 1031995)
+-- TOC entry 6669 (class 2606 OID 1035261)
 -- Name: tr_10_detail tr_10_detail_bill_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
 ALTER TABLE ONLY billing.tr_10_detail
-    ADD CONSTRAINT tr_10_detail_bill_id_fkey FOREIGN KEY (bill_id) REFERENCES billing.bill_details(bill_id) NOT VALID;
+    ADD CONSTRAINT tr_10_detail_bill_id_fkey FOREIGN KEY (bill_id) REFERENCES old.billing_bill_details(bill_id) NOT VALID;
 
 
 --
--- TOC entry 5903 (class 2606 OID 1032005)
+-- TOC entry 6670 (class 2606 OID 1035266)
 -- Name: tr_12_detail tr_12_detail_bill_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
 ALTER TABLE ONLY billing.tr_12_detail
-    ADD CONSTRAINT tr_12_detail_bill_id_fkey FOREIGN KEY (bill_id) REFERENCES billing.bill_details(bill_id) NOT VALID;
+    ADD CONSTRAINT tr_12_detail_bill_id_fkey FOREIGN KEY (bill_id) REFERENCES old.billing_bill_details(bill_id) NOT VALID;
 
 
 --
--- TOC entry 5904 (class 2606 OID 1032011)
+-- TOC entry 6671 (class 2606 OID 1035271)
 -- Name: tr_26a_detail tr_26a_detail_bill_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: postgres
 --
 
 ALTER TABLE ONLY billing.tr_26a_detail
-    ADD CONSTRAINT tr_26a_detail_bill_id_fkey FOREIGN KEY (bill_id) REFERENCES billing.bill_details(bill_id);
+    ADD CONSTRAINT tr_26a_detail_bill_id_fkey FOREIGN KEY (bill_id) REFERENCES old.billing_bill_details(bill_id);
 
 
 --
--- TOC entry 5905 (class 2606 OID 1032159)
+-- TOC entry 6672 (class 2606 OID 1035276)
 -- Name: cpin_vender_mst cpin_vender_mst_cpinmstid_fkey; Type: FK CONSTRAINT; Schema: billing_master; Owner: postgres
 --
 
 ALTER TABLE ONLY billing_master.cpin_vender_mst
-    ADD CONSTRAINT cpin_vender_mst_cpinmstid_fkey FOREIGN KEY (cpinmstid) REFERENCES billing_master.cpin_master(id) NOT VALID;
+    ADD CONSTRAINT cpin_vender_mst_cpinmstid_fkey FOREIGN KEY (cpinmstid) REFERENCES old.billing_master_cpin_master(id) NOT VALID;
 
 
 --
--- TOC entry 5906 (class 2606 OID 1032169)
+-- TOC entry 6673 (class 2606 OID 1035281)
 -- Name: tr_master_checklist tr_master_checklist_tr_master_id_fkey; Type: FK CONSTRAINT; Schema: billing_master; Owner: postgres
 --
 
@@ -15470,214 +19525,169 @@ ALTER TABLE ONLY billing_master.tr_master_checklist
 
 
 --
--- TOC entry 5917 (class 2606 OID 1032174)
--- Name: challan challan_financial_year_fkey; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
---
-
-ALTER TABLE ONLY cts.challan
-    ADD CONSTRAINT challan_financial_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id);
-
-
---
--- TOC entry 5918 (class 2606 OID 1032180)
--- Name: challan challan_treasury_code_fkey; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
---
-
-ALTER TABLE ONLY cts.challan
-    ADD CONSTRAINT challan_treasury_code_fkey FOREIGN KEY (treasury_code) REFERENCES master.treasury(code);
-
-
---
--- TOC entry 5907 (class 2606 OID 1032186)
--- Name: failed_transaction_beneficiary failed_transaction_beneficiary_bill_id_fkey; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
---
-
-ALTER TABLE ONLY cts.failed_transaction_beneficiary
-    ADD CONSTRAINT failed_transaction_beneficiary_bill_id_fkey FOREIGN KEY (bill_id) REFERENCES billing.bill_details(bill_id);
-
-
---
--- TOC entry 5919 (class 2606 OID 1032216)
+-- TOC entry 6772 (class 2606 OID 1037261)
 -- Name: failed_transaction_beneficiary_bk failed_transaction_beneficiary_bill_id_fkey_bk; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
 --
 
-ALTER TABLE ONLY cts.failed_transaction_beneficiary_bk
-    ADD CONSTRAINT failed_transaction_beneficiary_bill_id_fkey_bk FOREIGN KEY (bill_id) REFERENCES billing.bill_details(bill_id);
+ALTER TABLE cts.failed_transaction_beneficiary_bk
+    ADD CONSTRAINT failed_transaction_beneficiary_bill_id_fkey_bk FOREIGN KEY (bill_id, financial_year) REFERENCES billing.bill_details(bill_id, financial_year);
 
 
 --
--- TOC entry 5908 (class 2606 OID 1032275)
+-- TOC entry 6768 (class 2606 OID 1037193)
 -- Name: failed_transaction_beneficiary failed_transaction_beneficiary_ddo_code_fkey; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
 --
 
-ALTER TABLE ONLY cts.failed_transaction_beneficiary
+ALTER TABLE cts.failed_transaction_beneficiary
     ADD CONSTRAINT failed_transaction_beneficiary_ddo_code_fkey FOREIGN KEY (ddo_code) REFERENCES master.ddo(ddo_code);
 
 
 --
--- TOC entry 5920 (class 2606 OID 1032291)
+-- TOC entry 6773 (class 2606 OID 1037275)
 -- Name: failed_transaction_beneficiary_bk failed_transaction_beneficiary_ddo_code_fkey_bk; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
 --
 
-ALTER TABLE ONLY cts.failed_transaction_beneficiary_bk
+ALTER TABLE cts.failed_transaction_beneficiary_bk
     ADD CONSTRAINT failed_transaction_beneficiary_ddo_code_fkey_bk FOREIGN KEY (ddo_code) REFERENCES master.ddo(ddo_code);
 
 
 --
--- TOC entry 5909 (class 2606 OID 1032308)
+-- TOC entry 6769 (class 2606 OID 1037204)
 -- Name: failed_transaction_beneficiary failed_transaction_beneficiary_financial_year_fkey; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
 --
 
-ALTER TABLE ONLY cts.failed_transaction_beneficiary
+ALTER TABLE cts.failed_transaction_beneficiary
     ADD CONSTRAINT failed_transaction_beneficiary_financial_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id);
 
 
 --
--- TOC entry 5921 (class 2606 OID 1032326)
+-- TOC entry 6774 (class 2606 OID 1037283)
 -- Name: failed_transaction_beneficiary_bk failed_transaction_beneficiary_financial_year_fkey_bk; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
 --
 
-ALTER TABLE ONLY cts.failed_transaction_beneficiary_bk
+ALTER TABLE cts.failed_transaction_beneficiary_bk
     ADD CONSTRAINT failed_transaction_beneficiary_financial_year_fkey_bk FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id);
 
 
 --
--- TOC entry 5910 (class 2606 OID 1032338)
+-- TOC entry 6770 (class 2606 OID 1037215)
 -- Name: failed_transaction_beneficiary failed_transaction_beneficiary_ifsc_code_fkey; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
 --
 
-ALTER TABLE ONLY cts.failed_transaction_beneficiary
+ALTER TABLE cts.failed_transaction_beneficiary
     ADD CONSTRAINT failed_transaction_beneficiary_ifsc_code_fkey FOREIGN KEY (ifsc_code) REFERENCES master.rbi_ifsc_stock(ifsc);
 
 
 --
--- TOC entry 5922 (class 2606 OID 1032449)
+-- TOC entry 6775 (class 2606 OID 1037291)
 -- Name: failed_transaction_beneficiary_bk failed_transaction_beneficiary_ifsc_code_fkey_bk; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
 --
 
-ALTER TABLE ONLY cts.failed_transaction_beneficiary_bk
+ALTER TABLE cts.failed_transaction_beneficiary_bk
     ADD CONSTRAINT failed_transaction_beneficiary_ifsc_code_fkey_bk FOREIGN KEY (ifsc_code) REFERENCES master.rbi_ifsc_stock(ifsc);
 
 
 --
--- TOC entry 5911 (class 2606 OID 1032563)
+-- TOC entry 6771 (class 2606 OID 1037226)
 -- Name: failed_transaction_beneficiary failed_transaction_beneficiary_treasury_code_fkey; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
 --
 
-ALTER TABLE ONLY cts.failed_transaction_beneficiary
+ALTER TABLE cts.failed_transaction_beneficiary
     ADD CONSTRAINT failed_transaction_beneficiary_treasury_code_fkey FOREIGN KEY (treasury_code) REFERENCES master.treasury(code);
 
 
 --
--- TOC entry 5923 (class 2606 OID 1032579)
+-- TOC entry 6776 (class 2606 OID 1037299)
 -- Name: failed_transaction_beneficiary_bk failed_transaction_beneficiary_treasury_code_fkey_bk; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
 --
 
-ALTER TABLE ONLY cts.failed_transaction_beneficiary_bk
+ALTER TABLE cts.failed_transaction_beneficiary_bk
     ADD CONSTRAINT failed_transaction_beneficiary_treasury_code_fkey_bk FOREIGN KEY (treasury_code) REFERENCES master.treasury(code);
 
 
 --
--- TOC entry 5912 (class 2606 OID 1032587)
--- Name: success_transaction_beneficiary success_transaction_beneficiary_bill_id_fkey; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
---
-
-ALTER TABLE ONLY cts.success_transaction_beneficiary
-    ADD CONSTRAINT success_transaction_beneficiary_bill_id_fkey FOREIGN KEY (bill_id) REFERENCES billing.bill_details(bill_id);
-
-
---
--- TOC entry 5926 (class 2606 OID 1033002)
--- Name: success_transaction_beneficiary_bk success_transaction_beneficiary_bill_id_fkey_bk; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
---
-
-ALTER TABLE ONLY cts.success_transaction_beneficiary_bk
-    ADD CONSTRAINT success_transaction_beneficiary_bill_id_fkey_bk FOREIGN KEY (bill_id) REFERENCES billing.bill_details(bill_id);
-
-
---
--- TOC entry 5913 (class 2606 OID 1033117)
+-- TOC entry 6777 (class 2606 OID 1037368)
 -- Name: success_transaction_beneficiary success_transaction_beneficiary_ddo_code_fkey; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
 --
 
-ALTER TABLE ONLY cts.success_transaction_beneficiary
+ALTER TABLE cts.success_transaction_beneficiary
     ADD CONSTRAINT success_transaction_beneficiary_ddo_code_fkey FOREIGN KEY (ddo_code) REFERENCES master.ddo(ddo_code);
 
 
 --
--- TOC entry 5927 (class 2606 OID 1033244)
+-- TOC entry 6781 (class 2606 OID 1037448)
 -- Name: success_transaction_beneficiary_bk success_transaction_beneficiary_ddo_code_fkey_bk; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
 --
 
-ALTER TABLE ONLY cts.success_transaction_beneficiary_bk
+ALTER TABLE cts.success_transaction_beneficiary_bk
     ADD CONSTRAINT success_transaction_beneficiary_ddo_code_fkey_bk FOREIGN KEY (ddo_code) REFERENCES master.ddo(ddo_code);
 
 
 --
--- TOC entry 5914 (class 2606 OID 1033335)
+-- TOC entry 6778 (class 2606 OID 1037379)
 -- Name: success_transaction_beneficiary success_transaction_beneficiary_financial_year_fkey; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
 --
 
-ALTER TABLE ONLY cts.success_transaction_beneficiary
+ALTER TABLE cts.success_transaction_beneficiary
     ADD CONSTRAINT success_transaction_beneficiary_financial_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id);
 
 
 --
--- TOC entry 5928 (class 2606 OID 1033580)
+-- TOC entry 6782 (class 2606 OID 1037456)
 -- Name: success_transaction_beneficiary_bk success_transaction_beneficiary_financial_year_fkey_bk; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
 --
 
-ALTER TABLE ONLY cts.success_transaction_beneficiary_bk
+ALTER TABLE cts.success_transaction_beneficiary_bk
     ADD CONSTRAINT success_transaction_beneficiary_financial_year_fkey_bk FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id);
 
 
 --
--- TOC entry 5915 (class 2606 OID 1033651)
+-- TOC entry 6779 (class 2606 OID 1037390)
 -- Name: success_transaction_beneficiary success_transaction_beneficiary_ifsc_code_fkey; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
 --
 
-ALTER TABLE ONLY cts.success_transaction_beneficiary
+ALTER TABLE cts.success_transaction_beneficiary
     ADD CONSTRAINT success_transaction_beneficiary_ifsc_code_fkey FOREIGN KEY (ifsc_code) REFERENCES master.rbi_ifsc_stock(ifsc);
 
 
 --
--- TOC entry 5929 (class 2606 OID 1034211)
+-- TOC entry 6783 (class 2606 OID 1037464)
 -- Name: success_transaction_beneficiary_bk success_transaction_beneficiary_ifsc_code_fkey_bk; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
 --
 
-ALTER TABLE ONLY cts.success_transaction_beneficiary_bk
+ALTER TABLE cts.success_transaction_beneficiary_bk
     ADD CONSTRAINT success_transaction_beneficiary_ifsc_code_fkey_bk FOREIGN KEY (ifsc_code) REFERENCES master.rbi_ifsc_stock(ifsc);
 
 
 --
--- TOC entry 5916 (class 2606 OID 1034397)
+-- TOC entry 6780 (class 2606 OID 1037405)
 -- Name: success_transaction_beneficiary success_transaction_beneficiary_treasury_code_fkey; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
 --
 
-ALTER TABLE ONLY cts.success_transaction_beneficiary
+ALTER TABLE cts.success_transaction_beneficiary
     ADD CONSTRAINT success_transaction_beneficiary_treasury_code_fkey FOREIGN KEY (treasury_code) REFERENCES master.treasury(code);
 
 
 --
--- TOC entry 5930 (class 2606 OID 1034499)
+-- TOC entry 6784 (class 2606 OID 1037472)
 -- Name: success_transaction_beneficiary_bk success_transaction_beneficiary_treasury_code_fkey_bk; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
 --
 
-ALTER TABLE ONLY cts.success_transaction_beneficiary_bk
+ALTER TABLE cts.success_transaction_beneficiary_bk
     ADD CONSTRAINT success_transaction_beneficiary_treasury_code_fkey_bk FOREIGN KEY (treasury_code) REFERENCES master.treasury(code);
 
 
 --
--- TOC entry 5931 (class 2606 OID 1034533)
+-- TOC entry 6698 (class 2606 OID 1035396)
 -- Name: token token_n_bill_id_fkey; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
 --
 
 ALTER TABLE ONLY cts.token
-    ADD CONSTRAINT token_n_bill_id_fkey FOREIGN KEY (entity_id) REFERENCES billing.bill_details(bill_id);
+    ADD CONSTRAINT token_n_bill_id_fkey FOREIGN KEY (entity_id) REFERENCES old.billing_bill_details(bill_id);
 
 
 --
--- TOC entry 5932 (class 2606 OID 1034539)
+-- TOC entry 6699 (class 2606 OID 1035401)
 -- Name: token token_n_ddo_code_fkey; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
 --
 
@@ -15686,16 +19696,16 @@ ALTER TABLE ONLY cts.token
 
 
 --
--- TOC entry 5933 (class 2606 OID 1034546)
+-- TOC entry 6700 (class 2606 OID 1035406)
 -- Name: token token_n_financial_year_id_fkey; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
 --
 
 ALTER TABLE ONLY cts.token
-    ADD CONSTRAINT token_n_financial_year_id_fkey FOREIGN KEY (financial_year_id) REFERENCES master.financial_year_master(id);
+    ADD CONSTRAINT token_n_financial_year_id_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id);
 
 
 --
--- TOC entry 5934 (class 2606 OID 1034551)
+-- TOC entry 6701 (class 2606 OID 1035411)
 -- Name: token token_n_treasury_code_fkey; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
 --
 
@@ -15704,25 +19714,25 @@ ALTER TABLE ONLY cts.token
 
 
 --
--- TOC entry 5935 (class 2606 OID 1034561)
+-- TOC entry 6702 (class 2606 OID 1035416)
 -- Name: voucher voucher_bill_id_fkey; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
 --
 
 ALTER TABLE ONLY cts.voucher
-    ADD CONSTRAINT voucher_bill_id_fkey FOREIGN KEY (bill_id) REFERENCES billing.bill_details(bill_id) NOT VALID;
+    ADD CONSTRAINT voucher_bill_id_fkey FOREIGN KEY (bill_id) REFERENCES old.billing_bill_details(bill_id) NOT VALID;
 
 
 --
--- TOC entry 5936 (class 2606 OID 1034567)
+-- TOC entry 6703 (class 2606 OID 1035421)
 -- Name: voucher voucher_financial_year_id_fkey; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
 --
 
 ALTER TABLE ONLY cts.voucher
-    ADD CONSTRAINT voucher_financial_year_id_fkey FOREIGN KEY (financial_year_id) REFERENCES master.financial_year_master(id) NOT VALID;
+    ADD CONSTRAINT voucher_financial_year_id_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id) NOT VALID;
 
 
 --
--- TOC entry 5937 (class 2606 OID 1034572)
+-- TOC entry 6704 (class 2606 OID 1035426)
 -- Name: voucher voucher_token_id_fkey; Type: FK CONSTRAINT; Schema: cts; Owner: postgres
 --
 
@@ -15731,7 +19741,7 @@ ALTER TABLE ONLY cts.voucher
 
 
 --
--- TOC entry 5938 (class 2606 OID 1034577)
+-- TOC entry 6705 (class 2606 OID 1035431)
 -- Name: exp_payee_components exp_payee_components_payee_id_fkey; Type: FK CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -15740,16 +19750,16 @@ ALTER TABLE ONLY jit.exp_payee_components
 
 
 --
--- TOC entry 5939 (class 2606 OID 1034582)
+-- TOC entry 6706 (class 2606 OID 1035436)
 -- Name: exp_payee_components exp_payee_components_ref_id_fkey; Type: FK CONSTRAINT; Schema: jit; Owner: postgres
 --
 
 ALTER TABLE ONLY jit.exp_payee_components
-    ADD CONSTRAINT exp_payee_components_ref_id_fkey FOREIGN KEY (ref_id) REFERENCES jit.tsa_exp_details(id) NOT VALID;
+    ADD CONSTRAINT exp_payee_components_ref_id_fkey FOREIGN KEY (ref_id) REFERENCES old.jit_tsa_exp_details(id) NOT VALID;
 
 
 --
--- TOC entry 5940 (class 2606 OID 1034587)
+-- TOC entry 6707 (class 2606 OID 1035441)
 -- Name: fto_voucher fto_voucher_payee_id_fkey; Type: FK CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -15758,16 +19768,16 @@ ALTER TABLE ONLY jit.fto_voucher
 
 
 --
--- TOC entry 5941 (class 2606 OID 1034592)
+-- TOC entry 6708 (class 2606 OID 1035446)
 -- Name: fto_voucher fto_voucher_ref_id_fkey; Type: FK CONSTRAINT; Schema: jit; Owner: postgres
 --
 
 ALTER TABLE ONLY jit.fto_voucher
-    ADD CONSTRAINT fto_voucher_ref_id_fkey FOREIGN KEY (ref_id) REFERENCES jit.tsa_exp_details(id) NOT VALID;
+    ADD CONSTRAINT fto_voucher_ref_id_fkey FOREIGN KEY (ref_id) REFERENCES old.jit_tsa_exp_details(id) NOT VALID;
 
 
 --
--- TOC entry 5924 (class 2606 OID 1034597)
+-- TOC entry 6691 (class 2606 OID 1035451)
 -- Name: gst gst_payee_id_fkey; Type: FK CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -15776,16 +19786,16 @@ ALTER TABLE ONLY jit.gst
 
 
 --
--- TOC entry 5925 (class 2606 OID 1034602)
+-- TOC entry 6692 (class 2606 OID 1035456)
 -- Name: gst gst_ref_id_fkey; Type: FK CONSTRAINT; Schema: jit; Owner: postgres
 --
 
 ALTER TABLE ONLY jit.gst
-    ADD CONSTRAINT gst_ref_id_fkey FOREIGN KEY (ref_id) REFERENCES jit.tsa_exp_details(id) NOT VALID;
+    ADD CONSTRAINT gst_ref_id_fkey FOREIGN KEY (ref_id) REFERENCES old.jit_tsa_exp_details(id) NOT VALID;
 
 
 --
--- TOC entry 5942 (class 2606 OID 1034607)
+-- TOC entry 6709 (class 2606 OID 1035461)
 -- Name: jit_allotment jit_allotment_ddo_code_fkey; Type: FK CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -15794,16 +19804,16 @@ ALTER TABLE ONLY jit.jit_allotment
 
 
 --
--- TOC entry 5943 (class 2606 OID 1034612)
+-- TOC entry 6710 (class 2606 OID 1035466)
 -- Name: jit_allotment jit_allotment_fin_year_fkey; Type: FK CONSTRAINT; Schema: jit; Owner: postgres
 --
 
 ALTER TABLE ONLY jit.jit_allotment
-    ADD CONSTRAINT jit_allotment_fin_year_fkey FOREIGN KEY (fin_year) REFERENCES master.financial_year_master(id) NOT VALID;
+    ADD CONSTRAINT jit_allotment_fin_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id) NOT VALID;
 
 
 --
--- TOC entry 5944 (class 2606 OID 1034617)
+-- TOC entry 6711 (class 2606 OID 1035471)
 -- Name: jit_allotment jit_allotment_hoa_id_fkey; Type: FK CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -15812,7 +19822,7 @@ ALTER TABLE ONLY jit.jit_allotment
 
 
 --
--- TOC entry 5945 (class 2606 OID 1034622)
+-- TOC entry 6712 (class 2606 OID 1035476)
 -- Name: jit_allotment jit_allotment_treasury_code_fkey; Type: FK CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -15821,16 +19831,16 @@ ALTER TABLE ONLY jit.jit_allotment
 
 
 --
--- TOC entry 5946 (class 2606 OID 1034627)
+-- TOC entry 6713 (class 2606 OID 1035481)
 -- Name: jit_fto_sanction_booking jit_fto_sanction_booking_ref_id_fkey; Type: FK CONSTRAINT; Schema: jit; Owner: postgres
 --
 
 ALTER TABLE ONLY jit.jit_fto_sanction_booking
-    ADD CONSTRAINT jit_fto_sanction_booking_ref_id_fkey FOREIGN KEY (ref_id) REFERENCES jit.tsa_exp_details(id) NOT VALID;
+    ADD CONSTRAINT jit_fto_sanction_booking_ref_id_fkey FOREIGN KEY (ref_id) REFERENCES old.jit_tsa_exp_details(id) NOT VALID;
 
 
 --
--- TOC entry 5947 (class 2606 OID 1034632)
+-- TOC entry 6714 (class 2606 OID 1035486)
 -- Name: jit_fto_sanction_booking jit_fto_sanction_booking_sanction_id_fkey; Type: FK CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -15839,16 +19849,16 @@ ALTER TABLE ONLY jit.jit_fto_sanction_booking
 
 
 --
--- TOC entry 5948 (class 2606 OID 1034637)
+-- TOC entry 6715 (class 2606 OID 1035491)
 -- Name: jit_pullback_request jit_pullback_request_ref_no_fkey; Type: FK CONSTRAINT; Schema: jit; Owner: postgres
 --
 
 ALTER TABLE ONLY jit.jit_pullback_request
-    ADD CONSTRAINT jit_pullback_request_ref_no_fkey FOREIGN KEY (ref_no) REFERENCES jit.tsa_exp_details(ref_no);
+    ADD CONSTRAINT jit_pullback_request_ref_no_fkey FOREIGN KEY (ref_no) REFERENCES old.jit_tsa_exp_details(ref_no);
 
 
 --
--- TOC entry 5949 (class 2606 OID 1034664)
+-- TOC entry 6716 (class 2606 OID 1035496)
 -- Name: jit_report_details jit_report_details_hoa_id_fkey; Type: FK CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -15857,7 +19867,7 @@ ALTER TABLE ONLY jit.jit_report_details
 
 
 --
--- TOC entry 5950 (class 2606 OID 1034684)
+-- TOC entry 6717 (class 2606 OID 1035501)
 -- Name: jit_withdrawl jit_withdrawl_ddo_code_fkey; Type: FK CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -15866,16 +19876,16 @@ ALTER TABLE ONLY jit.jit_withdrawl
 
 
 --
--- TOC entry 5951 (class 2606 OID 1034692)
+-- TOC entry 6718 (class 2606 OID 1035506)
 -- Name: jit_withdrawl jit_withdrawl_fin_year_fkey; Type: FK CONSTRAINT; Schema: jit; Owner: postgres
 --
 
 ALTER TABLE ONLY jit.jit_withdrawl
-    ADD CONSTRAINT jit_withdrawl_fin_year_fkey FOREIGN KEY (fin_year) REFERENCES master.financial_year_master(id);
+    ADD CONSTRAINT jit_withdrawl_fin_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id);
 
 
 --
--- TOC entry 5952 (class 2606 OID 1034698)
+-- TOC entry 6719 (class 2606 OID 1035511)
 -- Name: jit_withdrawl jit_withdrawl_hoa_id_fkey; Type: FK CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -15884,7 +19894,7 @@ ALTER TABLE ONLY jit.jit_withdrawl
 
 
 --
--- TOC entry 5953 (class 2606 OID 1034704)
+-- TOC entry 6720 (class 2606 OID 1035516)
 -- Name: jit_withdrawl jit_withdrawl_treasury_code_fkey; Type: FK CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -15893,7 +19903,7 @@ ALTER TABLE ONLY jit.jit_withdrawl
 
 
 --
--- TOC entry 5954 (class 2606 OID 1034709)
+-- TOC entry 6721 (class 2606 OID 1035521)
 -- Name: payee_deduction payee_deduction_bt_code_fkey; Type: FK CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -15902,43 +19912,43 @@ ALTER TABLE ONLY jit.payee_deduction
 
 
 --
--- TOC entry 5955 (class 2606 OID 1034716)
+-- TOC entry 6722 (class 2606 OID 1035526)
 -- Name: payee_deduction payee_deduction_ref_id_fkey; Type: FK CONSTRAINT; Schema: jit; Owner: postgres
 --
 
 ALTER TABLE ONLY jit.payee_deduction
-    ADD CONSTRAINT payee_deduction_ref_id_fkey FOREIGN KEY (ref_id) REFERENCES jit.tsa_exp_details(id) NOT VALID;
+    ADD CONSTRAINT payee_deduction_ref_id_fkey FOREIGN KEY (ref_id) REFERENCES old.jit_tsa_exp_details(id) NOT VALID;
 
 
 --
--- TOC entry 5956 (class 2606 OID 1034723)
+-- TOC entry 6739 (class 2606 OID 1036156)
 -- Name: tsa_exp_details tsa_exp_details_ddo_code_fkey; Type: FK CONSTRAINT; Schema: jit; Owner: postgres
 --
 
-ALTER TABLE ONLY jit.tsa_exp_details
-    ADD CONSTRAINT tsa_exp_details_ddo_code_fkey FOREIGN KEY (ddo_code) REFERENCES master.ddo(ddo_code) NOT VALID;
+ALTER TABLE jit.tsa_exp_details
+    ADD CONSTRAINT tsa_exp_details_ddo_code_fkey FOREIGN KEY (ddo_code) REFERENCES master.ddo(ddo_code);
 
 
 --
--- TOC entry 5957 (class 2606 OID 1034728)
+-- TOC entry 6740 (class 2606 OID 1036164)
 -- Name: tsa_exp_details tsa_exp_details_hoa_id_fkey; Type: FK CONSTRAINT; Schema: jit; Owner: postgres
 --
 
-ALTER TABLE ONLY jit.tsa_exp_details
-    ADD CONSTRAINT tsa_exp_details_hoa_id_fkey FOREIGN KEY (hoa_id) REFERENCES master.active_hoa_mst(id) NOT VALID;
+ALTER TABLE jit.tsa_exp_details
+    ADD CONSTRAINT tsa_exp_details_hoa_id_fkey FOREIGN KEY (hoa_id) REFERENCES master.active_hoa_mst(id);
 
 
 --
--- TOC entry 5958 (class 2606 OID 1034733)
+-- TOC entry 6741 (class 2606 OID 1036172)
 -- Name: tsa_exp_details tsa_exp_details_treas_code_fkey; Type: FK CONSTRAINT; Schema: jit; Owner: postgres
 --
 
-ALTER TABLE ONLY jit.tsa_exp_details
-    ADD CONSTRAINT tsa_exp_details_treas_code_fkey FOREIGN KEY (treas_code) REFERENCES master.treasury(code) NOT VALID;
+ALTER TABLE jit.tsa_exp_details
+    ADD CONSTRAINT tsa_exp_details_treas_code_fkey FOREIGN KEY (treas_code) REFERENCES master.treasury(code);
 
 
 --
--- TOC entry 5959 (class 2606 OID 1034738)
+-- TOC entry 6726 (class 2606 OID 1035546)
 -- Name: tsa_payeemaster tsa_payeemaster_ifsc_code_fkey; Type: FK CONSTRAINT; Schema: jit; Owner: postgres
 --
 
@@ -15947,16 +19957,16 @@ ALTER TABLE ONLY jit.tsa_payeemaster
 
 
 --
--- TOC entry 5960 (class 2606 OID 1034743)
+-- TOC entry 6727 (class 2606 OID 1035551)
 -- Name: tsa_payeemaster tsa_payeemaster_ref_id_fkey; Type: FK CONSTRAINT; Schema: jit; Owner: postgres
 --
 
 ALTER TABLE ONLY jit.tsa_payeemaster
-    ADD CONSTRAINT tsa_payeemaster_ref_id_fkey FOREIGN KEY (ref_id) REFERENCES jit.tsa_exp_details(id) NOT VALID;
+    ADD CONSTRAINT tsa_payeemaster_ref_id_fkey FOREIGN KEY (ref_id) REFERENCES old.jit_tsa_exp_details(id) NOT VALID;
 
 
 --
--- TOC entry 5961 (class 2606 OID 1034749)
+-- TOC entry 6728 (class 2606 OID 1035556)
 -- Name: ddo ddo_treasury_code_fkey; Type: FK CONSTRAINT; Schema: master; Owner: postgres
 --
 
@@ -15965,7 +19975,7 @@ ALTER TABLE ONLY master.ddo
 
 
 --
--- TOC entry 5962 (class 2606 OID 1034754)
+-- TOC entry 6729 (class 2606 OID 1035561)
 -- Name: demand_major_mapping demand_major_mapping_demand_code_fkey; Type: FK CONSTRAINT; Schema: master; Owner: postgres
 --
 
@@ -15974,7 +19984,7 @@ ALTER TABLE ONLY master.demand_major_mapping
 
 
 --
--- TOC entry 5963 (class 2606 OID 1034760)
+-- TOC entry 6730 (class 2606 OID 1035566)
 -- Name: demand_major_mapping demand_major_mapping_major_head_id_fkey; Type: FK CONSTRAINT; Schema: master; Owner: postgres
 --
 
@@ -15983,7 +19993,7 @@ ALTER TABLE ONLY master.demand_major_mapping
 
 
 --
--- TOC entry 5964 (class 2606 OID 1034767)
+-- TOC entry 6731 (class 2606 OID 1035571)
 -- Name: minor_head minor_head_sub_major_id_fkey; Type: FK CONSTRAINT; Schema: master; Owner: postgres
 --
 
@@ -15992,7 +20002,7 @@ ALTER TABLE ONLY master.minor_head
 
 
 --
--- TOC entry 5965 (class 2606 OID 1034774)
+-- TOC entry 6732 (class 2606 OID 1035576)
 -- Name: scheme_head scheme_head_minor_head_id_fkey; Type: FK CONSTRAINT; Schema: master; Owner: postgres
 --
 
@@ -16001,7 +20011,7 @@ ALTER TABLE ONLY master.scheme_head
 
 
 --
--- TOC entry 5966 (class 2606 OID 1034781)
+-- TOC entry 6733 (class 2606 OID 1035581)
 -- Name: sub_detail_head sub_detail_head_detail_head_id_fkey; Type: FK CONSTRAINT; Schema: master; Owner: postgres
 --
 
@@ -16010,9 +20020,584 @@ ALTER TABLE ONLY master.sub_detail_head
 
 
 --
--- TOC entry 5967 (class 2606 OID 1034786)
+-- TOC entry 6734 (class 2606 OID 1035586)
 -- Name: sub_major_head sub_major_head_major_head_id_fkey; Type: FK CONSTRAINT; Schema: master; Owner: postgres
 --
 
 ALTER TABLE ONLY master.sub_major_head
     ADD CONSTRAINT sub_major_head_major_head_id_fkey FOREIGN KEY (major_head_id) REFERENCES master.major_head(id) NOT VALID;
+
+
+--
+-- TOC entry 6645 (class 2606 OID 1035101)
+-- Name: billing_bill_btdetail bill_btdetail_bill_id_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_btdetail
+    ADD CONSTRAINT bill_btdetail_bill_id_fkey FOREIGN KEY (bill_id) REFERENCES old.billing_bill_details(bill_id) NOT VALID;
+
+
+--
+-- TOC entry 6646 (class 2606 OID 1035106)
+-- Name: billing_bill_btdetail bill_btdetail_bt_serial_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_btdetail
+    ADD CONSTRAINT bill_btdetail_bt_serial_fkey FOREIGN KEY (bt_serial) REFERENCES billing_master.bt_details(bt_serial) NOT VALID;
+
+
+--
+-- TOC entry 6647 (class 2606 OID 1035111)
+-- Name: billing_bill_btdetail bill_btdetail_ddo_code_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_btdetail
+    ADD CONSTRAINT bill_btdetail_ddo_code_fkey FOREIGN KEY (ddo_code) REFERENCES master.ddo(ddo_code) NOT VALID;
+
+
+--
+-- TOC entry 6648 (class 2606 OID 1035116)
+-- Name: billing_bill_btdetail bill_btdetail_financial_year_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_btdetail
+    ADD CONSTRAINT bill_btdetail_financial_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id) NOT VALID;
+
+
+--
+-- TOC entry 6649 (class 2606 OID 1035121)
+-- Name: billing_bill_btdetail bill_btdetail_treasury_code_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_btdetail
+    ADD CONSTRAINT bill_btdetail_treasury_code_fkey FOREIGN KEY (treasury_code) REFERENCES master.treasury(code) NOT VALID;
+
+
+--
+-- TOC entry 6637 (class 2606 OID 1035126)
+-- Name: billing_bill_details bill_details_ddo_code_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_details
+    ADD CONSTRAINT bill_details_ddo_code_fkey FOREIGN KEY (ddo_code) REFERENCES master.ddo(ddo_code) NOT VALID;
+
+
+--
+-- TOC entry 6638 (class 2606 OID 1035131)
+-- Name: billing_bill_details bill_details_demand_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_details
+    ADD CONSTRAINT bill_details_demand_fkey FOREIGN KEY (demand) REFERENCES master.department(demand_code) NOT VALID;
+
+
+--
+-- TOC entry 6639 (class 2606 OID 1035136)
+-- Name: billing_bill_details bill_details_financial_year_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_details
+    ADD CONSTRAINT bill_details_financial_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id) NOT VALID;
+
+
+--
+-- TOC entry 6640 (class 2606 OID 1035141)
+-- Name: billing_bill_details bill_details_status_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_details
+    ADD CONSTRAINT bill_details_status_fkey FOREIGN KEY (status) REFERENCES billing_master.bill_status_master(status_id) NOT VALID;
+
+
+--
+-- TOC entry 6641 (class 2606 OID 1035146)
+-- Name: billing_bill_details bill_details_tr_master_id_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_details
+    ADD CONSTRAINT bill_details_tr_master_id_fkey FOREIGN KEY (tr_master_id) REFERENCES billing_master.tr_master(id) NOT VALID;
+
+
+--
+-- TOC entry 6642 (class 2606 OID 1035151)
+-- Name: billing_bill_details bill_details_treasury_code_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_details
+    ADD CONSTRAINT bill_details_treasury_code_fkey FOREIGN KEY (treasury_code) REFERENCES master.treasury(code) NOT VALID;
+
+
+--
+-- TOC entry 6652 (class 2606 OID 1035156)
+-- Name: billing_bill_ecs_neft_details bill_ecs_neft_details_bill_id_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_ecs_neft_details
+    ADD CONSTRAINT bill_ecs_neft_details_bill_id_fkey FOREIGN KEY (bill_id) REFERENCES old.billing_bill_details(bill_id) NOT VALID;
+
+
+--
+-- TOC entry 6653 (class 2606 OID 1035161)
+-- Name: billing_bill_ecs_neft_details bill_ecs_neft_details_financial_year_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_ecs_neft_details
+    ADD CONSTRAINT bill_ecs_neft_details_financial_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id) NOT VALID;
+
+
+--
+-- TOC entry 6654 (class 2606 OID 1035166)
+-- Name: billing_bill_ecs_neft_details bill_ecs_neft_details_ifsc_code_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_ecs_neft_details
+    ADD CONSTRAINT bill_ecs_neft_details_ifsc_code_fkey FOREIGN KEY (ifsc_code) REFERENCES master.rbi_ifsc_stock(ifsc) NOT VALID;
+
+
+--
+-- TOC entry 6655 (class 2606 OID 1035171)
+-- Name: billing_bill_jit_components bill_jit_components_bill_id_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_jit_components
+    ADD CONSTRAINT bill_jit_components_bill_id_fkey FOREIGN KEY (bill_id) REFERENCES old.billing_bill_details(bill_id);
+
+
+--
+-- TOC entry 6657 (class 2606 OID 1035181)
+-- Name: billing_bill_subdetail_info bill_subdetail_info_active_hoa_id_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_subdetail_info
+    ADD CONSTRAINT bill_subdetail_info_active_hoa_id_fkey FOREIGN KEY (active_hoa_id) REFERENCES master.active_hoa_mst(id) NOT VALID;
+
+
+--
+-- TOC entry 6658 (class 2606 OID 1035186)
+-- Name: billing_bill_subdetail_info bill_subdetail_info_bill_id_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_subdetail_info
+    ADD CONSTRAINT bill_subdetail_info_bill_id_fkey FOREIGN KEY (bill_id) REFERENCES old.billing_bill_details(bill_id) NOT VALID;
+
+
+--
+-- TOC entry 6659 (class 2606 OID 1035191)
+-- Name: billing_bill_subdetail_info bill_subdetail_info_ddo_code_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_subdetail_info
+    ADD CONSTRAINT bill_subdetail_info_ddo_code_fkey FOREIGN KEY (ddo_code) REFERENCES master.ddo(ddo_code) NOT VALID;
+
+
+--
+-- TOC entry 6660 (class 2606 OID 1035196)
+-- Name: billing_bill_subdetail_info bill_subdetail_info_financial_year_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_subdetail_info
+    ADD CONSTRAINT bill_subdetail_info_financial_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id) NOT VALID;
+
+
+--
+-- TOC entry 6661 (class 2606 OID 1035201)
+-- Name: billing_bill_subdetail_info bill_subdetail_info_treasury_code_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_subdetail_info
+    ADD CONSTRAINT bill_subdetail_info_treasury_code_fkey FOREIGN KEY (treasury_code) REFERENCES master.treasury(code) NOT VALID;
+
+
+--
+-- TOC entry 6684 (class 2606 OID 1035286)
+-- Name: cts_challan challan_financial_year_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_challan
+    ADD CONSTRAINT challan_financial_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id);
+
+
+--
+-- TOC entry 6685 (class 2606 OID 1035291)
+-- Name: cts_challan challan_treasury_code_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_challan
+    ADD CONSTRAINT challan_treasury_code_fkey FOREIGN KEY (treasury_code) REFERENCES master.treasury(code);
+
+
+--
+-- TOC entry 6662 (class 2606 OID 1035206)
+-- Name: billing_ddo_allotment_booked_bill ddo_allotment_booked_bill_active_hoa_id_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_ddo_allotment_booked_bill
+    ADD CONSTRAINT ddo_allotment_booked_bill_active_hoa_id_fkey FOREIGN KEY (active_hoa_id) REFERENCES master.active_hoa_mst(id) NOT VALID;
+
+
+--
+-- TOC entry 6663 (class 2606 OID 1035211)
+-- Name: billing_ddo_allotment_booked_bill ddo_allotment_booked_bill_allotment_id_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_ddo_allotment_booked_bill
+    ADD CONSTRAINT ddo_allotment_booked_bill_allotment_id_fkey FOREIGN KEY (allotment_id) REFERENCES old.bantan_ddo_allotment_transactions(allotment_id) NOT VALID;
+
+
+--
+-- TOC entry 6664 (class 2606 OID 1035216)
+-- Name: billing_ddo_allotment_booked_bill ddo_allotment_booked_bill_bill_id_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_ddo_allotment_booked_bill
+    ADD CONSTRAINT ddo_allotment_booked_bill_bill_id_fkey FOREIGN KEY (bill_id) REFERENCES old.billing_bill_details(bill_id) NOT VALID;
+
+
+--
+-- TOC entry 6665 (class 2606 OID 1035221)
+-- Name: billing_ddo_allotment_booked_bill ddo_allotment_booked_bill_ddo_code_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_ddo_allotment_booked_bill
+    ADD CONSTRAINT ddo_allotment_booked_bill_ddo_code_fkey FOREIGN KEY (ddo_code) REFERENCES master.ddo(ddo_code) NOT VALID;
+
+
+--
+-- TOC entry 6666 (class 2606 OID 1035226)
+-- Name: billing_ddo_allotment_booked_bill ddo_allotment_booked_bill_financial_year_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_ddo_allotment_booked_bill
+    ADD CONSTRAINT ddo_allotment_booked_bill_financial_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id) NOT VALID;
+
+
+--
+-- TOC entry 6667 (class 2606 OID 1035231)
+-- Name: billing_ddo_allotment_booked_bill ddo_allotment_booked_bill_treasury_code_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_ddo_allotment_booked_bill
+    ADD CONSTRAINT ddo_allotment_booked_bill_treasury_code_fkey FOREIGN KEY (treasury_code) REFERENCES master.treasury(code) NOT VALID;
+
+
+--
+-- TOC entry 6629 (class 2606 OID 1035061)
+-- Name: bantan_ddo_allotment_transactions ddo_allotment_transactions_active_hoa_id_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.bantan_ddo_allotment_transactions
+    ADD CONSTRAINT ddo_allotment_transactions_active_hoa_id_fkey FOREIGN KEY (active_hoa_id) REFERENCES master.active_hoa_mst(id) NOT VALID;
+
+
+--
+-- TOC entry 6630 (class 2606 OID 1035066)
+-- Name: bantan_ddo_allotment_transactions ddo_allotment_transactions_financial_year_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.bantan_ddo_allotment_transactions
+    ADD CONSTRAINT ddo_allotment_transactions_financial_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id) NOT VALID;
+
+
+--
+-- TOC entry 6631 (class 2606 OID 1035071)
+-- Name: bantan_ddo_allotment_transactions ddo_allotment_transactions_receiver_sao_ddo_code_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.bantan_ddo_allotment_transactions
+    ADD CONSTRAINT ddo_allotment_transactions_receiver_sao_ddo_code_fkey FOREIGN KEY (receiver_sao_ddo_code) REFERENCES master.ddo(ddo_code) NOT VALID;
+
+
+--
+-- TOC entry 6632 (class 2606 OID 1035076)
+-- Name: bantan_ddo_allotment_transactions ddo_allotment_transactions_treasury_code_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.bantan_ddo_allotment_transactions
+    ADD CONSTRAINT ddo_allotment_transactions_treasury_code_fkey FOREIGN KEY (treasury_code) REFERENCES master.treasury(code) NOT VALID;
+
+
+--
+-- TOC entry 6633 (class 2606 OID 1035081)
+-- Name: bantan_ddo_wallet ddo_wallet_active_hoa_id_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.bantan_ddo_wallet
+    ADD CONSTRAINT ddo_wallet_active_hoa_id_fkey FOREIGN KEY (active_hoa_id) REFERENCES master.active_hoa_mst(id);
+
+
+--
+-- TOC entry 6634 (class 2606 OID 1035086)
+-- Name: bantan_ddo_wallet ddo_wallet_financial_year_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.bantan_ddo_wallet
+    ADD CONSTRAINT ddo_wallet_financial_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id);
+
+
+--
+-- TOC entry 6635 (class 2606 OID 1035091)
+-- Name: bantan_ddo_wallet ddo_wallet_sao_ddo_code_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.bantan_ddo_wallet
+    ADD CONSTRAINT ddo_wallet_sao_ddo_code_fkey FOREIGN KEY (sao_ddo_code) REFERENCES master.ddo(ddo_code);
+
+
+--
+-- TOC entry 6636 (class 2606 OID 1035096)
+-- Name: bantan_ddo_wallet ddo_wallet_treasury_code_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.bantan_ddo_wallet
+    ADD CONSTRAINT ddo_wallet_treasury_code_fkey FOREIGN KEY (treasury_code) REFERENCES master.treasury(code);
+
+
+--
+-- TOC entry 6674 (class 2606 OID 1035296)
+-- Name: cts_failed_transaction_beneficiary failed_transaction_beneficiary_bill_id_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_failed_transaction_beneficiary
+    ADD CONSTRAINT failed_transaction_beneficiary_bill_id_fkey FOREIGN KEY (bill_id) REFERENCES old.billing_bill_details(bill_id);
+
+
+--
+-- TOC entry 6686 (class 2606 OID 1035301)
+-- Name: cts_failed_transaction_beneficiary_bk failed_transaction_beneficiary_bill_id_fkey_bk; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_failed_transaction_beneficiary_bk
+    ADD CONSTRAINT failed_transaction_beneficiary_bill_id_fkey_bk FOREIGN KEY (bill_id) REFERENCES old.billing_bill_details(bill_id);
+
+
+--
+-- TOC entry 6675 (class 2606 OID 1035306)
+-- Name: cts_failed_transaction_beneficiary failed_transaction_beneficiary_ddo_code_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_failed_transaction_beneficiary
+    ADD CONSTRAINT failed_transaction_beneficiary_ddo_code_fkey FOREIGN KEY (ddo_code) REFERENCES master.ddo(ddo_code);
+
+
+--
+-- TOC entry 6687 (class 2606 OID 1035311)
+-- Name: cts_failed_transaction_beneficiary_bk failed_transaction_beneficiary_ddo_code_fkey_bk; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_failed_transaction_beneficiary_bk
+    ADD CONSTRAINT failed_transaction_beneficiary_ddo_code_fkey_bk FOREIGN KEY (ddo_code) REFERENCES master.ddo(ddo_code);
+
+
+--
+-- TOC entry 6676 (class 2606 OID 1035316)
+-- Name: cts_failed_transaction_beneficiary failed_transaction_beneficiary_financial_year_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_failed_transaction_beneficiary
+    ADD CONSTRAINT failed_transaction_beneficiary_financial_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id);
+
+
+--
+-- TOC entry 6688 (class 2606 OID 1035321)
+-- Name: cts_failed_transaction_beneficiary_bk failed_transaction_beneficiary_financial_year_fkey_bk; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_failed_transaction_beneficiary_bk
+    ADD CONSTRAINT failed_transaction_beneficiary_financial_year_fkey_bk FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id);
+
+
+--
+-- TOC entry 6677 (class 2606 OID 1035326)
+-- Name: cts_failed_transaction_beneficiary failed_transaction_beneficiary_ifsc_code_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_failed_transaction_beneficiary
+    ADD CONSTRAINT failed_transaction_beneficiary_ifsc_code_fkey FOREIGN KEY (ifsc_code) REFERENCES master.rbi_ifsc_stock(ifsc);
+
+
+--
+-- TOC entry 6689 (class 2606 OID 1035331)
+-- Name: cts_failed_transaction_beneficiary_bk failed_transaction_beneficiary_ifsc_code_fkey_bk; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_failed_transaction_beneficiary_bk
+    ADD CONSTRAINT failed_transaction_beneficiary_ifsc_code_fkey_bk FOREIGN KEY (ifsc_code) REFERENCES master.rbi_ifsc_stock(ifsc);
+
+
+--
+-- TOC entry 6678 (class 2606 OID 1035336)
+-- Name: cts_failed_transaction_beneficiary failed_transaction_beneficiary_treasury_code_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_failed_transaction_beneficiary
+    ADD CONSTRAINT failed_transaction_beneficiary_treasury_code_fkey FOREIGN KEY (treasury_code) REFERENCES master.treasury(code);
+
+
+--
+-- TOC entry 6690 (class 2606 OID 1035341)
+-- Name: cts_failed_transaction_beneficiary_bk failed_transaction_beneficiary_treasury_code_fkey_bk; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_failed_transaction_beneficiary_bk
+    ADD CONSTRAINT failed_transaction_beneficiary_treasury_code_fkey_bk FOREIGN KEY (treasury_code) REFERENCES master.treasury(code);
+
+
+--
+-- TOC entry 6650 (class 2606 OID 1035236)
+-- Name: billing_bill_gst fk_bill_id; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_gst
+    ADD CONSTRAINT fk_bill_id FOREIGN KEY (bill_id) REFERENCES old.billing_bill_details(bill_id);
+
+
+--
+-- TOC entry 6651 (class 2606 OID 1035241)
+-- Name: billing_bill_gst fk_cpin_id; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_bill_gst
+    ADD CONSTRAINT fk_cpin_id FOREIGN KEY (cpin_id) REFERENCES old.billing_master_cpin_master(id);
+
+
+--
+-- TOC entry 6643 (class 2606 OID 1035246)
+-- Name: billing_jit_ecs_additional jit_ecs_additional_bill_id_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_jit_ecs_additional
+    ADD CONSTRAINT jit_ecs_additional_bill_id_fkey FOREIGN KEY (bill_id) REFERENCES old.billing_bill_details(bill_id) NOT VALID;
+
+
+--
+-- TOC entry 6644 (class 2606 OID 1035251)
+-- Name: billing_jit_ecs_additional jit_ecs_additional_ecs_id_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.billing_jit_ecs_additional
+    ADD CONSTRAINT jit_ecs_additional_ecs_id_fkey FOREIGN KEY (ecs_id) REFERENCES old.billing_bill_ecs_neft_details(id);
+
+
+--
+-- TOC entry 6679 (class 2606 OID 1035346)
+-- Name: cts_success_transaction_beneficiary success_transaction_beneficiary_bill_id_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_success_transaction_beneficiary
+    ADD CONSTRAINT success_transaction_beneficiary_bill_id_fkey FOREIGN KEY (bill_id) REFERENCES old.billing_bill_details(bill_id);
+
+
+--
+-- TOC entry 6693 (class 2606 OID 1035351)
+-- Name: cts_success_transaction_beneficiary_bk success_transaction_beneficiary_bill_id_fkey_bk; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_success_transaction_beneficiary_bk
+    ADD CONSTRAINT success_transaction_beneficiary_bill_id_fkey_bk FOREIGN KEY (bill_id) REFERENCES old.billing_bill_details(bill_id);
+
+
+--
+-- TOC entry 6680 (class 2606 OID 1035356)
+-- Name: cts_success_transaction_beneficiary success_transaction_beneficiary_ddo_code_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_success_transaction_beneficiary
+    ADD CONSTRAINT success_transaction_beneficiary_ddo_code_fkey FOREIGN KEY (ddo_code) REFERENCES master.ddo(ddo_code);
+
+
+--
+-- TOC entry 6694 (class 2606 OID 1035361)
+-- Name: cts_success_transaction_beneficiary_bk success_transaction_beneficiary_ddo_code_fkey_bk; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_success_transaction_beneficiary_bk
+    ADD CONSTRAINT success_transaction_beneficiary_ddo_code_fkey_bk FOREIGN KEY (ddo_code) REFERENCES master.ddo(ddo_code);
+
+
+--
+-- TOC entry 6681 (class 2606 OID 1035366)
+-- Name: cts_success_transaction_beneficiary success_transaction_beneficiary_financial_year_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_success_transaction_beneficiary
+    ADD CONSTRAINT success_transaction_beneficiary_financial_year_fkey FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id);
+
+
+--
+-- TOC entry 6695 (class 2606 OID 1035371)
+-- Name: cts_success_transaction_beneficiary_bk success_transaction_beneficiary_financial_year_fkey_bk; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_success_transaction_beneficiary_bk
+    ADD CONSTRAINT success_transaction_beneficiary_financial_year_fkey_bk FOREIGN KEY (financial_year) REFERENCES master.financial_year_master(id);
+
+
+--
+-- TOC entry 6682 (class 2606 OID 1035376)
+-- Name: cts_success_transaction_beneficiary success_transaction_beneficiary_ifsc_code_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_success_transaction_beneficiary
+    ADD CONSTRAINT success_transaction_beneficiary_ifsc_code_fkey FOREIGN KEY (ifsc_code) REFERENCES master.rbi_ifsc_stock(ifsc);
+
+
+--
+-- TOC entry 6696 (class 2606 OID 1035381)
+-- Name: cts_success_transaction_beneficiary_bk success_transaction_beneficiary_ifsc_code_fkey_bk; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_success_transaction_beneficiary_bk
+    ADD CONSTRAINT success_transaction_beneficiary_ifsc_code_fkey_bk FOREIGN KEY (ifsc_code) REFERENCES master.rbi_ifsc_stock(ifsc);
+
+
+--
+-- TOC entry 6683 (class 2606 OID 1035386)
+-- Name: cts_success_transaction_beneficiary success_transaction_beneficiary_treasury_code_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_success_transaction_beneficiary
+    ADD CONSTRAINT success_transaction_beneficiary_treasury_code_fkey FOREIGN KEY (treasury_code) REFERENCES master.treasury(code);
+
+
+--
+-- TOC entry 6697 (class 2606 OID 1035391)
+-- Name: cts_success_transaction_beneficiary_bk success_transaction_beneficiary_treasury_code_fkey_bk; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.cts_success_transaction_beneficiary_bk
+    ADD CONSTRAINT success_transaction_beneficiary_treasury_code_fkey_bk FOREIGN KEY (treasury_code) REFERENCES master.treasury(code);
+
+
+--
+-- TOC entry 6723 (class 2606 OID 1035531)
+-- Name: jit_tsa_exp_details tsa_exp_details_ddo_code_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.jit_tsa_exp_details
+    ADD CONSTRAINT tsa_exp_details_ddo_code_fkey FOREIGN KEY (ddo_code) REFERENCES master.ddo(ddo_code) NOT VALID;
+
+
+--
+-- TOC entry 6724 (class 2606 OID 1035536)
+-- Name: jit_tsa_exp_details tsa_exp_details_hoa_id_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.jit_tsa_exp_details
+    ADD CONSTRAINT tsa_exp_details_hoa_id_fkey FOREIGN KEY (hoa_id) REFERENCES master.active_hoa_mst(id) NOT VALID;
+
+
+--
+-- TOC entry 6725 (class 2606 OID 1035541)
+-- Name: jit_tsa_exp_details tsa_exp_details_treas_code_fkey; Type: FK CONSTRAINT; Schema: old; Owner: postgres
+--
+
+ALTER TABLE ONLY old.jit_tsa_exp_details
+    ADD CONSTRAINT tsa_exp_details_treas_code_fkey FOREIGN KEY (treas_code) REFERENCES master.treasury(code) NOT VALID;
+
+
+-- Completed on 2025-12-30 17:51:58
+
+--
+-- PostgreSQL database dump complete
+--
+
