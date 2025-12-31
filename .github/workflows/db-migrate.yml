@@ -10,17 +10,22 @@ on:
 
 jobs:
   flyway-migrate:
-    name: Run Flyway Migrate
     runs-on: ubuntu-latest
-
     steps:
-      # Step 1: Download your code (Check out the V files)
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Step 2: Run Flyway using the official Docker container
+      # === NEW STEP: Connect Runner to Tailscale ===
+      - name: Connect to Tailscale
+        uses: tailscale/github-action@v2
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
+          
+      # === EXISTING STEP: Run Flyway ===
       - name: Flyway Migrate
         uses: docker://flyway/flyway:10
         with:
-          # Arguments passed to the docker container entrypoint
-          args: -url=${{ secrets.DB_URL }} -user=${{ secrets.DB_USER }} -password=${{ secrets.DB_PASSWORD }} -locations=filesystem:sql -schemas=flyway_admin,public migrate
+          # Now the runner can reach "100.x.x.x" because it joined the VPN!
+          args: -url=${{ secrets.DB_URL }} -user=${{ secrets.DB_USER }} -password=${{ secrets.DB_PASSWORD }} -locations=filesystem:sql migrate
