@@ -1,0 +1,26 @@
+name: Production Database Migration
+
+# Trigger: Run this only when code is pushed to the 'main' branch
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'sql/**' # Only run if SQL files changed
+
+jobs:
+  flyway-migrate:
+    name: Run Flyway Migrate
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Download your code (Check out the V files)
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Run Flyway using the official Docker container
+      - name: Flyway Migrate
+        uses: docker://flyway/flyway:10
+        with:
+          # Arguments passed to the docker container entrypoint
+          args: -url=${{ secrets.DB_URL }} -user=${{ secrets.DB_USER }} -password=${{ secrets.DB_PASSWORD }} -locations=filesystem:sql -schemas=flyway_admin,public migrate
