@@ -244,7 +244,7 @@ ALTER FUNCTION billing.bill_status_send_to_jit() OWNER TO postgres;
 -- Name: cpin_regenerate_bill(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
-CREATE PROCEDURE billing.cpin_regenerate_bill(IN billing_details_payload jsonb, OUT inserted_id bigint, OUT _out_ref_no character varying)
+CREATE OR REPLACE PROCEDURE billing.cpin_regenerate_bill(IN billing_details_payload jsonb, OUT inserted_id bigint, OUT _out_ref_no character varying)
     LANGUAGE plpgsql
     AS $$
 Declare 
@@ -399,7 +399,7 @@ ALTER FUNCTION billing.enforce_unique_id() OWNER TO postgres;
 -- Name: fetch_cpin_failed_record(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
-CREATE PROCEDURE billing.fetch_cpin_failed_record(IN in_payload jsonb, OUT _out_failed_ben jsonb)
+CREATE OR REPLACE PROCEDURE billing.fetch_cpin_failed_record(IN in_payload jsonb, OUT _out_failed_ben jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -541,7 +541,7 @@ ALTER PROCEDURE billing.fetch_cpin_failed_record(IN in_payload jsonb, OUT _out_f
 -- Name: fetch_cpin_failed_record_bk(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
-CREATE PROCEDURE billing.fetch_cpin_failed_record_bk(IN in_payload jsonb, OUT _out_failed_ben jsonb)
+CREATE OR REPLACE PROCEDURE billing.fetch_cpin_failed_record_bk(IN in_payload jsonb, OUT _out_failed_ben jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -634,7 +634,7 @@ ALTER PROCEDURE billing.fetch_cpin_failed_record_bk(IN in_payload jsonb, OUT _ou
 -- Name: fetch_cpin_failed_record_by_billids(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
-CREATE PROCEDURE billing.fetch_cpin_failed_record_by_billids(IN in_payload jsonb, OUT _out_failed_ben jsonb)
+CREATE OR REPLACE PROCEDURE billing.fetch_cpin_failed_record_by_billids(IN in_payload jsonb, OUT _out_failed_ben jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -731,7 +731,7 @@ ALTER PROCEDURE billing.fetch_cpin_failed_record_by_billids(IN in_payload jsonb,
 -- Name: fetch_failed_ben_record_old(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
-CREATE PROCEDURE billing.fetch_failed_ben_record_old(IN in_payload jsonb, OUT _out_failed_ben jsonb)
+CREATE OR REPLACE PROCEDURE billing.fetch_failed_ben_record_old(IN in_payload jsonb, OUT _out_failed_ben jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -859,7 +859,7 @@ ALTER PROCEDURE billing.fetch_failed_ben_record_old(IN in_payload jsonb, OUT _ou
 -- Name: forward_treasury_jit_bill(bigint, bigint, smallint); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
-CREATE PROCEDURE billing.forward_treasury_jit_bill(IN _bill_id bigint, IN _forwarded_by_userid bigint, IN _forwarded_status smallint)
+CREATE OR REPLACE PROCEDURE billing.forward_treasury_jit_bill(IN _bill_id bigint, IN _forwarded_by_userid bigint, IN _forwarded_status smallint)
     LANGUAGE plpgsql
     AS $$
 Declare 
@@ -887,7 +887,7 @@ ALTER PROCEDURE billing.forward_treasury_jit_bill(IN _bill_id bigint, IN _forwar
 -- Name: get_bill_details_report(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
-CREATE PROCEDURE billing.get_bill_details_report(IN in_payload jsonb, OUT out_payload jsonb)
+CREATE OR REPLACE PROCEDURE billing.get_bill_details_report(IN in_payload jsonb, OUT out_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -1824,7 +1824,7 @@ ALTER FUNCTION billing.get_bill_payload_old(p_bill_id bigint) OWNER TO postgres;
 -- Name: get_failed_success_ben_report(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
-CREATE PROCEDURE billing.get_failed_success_ben_report(IN in_payload jsonb, OUT out_payload jsonb)
+CREATE OR REPLACE PROCEDURE billing.get_failed_success_ben_report(IN in_payload jsonb, OUT out_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -2037,7 +2037,7 @@ ALTER PROCEDURE billing.get_failed_success_ben_report(IN in_payload jsonb, OUT o
 -- Name: get_failed_success_ben_report_bk(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
-CREATE PROCEDURE billing.get_failed_success_ben_report_bk(IN in_payload jsonb, OUT out_payload jsonb)
+CREATE OR REPLACE PROCEDURE billing.get_failed_success_ben_report_bk(IN in_payload jsonb, OUT out_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -2228,7 +2228,7 @@ ALTER PROCEDURE billing.get_failed_success_ben_report_bk(IN in_payload jsonb, OU
 -- Name: get_non_salary_tds_details_report(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
-CREATE PROCEDURE billing.get_non_salary_tds_details_report(IN in_payload jsonb, OUT is_done boolean, OUT message_out text, OUT out_payload jsonb)
+CREATE OR REPLACE PROCEDURE billing.get_non_salary_tds_details_report(IN in_payload jsonb, OUT is_done boolean, OUT message_out text, OUT out_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -2325,7 +2325,7 @@ ALTER PROCEDURE billing.get_non_salary_tds_details_report(IN in_payload jsonb, O
 -- Name: get_pfms_process_log_status(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
-CREATE PROCEDURE billing.get_pfms_process_log_status(IN in_payload jsonb, OUT out_payload jsonb)
+CREATE OR REPLACE PROCEDURE billing.get_pfms_process_log_status(IN in_payload jsonb, OUT out_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 BEGIN
@@ -2370,7 +2370,7 @@ ALTER PROCEDURE billing.get_pfms_process_log_status(IN in_payload jsonb, OUT out
 -- Name: get_tds_details_report(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
-CREATE PROCEDURE billing.get_tds_details_report(IN in_payload jsonb, OUT is_done boolean, OUT message_out text, OUT out_payload jsonb)
+CREATE OR REPLACE PROCEDURE billing.get_tds_details_report(IN in_payload jsonb, OUT is_done boolean, OUT message_out text, OUT out_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -2510,7 +2510,7 @@ ALTER PROCEDURE billing.get_tds_details_report(IN in_payload jsonb, OUT is_done 
 -- Name: get_tds_on_gst_details_report(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
-CREATE PROCEDURE billing.get_tds_on_gst_details_report(IN in_payload jsonb, OUT is_done boolean, OUT message_out text, OUT out_payload jsonb)
+CREATE OR REPLACE PROCEDURE billing.get_tds_on_gst_details_report(IN in_payload jsonb, OUT is_done boolean, OUT message_out text, OUT out_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -2632,7 +2632,7 @@ ALTER PROCEDURE billing.get_tds_on_gst_details_report(IN in_payload jsonb, OUT i
 -- Name: insert_bill_allotment_details(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
-CREATE PROCEDURE billing.insert_bill_allotment_details(IN bill_allotment_details_payload jsonb)
+CREATE OR REPLACE PROCEDURE billing.insert_bill_allotment_details(IN bill_allotment_details_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -2838,7 +2838,7 @@ ALTER PROCEDURE billing.insert_bill_allotment_details(IN bill_allotment_details_
 -- Name: insert_bill_status_details(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
-CREATE PROCEDURE billing.insert_bill_status_details(IN bill_status_details_payload jsonb)
+CREATE OR REPLACE PROCEDURE billing.insert_bill_status_details(IN bill_status_details_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -2906,7 +2906,7 @@ ALTER FUNCTION billing.insert_cpin_ecs() OWNER TO postgres;
 -- Name: insert_cpin_failed_bill(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
-CREATE PROCEDURE billing.insert_cpin_failed_bill(IN cpin_details_payload jsonb, OUT inserted_id bigint, OUT _out_ref_no character varying)
+CREATE OR REPLACE PROCEDURE billing.insert_cpin_failed_bill(IN cpin_details_payload jsonb, OUT inserted_id bigint, OUT _out_ref_no character varying)
     LANGUAGE plpgsql
     AS $$
 Declare 
@@ -3292,7 +3292,7 @@ ALTER PROCEDURE billing.insert_cpin_failed_bill(IN cpin_details_payload jsonb, O
 -- Name: insert_cpin_failed_bill_old(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
-CREATE PROCEDURE billing.insert_cpin_failed_bill_old(IN cpin_details_payload jsonb, OUT inserted_id bigint, OUT _out_ref_no character varying)
+CREATE OR REPLACE PROCEDURE billing.insert_cpin_failed_bill_old(IN cpin_details_payload jsonb, OUT inserted_id bigint, OUT _out_ref_no character varying)
     LANGUAGE plpgsql
     AS $$
 Declare 
@@ -3487,7 +3487,7 @@ ALTER PROCEDURE billing.insert_cpin_failed_bill_old(IN cpin_details_payload json
 -- Name: insert_ddo_details_json_array(character varying, jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
-CREATE PROCEDURE billing.insert_ddo_details_json_array(IN ddocode character varying, IN jsonarray jsonb)
+CREATE OR REPLACE PROCEDURE billing.insert_ddo_details_json_array(IN ddocode character varying, IN jsonarray jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -3553,7 +3553,7 @@ ALTER PROCEDURE billing.insert_ddo_details_json_array(IN ddocode character varyi
 -- Name: insert_jit_bill(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
-CREATE PROCEDURE billing.insert_jit_bill(IN billing_details_payload jsonb, OUT inserted_id bigint, OUT _out_ref_no character varying)
+CREATE OR REPLACE PROCEDURE billing.insert_jit_bill(IN billing_details_payload jsonb, OUT inserted_id bigint, OUT _out_ref_no character varying)
     LANGUAGE plpgsql
     AS $$
 Declare 
@@ -4035,7 +4035,7 @@ ALTER FUNCTION billing.insert_jit_report() OWNER TO postgres;
 -- Name: insert_pfms_failed_transaction_detail(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
-CREATE PROCEDURE billing.insert_pfms_failed_transaction_detail(IN failed_transaction_file_payload jsonb)
+CREATE OR REPLACE PROCEDURE billing.insert_pfms_failed_transaction_detail(IN failed_transaction_file_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -4121,7 +4121,7 @@ ALTER PROCEDURE billing.insert_pfms_failed_transaction_detail(IN failed_transact
 -- Name: insert_pfms_failed_transaction_detail_24092025(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
-CREATE PROCEDURE billing.insert_pfms_failed_transaction_detail_24092025(IN failed_transaction_file_payload jsonb)
+CREATE OR REPLACE PROCEDURE billing.insert_pfms_failed_transaction_detail_24092025(IN failed_transaction_file_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -4177,7 +4177,7 @@ ALTER PROCEDURE billing.insert_pfms_failed_transaction_detail_24092025(IN failed
 -- Name: insert_pfms_file_status_details(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
-CREATE PROCEDURE billing.insert_pfms_file_status_details(IN pfms_file_status_payload jsonb)
+CREATE OR REPLACE PROCEDURE billing.insert_pfms_file_status_details(IN pfms_file_status_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -4210,7 +4210,7 @@ ALTER PROCEDURE billing.insert_pfms_file_status_details(IN pfms_file_status_payl
 -- Name: insert_return_memo_generated_bill(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
-CREATE PROCEDURE billing.insert_return_memo_generated_bill(IN return_memo_payload jsonb)
+CREATE OR REPLACE PROCEDURE billing.insert_return_memo_generated_bill(IN return_memo_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -4238,7 +4238,7 @@ ALTER PROCEDURE billing.insert_return_memo_generated_bill(IN return_memo_payload
 -- Name: insert_update_treasury_details(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
-CREATE PROCEDURE billing.insert_update_treasury_details(IN treasury_details_payload jsonb, OUT inserted_id integer)
+CREATE OR REPLACE PROCEDURE billing.insert_update_treasury_details(IN treasury_details_payload jsonb, OUT inserted_id integer)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -4323,7 +4323,7 @@ ALTER PROCEDURE billing.insert_update_treasury_details(IN treasury_details_paylo
 -- Name: jit_cancelled_fto_data(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
-CREATE PROCEDURE billing.jit_cancelled_fto_data(IN in_payload jsonb, OUT _out_jit_cancelled_fto jsonb)
+CREATE OR REPLACE PROCEDURE billing.jit_cancelled_fto_data(IN in_payload jsonb, OUT _out_jit_cancelled_fto jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -4654,7 +4654,7 @@ ALTER FUNCTION billing.pfms_file_status_send_to_jit() OWNER TO postgres;
 -- Name: sys_generated_bill_no_seq(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
-CREATE PROCEDURE billing.sys_generated_bill_no_seq(IN sys_generated_bill_no_payload jsonb, OUT _out_bill_no character varying)
+CREATE OR REPLACE PROCEDURE billing.sys_generated_bill_no_seq(IN sys_generated_bill_no_payload jsonb, OUT _out_bill_no character varying)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -4760,7 +4760,7 @@ ALTER FUNCTION billing.update_cpin_ecs() OWNER TO postgres;
 -- Name: update_incorrect_beneficiary_dtl(jsonb); Type: PROCEDURE; Schema: billing; Owner: postgres
 --
 
-CREATE PROCEDURE billing.update_incorrect_beneficiary_dtl(IN correct_beneficiary_payload jsonb)
+CREATE OR REPLACE PROCEDURE billing.update_incorrect_beneficiary_dtl(IN correct_beneficiary_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -4918,7 +4918,7 @@ ALTER FUNCTION billing_log.log_table_changes() OWNER TO postgres;
 -- Name: delete_cpin(bigint, text); Type: PROCEDURE; Schema: billing_master; Owner: postgres
 --
 
-CREATE PROCEDURE billing_master.delete_cpin(IN v_bill_id bigint, IN cpin_number text)
+CREATE OR REPLACE PROCEDURE billing_master.delete_cpin(IN v_bill_id bigint, IN cpin_number text)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -4951,7 +4951,7 @@ ALTER PROCEDURE billing_master.delete_cpin(IN v_bill_id bigint, IN cpin_number t
 -- Name: delete_cpin_old1(text); Type: PROCEDURE; Schema: billing_master; Owner: postgres
 --
 
-CREATE PROCEDURE billing_master.delete_cpin_old1(IN cpin_number text)
+CREATE OR REPLACE PROCEDURE billing_master.delete_cpin_old1(IN cpin_number text)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -4985,7 +4985,7 @@ ALTER PROCEDURE billing_master.delete_cpin_old1(IN cpin_number text) OWNER TO po
 -- Name: delete_cpin_old2(bigint, text); Type: PROCEDURE; Schema: billing_master; Owner: postgres
 --
 
-CREATE PROCEDURE billing_master.delete_cpin_old2(IN bill_id bigint, IN cpin_number text)
+CREATE OR REPLACE PROCEDURE billing_master.delete_cpin_old2(IN bill_id bigint, IN cpin_number text)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -5191,7 +5191,7 @@ ALTER FUNCTION billing_master.getcpinwithdetails(cpinidparam text) OWNER TO post
 -- Name: jit_insert_cpinmaster_cpinvendormst_billgst(jsonb); Type: PROCEDURE; Schema: billing_master; Owner: postgres
 --
 
-CREATE PROCEDURE billing_master.jit_insert_cpinmaster_cpinvendormst_billgst(IN in_payload jsonb)
+CREATE OR REPLACE PROCEDURE billing_master.jit_insert_cpinmaster_cpinvendormst_billgst(IN in_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -5281,7 +5281,7 @@ ALTER PROCEDURE billing_master.jit_insert_cpinmaster_cpinvendormst_billgst(IN in
 -- Name: jit_insert_cpinmaster_cpinvendormst_billgst_old1(jsonb); Type: PROCEDURE; Schema: billing_master; Owner: postgres
 --
 
-CREATE PROCEDURE billing_master.jit_insert_cpinmaster_cpinvendormst_billgst_old1(IN in_payload jsonb)
+CREATE OR REPLACE PROCEDURE billing_master.jit_insert_cpinmaster_cpinvendormst_billgst_old1(IN in_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -5380,7 +5380,7 @@ ALTER PROCEDURE billing_master.jit_insert_cpinmaster_cpinvendormst_billgst_old1(
 -- Name: jit_insert_cpinmaster_cpinvendormst_billgst_old2(jsonb); Type: PROCEDURE; Schema: billing_master; Owner: postgres
 --
 
-CREATE PROCEDURE billing_master.jit_insert_cpinmaster_cpinvendormst_billgst_old2(IN in_payload jsonb)
+CREATE OR REPLACE PROCEDURE billing_master.jit_insert_cpinmaster_cpinvendormst_billgst_old2(IN in_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -5488,7 +5488,7 @@ ALTER PROCEDURE billing_master.jit_insert_cpinmaster_cpinvendormst_billgst_old2(
 -- Name: update_ddo_transfer_details(jsonb); Type: PROCEDURE; Schema: billing_master; Owner: postgres
 --
 
-CREATE PROCEDURE billing_master.update_ddo_transfer_details(IN ddo_transfer_details_payload jsonb)
+CREATE OR REPLACE PROCEDURE billing_master.update_ddo_transfer_details(IN ddo_transfer_details_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 
@@ -5867,7 +5867,7 @@ ALTER FUNCTION cts.get_transaction_summary(p_finyear smallint) OWNER TO postgres
 -- Name: insert_failed_transaction_ben_detail(jsonb); Type: PROCEDURE; Schema: cts; Owner: postgres
 --
 
-CREATE PROCEDURE cts.insert_failed_transaction_ben_detail(IN failed_transaction_ben_payload jsonb)
+CREATE OR REPLACE PROCEDURE cts.insert_failed_transaction_ben_detail(IN failed_transaction_ben_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 Declare 
@@ -5969,7 +5969,7 @@ ALTER PROCEDURE cts.insert_failed_transaction_ben_detail(IN failed_transaction_b
 -- Name: insert_failed_transaction_ben_detail_old(jsonb); Type: PROCEDURE; Schema: cts; Owner: postgres
 --
 
-CREATE PROCEDURE cts.insert_failed_transaction_ben_detail_old(IN failed_transaction_ben_payload jsonb)
+CREATE OR REPLACE PROCEDURE cts.insert_failed_transaction_ben_detail_old(IN failed_transaction_ben_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 Declare 
@@ -6126,7 +6126,7 @@ ALTER FUNCTION cts.insert_list_of_payment(in_hoa_details record, in_voucher_id b
 -- Name: insert_success_transaction_ben_detail(jsonb); Type: PROCEDURE; Schema: cts; Owner: postgres
 --
 
-CREATE PROCEDURE cts.insert_success_transaction_ben_detail(IN success_transaction_ben_payload jsonb)
+CREATE OR REPLACE PROCEDURE cts.insert_success_transaction_ben_detail(IN success_transaction_ben_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 Declare 
@@ -6221,7 +6221,7 @@ ALTER PROCEDURE cts.insert_success_transaction_ben_detail(IN success_transaction
 -- Name: insert_token_details(jsonb); Type: PROCEDURE; Schema: cts; Owner: postgres
 --
 
-CREATE PROCEDURE cts.insert_token_details(IN in_payload jsonb)
+CREATE OR REPLACE PROCEDURE cts.insert_token_details(IN in_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -6270,7 +6270,7 @@ ALTER FUNCTION cts.insert_token_details_func(param1 jsonb) OWNER TO postgres;
 -- Name: insert_voucher_details(jsonb); Type: PROCEDURE; Schema: cts; Owner: postgres
 --
 
-CREATE PROCEDURE cts.insert_voucher_details(IN in_payload jsonb)
+CREATE OR REPLACE PROCEDURE cts.insert_voucher_details(IN in_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -6375,7 +6375,7 @@ ALTER FUNCTION cts.trg_adjust_allotment_failed_beneficiary() OWNER TO postgres;
 -- Name: update_ddo_allotment_actual_amount_from_treasury(jsonb); Type: PROCEDURE; Schema: cts; Owner: postgres
 --
 
-CREATE PROCEDURE cts.update_ddo_allotment_actual_amount_from_treasury(IN in_payload jsonb)
+CREATE OR REPLACE PROCEDURE cts.update_ddo_allotment_actual_amount_from_treasury(IN in_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 BEGIN
@@ -6443,7 +6443,7 @@ ALTER FUNCTION jit.bkend_update_jit_allotment_func(_sanction_no character varyin
 -- Name: cancel_fto_from_bill(jsonb, character varying, character varying, bigint); Type: PROCEDURE; Schema: jit; Owner: postgres
 --
 
-CREATE PROCEDURE jit.cancel_fto_from_bill(IN in_payload jsonb, IN queuename character varying, IN refno character varying, IN billid bigint)
+CREATE OR REPLACE PROCEDURE jit.cancel_fto_from_bill(IN in_payload jsonb, IN queuename character varying, IN refno character varying, IN billid bigint)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -6641,7 +6641,7 @@ ALTER FUNCTION jit.get_failed_transaction_details_manual_generation() OWNER TO p
 -- Name: get_jit_allotments(jsonb); Type: PROCEDURE; Schema: jit; Owner: postgres
 --
 
-CREATE PROCEDURE jit.get_jit_allotments(IN in_payload jsonb, OUT out_payload jsonb)
+CREATE OR REPLACE PROCEDURE jit.get_jit_allotments(IN in_payload jsonb, OUT out_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 BEGIN
@@ -6774,7 +6774,7 @@ ALTER FUNCTION jit.get_success_transaction_details() OWNER TO postgres;
 -- Name: insert_agency_ddo_mapping_details(jsonb); Type: PROCEDURE; Schema: jit; Owner: postgres
 --
 
-CREATE PROCEDURE jit.insert_agency_ddo_mapping_details(IN in_payload jsonb)
+CREATE OR REPLACE PROCEDURE jit.insert_agency_ddo_mapping_details(IN in_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -6817,7 +6817,7 @@ ALTER PROCEDURE jit.insert_agency_ddo_mapping_details(IN in_payload jsonb) OWNER
 -- Name: insert_hoa_details(jsonb); Type: PROCEDURE; Schema: jit; Owner: postgres
 --
 
-CREATE PROCEDURE jit.insert_hoa_details(IN jit_hoa_details_payload jsonb)
+CREATE OR REPLACE PROCEDURE jit.insert_hoa_details(IN jit_hoa_details_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -6898,7 +6898,7 @@ ALTER PROCEDURE jit.insert_hoa_details(IN jit_hoa_details_payload jsonb) OWNER T
 -- Name: insert_jit_allotment(jsonb); Type: PROCEDURE; Schema: jit; Owner: postgres
 --
 
-CREATE PROCEDURE jit.insert_jit_allotment(IN jit_allotment_payload jsonb)
+CREATE OR REPLACE PROCEDURE jit.insert_jit_allotment(IN jit_allotment_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE 
@@ -7084,7 +7084,7 @@ ALTER PROCEDURE jit.insert_jit_allotment(IN jit_allotment_payload jsonb) OWNER T
 -- Name: insert_jit_allotment_withdrawal(jsonb); Type: PROCEDURE; Schema: jit; Owner: postgres
 --
 
-CREATE PROCEDURE jit.insert_jit_allotment_withdrawal(IN jit_withdrawl_payload jsonb)
+CREATE OR REPLACE PROCEDURE jit.insert_jit_allotment_withdrawal(IN jit_withdrawl_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE 
@@ -7226,7 +7226,7 @@ ALTER PROCEDURE jit.insert_jit_allotment_withdrawal(IN jit_withdrawl_payload jso
 -- Name: insert_jit_details(jsonb); Type: PROCEDURE; Schema: jit; Owner: postgres
 --
 
-CREATE PROCEDURE jit.insert_jit_details(IN jit_details_payload jsonb)
+CREATE OR REPLACE PROCEDURE jit.insert_jit_details(IN jit_details_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 Declare 
@@ -7489,7 +7489,7 @@ ALTER PROCEDURE jit.insert_jit_details(IN jit_details_payload jsonb) OWNER TO po
 -- Name: insert_jit_details_wo_tsa_exp_details(jsonb); Type: PROCEDURE; Schema: jit; Owner: postgres
 --
 
-CREATE PROCEDURE jit.insert_jit_details_wo_tsa_exp_details(IN jit_details_payload jsonb)
+CREATE OR REPLACE PROCEDURE jit.insert_jit_details_wo_tsa_exp_details(IN jit_details_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 Declare 
@@ -7825,7 +7825,7 @@ ALTER FUNCTION jit.insert_jit_scheme_config_master(in_payload jsonb) OWNER TO po
 -- Name: insert_mother_sanction_allocation(jsonb, character varying); Type: PROCEDURE; Schema: jit; Owner: postgres
 --
 
-CREATE PROCEDURE jit.insert_mother_sanction_allocation(IN jit_hoa_details_payload jsonb, IN _queue_name character varying)
+CREATE OR REPLACE PROCEDURE jit.insert_mother_sanction_allocation(IN jit_hoa_details_payload jsonb, IN _queue_name character varying)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -7875,7 +7875,7 @@ ALTER PROCEDURE jit.insert_mother_sanction_allocation(IN jit_hoa_details_payload
 -- Name: insert_return_fto_details(jsonb); Type: PROCEDURE; Schema: jit; Owner: postgres
 --
 
-CREATE PROCEDURE jit.insert_return_fto_details(IN return_fto_payload jsonb)
+CREATE OR REPLACE PROCEDURE jit.insert_return_fto_details(IN return_fto_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -7941,7 +7941,7 @@ ALTER PROCEDURE jit.insert_return_fto_details(IN return_fto_payload jsonb) OWNER
 -- Name: insert_return_fto_details(jsonb, character varying); Type: PROCEDURE; Schema: jit; Owner: postgres
 --
 
-CREATE PROCEDURE jit.insert_return_fto_details(IN return_fto_payload jsonb, IN _queue_name character varying, OUT updated_count integer)
+CREATE OR REPLACE PROCEDURE jit.insert_return_fto_details(IN return_fto_payload jsonb, IN _queue_name character varying, OUT updated_count integer)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -7977,7 +7977,7 @@ ALTER PROCEDURE jit.insert_return_fto_details(IN return_fto_payload jsonb, IN _q
 -- Name: send_ddo_agency_mapping_response(jsonb); Type: PROCEDURE; Schema: jit; Owner: postgres
 --
 
-CREATE PROCEDURE jit.send_ddo_agency_mapping_response(IN in_payload jsonb)
+CREATE OR REPLACE PROCEDURE jit.send_ddo_agency_mapping_response(IN in_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -8019,7 +8019,7 @@ ALTER PROCEDURE jit.send_ddo_agency_mapping_response(IN in_payload jsonb) OWNER 
 -- Name: send_rejected_fto(jsonb); Type: PROCEDURE; Schema: jit; Owner: postgres
 --
 
-CREATE PROCEDURE jit.send_rejected_fto(IN in_payload jsonb)
+CREATE OR REPLACE PROCEDURE jit.send_rejected_fto(IN in_payload jsonb)
     LANGUAGE plpgsql
     AS $$
 DECLARE
