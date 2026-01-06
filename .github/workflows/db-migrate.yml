@@ -29,4 +29,13 @@ jobs:
         uses: docker://flyway/flyway:11
         with:
           # Now the runner can reach "100.x.x.x" because it joined the VPN!
-          args: -url=${{ secrets.DB_URL }} -user=${{ secrets.DB_USER }} -password=${{ secrets.DB_PASSWORD }} -schemas=${{secrets.FLYWAY_SCHEMA}} -createSchemas=true -locations=filesystem:sql migrate
+          args: >-
+            -url=${{ secrets.DB_URL }}
+            -user=${{ secrets.DB_USER }}
+            -password=${{ secrets.DB_PASSWORD }}
+            -locations=filesystem:sql
+            -schemas=${{ secrets.FLYWAY_SCHEMA }} 
+            -createSchemas=true 
+            -baselineOnMigrate=true
+            -baselineVersion=1
+            migrate
