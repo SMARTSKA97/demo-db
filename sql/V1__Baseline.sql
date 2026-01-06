@@ -8146,9 +8146,9 @@ BEGIN
         );
 
         -- Create indexes on the new partition
-        EXECUTE format('CREATE INDEX ON %I (status)', partition_table);
-        EXECUTE format('CREATE INDEX ON %I (queue_name)', partition_table);
-        EXECUTE format('CREATE INDEX ON %I (created_at)', partition_table);
+        EXECUTE format('CREATE INDEX IF NOT EXISTS ON %I (status)', partition_table);
+        EXECUTE format('CREATE INDEX IF NOT EXISTS ON %I (queue_name)', partition_table);
+        EXECUTE format('CREATE INDEX IF NOT EXISTS ON %I (created_at)', partition_table);
     END IF;
 END;
 $$;
@@ -8696,7 +8696,7 @@ ALTER FUNCTION message_queue.insert_message_queue_15092025(p_queue_identifier_na
 -- Name: ddo_allotment_sequence; Type: SEQUENCE; Schema: bantan; Owner: postgres
 --
 
-CREATE SEQUENCE bantan.ddo_allotment_sequence
+CREATE SEQUENCE IF NOT EXISTS bantan.ddo_allotment_sequence
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -8817,7 +8817,7 @@ ALTER TABLE bantan.ddo_wallet OWNER TO postgres;
 -- Name: ddo_wallet_id_seq; Type: SEQUENCE; Schema: bantan; Owner: postgres
 --
 
-CREATE SEQUENCE bantan.ddo_wallet_id_seq
+CREATE SEQUENCE IF NOT EXISTS bantan.ddo_wallet_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -9005,7 +9005,7 @@ COMMENT ON COLUMN billing.jit_ecs_additional.ward_lgd IS 'LGD code for ward';
 -- Name: agency_details_view; Type: VIEW; Schema: billing; Owner: postgres
 --
 
-CREATE VIEW billing.agency_details_view AS
+CREATE OR REPLACE VIEW billing.agency_details_view AS
  WITH bill_info AS (
          SELECT ecs.bill_id,
             ecs.agency_code,
@@ -9053,7 +9053,7 @@ ALTER TABLE billing.bill_btdetail OWNER TO postgres;
 -- Name: bill_btdetail_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
 --
 
-CREATE SEQUENCE billing.bill_btdetail_id_seq
+CREATE SEQUENCE IF NOT EXISTS billing.bill_btdetail_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -9100,7 +9100,7 @@ ALTER TABLE billing.bill_gst OWNER TO postgres;
 -- Name: bill_cpin_mapping_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
 --
 
-CREATE SEQUENCE billing.bill_cpin_mapping_id_seq
+CREATE SEQUENCE IF NOT EXISTS billing.bill_cpin_mapping_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -9124,7 +9124,7 @@ ALTER SEQUENCE billing.bill_cpin_mapping_id_seq OWNED BY billing.bill_gst.id;
 -- Name: bill_details_bill_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
 --
 
-CREATE SEQUENCE billing.bill_details_bill_id_seq
+CREATE SEQUENCE IF NOT EXISTS billing.bill_details_bill_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -9203,7 +9203,7 @@ ALTER TABLE billing.bill_jit_components OWNER TO postgres;
 -- Name: bill_jit_components_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
 --
 
-CREATE SEQUENCE billing.bill_jit_components_id_seq
+CREATE SEQUENCE IF NOT EXISTS billing.bill_jit_components_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -9244,7 +9244,7 @@ ALTER TABLE billing.bill_status_info OWNER TO postgres;
 -- Name: bill_status_info_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
 --
 
-CREATE SEQUENCE billing.bill_status_info_id_seq
+CREATE SEQUENCE IF NOT EXISTS billing.bill_status_info_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -9291,7 +9291,7 @@ ALTER TABLE billing.bill_subdetail_info OWNER TO postgres;
 -- Name: bill_subdetail_info_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
 --
 
-CREATE SEQUENCE billing.bill_subdetail_info_id_seq
+CREATE SEQUENCE IF NOT EXISTS billing.bill_subdetail_info_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -9334,7 +9334,7 @@ ALTER TABLE billing.billing_pfms_file_status_details OWNER TO postgres;
 -- Name: billing_pfms_file_status_details_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
 --
 
-CREATE SEQUENCE billing.billing_pfms_file_status_details_id_seq
+CREATE SEQUENCE IF NOT EXISTS billing.billing_pfms_file_status_details_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -9386,7 +9386,7 @@ ALTER TABLE billing.ddo_allotment_booked_bill OWNER TO postgres;
 -- Name: ddo_allotment_booked_bill_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
 --
 
-CREATE SEQUENCE billing.ddo_allotment_booked_bill_id_seq
+CREATE SEQUENCE IF NOT EXISTS billing.ddo_allotment_booked_bill_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -9411,7 +9411,7 @@ ALTER SEQUENCE billing.ddo_allotment_booked_bill_id_seq OWNED BY billing.ddo_all
 -- Name: department_details_view; Type: VIEW; Schema: billing; Owner: postgres
 --
 
-CREATE VIEW billing.department_details_view AS
+CREATE OR REPLACE VIEW billing.department_details_view AS
 SELECT
     NULL::character(2) AS demand_code,
     NULL::character varying(100) AS department_name,
@@ -9425,7 +9425,7 @@ ALTER VIEW billing.department_details_view OWNER TO postgres;
 -- Name: ebill_jit_int_map_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
 --
 
-CREATE SEQUENCE billing.ebill_jit_int_map_id_seq
+CREATE SEQUENCE IF NOT EXISTS billing.ebill_jit_int_map_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -9503,7 +9503,7 @@ ALTER TABLE billing.ebill_jit_int_map_bk_24092025 OWNER TO postgres;
 -- Name: ecs_neft_details_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
 --
 
-CREATE SEQUENCE billing.ecs_neft_details_id_seq
+CREATE SEQUENCE IF NOT EXISTS billing.ecs_neft_details_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -9557,7 +9557,7 @@ ALTER TABLE master.active_hoa_mst OWNER TO postgres;
 -- Name: hoa_details_view; Type: VIEW; Schema: billing; Owner: postgres
 --
 
-CREATE VIEW billing.hoa_details_view AS
+CREATE OR REPLACE VIEW billing.hoa_details_view AS
  WITH bill_info AS (
          SELECT billsub.bill_id,
             billsub.active_hoa_id,
@@ -9594,7 +9594,7 @@ ALTER TABLE billing.jit_ben_agency_map OWNER TO postgres;
 -- Name: jit_ecs_additional_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
 --
 
-CREATE SEQUENCE billing.jit_ecs_additional_id_seq
+CREATE SEQUENCE IF NOT EXISTS billing.jit_ecs_additional_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -9636,7 +9636,7 @@ ALTER TABLE billing.jit_fto_voucher OWNER TO postgres;
 -- Name: jit_fto_voucher_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
 --
 
-CREATE SEQUENCE billing.jit_fto_voucher_id_seq
+CREATE SEQUENCE IF NOT EXISTS billing.jit_fto_voucher_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -9660,7 +9660,7 @@ ALTER SEQUENCE billing.jit_fto_voucher_id_seq OWNED BY billing.jit_fto_voucher.i
 -- Name: notification_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
 --
 
-CREATE SEQUENCE billing.notification_id_seq
+CREATE SEQUENCE IF NOT EXISTS billing.notification_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -9712,7 +9712,7 @@ ALTER TABLE billing.returned_memo_generated_bill OWNER TO postgres;
 -- Name: returned_memo_generated_bill_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
 --
 
-CREATE SEQUENCE billing.returned_memo_generated_bill_id_seq
+CREATE SEQUENCE IF NOT EXISTS billing.returned_memo_generated_bill_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -9736,7 +9736,7 @@ ALTER SEQUENCE billing.returned_memo_generated_bill_id_seq OWNED BY billing.retu
 -- Name: slscode_details_view; Type: VIEW; Schema: billing; Owner: postgres
 --
 
-CREATE VIEW billing.slscode_details_view AS
+CREATE OR REPLACE VIEW billing.slscode_details_view AS
  WITH bill_info AS (
          SELECT bd.bill_id,
             bd.scheme_code,
@@ -9758,7 +9758,7 @@ ALTER VIEW billing.slscode_details_view OWNER TO postgres;
 -- Name: sys_generated_bill_no_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
 --
 
-CREATE SEQUENCE billing.sys_generated_bill_no_seq
+CREATE SEQUENCE IF NOT EXISTS billing.sys_generated_bill_no_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -9795,7 +9795,7 @@ ALTER TABLE billing.tr_detail OWNER TO postgres;
 -- Name: tr_detail_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
 --
 
-CREATE SEQUENCE billing.tr_detail_id_seq
+CREATE SEQUENCE IF NOT EXISTS billing.tr_detail_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -9868,7 +9868,7 @@ ALTER TABLE billing.tr_12_detail OWNER TO postgres;
 -- Name: tr_26_detail_id_seq; Type: SEQUENCE; Schema: billing; Owner: postgres
 --
 
-CREATE SEQUENCE billing.tr_26_detail_id_seq
+CREATE SEQUENCE IF NOT EXISTS billing.tr_26_detail_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -9913,7 +9913,7 @@ ALTER TABLE billing.tr_26a_detail OWNER TO postgres;
 -- Name: audit_log_id_seq; Type: SEQUENCE; Schema: billing_log; Owner: postgres
 --
 
-CREATE SEQUENCE billing_log.audit_log_id_seq
+CREATE SEQUENCE IF NOT EXISTS billing_log.audit_log_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -10176,7 +10176,7 @@ ALTER TABLE billing_log.audit_log_2026_04 OWNER TO postgres;
 -- Name: cheque_details_id_seq; Type: SEQUENCE; Schema: billing_log; Owner: postgres
 --
 
-CREATE SEQUENCE billing_log.cheque_details_id_seq
+CREATE SEQUENCE IF NOT EXISTS billing_log.cheque_details_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -10191,7 +10191,7 @@ ALTER SEQUENCE billing_log.cheque_details_id_seq OWNER TO postgres;
 -- Name: ddo_id_seq; Type: SEQUENCE; Schema: billing_log; Owner: postgres
 --
 
-CREATE SEQUENCE billing_log.ddo_id_seq
+CREATE SEQUENCE IF NOT EXISTS billing_log.ddo_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -10245,7 +10245,7 @@ ALTER TABLE billing_log.ddo_log OWNER TO postgres;
 -- Name: ddo_log_id_seq; Type: SEQUENCE; Schema: billing_log; Owner: postgres
 --
 
-CREATE SEQUENCE billing_log.ddo_log_id_seq
+CREATE SEQUENCE IF NOT EXISTS billing_log.ddo_log_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -10290,7 +10290,7 @@ ALTER TABLE billing_log.ebill_jit_int_map_log OWNER TO postgres;
 -- Name: ebill_jit_int_map_log_id_seq; Type: SEQUENCE; Schema: billing_log; Owner: postgres
 --
 
-CREATE SEQUENCE billing_log.ebill_jit_int_map_log_id_seq
+CREATE SEQUENCE IF NOT EXISTS billing_log.ebill_jit_int_map_log_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -10347,7 +10347,7 @@ ALTER TABLE billing_log.scheme_config_master_log OWNER TO postgres;
 -- Name: scheme_config_master_log_id_seq; Type: SEQUENCE; Schema: billing_log; Owner: postgres
 --
 
-CREATE SEQUENCE billing_log.scheme_config_master_log_id_seq
+CREATE SEQUENCE IF NOT EXISTS billing_log.scheme_config_master_log_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -10371,7 +10371,7 @@ ALTER SEQUENCE billing_log.scheme_config_master_log_id_seq OWNED BY billing_log.
 -- Name: bill_project_contrctor_mapping_id_seq; Type: SEQUENCE; Schema: billing_master; Owner: postgres
 --
 
-CREATE SEQUENCE billing_master.bill_project_contrctor_mapping_id_seq
+CREATE SEQUENCE IF NOT EXISTS billing_master.bill_project_contrctor_mapping_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -10427,7 +10427,7 @@ ALTER TABLE billing_master.bt_details OWNER TO postgres;
 -- Name: cpin_master_id_seq; Type: SEQUENCE; Schema: billing_master; Owner: postgres
 --
 
-CREATE SEQUENCE billing_master.cpin_master_id_seq
+CREATE SEQUENCE IF NOT EXISTS billing_master.cpin_master_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -10471,7 +10471,7 @@ ALTER TABLE billing_master.cpin_master OWNER TO postgres;
 -- Name: cpin_vender_mst_id_seq; Type: SEQUENCE; Schema: billing_master; Owner: postgres
 --
 
-CREATE SEQUENCE billing_master.cpin_vender_mst_id_seq
+CREATE SEQUENCE IF NOT EXISTS billing_master.cpin_vender_mst_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -10530,7 +10530,7 @@ ALTER TABLE billing_master.rbi_gst_master OWNER TO postgres;
 -- Name: rbi_gst_master_id_seq; Type: SEQUENCE; Schema: billing_master; Owner: postgres
 --
 
-CREATE SEQUENCE billing_master.rbi_gst_master_id_seq
+CREATE SEQUENCE IF NOT EXISTS billing_master.rbi_gst_master_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -10555,7 +10555,7 @@ ALTER SEQUENCE billing_master.rbi_gst_master_id_seq OWNED BY billing_master.rbi_
 -- Name: service_provider_consumer_master_id_seq; Type: SEQUENCE; Schema: billing_master; Owner: postgres
 --
 
-CREATE SEQUENCE billing_master.service_provider_consumer_master_id_seq
+CREATE SEQUENCE IF NOT EXISTS billing_master.service_provider_consumer_master_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -10697,7 +10697,7 @@ ALTER TABLE cts.success_transaction_beneficiary OWNER TO postgres;
 -- Name: bill_wise_gst_success_failed_transaction_summary; Type: VIEW; Schema: cts; Owner: postgres
 --
 
-CREATE VIEW cts.bill_wise_gst_success_failed_transaction_summary AS
+CREATE OR REPLACE VIEW cts.bill_wise_gst_success_failed_transaction_summary AS
  WITH bill_base AS (
          SELECT DISTINCT bd.bill_id,
             bd.financial_year,
@@ -10762,7 +10762,7 @@ ALTER VIEW cts.bill_wise_gst_success_failed_transaction_summary OWNER TO postgre
 -- Name: bill_wise_success_failed_transaction_summary; Type: VIEW; Schema: cts; Owner: postgres
 --
 
-CREATE VIEW cts.bill_wise_success_failed_transaction_summary AS
+CREATE OR REPLACE VIEW cts.bill_wise_success_failed_transaction_summary AS
  WITH bill_base AS (
          SELECT DISTINCT bd.bill_id,
             bd.financial_year,
@@ -10861,7 +10861,7 @@ ALTER TABLE cts.challan OWNER TO postgres;
 -- Name: failed_transaction_beneficiary_id_seq_bk; Type: SEQUENCE; Schema: cts; Owner: postgres
 --
 
-CREATE SEQUENCE cts.failed_transaction_beneficiary_id_seq_bk
+CREATE SEQUENCE IF NOT EXISTS cts.failed_transaction_beneficiary_id_seq_bk
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -10920,7 +10920,7 @@ ALTER TABLE cts.failed_transaction_beneficiary_bk OWNER TO postgres;
 -- Name: failed_transaction_beneficiary_id_seq; Type: SEQUENCE; Schema: cts; Owner: postgres
 --
 
-CREATE SEQUENCE cts.failed_transaction_beneficiary_id_seq
+CREATE SEQUENCE IF NOT EXISTS cts.failed_transaction_beneficiary_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -10980,7 +10980,7 @@ ALTER TABLE jit.gst OWNER TO postgres;
 -- Name: fto_wise_gst_success_failed_transaction_summary; Type: VIEW; Schema: cts; Owner: postgres
 --
 
-CREATE VIEW cts.fto_wise_gst_success_failed_transaction_summary AS
+CREATE OR REPLACE VIEW cts.fto_wise_gst_success_failed_transaction_summary AS
  WITH bill_summary AS (
          SELECT gst.ref_no,
             bd.financial_year,
@@ -11033,7 +11033,7 @@ ALTER VIEW cts.fto_wise_gst_success_failed_transaction_summary OWNER TO postgres
 -- Name: fto_wise_success_failed_transaction_summary; Type: VIEW; Schema: cts; Owner: postgres
 --
 
-CREATE VIEW cts.fto_wise_success_failed_transaction_summary AS
+CREATE OR REPLACE VIEW cts.fto_wise_success_failed_transaction_summary AS
  WITH bill_summary AS (
          SELECT DISTINCT ecs_add.jit_reference_no AS jit_ref_no,
             ecs_add.financial_year,
@@ -11086,7 +11086,7 @@ ALTER VIEW cts.fto_wise_success_failed_transaction_summary OWNER TO postgres;
 -- Name: success_transaction_beneficiary_id_seq_bk; Type: SEQUENCE; Schema: cts; Owner: postgres
 --
 
-CREATE SEQUENCE cts.success_transaction_beneficiary_id_seq_bk
+CREATE SEQUENCE IF NOT EXISTS cts.success_transaction_beneficiary_id_seq_bk
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -11137,7 +11137,7 @@ ALTER TABLE cts.success_transaction_beneficiary_bk OWNER TO postgres;
 -- Name: success_transaction_beneficiary_id_seq; Type: SEQUENCE; Schema: cts; Owner: postgres
 --
 
-CREATE SEQUENCE cts.success_transaction_beneficiary_id_seq
+CREATE SEQUENCE IF NOT EXISTS cts.success_transaction_beneficiary_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -11201,7 +11201,7 @@ ALTER TABLE cts.voucher OWNER TO postgres;
 -- Name: voucher_id_seq; Type: SEQUENCE; Schema: cts; Owner: postgres
 --
 
-CREATE SEQUENCE cts.voucher_id_seq
+CREATE SEQUENCE IF NOT EXISTS cts.voucher_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -11216,7 +11216,7 @@ ALTER SEQUENCE cts.voucher_id_seq OWNER TO postgres;
 -- Name: voucher_id_seq1; Type: SEQUENCE; Schema: cts; Owner: postgres
 --
 
-CREATE SEQUENCE cts.voucher_id_seq1
+CREATE SEQUENCE IF NOT EXISTS cts.voucher_id_seq1
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -11272,7 +11272,7 @@ COMMENT ON COLUMN jit.ddo_agency_mapping_details.action_type IS '0 for reject, 1
 -- Name: ddo_agency_mapping_details_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
 --
 
-CREATE SEQUENCE jit.ddo_agency_mapping_details_id_seq
+CREATE SEQUENCE IF NOT EXISTS jit.ddo_agency_mapping_details_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -11319,7 +11319,7 @@ ALTER TABLE jit.exp_payee_components OWNER TO postgres;
 -- Name: exp_payee_components_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
 --
 
-CREATE SEQUENCE jit.exp_payee_components_id_seq
+CREATE SEQUENCE IF NOT EXISTS jit.exp_payee_components_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -11367,7 +11367,7 @@ ALTER TABLE jit.fto_voucher OWNER TO postgres;
 -- Name: fto_voucher_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
 --
 
-CREATE SEQUENCE jit.fto_voucher_id_seq
+CREATE SEQUENCE IF NOT EXISTS jit.fto_voucher_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -11391,7 +11391,7 @@ ALTER SEQUENCE jit.fto_voucher_id_seq OWNED BY jit.fto_voucher.id;
 -- Name: gst_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
 --
 
-CREATE SEQUENCE jit.gst_id_seq
+CREATE SEQUENCE IF NOT EXISTS jit.gst_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -11441,7 +11441,7 @@ ALTER TABLE jit.jit_allotment OWNER TO postgres;
 -- Name: jit_allotment_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
 --
 
-CREATE SEQUENCE jit.jit_allotment_id_seq
+CREATE SEQUENCE IF NOT EXISTS jit.jit_allotment_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -11487,7 +11487,7 @@ ALTER TABLE jit.jit_fto_sanction_booking OWNER TO postgres;
 -- Name: jit_fto_sanction_booking_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
 --
 
-CREATE SEQUENCE jit.jit_fto_sanction_booking_id_seq
+CREATE SEQUENCE IF NOT EXISTS jit.jit_fto_sanction_booking_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -11530,7 +11530,7 @@ ALTER TABLE jit.jit_pullback_request OWNER TO postgres;
 -- Name: jit_pullback_request_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
 --
 
-CREATE SEQUENCE jit.jit_pullback_request_id_seq
+CREATE SEQUENCE IF NOT EXISTS jit.jit_pullback_request_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -11579,7 +11579,7 @@ ALTER TABLE jit.jit_report_details OWNER TO postgres;
 -- Name: jit_report_details_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
 --
 
-CREATE SEQUENCE jit.jit_report_details_id_seq
+CREATE SEQUENCE IF NOT EXISTS jit.jit_report_details_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -11630,7 +11630,7 @@ ALTER TABLE jit.jit_withdrawl OWNER TO postgres;
 -- Name: jit_withdrawl_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
 --
 
-CREATE SEQUENCE jit.jit_withdrawl_id_seq
+CREATE SEQUENCE IF NOT EXISTS jit.jit_withdrawl_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -11700,7 +11700,7 @@ COMMENT ON COLUMN jit.mother_sanction_allocation.send_to_cts IS '0 for not yet s
 -- Name: mother_sanction_allocation_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
 --
 
-CREATE SEQUENCE jit.mother_sanction_allocation_id_seq
+CREATE SEQUENCE IF NOT EXISTS jit.mother_sanction_allocation_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -11746,7 +11746,7 @@ ALTER TABLE jit.payee_deduction OWNER TO postgres;
 -- Name: payee_deduction_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
 --
 
-CREATE SEQUENCE jit.payee_deduction_id_seq
+CREATE SEQUENCE IF NOT EXISTS jit.payee_deduction_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -11800,7 +11800,7 @@ ALTER TABLE jit.scheme_config_master OWNER TO postgres;
 -- Name: scheme_config_master_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
 --
 
-CREATE SEQUENCE jit.scheme_config_master_id_seq
+CREATE SEQUENCE IF NOT EXISTS jit.scheme_config_master_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -11880,7 +11880,7 @@ ALTER TABLE jit.tsa_exp_details OWNER TO postgres;
 -- Name: tsa_exp_details_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
 --
 
-CREATE SEQUENCE jit.tsa_exp_details_id_seq
+CREATE SEQUENCE IF NOT EXISTS jit.tsa_exp_details_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -12008,7 +12008,7 @@ COMMENT ON COLUMN jit.tsa_payeemaster.ward_lgd IS 'LGD code for ward';
 -- Name: tsa_payeemaster_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
 --
 
-CREATE SEQUENCE jit.tsa_payeemaster_id_seq
+CREATE SEQUENCE IF NOT EXISTS jit.tsa_payeemaster_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -12050,7 +12050,7 @@ ALTER TABLE jit.tsa_schemecomponent OWNER TO postgres;
 -- Name: tsa_schemecomponent_id_seq; Type: SEQUENCE; Schema: jit; Owner: postgres
 --
 
-CREATE SEQUENCE jit.tsa_schemecomponent_id_seq
+CREATE SEQUENCE IF NOT EXISTS jit.tsa_schemecomponent_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -12089,7 +12089,7 @@ ALTER TABLE master.bank_type_master OWNER TO postgres;
 -- Name: bank_type_master_id_seq; Type: SEQUENCE; Schema: master; Owner: postgres
 --
 
-CREATE SEQUENCE master.bank_type_master_id_seq
+CREATE SEQUENCE IF NOT EXISTS master.bank_type_master_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -12153,7 +12153,7 @@ ALTER TABLE master.ddo OWNER TO postgres;
 -- Name: ddo_id_seq; Type: SEQUENCE; Schema: master; Owner: postgres
 --
 
-CREATE SEQUENCE master.ddo_id_seq
+CREATE SEQUENCE IF NOT EXISTS master.ddo_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -12221,7 +12221,7 @@ ALTER TABLE master.detail_head OWNER TO postgres;
 -- Name: financial_year_master_id_seq; Type: SEQUENCE; Schema: master; Owner: postgres
 --
 
-CREATE SEQUENCE master.financial_year_master_id_seq
+CREATE SEQUENCE IF NOT EXISTS master.financial_year_master_id_seq
     AS smallint
     START WITH 1
     INCREMENT BY 1
@@ -12404,7 +12404,7 @@ ALTER TABLE master.treasury OWNER TO postgres;
 -- Name: treasury_id_seq; Type: SEQUENCE; Schema: master; Owner: postgres
 --
 
-CREATE SEQUENCE master.treasury_id_seq
+CREATE SEQUENCE IF NOT EXISTS master.treasury_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -12448,7 +12448,7 @@ ALTER TABLE master.tsa_vendor_type OWNER TO postgres;
 -- Name: tsa_vendor_type_id_seq; Type: SEQUENCE; Schema: master; Owner: postgres
 --
 
-CREATE SEQUENCE master.tsa_vendor_type_id_seq
+CREATE SEQUENCE IF NOT EXISTS master.tsa_vendor_type_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -12494,7 +12494,7 @@ ALTER TABLE message_queue.consume_logs OWNER TO postgres;
 -- Name: consume_logs_id_seq; Type: SEQUENCE; Schema: message_queue; Owner: postgres
 --
 
-CREATE SEQUENCE message_queue.consume_logs_id_seq
+CREATE SEQUENCE IF NOT EXISTS message_queue.consume_logs_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -12599,7 +12599,7 @@ ALTER TABLE message_queue.queues_master OWNER TO postgres;
 -- Name: queues_master_id_seq; Type: SEQUENCE; Schema: message_queue; Owner: postgres
 --
 
-CREATE SEQUENCE message_queue.queues_master_id_seq
+CREATE SEQUENCE IF NOT EXISTS message_queue.queues_master_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -12865,7 +12865,7 @@ ALTER TABLE public.ebilling_jit_voucher OWNER TO postgres;
 -- Name: ebilling_jit_voucher_id_seq1; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public.ebilling_jit_voucher_id_seq1
+CREATE SEQUENCE IF NOT EXISTS public.ebilling_jit_voucher_id_seq1
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -14657,7 +14657,7 @@ ALTER TABLE ONLY public.ebilling_jit_voucher
 -- Name: bill_details_bill_id_idx; Type: INDEX; Schema: billing; Owner: postgres
 --
 
-CREATE INDEX bill_details_bill_id_idx ON billing.bill_details USING btree (bill_id) WITH (deduplicate_items='false');
+CREATE INDEX IF NOT EXISTS bill_details_bill_id_idx ON billing.bill_details USING btree (bill_id) WITH (deduplicate_items='false');
 
 
 --
@@ -14665,7 +14665,7 @@ CREATE INDEX bill_details_bill_id_idx ON billing.bill_details USING btree (bill_
 -- Name: fki_bill_jit_components_bill_id_fkey; Type: INDEX; Schema: billing; Owner: postgres
 --
 
-CREATE INDEX fki_bill_jit_components_bill_id_fkey ON billing.bill_jit_components USING btree (bill_id);
+CREATE INDEX IF NOT EXISTS fki_bill_jit_components_bill_id_fkey ON billing.bill_jit_components USING btree (bill_id);
 
 
 --
@@ -14673,7 +14673,7 @@ CREATE INDEX fki_bill_jit_components_bill_id_fkey ON billing.bill_jit_components
 -- Name: fki_jit_ecs_additional_bill_id_fkey; Type: INDEX; Schema: billing; Owner: postgres
 --
 
-CREATE INDEX fki_jit_ecs_additional_bill_id_fkey ON billing.jit_ecs_additional USING btree (bill_id);
+CREATE INDEX IF NOT EXISTS fki_jit_ecs_additional_bill_id_fkey ON billing.jit_ecs_additional USING btree (bill_id);
 
 
 --
@@ -14681,7 +14681,7 @@ CREATE INDEX fki_jit_ecs_additional_bill_id_fkey ON billing.jit_ecs_additional U
 -- Name: fki_jit_fto_voucher_bill_id_fkey; Type: INDEX; Schema: billing; Owner: postgres
 --
 
-CREATE INDEX fki_jit_fto_voucher_bill_id_fkey ON billing.jit_fto_voucher USING btree (bill_id);
+CREATE INDEX IF NOT EXISTS fki_jit_fto_voucher_bill_id_fkey ON billing.jit_fto_voucher USING btree (bill_id);
 
 
 --
@@ -14689,7 +14689,7 @@ CREATE INDEX fki_jit_fto_voucher_bill_id_fkey ON billing.jit_fto_voucher USING b
 -- Name: idx_ebill_jit_int_map_bill_id; Type: INDEX; Schema: billing; Owner: postgres
 --
 
-CREATE INDEX idx_ebill_jit_int_map_bill_id ON billing.ebill_jit_int_map USING btree (bill_id);
+CREATE INDEX IF NOT EXISTS idx_ebill_jit_int_map_bill_id ON billing.ebill_jit_int_map USING btree (bill_id);
 
 
 --
@@ -14697,7 +14697,7 @@ CREATE INDEX idx_ebill_jit_int_map_bill_id ON billing.ebill_jit_int_map USING bt
 -- Name: ndx_bill_btdetail; Type: INDEX; Schema: billing; Owner: postgres
 --
 
-CREATE INDEX ndx_bill_btdetail ON billing.bill_btdetail USING btree (bill_id);
+CREATE INDEX IF NOT EXISTS ndx_bill_btdetail ON billing.bill_btdetail USING btree (bill_id);
 
 
 --
@@ -14705,7 +14705,7 @@ CREATE INDEX ndx_bill_btdetail ON billing.bill_btdetail USING btree (bill_id);
 -- Name: ndx_bill_ecs_neft_details; Type: INDEX; Schema: billing; Owner: postgres
 --
 
-CREATE INDEX ndx_bill_ecs_neft_details ON billing.bill_ecs_neft_details USING btree (bill_id);
+CREATE INDEX IF NOT EXISTS ndx_bill_ecs_neft_details ON billing.bill_ecs_neft_details USING btree (bill_id);
 
 
 --
@@ -14713,7 +14713,7 @@ CREATE INDEX ndx_bill_ecs_neft_details ON billing.bill_ecs_neft_details USING bt
 -- Name: ndx_bill_jit_components; Type: INDEX; Schema: billing; Owner: postgres
 --
 
-CREATE INDEX ndx_bill_jit_components ON billing.bill_jit_components USING btree (bill_id);
+CREATE INDEX IF NOT EXISTS ndx_bill_jit_components ON billing.bill_jit_components USING btree (bill_id);
 
 
 --
@@ -14721,7 +14721,7 @@ CREATE INDEX ndx_bill_jit_components ON billing.bill_jit_components USING btree 
 -- Name: ndx_bill_subdetail_info; Type: INDEX; Schema: billing; Owner: postgres
 --
 
-CREATE INDEX ndx_bill_subdetail_info ON billing.bill_subdetail_info USING btree (bill_id);
+CREATE INDEX IF NOT EXISTS ndx_bill_subdetail_info ON billing.bill_subdetail_info USING btree (bill_id);
 
 
 --
@@ -14729,7 +14729,7 @@ CREATE INDEX ndx_bill_subdetail_info ON billing.bill_subdetail_info USING btree 
 -- Name: ndx_ecs_id; Type: INDEX; Schema: billing; Owner: postgres
 --
 
-CREATE INDEX ndx_ecs_id ON billing.bill_ecs_neft_details USING btree (id) WITH (deduplicate_items='false');
+CREATE INDEX IF NOT EXISTS ndx_ecs_id ON billing.bill_ecs_neft_details USING btree (id) WITH (deduplicate_items='false');
 
 
 --
@@ -14737,7 +14737,7 @@ CREATE INDEX ndx_ecs_id ON billing.bill_ecs_neft_details USING btree (id) WITH (
 -- Name: ndx_jit_ecs_additional; Type: INDEX; Schema: billing; Owner: postgres
 --
 
-CREATE INDEX ndx_jit_ecs_additional ON billing.jit_ecs_additional USING btree (bill_id);
+CREATE INDEX IF NOT EXISTS ndx_jit_ecs_additional ON billing.jit_ecs_additional USING btree (bill_id);
 
 
 --
@@ -14745,7 +14745,7 @@ CREATE INDEX ndx_jit_ecs_additional ON billing.jit_ecs_additional USING btree (b
 -- Name: ndx_jit_fto_voucher; Type: INDEX; Schema: billing; Owner: postgres
 --
 
-CREATE INDEX ndx_jit_fto_voucher ON billing.jit_fto_voucher USING btree (bill_id);
+CREATE INDEX IF NOT EXISTS ndx_jit_fto_voucher ON billing.jit_fto_voucher USING btree (bill_id);
 
 
 --
@@ -14753,7 +14753,7 @@ CREATE INDEX ndx_jit_fto_voucher ON billing.jit_fto_voucher USING btree (bill_id
 -- Name: ndx_tr_10_detail; Type: INDEX; Schema: billing; Owner: postgres
 --
 
-CREATE INDEX ndx_tr_10_detail ON billing.tr_10_detail USING btree (bill_id);
+CREATE INDEX IF NOT EXISTS ndx_tr_10_detail ON billing.tr_10_detail USING btree (bill_id);
 
 
 --
@@ -14761,7 +14761,7 @@ CREATE INDEX ndx_tr_10_detail ON billing.tr_10_detail USING btree (bill_id);
 -- Name: ndx_tr_26a_detail; Type: INDEX; Schema: billing; Owner: postgres
 --
 
-CREATE INDEX ndx_tr_26a_detail ON billing.tr_26a_detail USING btree (bill_id);
+CREATE INDEX IF NOT EXISTS ndx_tr_26a_detail ON billing.tr_26a_detail USING btree (bill_id);
 
 
 --
@@ -14785,7 +14785,7 @@ CREATE UNIQUE INDEX unique_bill_details_active_bill_no ON billing.bill_details U
 -- Name: idx_ebill_jit_int_map_log_bill_id; Type: INDEX; Schema: billing_log; Owner: postgres
 --
 
-CREATE INDEX idx_ebill_jit_int_map_log_bill_id ON billing_log.ebill_jit_int_map_log USING btree (bill_id);
+CREATE INDEX IF NOT EXISTS idx_ebill_jit_int_map_log_bill_id ON billing_log.ebill_jit_int_map_log USING btree (bill_id);
 
 
 --
@@ -14809,7 +14809,7 @@ CREATE UNIQUE INDEX unique_active_cpin ON billing_master.cpin_master USING btree
 -- Name: idx_success_trans_ben_billid_endtoendid; Type: INDEX; Schema: cts; Owner: postgres
 --
 
-CREATE INDEX idx_success_trans_ben_billid_endtoendid ON cts.success_transaction_beneficiary USING btree (bill_id, end_to_end_id);
+CREATE INDEX IF NOT EXISTS idx_success_trans_ben_billid_endtoendid ON cts.success_transaction_beneficiary USING btree (bill_id, end_to_end_id);
 
 
 --
@@ -14817,7 +14817,7 @@ CREATE INDEX idx_success_trans_ben_billid_endtoendid ON cts.success_transaction_
 -- Name: active_hoa_mst_id_idx; Type: INDEX; Schema: master; Owner: postgres
 --
 
-CREATE INDEX active_hoa_mst_id_idx ON master.active_hoa_mst USING btree (id) WITH (deduplicate_items='true');
+CREATE INDEX IF NOT EXISTS active_hoa_mst_id_idx ON master.active_hoa_mst USING btree (id) WITH (deduplicate_items='true');
 
 
 --
@@ -14825,7 +14825,7 @@ CREATE INDEX active_hoa_mst_id_idx ON master.active_hoa_mst USING btree (id) WIT
 -- Name: ddo_ddo_code_idx; Type: INDEX; Schema: master; Owner: postgres
 --
 
-CREATE INDEX ddo_ddo_code_idx ON master.ddo USING btree (ddo_code) WITH (deduplicate_items='true');
+CREATE INDEX IF NOT EXISTS ddo_ddo_code_idx ON master.ddo USING btree (ddo_code) WITH (deduplicate_items='true');
 
 
 --
@@ -14833,7 +14833,7 @@ CREATE INDEX ddo_ddo_code_idx ON master.ddo USING btree (ddo_code) WITH (dedupli
 -- Name: rbi_ifsc_stock_ifsc_idx; Type: INDEX; Schema: master; Owner: postgres
 --
 
-CREATE INDEX rbi_ifsc_stock_ifsc_idx ON master.rbi_ifsc_stock USING btree (ifsc) WITH (deduplicate_items='true');
+CREATE INDEX IF NOT EXISTS rbi_ifsc_stock_ifsc_idx ON master.rbi_ifsc_stock USING btree (ifsc) WITH (deduplicate_items='true');
 
 
 --
@@ -14841,7 +14841,7 @@ CREATE INDEX rbi_ifsc_stock_ifsc_idx ON master.rbi_ifsc_stock USING btree (ifsc)
 -- Name: treasury_code_idx; Type: INDEX; Schema: master; Owner: postgres
 --
 
-CREATE INDEX treasury_code_idx ON master.treasury USING btree (code) WITH (deduplicate_items='true');
+CREATE INDEX IF NOT EXISTS treasury_code_idx ON master.treasury USING btree (code) WITH (deduplicate_items='true');
 
 
 --
