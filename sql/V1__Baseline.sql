@@ -17,7 +17,7 @@ SET check_function_bodies = false;
 -- Name: bantan; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
-CREATE SCHEMA bantan;
+CREATE SCHEMA IF NOT EXISTS bantan;
 
 
 ALTER SCHEMA bantan OWNER TO postgres;
@@ -27,7 +27,7 @@ ALTER SCHEMA bantan OWNER TO postgres;
 -- Name: billing; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
-CREATE SCHEMA billing;
+CREATE SCHEMA IF NOT EXISTS billing;
 
 
 ALTER SCHEMA billing OWNER TO postgres;
@@ -37,7 +37,7 @@ ALTER SCHEMA billing OWNER TO postgres;
 -- Name: billing_log; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
-CREATE SCHEMA billing_log;
+CREATE SCHEMA IF NOT EXISTS billing_log;
 
 
 ALTER SCHEMA billing_log OWNER TO postgres;
@@ -47,7 +47,7 @@ ALTER SCHEMA billing_log OWNER TO postgres;
 -- Name: billing_master; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
-CREATE SCHEMA billing_master;
+CREATE SCHEMA IF NOT EXISTS billing_master;
 
 
 ALTER SCHEMA billing_master OWNER TO postgres;
@@ -57,7 +57,7 @@ ALTER SCHEMA billing_master OWNER TO postgres;
 -- Name: cts; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
-CREATE SCHEMA cts;
+CREATE SCHEMA IF NOT EXISTS cts;
 
 
 ALTER SCHEMA cts OWNER TO postgres;
@@ -67,7 +67,7 @@ ALTER SCHEMA cts OWNER TO postgres;
 -- Name: jit; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
-CREATE SCHEMA jit;
+CREATE SCHEMA IF NOT EXISTS jit;
 
 
 ALTER SCHEMA jit OWNER TO postgres;
@@ -77,7 +77,7 @@ ALTER SCHEMA jit OWNER TO postgres;
 -- Name: master; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
-CREATE SCHEMA master;
+CREATE SCHEMA IF NOT EXISTS master;
 
 
 ALTER SCHEMA master OWNER TO postgres;
@@ -87,7 +87,7 @@ ALTER SCHEMA master OWNER TO postgres;
 -- Name: message_queue; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
-CREATE SCHEMA message_queue;
+CREATE SCHEMA IF NOT EXISTS message_queue;
 
 
 ALTER SCHEMA message_queue OWNER TO postgres;
@@ -97,7 +97,7 @@ ALTER SCHEMA message_queue OWNER TO postgres;
 -- Name: report; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
-CREATE SCHEMA report;
+CREATE SCHEMA IF NOT EXISTS report;
 
 
 ALTER SCHEMA report OWNER TO postgres;
@@ -8139,7 +8139,7 @@ BEGIN
     IF NOT FOUND THEN
         -- Create the new partition
         EXECUTE format('
-            CREATE TABLE %I
+            CREATE TABLE IF NOT EXISTS %I
             PARTITION OF message_queue.consume_logs
             FOR VALUES FROM (%L) TO (%L)',
             partition_table, start_date, end_date
@@ -8715,7 +8715,7 @@ SET default_table_access_method = heap;
 -- Name: ddo_allotment_transactions; Type: TABLE; Schema: bantan; Owner: postgres
 --
 
-CREATE TABLE bantan.ddo_allotment_transactions (
+CREATE TABLE IF NOT EXISTS bantan.ddo_allotment_transactions (
     allotment_id bigint DEFAULT nextval('bantan.ddo_allotment_sequence'::regclass) NOT NULL,
     transaction_id bigint,
     sanction_id bigint,
@@ -8778,7 +8778,7 @@ COMMENT ON COLUMN bantan.ddo_allotment_transactions.sender_user_type IS '1 - SAO
 -- Name: ddo_wallet; Type: TABLE; Schema: bantan; Owner: postgres
 --
 
-CREATE TABLE bantan.ddo_wallet (
+CREATE TABLE IF NOT EXISTS bantan.ddo_wallet (
     id bigint NOT NULL,
     sao_ddo_code character(12) NOT NULL,
     dept_code character(2),
@@ -8841,7 +8841,7 @@ ALTER SEQUENCE bantan.ddo_wallet_id_seq OWNED BY bantan.ddo_wallet.id;
 -- Name: bill_details; Type: TABLE; Schema: billing; Owner: postgres
 --
 
-CREATE TABLE billing.bill_details (
+CREATE TABLE IF NOT EXISTS billing.bill_details (
     bill_id bigint NOT NULL,
     bill_no character(15),
     bill_date date NOT NULL,
@@ -8906,7 +8906,7 @@ ALTER TABLE billing.bill_details OWNER TO postgres;
 -- Name: jit_ecs_additional; Type: TABLE; Schema: billing; Owner: postgres
 --
 
-CREATE TABLE billing.jit_ecs_additional (
+CREATE TABLE IF NOT EXISTS billing.jit_ecs_additional (
     id bigint NOT NULL,
     ecs_id bigint NOT NULL,
     bill_id bigint NOT NULL,
@@ -9028,7 +9028,7 @@ ALTER VIEW billing.agency_details_view OWNER TO postgres;
 -- Name: bill_btdetail; Type: TABLE; Schema: billing; Owner: postgres
 --
 
-CREATE TABLE billing.bill_btdetail (
+CREATE TABLE IF NOT EXISTS billing.bill_btdetail (
     id bigint NOT NULL,
     bill_id bigint NOT NULL,
     bt_serial integer,
@@ -9077,7 +9077,7 @@ ALTER SEQUENCE billing.bill_btdetail_id_seq OWNED BY billing.bill_btdetail.id;
 -- Name: bill_gst; Type: TABLE; Schema: billing; Owner: postgres
 --
 
-CREATE TABLE billing.bill_gst (
+CREATE TABLE IF NOT EXISTS billing.bill_gst (
     id bigint NOT NULL,
     bill_id bigint,
     cpin_id bigint,
@@ -9148,7 +9148,7 @@ ALTER SEQUENCE billing.bill_details_bill_id_seq OWNED BY billing.bill_details.bi
 -- Name: bill_ecs_neft_details; Type: TABLE; Schema: billing; Owner: postgres
 --
 
-CREATE TABLE billing.bill_ecs_neft_details (
+CREATE TABLE IF NOT EXISTS billing.bill_ecs_neft_details (
     id bigint NOT NULL,
     bill_id bigint NOT NULL,
     payee_name character varying(100),
@@ -9184,7 +9184,7 @@ ALTER TABLE billing.bill_ecs_neft_details OWNER TO postgres;
 -- Name: bill_jit_components; Type: TABLE; Schema: billing; Owner: postgres
 --
 
-CREATE TABLE billing.bill_jit_components (
+CREATE TABLE IF NOT EXISTS billing.bill_jit_components (
     bill_id bigint,
     payee_id character varying(50),
     componentcode character varying(50),
@@ -9227,7 +9227,7 @@ ALTER SEQUENCE billing.bill_jit_components_id_seq OWNED BY billing.bill_jit_comp
 -- Name: bill_status_info; Type: TABLE; Schema: billing; Owner: postgres
 --
 
-CREATE TABLE billing.bill_status_info (
+CREATE TABLE IF NOT EXISTS billing.bill_status_info (
     id bigint NOT NULL,
     bill_id bigint NOT NULL,
     status_id smallint NOT NULL,
@@ -9268,7 +9268,7 @@ ALTER SEQUENCE billing.bill_status_info_id_seq OWNED BY billing.bill_status_info
 -- Name: bill_subdetail_info; Type: TABLE; Schema: billing; Owner: postgres
 --
 
-CREATE TABLE billing.bill_subdetail_info (
+CREATE TABLE IF NOT EXISTS billing.bill_subdetail_info (
     id bigint NOT NULL,
     bill_id bigint NOT NULL,
     active_hoa_id bigint NOT NULL,
@@ -9315,7 +9315,7 @@ ALTER SEQUENCE billing.bill_subdetail_info_id_seq OWNED BY billing.bill_subdetai
 -- Name: billing_pfms_file_status_details; Type: TABLE; Schema: billing; Owner: postgres
 --
 
-CREATE TABLE billing.billing_pfms_file_status_details (
+CREATE TABLE IF NOT EXISTS billing.billing_pfms_file_status_details (
     id bigint NOT NULL,
     bill_id bigint NOT NULL,
     file_name character varying(32) NOT NULL,
@@ -9358,7 +9358,7 @@ ALTER SEQUENCE billing.billing_pfms_file_status_details_id_seq OWNED BY billing.
 -- Name: ddo_allotment_booked_bill; Type: TABLE; Schema: billing; Owner: postgres
 --
 
-CREATE TABLE billing.ddo_allotment_booked_bill (
+CREATE TABLE IF NOT EXISTS billing.ddo_allotment_booked_bill (
     id integer NOT NULL,
     bill_id bigint NOT NULL,
     allotment_id bigint,
@@ -9440,7 +9440,7 @@ ALTER SEQUENCE billing.ebill_jit_int_map_id_seq OWNER TO postgres;
 -- Name: ebill_jit_int_map; Type: TABLE; Schema: billing; Owner: postgres
 --
 
-CREATE TABLE billing.ebill_jit_int_map (
+CREATE TABLE IF NOT EXISTS billing.ebill_jit_int_map (
     id bigint DEFAULT nextval('billing.ebill_jit_int_map_id_seq'::regclass) NOT NULL,
     ebill_ref_no character(20) NOT NULL,
     jit_ref_no character varying(50) NOT NULL,
@@ -9461,7 +9461,7 @@ ALTER TABLE billing.ebill_jit_int_map OWNER TO postgres;
 -- Name: ebill_jit_int_map_01102025; Type: TABLE; Schema: billing; Owner: postgres
 --
 
-CREATE TABLE billing.ebill_jit_int_map_01102025 (
+CREATE TABLE IF NOT EXISTS billing.ebill_jit_int_map_01102025 (
     id bigint,
     ebill_ref_no character(20),
     jit_ref_no character varying(50),
@@ -9482,7 +9482,7 @@ ALTER TABLE billing.ebill_jit_int_map_01102025 OWNER TO postgres;
 -- Name: ebill_jit_int_map_bk_24092025; Type: TABLE; Schema: billing; Owner: postgres
 --
 
-CREATE TABLE billing.ebill_jit_int_map_bk_24092025 (
+CREATE TABLE IF NOT EXISTS billing.ebill_jit_int_map_bk_24092025 (
     id bigint,
     ebill_ref_no character(20),
     jit_ref_no character varying(50),
@@ -9527,7 +9527,7 @@ ALTER SEQUENCE billing.ecs_neft_details_id_seq OWNED BY billing.bill_ecs_neft_de
 -- Name: active_hoa_mst; Type: TABLE; Schema: master; Owner: postgres
 --
 
-CREATE TABLE master.active_hoa_mst (
+CREATE TABLE IF NOT EXISTS master.active_hoa_mst (
     id bigint NOT NULL,
     dept_code character(2),
     demand_no character(2),
@@ -9579,7 +9579,7 @@ ALTER VIEW billing.hoa_details_view OWNER TO postgres;
 -- Name: jit_ben_agency_map; Type: TABLE; Schema: billing; Owner: postgres
 --
 
-CREATE TABLE billing.jit_ben_agency_map (
+CREATE TABLE IF NOT EXISTS billing.jit_ben_agency_map (
     bill_id bigint,
     payee_id character varying(50),
     agencycode character varying(50),
@@ -9618,7 +9618,7 @@ ALTER SEQUENCE billing.jit_ecs_additional_id_seq OWNED BY billing.jit_ecs_additi
 -- Name: jit_fto_voucher; Type: TABLE; Schema: billing; Owner: postgres
 --
 
-CREATE TABLE billing.jit_fto_voucher (
+CREATE TABLE IF NOT EXISTS billing.jit_fto_voucher (
     id bigint NOT NULL,
     bill_id bigint,
     voucher_no character varying(150),
@@ -9675,7 +9675,7 @@ ALTER SEQUENCE billing.notification_id_seq OWNER TO postgres;
 -- Name: notification; Type: TABLE; Schema: billing; Owner: postgres
 --
 
-CREATE TABLE billing.notification (
+CREATE TABLE IF NOT EXISTS billing.notification (
     id bigint DEFAULT nextval('billing.notification_id_seq'::regclass) NOT NULL,
     user_id bigint,
     user_role character varying,
@@ -9696,7 +9696,7 @@ ALTER TABLE billing.notification OWNER TO postgres;
 -- Name: returned_memo_generated_bill; Type: TABLE; Schema: billing; Owner: postgres
 --
 
-CREATE TABLE billing.returned_memo_generated_bill (
+CREATE TABLE IF NOT EXISTS billing.returned_memo_generated_bill (
     bill_objections jsonb,
     generated_at timestamp without time zone NOT NULL,
     generated_by bigint NOT NULL,
@@ -9773,7 +9773,7 @@ ALTER SEQUENCE billing.sys_generated_bill_no_seq OWNER TO postgres;
 -- Name: tr_detail; Type: TABLE; Schema: billing; Owner: postgres
 --
 
-CREATE TABLE billing.tr_detail (
+CREATE TABLE IF NOT EXISTS billing.tr_detail (
     id integer NOT NULL,
     bill_id bigint NOT NULL,
     bill_mode smallint,
@@ -9820,7 +9820,7 @@ ALTER SEQUENCE billing.tr_detail_id_seq OWNED BY billing.tr_detail.id;
 -- Name: tr_10_detail; Type: TABLE; Schema: billing; Owner: postgres
 --
 
-CREATE TABLE billing.tr_10_detail (
+CREATE TABLE IF NOT EXISTS billing.tr_10_detail (
     id integer DEFAULT nextval('billing.tr_detail_id_seq'::regclass),
     bill_id bigint,
     bill_mode smallint,
@@ -9844,7 +9844,7 @@ ALTER TABLE billing.tr_10_detail OWNER TO postgres;
 -- Name: tr_12_detail; Type: TABLE; Schema: billing; Owner: postgres
 --
 
-CREATE TABLE billing.tr_12_detail (
+CREATE TABLE IF NOT EXISTS billing.tr_12_detail (
     id integer DEFAULT nextval('billing.tr_detail_id_seq'::regclass),
     bill_id bigint,
     bill_mode smallint,
@@ -9883,7 +9883,7 @@ ALTER SEQUENCE billing.tr_26_detail_id_seq OWNER TO postgres;
 -- Name: tr_26a_detail; Type: TABLE; Schema: billing; Owner: postgres
 --
 
-CREATE TABLE billing.tr_26a_detail (
+CREATE TABLE IF NOT EXISTS billing.tr_26a_detail (
     voucher_details_object jsonb,
     pl_detail_object jsonb,
     reissue_amount bigint DEFAULT 0,
@@ -9928,7 +9928,7 @@ ALTER SEQUENCE billing_log.audit_log_id_seq OWNER TO postgres;
 -- Name: audit_log; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
-CREATE TABLE billing_log.audit_log (
+CREATE TABLE IF NOT EXISTS billing_log.audit_log (
     id bigint DEFAULT nextval('billing_log.audit_log_id_seq'::regclass) NOT NULL,
     schema_name text NOT NULL,
     table_name text NOT NULL,
@@ -9948,7 +9948,7 @@ ALTER TABLE billing_log.audit_log OWNER TO postgres;
 -- Name: audit_log_2025_05; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
-CREATE TABLE billing_log.audit_log_2025_05 (
+CREATE TABLE IF NOT EXISTS billing_log.audit_log_2025_05 (
     id bigint DEFAULT nextval('billing_log.audit_log_id_seq'::regclass) NOT NULL,
     schema_name text NOT NULL,
     table_name text NOT NULL,
@@ -9967,7 +9967,7 @@ ALTER TABLE billing_log.audit_log_2025_05 OWNER TO postgres;
 -- Name: audit_log_2025_06; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
-CREATE TABLE billing_log.audit_log_2025_06 (
+CREATE TABLE IF NOT EXISTS billing_log.audit_log_2025_06 (
     id bigint DEFAULT nextval('billing_log.audit_log_id_seq'::regclass) NOT NULL,
     schema_name text NOT NULL,
     table_name text NOT NULL,
@@ -9986,7 +9986,7 @@ ALTER TABLE billing_log.audit_log_2025_06 OWNER TO postgres;
 -- Name: audit_log_2025_07; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
-CREATE TABLE billing_log.audit_log_2025_07 (
+CREATE TABLE IF NOT EXISTS billing_log.audit_log_2025_07 (
     id bigint DEFAULT nextval('billing_log.audit_log_id_seq'::regclass) NOT NULL,
     schema_name text NOT NULL,
     table_name text NOT NULL,
@@ -10005,7 +10005,7 @@ ALTER TABLE billing_log.audit_log_2025_07 OWNER TO postgres;
 -- Name: audit_log_2025_08; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
-CREATE TABLE billing_log.audit_log_2025_08 (
+CREATE TABLE IF NOT EXISTS billing_log.audit_log_2025_08 (
     id bigint DEFAULT nextval('billing_log.audit_log_id_seq'::regclass) NOT NULL,
     schema_name text NOT NULL,
     table_name text NOT NULL,
@@ -10024,7 +10024,7 @@ ALTER TABLE billing_log.audit_log_2025_08 OWNER TO postgres;
 -- Name: audit_log_2025_09; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
-CREATE TABLE billing_log.audit_log_2025_09 (
+CREATE TABLE IF NOT EXISTS billing_log.audit_log_2025_09 (
     id bigint DEFAULT nextval('billing_log.audit_log_id_seq'::regclass) NOT NULL,
     schema_name text NOT NULL,
     table_name text NOT NULL,
@@ -10043,7 +10043,7 @@ ALTER TABLE billing_log.audit_log_2025_09 OWNER TO postgres;
 -- Name: audit_log_2025_10; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
-CREATE TABLE billing_log.audit_log_2025_10 (
+CREATE TABLE IF NOT EXISTS billing_log.audit_log_2025_10 (
     id bigint DEFAULT nextval('billing_log.audit_log_id_seq'::regclass) NOT NULL,
     schema_name text NOT NULL,
     table_name text NOT NULL,
@@ -10062,7 +10062,7 @@ ALTER TABLE billing_log.audit_log_2025_10 OWNER TO postgres;
 -- Name: audit_log_2025_11; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
-CREATE TABLE billing_log.audit_log_2025_11 (
+CREATE TABLE IF NOT EXISTS billing_log.audit_log_2025_11 (
     id bigint DEFAULT nextval('billing_log.audit_log_id_seq'::regclass) NOT NULL,
     schema_name text NOT NULL,
     table_name text NOT NULL,
@@ -10081,7 +10081,7 @@ ALTER TABLE billing_log.audit_log_2025_11 OWNER TO postgres;
 -- Name: audit_log_2025_12; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
-CREATE TABLE billing_log.audit_log_2025_12 (
+CREATE TABLE IF NOT EXISTS billing_log.audit_log_2025_12 (
     id bigint DEFAULT nextval('billing_log.audit_log_id_seq'::regclass) NOT NULL,
     schema_name text NOT NULL,
     table_name text NOT NULL,
@@ -10100,7 +10100,7 @@ ALTER TABLE billing_log.audit_log_2025_12 OWNER TO postgres;
 -- Name: audit_log_2026_01; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
-CREATE TABLE billing_log.audit_log_2026_01 (
+CREATE TABLE IF NOT EXISTS billing_log.audit_log_2026_01 (
     id bigint DEFAULT nextval('billing_log.audit_log_id_seq'::regclass) NOT NULL,
     schema_name text NOT NULL,
     table_name text NOT NULL,
@@ -10119,7 +10119,7 @@ ALTER TABLE billing_log.audit_log_2026_01 OWNER TO postgres;
 -- Name: audit_log_2026_02; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
-CREATE TABLE billing_log.audit_log_2026_02 (
+CREATE TABLE IF NOT EXISTS billing_log.audit_log_2026_02 (
     id bigint DEFAULT nextval('billing_log.audit_log_id_seq'::regclass) NOT NULL,
     schema_name text NOT NULL,
     table_name text NOT NULL,
@@ -10138,7 +10138,7 @@ ALTER TABLE billing_log.audit_log_2026_02 OWNER TO postgres;
 -- Name: audit_log_2026_03; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
-CREATE TABLE billing_log.audit_log_2026_03 (
+CREATE TABLE IF NOT EXISTS billing_log.audit_log_2026_03 (
     id bigint DEFAULT nextval('billing_log.audit_log_id_seq'::regclass) NOT NULL,
     schema_name text NOT NULL,
     table_name text NOT NULL,
@@ -10157,7 +10157,7 @@ ALTER TABLE billing_log.audit_log_2026_03 OWNER TO postgres;
 -- Name: audit_log_2026_04; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
-CREATE TABLE billing_log.audit_log_2026_04 (
+CREATE TABLE IF NOT EXISTS billing_log.audit_log_2026_04 (
     id bigint DEFAULT nextval('billing_log.audit_log_id_seq'::regclass) NOT NULL,
     schema_name text NOT NULL,
     table_name text NOT NULL,
@@ -10206,7 +10206,7 @@ ALTER SEQUENCE billing_log.ddo_id_seq OWNER TO postgres;
 -- Name: ddo_log; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
-CREATE TABLE billing_log.ddo_log (
+CREATE TABLE IF NOT EXISTS billing_log.ddo_log (
     id bigint NOT NULL,
     treasury_code character(4),
     ddo_code character(9) NOT NULL,
@@ -10269,7 +10269,7 @@ ALTER SEQUENCE billing_log.ddo_log_id_seq OWNED BY billing_log.ddo_log.id;
 -- Name: ebill_jit_int_map_log; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
-CREATE TABLE billing_log.ebill_jit_int_map_log (
+CREATE TABLE IF NOT EXISTS billing_log.ebill_jit_int_map_log (
     id bigint NOT NULL,
     ebill_ref_no character(20) NOT NULL,
     jit_ref_no character varying(50) NOT NULL,
@@ -10314,7 +10314,7 @@ ALTER SEQUENCE billing_log.ebill_jit_int_map_log_id_seq OWNED BY billing_log.ebi
 -- Name: scheme_config_master_log; Type: TABLE; Schema: billing_log; Owner: postgres
 --
 
-CREATE TABLE billing_log.scheme_config_master_log (
+CREATE TABLE IF NOT EXISTS billing_log.scheme_config_master_log (
     id bigint NOT NULL,
     state_code character varying(11),
     sls_code character varying(11),
@@ -10386,7 +10386,7 @@ ALTER SEQUENCE billing_master.bill_project_contrctor_mapping_id_seq OWNER TO pos
 -- Name: bill_status_master; Type: TABLE; Schema: billing_master; Owner: postgres
 --
 
-CREATE TABLE billing_master.bill_status_master (
+CREATE TABLE IF NOT EXISTS billing_master.bill_status_master (
     status_id smallint NOT NULL,
     status_code character varying NOT NULL
 );
@@ -10399,7 +10399,7 @@ ALTER TABLE billing_master.bill_status_master OWNER TO postgres;
 -- Name: bt_details; Type: TABLE; Schema: billing_master; Owner: postgres
 --
 
-CREATE TABLE billing_master.bt_details (
+CREATE TABLE IF NOT EXISTS billing_master.bt_details (
     id integer NOT NULL,
     bt_serial integer NOT NULL,
     "desc" character varying,
@@ -10442,7 +10442,7 @@ ALTER SEQUENCE billing_master.cpin_master_id_seq OWNER TO postgres;
 -- Name: cpin_master; Type: TABLE; Schema: billing_master; Owner: postgres
 --
 
-CREATE TABLE billing_master.cpin_master (
+CREATE TABLE IF NOT EXISTS billing_master.cpin_master (
     id bigint DEFAULT nextval('billing_master.cpin_master_id_seq'::regclass) NOT NULL,
     cpin_id character varying(14),
     cpin_amount numeric NOT NULL,
@@ -10486,7 +10486,7 @@ ALTER SEQUENCE billing_master.cpin_vender_mst_id_seq OWNER TO postgres;
 -- Name: cpin_vender_mst; Type: TABLE; Schema: billing_master; Owner: postgres
 --
 
-CREATE TABLE billing_master.cpin_vender_mst (
+CREATE TABLE IF NOT EXISTS billing_master.cpin_vender_mst (
     id bigint DEFAULT nextval('billing_master.cpin_vender_mst_id_seq'::regclass) NOT NULL,
     cpinmstid bigint NOT NULL,
     vendorname character varying,
@@ -10513,7 +10513,7 @@ ALTER TABLE billing_master.cpin_vender_mst OWNER TO postgres;
 -- Name: rbi_gst_master; Type: TABLE; Schema: billing_master; Owner: postgres
 --
 
-CREATE TABLE billing_master.rbi_gst_master (
+CREATE TABLE IF NOT EXISTS billing_master.rbi_gst_master (
     id integer NOT NULL,
     ifsc character(12) NOT NULL,
     name character(10) DEFAULT 'GST'::bpchar NOT NULL,
@@ -10570,7 +10570,7 @@ ALTER SEQUENCE billing_master.service_provider_consumer_master_id_seq OWNER TO p
 -- Name: tr_master; Type: TABLE; Schema: billing_master; Owner: postgres
 --
 
-CREATE TABLE billing_master.tr_master (
+CREATE TABLE IF NOT EXISTS billing_master.tr_master (
     id smallint NOT NULL,
     form_name character varying,
     wb_form_code character varying NOT NULL,
@@ -10593,7 +10593,7 @@ ALTER TABLE billing_master.tr_master OWNER TO postgres;
 -- Name: tr_master_checklist; Type: TABLE; Schema: billing_master; Owner: postgres
 --
 
-CREATE TABLE billing_master.tr_master_checklist (
+CREATE TABLE IF NOT EXISTS billing_master.tr_master_checklist (
     forms character varying,
     has_bt_details smallint,
     has_certificate_details smallint,
@@ -10610,7 +10610,7 @@ ALTER TABLE billing_master.tr_master_checklist OWNER TO postgres;
 -- Name: failed_transaction_beneficiary; Type: TABLE; Schema: cts; Owner: postgres
 --
 
-CREATE TABLE cts.failed_transaction_beneficiary (
+CREATE TABLE IF NOT EXISTS cts.failed_transaction_beneficiary (
     id bigint NOT NULL,
     bill_id bigint NOT NULL,
     treasury_code character(3),
@@ -10660,7 +10660,7 @@ ALTER TABLE cts.failed_transaction_beneficiary OWNER TO postgres;
 -- Name: success_transaction_beneficiary; Type: TABLE; Schema: cts; Owner: postgres
 --
 
-CREATE TABLE cts.success_transaction_beneficiary (
+CREATE TABLE IF NOT EXISTS cts.success_transaction_beneficiary (
     id bigint NOT NULL,
     bill_id bigint NOT NULL,
     treasury_code character(3),
@@ -10827,7 +10827,7 @@ ALTER VIEW cts.bill_wise_success_failed_transaction_summary OWNER TO postgres;
 -- Name: challan; Type: TABLE; Schema: cts; Owner: postgres
 --
 
-CREATE TABLE cts.challan (
+CREATE TABLE IF NOT EXISTS cts.challan (
     id bigint NOT NULL,
     challan_no integer NOT NULL,
     challan_date date NOT NULL,
@@ -10876,7 +10876,7 @@ ALTER SEQUENCE cts.failed_transaction_beneficiary_id_seq_bk OWNER TO postgres;
 -- Name: failed_transaction_beneficiary_bk; Type: TABLE; Schema: cts; Owner: postgres
 --
 
-CREATE TABLE cts.failed_transaction_beneficiary_bk (
+CREATE TABLE IF NOT EXISTS cts.failed_transaction_beneficiary_bk (
     id bigint DEFAULT nextval('cts.failed_transaction_beneficiary_id_seq_bk'::regclass) NOT NULL,
     bill_id bigint NOT NULL,
     treasury_code character(3),
@@ -10944,7 +10944,7 @@ ALTER SEQUENCE cts.failed_transaction_beneficiary_id_seq OWNED BY cts.failed_tra
 -- Name: gst; Type: TABLE; Schema: jit; Owner: postgres
 --
 
-CREATE TABLE jit.gst (
+CREATE TABLE IF NOT EXISTS jit.gst (
     id bigint NOT NULL,
     payee_id bigint,
     payee_code character varying(50),
@@ -11101,7 +11101,7 @@ ALTER SEQUENCE cts.success_transaction_beneficiary_id_seq_bk OWNER TO postgres;
 -- Name: success_transaction_beneficiary_bk; Type: TABLE; Schema: cts; Owner: postgres
 --
 
-CREATE TABLE cts.success_transaction_beneficiary_bk (
+CREATE TABLE IF NOT EXISTS cts.success_transaction_beneficiary_bk (
     id bigint DEFAULT nextval('cts.success_transaction_beneficiary_id_seq_bk'::regclass) NOT NULL,
     bill_id bigint NOT NULL,
     treasury_code character(3),
@@ -11161,7 +11161,7 @@ ALTER SEQUENCE cts.success_transaction_beneficiary_id_seq OWNED BY cts.success_t
 -- Name: token; Type: TABLE; Schema: cts; Owner: postgres
 --
 
-CREATE TABLE cts.token (
+CREATE TABLE IF NOT EXISTS cts.token (
     id bigint NOT NULL,
     token_number bigint NOT NULL,
     token_date date NOT NULL,
@@ -11179,7 +11179,7 @@ ALTER TABLE cts.token OWNER TO postgres;
 -- Name: voucher; Type: TABLE; Schema: cts; Owner: postgres
 --
 
-CREATE TABLE cts.voucher (
+CREATE TABLE IF NOT EXISTS cts.voucher (
     id bigint NOT NULL,
     voucher_no integer NOT NULL,
     voucher_date date NOT NULL,
@@ -11240,7 +11240,7 @@ ALTER SEQUENCE cts.voucher_id_seq1 OWNED BY cts.voucher.id;
 -- Name: ddo_agency_mapping_details; Type: TABLE; Schema: jit; Owner: postgres
 --
 
-CREATE TABLE jit.ddo_agency_mapping_details (
+CREATE TABLE IF NOT EXISTS jit.ddo_agency_mapping_details (
     id bigint NOT NULL,
     agency_code character varying(100) NOT NULL,
     agency_name character varying(200),
@@ -11296,7 +11296,7 @@ ALTER SEQUENCE jit.ddo_agency_mapping_details_id_seq OWNED BY jit.ddo_agency_map
 -- Name: exp_payee_components; Type: TABLE; Schema: jit; Owner: postgres
 --
 
-CREATE TABLE jit.exp_payee_components (
+CREATE TABLE IF NOT EXISTS jit.exp_payee_components (
     id bigint NOT NULL,
     payee_id bigint,
     payee_code character varying,
@@ -11343,7 +11343,7 @@ ALTER SEQUENCE jit.exp_payee_components_id_seq OWNED BY jit.exp_payee_components
 -- Name: fto_voucher; Type: TABLE; Schema: jit; Owner: postgres
 --
 
-CREATE TABLE jit.fto_voucher (
+CREATE TABLE IF NOT EXISTS jit.fto_voucher (
     id bigint NOT NULL,
     payee_id bigint,
     payee_code character varying(50),
@@ -11415,7 +11415,7 @@ ALTER SEQUENCE jit.gst_id_seq OWNED BY jit.gst.id;
 -- Name: jit_allotment; Type: TABLE; Schema: jit; Owner: postgres
 --
 
-CREATE TABLE jit.jit_allotment (
+CREATE TABLE IF NOT EXISTS jit.jit_allotment (
     id bigint NOT NULL,
     sls_code character varying,
     fin_year smallint,
@@ -11465,7 +11465,7 @@ ALTER SEQUENCE jit.jit_allotment_id_seq OWNED BY jit.jit_allotment.id;
 -- Name: jit_fto_sanction_booking; Type: TABLE; Schema: jit; Owner: postgres
 --
 
-CREATE TABLE jit.jit_fto_sanction_booking (
+CREATE TABLE IF NOT EXISTS jit.jit_fto_sanction_booking (
     id bigint NOT NULL,
     sanction_id bigint NOT NULL,
     sanction_no character varying NOT NULL,
@@ -11511,7 +11511,7 @@ ALTER SEQUENCE jit.jit_fto_sanction_booking_id_seq OWNED BY jit.jit_fto_sanction
 -- Name: jit_pullback_request; Type: TABLE; Schema: jit; Owner: postgres
 --
 
-CREATE TABLE jit.jit_pullback_request (
+CREATE TABLE IF NOT EXISTS jit.jit_pullback_request (
     id bigint NOT NULL,
     ddo_code character varying,
     agency_id character varying,
@@ -11554,7 +11554,7 @@ ALTER SEQUENCE jit.jit_pullback_request_id_seq OWNED BY jit.jit_pullback_request
 -- Name: jit_report_details; Type: TABLE; Schema: jit; Owner: postgres
 --
 
-CREATE TABLE jit.jit_report_details (
+CREATE TABLE IF NOT EXISTS jit.jit_report_details (
     id bigint NOT NULL,
     ddo_code character(9),
     scheme_code character varying(50),
@@ -11603,7 +11603,7 @@ ALTER SEQUENCE jit.jit_report_details_id_seq OWNED BY jit.jit_report_details.id;
 -- Name: jit_withdrawl; Type: TABLE; Schema: jit; Owner: postgres
 --
 
-CREATE TABLE jit.jit_withdrawl (
+CREATE TABLE IF NOT EXISTS jit.jit_withdrawl (
     id bigint NOT NULL,
     sls_code character varying,
     fin_year smallint,
@@ -11654,7 +11654,7 @@ ALTER SEQUENCE jit.jit_withdrawl_id_seq OWNED BY jit.jit_withdrawl.id;
 -- Name: mother_sanction_allocation; Type: TABLE; Schema: jit; Owner: postgres
 --
 
-CREATE TABLE jit.mother_sanction_allocation (
+CREATE TABLE IF NOT EXISTS jit.mother_sanction_allocation (
     id bigint NOT NULL,
     sls_scheme_code character varying,
     sanction_amount bigint,
@@ -11724,7 +11724,7 @@ ALTER SEQUENCE jit.mother_sanction_allocation_id_seq OWNED BY jit.mother_sanctio
 -- Name: payee_deduction; Type: TABLE; Schema: jit; Owner: postgres
 --
 
-CREATE TABLE jit.payee_deduction (
+CREATE TABLE IF NOT EXISTS jit.payee_deduction (
     id bigint NOT NULL,
     payee_id bigint,
     payee_code character varying,
@@ -11770,7 +11770,7 @@ ALTER SEQUENCE jit.payee_deduction_id_seq OWNED BY jit.payee_deduction.id;
 -- Name: scheme_config_master; Type: TABLE; Schema: jit; Owner: postgres
 --
 
-CREATE TABLE jit.scheme_config_master (
+CREATE TABLE IF NOT EXISTS jit.scheme_config_master (
     id bigint NOT NULL,
     state_code character varying(11),
     sls_code character varying(11),
@@ -11824,7 +11824,7 @@ ALTER SEQUENCE jit.scheme_config_master_id_seq OWNED BY jit.scheme_config_master
 -- Name: tsa_exp_details; Type: TABLE; Schema: jit; Owner: postgres
 --
 
-CREATE TABLE jit.tsa_exp_details (
+CREATE TABLE IF NOT EXISTS jit.tsa_exp_details (
     id bigint NOT NULL,
     ref_no character varying(50),
     sls_code character varying(50),
@@ -11904,7 +11904,7 @@ ALTER SEQUENCE jit.tsa_exp_details_id_seq OWNED BY jit.tsa_exp_details.id;
 -- Name: tsa_payeemaster; Type: TABLE; Schema: jit; Owner: postgres
 --
 
-CREATE TABLE jit.tsa_payeemaster (
+CREATE TABLE IF NOT EXISTS jit.tsa_payeemaster (
     id bigint NOT NULL,
     payee_code character varying(50),
     payee_name character varying(200),
@@ -12032,7 +12032,7 @@ ALTER SEQUENCE jit.tsa_payeemaster_id_seq OWNED BY jit.tsa_payeemaster.id;
 -- Name: tsa_schemecomponent; Type: TABLE; Schema: jit; Owner: postgres
 --
 
-CREATE TABLE jit.tsa_schemecomponent (
+CREATE TABLE IF NOT EXISTS jit.tsa_schemecomponent (
     id bigint NOT NULL,
     slscode character varying(50),
     shemename character varying(300),
@@ -12074,7 +12074,7 @@ ALTER SEQUENCE jit.tsa_schemecomponent_id_seq OWNED BY jit.tsa_schemecomponent.i
 -- Name: bank_type_master; Type: TABLE; Schema: master; Owner: postgres
 --
 
-CREATE TABLE master.bank_type_master (
+CREATE TABLE IF NOT EXISTS master.bank_type_master (
     id integer NOT NULL,
     bank_type character varying NOT NULL,
     created_date timestamp without time zone DEFAULT now() NOT NULL,
@@ -12114,7 +12114,7 @@ ALTER SEQUENCE master.bank_type_master_id_seq OWNED BY master.bank_type_master.i
 -- Name: ddo; Type: TABLE; Schema: master; Owner: postgres
 --
 
-CREATE TABLE master.ddo (
+CREATE TABLE IF NOT EXISTS master.ddo (
     id bigint NOT NULL,
     treasury_code character(4),
     ddo_code character(9) NOT NULL,
@@ -12177,7 +12177,7 @@ ALTER SEQUENCE master.ddo_id_seq OWNED BY master.ddo.id;
 -- Name: demand_major_mapping; Type: TABLE; Schema: master; Owner: postgres
 --
 
-CREATE TABLE master.demand_major_mapping (
+CREATE TABLE IF NOT EXISTS master.demand_major_mapping (
     id smallint NOT NULL,
     demand_code character(2),
     major_head_code character(4),
@@ -12192,7 +12192,7 @@ ALTER TABLE master.demand_major_mapping OWNER TO postgres;
 -- Name: department; Type: TABLE; Schema: master; Owner: postgres
 --
 
-CREATE TABLE master.department (
+CREATE TABLE IF NOT EXISTS master.department (
     id smallint NOT NULL,
     code character(2) NOT NULL,
     name character varying(100),
@@ -12207,7 +12207,7 @@ ALTER TABLE master.department OWNER TO postgres;
 -- Name: detail_head; Type: TABLE; Schema: master; Owner: postgres
 --
 
-CREATE TABLE master.detail_head (
+CREATE TABLE IF NOT EXISTS master.detail_head (
     id smallint NOT NULL,
     code character(2),
     name character varying(100)
@@ -12237,7 +12237,7 @@ ALTER SEQUENCE master.financial_year_master_id_seq OWNER TO postgres;
 -- Name: financial_year_master; Type: TABLE; Schema: master; Owner: postgres
 --
 
-CREATE TABLE master.financial_year_master (
+CREATE TABLE IF NOT EXISTS master.financial_year_master (
     id smallint DEFAULT nextval('master.financial_year_master_id_seq'::regclass) NOT NULL,
     financial_year character(9),
     is_active boolean,
@@ -12255,7 +12255,7 @@ ALTER TABLE master.financial_year_master OWNER TO postgres;
 -- Name: major_head; Type: TABLE; Schema: master; Owner: postgres
 --
 
-CREATE TABLE master.major_head (
+CREATE TABLE IF NOT EXISTS master.major_head (
     id smallint NOT NULL,
     code character(4),
     name character varying(150)
@@ -12269,7 +12269,7 @@ ALTER TABLE master.major_head OWNER TO postgres;
 -- Name: minor_head; Type: TABLE; Schema: master; Owner: postgres
 --
 
-CREATE TABLE master.minor_head (
+CREATE TABLE IF NOT EXISTS master.minor_head (
     id smallint NOT NULL,
     code character(3),
     name character varying(150),
@@ -12284,7 +12284,7 @@ ALTER TABLE master.minor_head OWNER TO postgres;
 -- Name: pending_ddo_list; Type: TABLE; Schema: master; Owner: postgres
 --
 
-CREATE TABLE master.pending_ddo_list (
+CREATE TABLE IF NOT EXISTS master.pending_ddo_list (
     "TREASURY_CODE" character varying(50),
     "DDO_CODE" character varying(50),
     "DESIGNATION" character varying(128)
@@ -12298,7 +12298,7 @@ ALTER TABLE master.pending_ddo_list OWNER TO postgres;
 -- Name: rbi_ifsc_stock; Type: TABLE; Schema: master; Owner: postgres
 --
 
-CREATE TABLE master.rbi_ifsc_stock (
+CREATE TABLE IF NOT EXISTS master.rbi_ifsc_stock (
     branchid integer,
     bankid integer,
     bankname character varying,
@@ -12320,7 +12320,7 @@ ALTER TABLE master.rbi_ifsc_stock OWNER TO postgres;
 -- Name: scheme_head; Type: TABLE; Schema: master; Owner: postgres
 --
 
-CREATE TABLE master.scheme_head (
+CREATE TABLE IF NOT EXISTS master.scheme_head (
     id smallint NOT NULL,
     demand_code character(2),
     code character(3),
@@ -12336,7 +12336,7 @@ ALTER TABLE master.scheme_head OWNER TO postgres;
 -- Name: sub_detail_head; Type: TABLE; Schema: master; Owner: postgres
 --
 
-CREATE TABLE master.sub_detail_head (
+CREATE TABLE IF NOT EXISTS master.sub_detail_head (
     id smallint NOT NULL,
     code character(2),
     name character varying(100),
@@ -12351,7 +12351,7 @@ ALTER TABLE master.sub_detail_head OWNER TO postgres;
 -- Name: sub_major_head; Type: TABLE; Schema: master; Owner: postgres
 --
 
-CREATE TABLE master.sub_major_head (
+CREATE TABLE IF NOT EXISTS master.sub_major_head (
     id smallint NOT NULL,
     code character(2),
     name character varying(150),
@@ -12366,7 +12366,7 @@ ALTER TABLE master.sub_major_head OWNER TO postgres;
 -- Name: treasury; Type: TABLE; Schema: master; Owner: postgres
 --
 
-CREATE TABLE master.treasury (
+CREATE TABLE IF NOT EXISTS master.treasury (
     id integer NOT NULL,
     code character(4) NOT NULL,
     treasury_name character varying(100),
@@ -12429,7 +12429,7 @@ ALTER SEQUENCE master.treasury_id_seq OWNED BY master.treasury.id;
 -- Name: tsa_vendor_type; Type: TABLE; Schema: master; Owner: postgres
 --
 
-CREATE TABLE master.tsa_vendor_type (
+CREATE TABLE IF NOT EXISTS master.tsa_vendor_type (
     id bigint NOT NULL,
     ven_type_id character varying(3),
     type_name character varying(50),
@@ -12472,7 +12472,7 @@ ALTER SEQUENCE master.tsa_vendor_type_id_seq OWNED BY master.tsa_vendor_type.id;
 -- Name: consume_logs; Type: TABLE; Schema: message_queue; Owner: postgres
 --
 
-CREATE TABLE message_queue.consume_logs (
+CREATE TABLE IF NOT EXISTS message_queue.consume_logs (
     id bigint NOT NULL,
     message_id character varying(255),
     queue_name character varying(255),
@@ -12518,7 +12518,7 @@ ALTER SEQUENCE message_queue.consume_logs_id_seq OWNED BY message_queue.consume_
 -- Name: consume_logs_partition; Type: TABLE; Schema: message_queue; Owner: postgres
 --
 
-CREATE TABLE message_queue.consume_logs_partition (
+CREATE TABLE IF NOT EXISTS message_queue.consume_logs_partition (
     id bigint DEFAULT nextval('message_queue.consume_logs_id_seq'::regclass) NOT NULL,
     message_id character varying(255),
     queue_name character varying(255),
@@ -12541,7 +12541,7 @@ ALTER TABLE message_queue.consume_logs_partition OWNER TO postgres;
 -- Name: message_queue_logs; Type: TABLE; Schema: message_queue; Owner: postgres
 --
 
-CREATE TABLE message_queue.message_queue_logs (
+CREATE TABLE IF NOT EXISTS message_queue.message_queue_logs (
     unique_id uuid NOT NULL,
     exchange_name character varying(100),
     queue_name character varying(100) NOT NULL,
@@ -12559,7 +12559,7 @@ ALTER TABLE message_queue.message_queue_logs OWNER TO postgres;
 -- Name: message_queues; Type: TABLE; Schema: message_queue; Owner: postgres
 --
 
-CREATE TABLE message_queue.message_queues (
+CREATE TABLE IF NOT EXISTS message_queue.message_queues (
     unique_id uuid DEFAULT gen_random_uuid() NOT NULL,
     exchange_name character varying(100),
     queue_name character varying(100) NOT NULL,
@@ -12577,7 +12577,7 @@ ALTER TABLE message_queue.message_queues OWNER TO postgres;
 -- Name: queues_master; Type: TABLE; Schema: message_queue; Owner: postgres
 --
 
-CREATE TABLE message_queue.queues_master (
+CREATE TABLE IF NOT EXISTS message_queue.queues_master (
     id smallint NOT NULL,
     queue_name character varying(100) NOT NULL,
     identifier character(50) NOT NULL,
@@ -12623,7 +12623,7 @@ ALTER SEQUENCE message_queue.queues_master_id_seq OWNED BY message_queue.queues_
 -- Name: bill_ecs_neft_details; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.bill_ecs_neft_details (
+CREATE TABLE IF NOT EXISTS public.bill_ecs_neft_details (
     id bigint,
     bill_id bigint,
     payee_name character varying(100),
@@ -12659,7 +12659,7 @@ ALTER TABLE public.bill_ecs_neft_details OWNER TO postgres;
 -- Name: bill_status_info_2425; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.bill_status_info_2425 (
+CREATE TABLE IF NOT EXISTS public.bill_status_info_2425 (
     bill_id bigint,
     name character varying,
     date_time timestamp without time zone,
@@ -12675,7 +12675,7 @@ ALTER TABLE public.bill_status_info_2425 OWNER TO postgres;
 -- Name: cts_failed_transaction_beneficiary; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.cts_failed_transaction_beneficiary (
+CREATE TABLE IF NOT EXISTS public.cts_failed_transaction_beneficiary (
     id bigint,
     transaction_lot_id bigint,
     transaction_lot_ben_id bigint,
@@ -12715,7 +12715,7 @@ ALTER TABLE public.cts_failed_transaction_beneficiary OWNER TO postgres;
 -- Name: cts_failed_transaction_beneficiary_1; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.cts_failed_transaction_beneficiary_1 (
+CREATE TABLE IF NOT EXISTS public.cts_failed_transaction_beneficiary_1 (
     id bigint,
     transaction_lot_id bigint,
     transaction_lot_ben_id bigint,
@@ -12755,7 +12755,7 @@ ALTER TABLE public.cts_failed_transaction_beneficiary_1 OWNER TO postgres;
 -- Name: cts_success_transaction_beneficiarys; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.cts_success_transaction_beneficiarys (
+CREATE TABLE IF NOT EXISTS public.cts_success_transaction_beneficiarys (
     id bigint,
     transaction_lot_id bigint,
     transaction_lot_ben_id bigint,
@@ -12790,7 +12790,7 @@ ALTER TABLE public.cts_success_transaction_beneficiarys OWNER TO postgres;
 -- Name: cts_success_transaction_beneficiarys_1; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.cts_success_transaction_beneficiarys_1 (
+CREATE TABLE IF NOT EXISTS public.cts_success_transaction_beneficiarys_1 (
     id bigint,
     transaction_lot_id bigint,
     transaction_lot_ben_id bigint,
@@ -12825,7 +12825,7 @@ ALTER TABLE public.cts_success_transaction_beneficiarys_1 OWNER TO postgres;
 -- Name: ebill_jit_int_map_bk_01102025; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.ebill_jit_int_map_bk_01102025 (
+CREATE TABLE IF NOT EXISTS public.ebill_jit_int_map_bk_01102025 (
     bill_id bigint,
     jit_ref_no character varying(50),
     error_details jsonb,
@@ -12842,7 +12842,7 @@ ALTER TABLE public.ebill_jit_int_map_bk_01102025 OWNER TO postgres;
 -- Name: ebilling_jit_voucher; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.ebilling_jit_voucher (
+CREATE TABLE IF NOT EXISTS public.ebilling_jit_voucher (
     id bigint NOT NULL,
     bill_id bigint,
     voucher_no bigint,
@@ -12889,7 +12889,7 @@ ALTER SEQUENCE public.ebilling_jit_voucher_id_seq1 OWNED BY public.ebilling_jit_
 -- Name: failed_beneficiary_2425; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.failed_beneficiary_2425 (
+CREATE TABLE IF NOT EXISTS public.failed_beneficiary_2425 (
     bill_id bigint,
     treasury_code character(3),
     ddo_code character(9),
@@ -12924,7 +12924,7 @@ ALTER TABLE public.failed_beneficiary_2425 OWNER TO postgres;
 -- Name: failed_ecs_end_to_end_id; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.failed_ecs_end_to_end_id (
+CREATE TABLE IF NOT EXISTS public.failed_ecs_end_to_end_id (
     id bigint,
     end_to_end_id character varying(29),
     file_number character varying(32)
@@ -12938,7 +12938,7 @@ ALTER TABLE public.failed_ecs_end_to_end_id OWNER TO postgres;
 -- Name: failed_utr_no; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.failed_utr_no (
+CREATE TABLE IF NOT EXISTS public.failed_utr_no (
     id bigint,
     end_to_end_id character varying(29),
     utr_no character varying(22)
@@ -12952,7 +12952,7 @@ ALTER TABLE public.failed_utr_no OWNER TO postgres;
 -- Name: jit_success_20250708; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.jit_success_20250708 (
+CREATE TABLE IF NOT EXISTS public.jit_success_20250708 (
     ref_no character varying(100),
     end_to_end_id character varying(150)
 );
@@ -12965,7 +12965,7 @@ ALTER TABLE public.jit_success_20250708 OWNER TO postgres;
 -- Name: jit_voucher_29072025; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.jit_voucher_29072025 (
+CREATE TABLE IF NOT EXISTS public.jit_voucher_29072025 (
     bill_id bigint
 );
 
@@ -12977,7 +12977,7 @@ ALTER TABLE public.jit_voucher_29072025 OWNER TO postgres;
 -- Name: match_success_02062025; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.match_success_02062025 (
+CREATE TABLE IF NOT EXISTS public.match_success_02062025 (
     end_to_end_id character varying(150),
     gross_amount numeric(12,2)
 );
@@ -12990,7 +12990,7 @@ ALTER TABLE public.match_success_02062025 OWNER TO postgres;
 -- Name: message_queue_wbjit_cts_billing_success_beneficiary; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.message_queue_wbjit_cts_billing_success_beneficiary (
+CREATE TABLE IF NOT EXISTS public.message_queue_wbjit_cts_billing_success_beneficiary (
     unique_id uuid,
     exchange_name character varying(100),
     queue_name character varying(100),
@@ -13008,7 +13008,7 @@ ALTER TABLE public.message_queue_wbjit_cts_billing_success_beneficiary OWNER TO 
 -- Name: process_failed_ben_success_31052025; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.process_failed_ben_success_31052025 (
+CREATE TABLE IF NOT EXISTS public.process_failed_ben_success_31052025 (
     "?column?" text
 );
 
@@ -13020,7 +13020,7 @@ ALTER TABLE public.process_failed_ben_success_31052025 OWNER TO postgres;
 -- Name: result_payload; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.result_payload (
+CREATE TABLE IF NOT EXISTS public.result_payload (
     jsonb_agg jsonb
 );
 
@@ -13032,7 +13032,7 @@ ALTER TABLE public.result_payload OWNER TO postgres;
 -- Name: success_beneficiary_2425; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.success_beneficiary_2425 (
+CREATE TABLE IF NOT EXISTS public.success_beneficiary_2425 (
     bill_id bigint,
     treasury_code character(3),
     ddo_code character(9),
@@ -13060,7 +13060,7 @@ ALTER TABLE public.success_beneficiary_2425 OWNER TO postgres;
 -- Name: success_ecs_end_to_end_id; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.success_ecs_end_to_end_id (
+CREATE TABLE IF NOT EXISTS public.success_ecs_end_to_end_id (
     id bigint,
     end_to_end_id character varying(29),
     file_number character varying(32)
@@ -13074,7 +13074,7 @@ ALTER TABLE public.success_ecs_end_to_end_id OWNER TO postgres;
 -- Name: test; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.test (
+CREATE TABLE IF NOT EXISTS public.test (
     now timestamp with time zone
 );
 
@@ -13086,7 +13086,7 @@ ALTER TABLE public.test OWNER TO postgres;
 -- Name: tr_26a; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.tr_26a (
+CREATE TABLE IF NOT EXISTS public.tr_26a (
     id integer,
     bill_id bigint,
     bill_mode smallint,
@@ -13126,7 +13126,7 @@ ALTER TABLE public.tr_26a OWNER TO postgres;
 -- Name: tsa_exp_sanction_details; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.tsa_exp_sanction_details (
+CREATE TABLE IF NOT EXISTS public.tsa_exp_sanction_details (
     refno character varying NOT NULL,
     debitamt numeric(15,2),
     limitcode bigint,
@@ -13145,7 +13145,7 @@ ALTER TABLE public.tsa_exp_sanction_details OWNER TO postgres;
 -- Name: voucher_2526_171025; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.voucher_2526_171025 (
+CREATE TABLE IF NOT EXISTS public.voucher_2526_171025 (
     id bigint,
     voucher_no integer,
     voucher_date date,
@@ -13167,7 +13167,7 @@ ALTER TABLE public.voucher_2526_171025 OWNER TO postgres;
 -- Name: voucher_payload; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.voucher_payload (
+CREATE TABLE IF NOT EXISTS public.voucher_payload (
     json_agg json
 );
 
@@ -13179,7 +13179,7 @@ ALTER TABLE public.voucher_payload OWNER TO postgres;
 -- Name: failed_success_ben_report_view; Type: TABLE; Schema: report; Owner: postgres
 --
 
-CREATE TABLE report.failed_success_ben_report_view (
+CREATE TABLE IF NOT EXISTS report.failed_success_ben_report_view (
     bill_id bigint,
     ddo_code character(9),
     bill_type character(15),
