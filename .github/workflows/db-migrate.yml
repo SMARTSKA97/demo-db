@@ -24,17 +24,28 @@ jobs:
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
           tags: tag:ci
           
-      # === EXISTING STEP: Run Flyway ===
+     # Step A: Baseline (Marks V1 as done if history is missing)
+      - name: Flyway Baseline
+        uses: docker://flyway/flyway:11
+        with:
+          args: >-
+            -url=${{ secrets.DB_URL }} 
+            -user=${{ secrets.DB_USER }} 
+            -password=${{ secrets.DB_PASSWORD }} 
+            -schemas=${{secrets.FLYWAY_SCHEMA}} 
+            -createSchemas=true 
+            -baselineVersion=1
+            baseline
+
+      # Step B: Migrate (Runs V2, V3...)
       - name: Flyway Migrate
         uses: docker://flyway/flyway:11
         with:
-          # Now the runner can reach "100.x.x.x" because it joined the VPN!
           args: >-
-            -url=${{ secrets.DB_URL }}
-            -user=${{ secrets.DB_USER }}
-            -password=${{ secrets.DB_PASSWORD }}
-            -locations=filesystem:sql
-            -schemas=${{ secrets.FLYWAY_SCHEMA }} 
+            -url=${{ secrets.DB_URL }} 
+            -user=${{ secrets.DB_USER }} 
+            -password=${{ secrets.DB_PASSWORD }} 
+            -schemas=${{secrets.FLYWAY_SCHEMA}} 
             -createSchemas=true 
             -baselineOnMigrate=true
             -baselineVersion=1
