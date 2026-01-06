@@ -30,31 +30,26 @@ jobs:
           tags: tag:ci
 
       # Step 3: Debug Info (See what Flyway sees before running)
-      # This prints a table of migrations (PENDING, IGNORED, SUCCESS) to the logs.
-      # Check this log if V2 is skipped!
-      - name: Flyway Info (Debug)
+      # Step A: FORCE Baseline (Writes the V1 marker to the history table)
+      - name: Force Flyway Baseline
         uses: docker://flyway/flyway:11
         with:
           args: >-
-            -url=${{ secrets.DB_URL }}
-            -user=${{ secrets.DB_USER }}
-            -password=${{ secrets.DB_PASSWORD }}
-            -schemas=${{ secrets.FLYWAY_SCHEMA }}
-            -locations=filesystem:sql
-            info
+            -url=${{ secrets.DB_URL }} 
+            -user=${{ secrets.DB_USER }} 
+            -password=${{ secrets.DB_PASSWORD }} 
+            -schemas=${{ secrets.FLYWAY_SCHEMA }} 
+            -baselineVersion=1
+            baseline
 
-      # Step 4: Run Migrate (The actual execution)
+      # Step B: Run Migration (Will see V1 is done, SKIP it, and run V2)
       - name: Flyway Migrate
         uses: docker://flyway/flyway:11
         with:
           args: >-
-            -url=${{ secrets.DB_URL }}
-            -user=${{ secrets.DB_USER }}
-            -password=${{ secrets.DB_PASSWORD }}
-            -schemas=${{ secrets.FLYWAY_SCHEMA }}
-            -createSchemas=true
-            -locations=filesystem:sql
-            -baselineOnMigrate=true
-            -baselineVersion=1
+            -url=${{ secrets.DB_URL }} 
+            -user=${{ secrets.DB_USER }} 
+            -password=${{ secrets.DB_PASSWORD }} 
+            -schemas=${{ secrets.FLYWAY_SCHEMA }} 
             -outOfOrder=true
             migrate
