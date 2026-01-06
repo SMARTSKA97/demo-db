@@ -1,6 +1,6 @@
 name: Production Database Migration
 
-# Trigger: 
+# Trigger:
 # 1. Run on push to main/master IF sql files change
 # 2. Allow manual trigger (workflow_dispatch) for debugging
 on:
@@ -9,7 +9,7 @@ on:
       - main
       - master
     paths:
-      - 'sql/**'
+      - "sql/**"
   workflow_dispatch:
 
 jobs:
