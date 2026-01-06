@@ -107,7 +107,7 @@ ALTER SCHEMA report OWNER TO postgres;
 -- Name: adjust_allotment_by_billid(bigint); Type: FUNCTION; Schema: bantan; Owner: postgres
 --
 
-CREATE FUNCTION bantan.adjust_allotment_by_billid(p_bill_id bigint) RETURNS json
+CREATE OR REPLACE FUNCTION  bantan.adjust_allotment_by_billid(p_bill_id bigint) RETURNS json
     LANGUAGE plpgsql
     AS $$
 
@@ -155,7 +155,7 @@ ALTER FUNCTION bantan.adjust_allotment_by_billid(p_bill_id bigint) OWNER TO post
 -- Name: adjust_allotment_by_general_bill(bigint); Type: FUNCTION; Schema: bantan; Owner: postgres
 --
 
-CREATE FUNCTION bantan.adjust_allotment_by_general_bill(p_bill_id bigint) RETURNS json
+CREATE OR REPLACE FUNCTION  bantan.adjust_allotment_by_general_bill(p_bill_id bigint) RETURNS json
     LANGUAGE plpgsql
     AS $$
 
@@ -191,7 +191,7 @@ ALTER FUNCTION bantan.adjust_allotment_by_general_bill(p_bill_id bigint) OWNER T
 -- Name: bill_status_send_to_jit(); Type: FUNCTION; Schema: billing; Owner: postgres
 --
 
-CREATE FUNCTION billing.bill_status_send_to_jit() RETURNS trigger
+CREATE OR REPLACE FUNCTION  billing.bill_status_send_to_jit() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -380,7 +380,7 @@ ALTER PROCEDURE billing.cpin_regenerate_bill(IN billing_details_payload jsonb, O
 -- Name: enforce_unique_id(); Type: FUNCTION; Schema: billing; Owner: postgres
 --
 
-CREATE FUNCTION billing.enforce_unique_id() RETURNS trigger
+CREATE OR REPLACE FUNCTION  billing.enforce_unique_id() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 BEGIN
@@ -1034,7 +1034,7 @@ ALTER PROCEDURE billing.get_bill_details_report(IN in_payload jsonb, OUT out_pay
 -- Name: get_bill_payload(bigint); Type: FUNCTION; Schema: billing; Owner: postgres
 --
 
-CREATE FUNCTION billing.get_bill_payload(p_bill_id bigint) RETURNS json
+CREATE OR REPLACE FUNCTION  billing.get_bill_payload(p_bill_id bigint) RETURNS json
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -1288,7 +1288,7 @@ ALTER FUNCTION billing.get_bill_payload(p_bill_id bigint) OWNER TO postgres;
 -- Name: get_bill_payload_last_working(bigint); Type: FUNCTION; Schema: billing; Owner: postgres
 --
 
-CREATE FUNCTION billing.get_bill_payload_last_working(p_bill_id bigint) RETURNS json
+CREATE OR REPLACE FUNCTION  billing.get_bill_payload_last_working(p_bill_id bigint) RETURNS json
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -1557,7 +1557,7 @@ ALTER FUNCTION billing.get_bill_payload_last_working(p_bill_id bigint) OWNER TO 
 -- Name: get_bill_payload_old(bigint); Type: FUNCTION; Schema: billing; Owner: postgres
 --
 
-CREATE FUNCTION billing.get_bill_payload_old(p_bill_id bigint) RETURNS json
+CREATE OR REPLACE FUNCTION  billing.get_bill_payload_old(p_bill_id bigint) RETURNS json
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -2882,7 +2882,7 @@ ALTER PROCEDURE billing.insert_bill_status_details(IN bill_status_details_payloa
 -- Name: insert_cpin_ecs(); Type: FUNCTION; Schema: billing; Owner: postgres
 --
 
-CREATE FUNCTION billing.insert_cpin_ecs() RETURNS trigger
+CREATE OR REPLACE FUNCTION  billing.insert_cpin_ecs() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 BEGIN
@@ -3959,7 +3959,7 @@ ALTER PROCEDURE billing.insert_jit_bill(IN billing_details_payload jsonb, OUT in
 -- Name: insert_jit_bill_without_bill_details_func(bigint); Type: FUNCTION; Schema: billing; Owner: postgres
 --
 
-CREATE FUNCTION billing.insert_jit_bill_without_bill_details_func(param1 bigint) RETURNS void
+CREATE OR REPLACE FUNCTION  billing.insert_jit_bill_without_bill_details_func(param1 bigint) RETURNS void
     LANGUAGE plpgsql
     AS $$
 BEGIN
@@ -3975,7 +3975,7 @@ ALTER FUNCTION billing.insert_jit_bill_without_bill_details_func(param1 bigint) 
 -- Name: insert_jit_report(); Type: FUNCTION; Schema: billing; Owner: postgres
 --
 
-CREATE FUNCTION billing.insert_jit_report() RETURNS trigger
+CREATE OR REPLACE FUNCTION  billing.insert_jit_report() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -4594,7 +4594,7 @@ ALTER PROCEDURE billing.jit_cancelled_fto_data(IN in_payload jsonb, OUT _out_jit
 -- Name: pfms_file_status_send_to_jit(); Type: FUNCTION; Schema: billing; Owner: postgres
 --
 
-CREATE FUNCTION billing.pfms_file_status_send_to_jit() RETURNS trigger
+CREATE OR REPLACE FUNCTION  billing.pfms_file_status_send_to_jit() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -4689,7 +4689,7 @@ ALTER PROCEDURE billing.sys_generated_bill_no_seq(IN sys_generated_bill_no_paylo
 -- Name: trg_adjust_allotment_by_billid(); Type: FUNCTION; Schema: billing; Owner: postgres
 --
 
-CREATE FUNCTION billing.trg_adjust_allotment_by_billid() RETURNS trigger
+CREATE OR REPLACE FUNCTION  billing.trg_adjust_allotment_by_billid() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -4717,7 +4717,7 @@ ALTER FUNCTION billing.trg_adjust_allotment_by_billid() OWNER TO postgres;
 -- Name: update_bill_detail_prov(bigint, bigint); Type: FUNCTION; Schema: billing; Owner: postgres
 --
 
-CREATE FUNCTION billing.update_bill_detail_prov(v_bill_id bigint, v_allotment_id bigint) RETURNS bigint
+CREATE OR REPLACE FUNCTION  billing.update_bill_detail_prov(v_bill_id bigint, v_allotment_id bigint) RETURNS bigint
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -4737,7 +4737,7 @@ ALTER FUNCTION billing.update_bill_detail_prov(v_bill_id bigint, v_allotment_id 
 -- Name: update_cpin_ecs(); Type: FUNCTION; Schema: billing; Owner: postgres
 --
 
-CREATE FUNCTION billing.update_cpin_ecs() RETURNS trigger
+CREATE OR REPLACE FUNCTION  billing.update_cpin_ecs() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 DECLARE 
@@ -4798,7 +4798,7 @@ ALTER PROCEDURE billing.update_incorrect_beneficiary_dtl(IN correct_beneficiary_
 -- Name: log_table_changes(); Type: FUNCTION; Schema: billing_log; Owner: postgres
 --
 
-CREATE FUNCTION billing_log.log_table_changes() RETURNS trigger
+CREATE OR REPLACE FUNCTION  billing_log.log_table_changes() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -5022,7 +5022,7 @@ ALTER PROCEDURE billing_master.delete_cpin_old2(IN bill_id bigint, IN cpin_numbe
 -- Name: get_cpin_vender_details(character varying, integer, integer); Type: FUNCTION; Schema: billing_master; Owner: postgres
 --
 
-CREATE FUNCTION billing_master.get_cpin_vender_details(v_cpinid character varying, p_page_number integer DEFAULT 1, p_page_size integer DEFAULT 10) RETURNS json
+CREATE OR REPLACE FUNCTION  billing_master.get_cpin_vender_details(v_cpinid character varying, p_page_number integer DEFAULT 1, p_page_size integer DEFAULT 10) RETURNS json
     LANGUAGE plpgsql
     AS $$
 DECLARE 
@@ -5119,7 +5119,7 @@ ALTER FUNCTION billing_master.get_cpin_vender_details(v_cpinid character varying
 -- Name: get_ddo_allotment(bigint, text); Type: FUNCTION; Schema: billing_master; Owner: postgres
 --
 
-CREATE FUNCTION billing_master.get_ddo_allotment(activehoaid bigint, ddocode text) RETURNS jsonb
+CREATE OR REPLACE FUNCTION  billing_master.get_ddo_allotment(activehoaid bigint, ddocode text) RETURNS jsonb
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -5171,7 +5171,7 @@ ALTER FUNCTION billing_master.get_ddo_allotment(activehoaid bigint, ddocode text
 -- Name: getcpinwithdetails(text); Type: FUNCTION; Schema: billing_master; Owner: postgres
 --
 
-CREATE FUNCTION billing_master.getcpinwithdetails(cpinidparam text) RETURNS TABLE(cpinid character varying)
+CREATE OR REPLACE FUNCTION  billing_master.getcpinwithdetails(cpinidparam text) RETURNS TABLE(cpinid character varying)
     LANGUAGE plpgsql
     AS $$
 BEGIN
@@ -5541,7 +5541,7 @@ ALTER PROCEDURE billing_master.update_ddo_transfer_details(IN ddo_transfer_detai
 -- Name: adjust_allotment_failed_beneficiary(bigint, bigint); Type: FUNCTION; Schema: cts; Owner: postgres
 --
 
-CREATE FUNCTION cts.adjust_allotment_failed_beneficiary(v_bill_id bigint, v_failed_transaction_amount bigint) RETURNS json
+CREATE OR REPLACE FUNCTION  cts.adjust_allotment_failed_beneficiary(v_bill_id bigint, v_failed_transaction_amount bigint) RETURNS json
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -5607,7 +5607,7 @@ ALTER FUNCTION cts.adjust_allotment_failed_beneficiary(v_bill_id bigint, v_faile
 -- Name: get_transaction_summary(); Type: FUNCTION; Schema: cts; Owner: postgres
 --
 
-CREATE FUNCTION cts.get_transaction_summary() RETURNS json
+CREATE OR REPLACE FUNCTION  cts.get_transaction_summary() RETURNS json
     LANGUAGE plpgsql
     AS $$
 BEGIN
@@ -5711,7 +5711,7 @@ ALTER FUNCTION cts.get_transaction_summary() OWNER TO postgres;
 -- Name: get_transaction_summary(smallint); Type: FUNCTION; Schema: cts; Owner: postgres
 --
 
-CREATE FUNCTION cts.get_transaction_summary(p_finyear smallint) RETURNS json
+CREATE OR REPLACE FUNCTION  cts.get_transaction_summary(p_finyear smallint) RETURNS json
     LANGUAGE plpgsql
     AS $$
 Declare
@@ -6028,7 +6028,7 @@ ALTER PROCEDURE cts.insert_failed_transaction_ben_detail_old(IN failed_transacti
 -- Name: insert_list_of_payment(record, bigint, integer, date, bigint, bigint, date, record, bigint); Type: FUNCTION; Schema: cts; Owner: postgres
 --
 
-CREATE FUNCTION cts.insert_list_of_payment(in_hoa_details record, in_voucher_id bigint, in_voucher_no integer, in_voucher_date date, in_token_id bigint, in_token_no bigint, in_token_date date, in_bill_details record, in_payment_advice_id bigint) RETURNS integer
+CREATE OR REPLACE FUNCTION  cts.insert_list_of_payment(in_hoa_details record, in_voucher_id bigint, in_voucher_no integer, in_voucher_date date, in_token_id bigint, in_token_no bigint, in_token_date date, in_bill_details record, in_payment_advice_id bigint) RETURNS integer
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -6254,7 +6254,7 @@ ALTER PROCEDURE cts.insert_token_details(IN in_payload jsonb) OWNER TO postgres;
 -- Name: insert_token_details_func(jsonb); Type: FUNCTION; Schema: cts; Owner: postgres
 --
 
-CREATE FUNCTION cts.insert_token_details_func(param1 jsonb) RETURNS void
+CREATE OR REPLACE FUNCTION  cts.insert_token_details_func(param1 jsonb) RETURNS void
     LANGUAGE plpgsql
     AS $$
 BEGIN
@@ -6339,7 +6339,7 @@ ALTER PROCEDURE cts.insert_voucher_details(IN in_payload jsonb) OWNER TO postgre
 -- Name: insert_voucher_details_func(jsonb); Type: FUNCTION; Schema: cts; Owner: postgres
 --
 
-CREATE FUNCTION cts.insert_voucher_details_func(param1 jsonb) RETURNS void
+CREATE OR REPLACE FUNCTION  cts.insert_voucher_details_func(param1 jsonb) RETURNS void
     LANGUAGE plpgsql
     AS $$
 BEGIN
@@ -6355,7 +6355,7 @@ ALTER FUNCTION cts.insert_voucher_details_func(param1 jsonb) OWNER TO postgres;
 -- Name: trg_adjust_allotment_failed_beneficiary(); Type: FUNCTION; Schema: cts; Owner: postgres
 --
 
-CREATE FUNCTION cts.trg_adjust_allotment_failed_beneficiary() RETURNS trigger
+CREATE OR REPLACE FUNCTION  cts.trg_adjust_allotment_failed_beneficiary() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 BEGIN
@@ -6404,7 +6404,7 @@ ALTER PROCEDURE cts.update_ddo_allotment_actual_amount_from_treasury(IN in_paylo
 -- Name: bkend_update_jit_allotment_func(character varying, character, bigint, smallint, bigint, bigint); Type: FUNCTION; Schema: jit; Owner: postgres
 --
 
-CREATE FUNCTION jit.bkend_update_jit_allotment_func(_sanction_no character varying, _ddo_code character, _active_hoa_id bigint, _financial_year smallint, _old_limit_amount bigint, _new_self_limit_amount bigint) RETURNS void
+CREATE OR REPLACE FUNCTION  jit.bkend_update_jit_allotment_func(_sanction_no character varying, _ddo_code character, _active_hoa_id bigint, _financial_year smallint, _old_limit_amount bigint, _new_self_limit_amount bigint) RETURNS void
     LANGUAGE plpgsql
     AS $$
 	DECLARE
@@ -6474,7 +6474,7 @@ ALTER PROCEDURE jit.cancel_fto_from_bill(IN in_payload jsonb, IN queuename chara
 -- Name: get_failed_transaction_details(); Type: FUNCTION; Schema: jit; Owner: postgres
 --
 
-CREATE FUNCTION jit.get_failed_transaction_details() RETURNS jsonb
+CREATE OR REPLACE FUNCTION  jit.get_failed_transaction_details() RETURNS jsonb
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -6557,7 +6557,7 @@ ALTER FUNCTION jit.get_failed_transaction_details() OWNER TO postgres;
 -- Name: get_failed_transaction_details_manual_generation(); Type: FUNCTION; Schema: jit; Owner: postgres
 --
 
-CREATE FUNCTION jit.get_failed_transaction_details_manual_generation() RETURNS jsonb
+CREATE OR REPLACE FUNCTION  jit.get_failed_transaction_details_manual_generation() RETURNS jsonb
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -6698,7 +6698,7 @@ ALTER PROCEDURE jit.get_jit_allotments(IN in_payload jsonb, OUT out_payload json
 -- Name: get_success_transaction_details(); Type: FUNCTION; Schema: jit; Owner: postgres
 --
 
-CREATE FUNCTION jit.get_success_transaction_details() RETURNS jsonb
+CREATE OR REPLACE FUNCTION  jit.get_success_transaction_details() RETURNS jsonb
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -7665,7 +7665,7 @@ ALTER PROCEDURE jit.insert_jit_details_wo_tsa_exp_details(IN jit_details_payload
 -- Name: insert_jit_report(); Type: FUNCTION; Schema: jit; Owner: postgres
 --
 
-CREATE FUNCTION jit.insert_jit_report() RETURNS trigger
+CREATE OR REPLACE FUNCTION  jit.insert_jit_report() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -7703,7 +7703,7 @@ ALTER FUNCTION jit.insert_jit_report() OWNER TO postgres;
 -- Name: insert_jit_scheme_config_master(jsonb); Type: FUNCTION; Schema: jit; Owner: postgres
 --
 
-CREATE FUNCTION jit.insert_jit_scheme_config_master(in_payload jsonb) RETURNS integer
+CREATE OR REPLACE FUNCTION  jit.insert_jit_scheme_config_master(in_payload jsonb) RETURNS integer
     LANGUAGE plpgsql PARALLEL SAFE
     AS $$
 DECLARE
@@ -8101,7 +8101,7 @@ ALTER PROCEDURE jit.send_rejected_fto(IN in_payload jsonb) OWNER TO postgres;
 -- Name: consume_logs_insert_trigger(); Type: FUNCTION; Schema: message_queue; Owner: postgres
 --
 
-CREATE FUNCTION message_queue.consume_logs_insert_trigger() RETURNS trigger
+CREATE OR REPLACE FUNCTION  message_queue.consume_logs_insert_trigger() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 BEGIN
@@ -8118,7 +8118,7 @@ ALTER FUNCTION message_queue.consume_logs_insert_trigger() OWNER TO postgres;
 -- Name: ensure_consume_logs_partition_for_date(date); Type: FUNCTION; Schema: message_queue; Owner: postgres
 --
 
-CREATE FUNCTION message_queue.ensure_consume_logs_partition_for_date(p_date date) RETURNS void
+CREATE OR REPLACE FUNCTION  message_queue.ensure_consume_logs_partition_for_date(p_date date) RETURNS void
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -8161,7 +8161,7 @@ ALTER FUNCTION message_queue.ensure_consume_logs_partition_for_date(p_date date)
 -- Name: fto_ack_send_to_jit(); Type: FUNCTION; Schema: message_queue; Owner: postgres
 --
 
-CREATE FUNCTION message_queue.fto_ack_send_to_jit() RETURNS trigger
+CREATE OR REPLACE FUNCTION  message_queue.fto_ack_send_to_jit() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -8199,7 +8199,7 @@ ALTER FUNCTION message_queue.fto_ack_send_to_jit() OWNER TO postgres;
 -- Name: get_failed_transactions(character varying); Type: FUNCTION; Schema: message_queue; Owner: postgres
 --
 
-CREATE FUNCTION message_queue.get_failed_transactions(queue_name character varying) RETURNS jsonb
+CREATE OR REPLACE FUNCTION  message_queue.get_failed_transactions(queue_name character varying) RETURNS jsonb
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -8598,7 +8598,7 @@ ALTER FUNCTION message_queue.get_failed_transactions(queue_name character varyin
 -- Name: get_queue_name_by_identifier(character varying); Type: FUNCTION; Schema: message_queue; Owner: postgres
 --
 
-CREATE FUNCTION message_queue.get_queue_name_by_identifier(in_identifier character varying) RETURNS character varying
+CREATE OR REPLACE FUNCTION  message_queue.get_queue_name_by_identifier(in_identifier character varying) RETURNS character varying
     LANGUAGE plpgsql
     AS $$
 BEGIN
@@ -8614,7 +8614,7 @@ ALTER FUNCTION message_queue.get_queue_name_by_identifier(in_identifier characte
 -- Name: insert_message_queue(character varying, jsonb); Type: FUNCTION; Schema: message_queue; Owner: postgres
 --
 
-CREATE FUNCTION message_queue.insert_message_queue(p_queue_identifier_name character varying, p_message jsonb) RETURNS void
+CREATE OR REPLACE FUNCTION  message_queue.insert_message_queue(p_queue_identifier_name character varying, p_message jsonb) RETURNS void
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -8668,7 +8668,7 @@ ALTER FUNCTION message_queue.insert_message_queue(p_queue_identifier_name charac
 -- Name: insert_message_queue_15092025(character varying, jsonb); Type: FUNCTION; Schema: message_queue; Owner: postgres
 --
 
-CREATE FUNCTION message_queue.insert_message_queue_15092025(p_queue_identifier_name character varying, p_message jsonb) RETURNS void
+CREATE OR REPLACE FUNCTION  message_queue.insert_message_queue_15092025(p_queue_identifier_name character varying, p_message jsonb) RETURNS void
     LANGUAGE plpgsql
     AS $$
 DECLARE
