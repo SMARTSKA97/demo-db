@@ -30,12 +30,12 @@ jobs:
         with:
           # Now the runner can reach "100.x.x.x" because it joined the VPN!
           args: >-
-          -url=${{ secrets.DB_URL }} 
-          -user=${{ secrets.DB_USER }} 
-          -password=${{ secrets.DB_PASSWORD }} 
-          -schemas=${{secrets.FLYWAY_SCHEMA}} 
-          -createSchemas=true 
-          -locations=filesystem:sql 
-          -baselineOnMigrate=true
-          -baselineVersion=1
-          migrate
+            -url=${{ secrets.DB_URL }}
+            -user=${{ secrets.DB_USER }}
+            -password=${{ secrets.DB_PASSWORD }}
+            -locations=filesystem:sql
+            -schemas=${{ secrets.FLYWAY_SCHEMA }} 
+            -createSchemas=true 
+            -baselineOnMigrate=true
+            -baselineVersion=1
+            migrate
